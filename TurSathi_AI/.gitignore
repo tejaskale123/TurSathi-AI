@@ -1,0 +1,88 @@
+# ============================================================
+# TurSathi AI — Root .gitignore
+# ============================================================
+
+# ----- Python / Backend -----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.cache/
+.pytest_cache/
+*.cover
+.hypothesis/
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ----- Environment / Secrets -----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.p8
+*.jks
+*.mobileprovision
+secrets.json
+
+# ----- Database -----
+*.sqlite
+*.db
+
+# ----- Uploads -----
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ----- Node / Mobile / Frontend -----
+node_modules/
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.pnpm-debug.log*
+
+# ----- Expo -----
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+.metro-health-check*
+*.tsbuildinfo
+
+# ----- Native (Expo managed) -----
+/mobile/ios/
+/mobile/android/
+*.orig.*
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----- IDE -----
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ----- Logs -----
+*.log
+logs/

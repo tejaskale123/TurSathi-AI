@@ -1,0 +1,136 @@
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
+
+// Default API URL configuration
+// Dynamically resolves current laptop LAN IP for physical mobile devices via Expo Go
+export const getBaseUrl = (): string => {
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL;
+  }
+  if (Platform.OS === 'web') {
+    if (typeof window !== 'undefined' && window.location && window.location.hostname) {
+      return `http://${window.location.hostname}:8000`;
+    }
+    return 'http://localhost:8000';
+  }
+  // Dynamically derive laptop LAN IP from Expo Go metadata properties
+  const rawHostUri =
+    Constants.expoConfig?.hostUri ||
+    Constants.manifest2?.extra?.expoGo?.debuggerHost ||
+    (Constants as any).manifest?.debuggerHost ||
+    (Constants as any).linkingUri;
+
+  if (rawHostUri && typeof rawHostUri === 'string') {
+    const cleanUri = rawHostUri.replace(/^(exp|http|https):\/\//, '');
+    const lanIp = cleanUri.split(':')[0];
+    if (lanIp && lanIp !== 'localhost' && lanIp !== '127.0.0.1') {
+      return `http://${lanIp}:8000`;
+    }
+  }
+  return 'http://10.211.50.75:8000';
+};
+
+export const API_BASE_URL = getBaseUrl();
+
+export interface UserResponse {
+  id: string;
+  full_name: string;
+  mobile_number: string;
+  email?: string | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface AuthTokenResponse {
+  access_token: string;
+  token_type: string;
+  user: UserResponse;
+}
+
+export interface RegisterPayload {
+  full_name: string;
+  mobile_number: string;
+  email?: string;
+  password: string;
+  confirm_password: string;
+}
+
+export interface LoginPayload {
+  identifier: string;
+  password: string;
+}
+
+const FETCH_TIMEOUT_MS = 10000;
+
+export async function registerUser(payload: RegisterPayload): Promise<UserResponse> {
+  const baseUrl = getBaseUrl();
+  console.log(`[MOBILE AUTH] Sending Register request to: ${baseUrl}/api/v1/auth/register`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const errorMessage = data.detail || 'Registration failed. Please try again.';
+      throw new Error(errorMessage);
+    }
+
+    return data as UserResponse;
+  } catch (err: any) {
+    if (err.name === 'AbortError') {
+      throw new Error('Unable to connect to server. Please check your connection and try again.');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+export async function loginUser(payload: LoginPayload): Promise<AuthTokenResponse> {
+  const baseUrl = getBaseUrl();
+  console.log(`[MOBILE AUTH] Sending Login request to: ${baseUrl}/api/v1/auth/login`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/api/v1/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+  } catch (_netErr) {
+    throw new Error('Unable to connect to server. Please check your connection and try again.');
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 400) {
+      throw new Error(data.detail || 'Invalid mobile number/email or password.');
+    }
+    const errorMessage = data.detail || 'Unable to connect to server. Please check your connection and try again.';
+    throw new Error(errorMessage);
+  }
+
+  if (!data.access_token || !data.user) {
+    throw new Error('Invalid authentication response from server.');
+  }
+
+  return data as AuthTokenResponse;
+}
