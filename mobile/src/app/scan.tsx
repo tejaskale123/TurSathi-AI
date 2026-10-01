@@ -663,11 +663,7 @@ export default function ScanScreen() {
               <Glyph name="back" color="#1F5137" />
             </Pressable>
 
-            <View style={styles.headerCopy}>
-              <Text style={styles.brand}>TurSathi AI</Text>
-              <Text style={styles.headerTitle}>{scanText.title}</Text>
-              <Text style={styles.headerSubtitle}>{scanText.subtitle}</Text>
-            </View>
+
 
             {/* Spacer for symmetrical header centering */}
             <View style={styles.headerSpacer} />

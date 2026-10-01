@@ -5,15 +5,17 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { t } = useLanguage();
+  const { t, isReady, hasSavedLanguage } = useLanguage();
 
   useEffect(() => {
+    if (!isReady) return;
+
     const timer = setTimeout(() => {
-      router.replace('/login');
+      router.replace('/language-selection');
     }, 2500);
 
     return () => clearTimeout(timer);
-  }, [router]);
+  }, [router, isReady]);
 
   return (
     <View style={styles.screen}>

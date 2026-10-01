@@ -912,34 +912,31 @@ export default function ProblemDescriptionScreen() {
               </View>
             </View>
 
-            {/* Compact Audio Player for Guidance Quote */}
-            <View style={styles.compactPlayerBox}>
-              <Pressable
-                accessibilityHint="Plays instructional voice guidance"
-                accessibilityLabel={
-                  isSpeaking ? labels.stopAccessibilityLabel : labels.playAccessibilityLabel
-                }
-                accessibilityRole="button"
-                onPress={handleToggleGuidance}
-                style={({ pressed }) => [
-                  styles.playButtonCompact,
-                  pressed && styles.buttonPressed,
-                ]}
-              >
+            {/* Full-width Play Voice Help button (matches Camera page) */}
+            <Pressable
+              accessibilityHint="Plays instructional voice guidance"
+              accessibilityLabel={
+                isSpeaking ? labels.stopAccessibilityLabel : labels.playAccessibilityLabel
+              }
+              accessibilityRole="button"
+              onPress={handleToggleGuidance}
+              style={({ pressed }) => [
+                styles.voiceHelpButton,
+                isSpeaking && styles.voiceHelpButtonActive,
+                pressed && styles.buttonPressed,
+              ]}
+            >
+              <View style={styles.voiceHelpIconWrap}>
                 {isSpeaking ? (
-                  <PauseGlyph color="#FFFFFF" size={14} />
+                  <PauseGlyph color="#FFFFFF" size={12} />
                 ) : (
-                  <PlayGlyph color="#FFFFFF" size={14} />
+                  <PlayGlyph color="#D5BB79" size={12} />
                 )}
-              </Pressable>
-
-              <View style={styles.playerMetaCol}>
-                <Text style={styles.playerMetaTitle}>{labels.playerLabel}</Text>
-                <Text style={styles.playerMetaTimer}>
-                  {isSpeaking ? labels.playerSpeakingStatus : labels.playerIdleStatus}
-                </Text>
               </View>
-            </View>
+              <Text style={styles.voiceHelpButtonText}>
+                {isSpeaking ? labels.playerSpeakingStatus : labels.playerLabel}
+              </Text>
+            </Pressable>
 
             {/* Subtle Progress Bar */}
             <View style={styles.progressBarTrack}>
@@ -1300,30 +1297,22 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '500',
   },
-  compactPlayerBox: {
-    backgroundColor: '#F7FAF7',
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#DDE9DF',
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+  voiceHelpButton: {
+    minHeight: 42,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    marginBottom: 10,
-  },
-  playButtonCompact: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: '#1B4332',
-    alignItems: 'center',
     justifyContent: 'center',
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#D5BB79',
+    borderRadius: 12,
+    backgroundColor: '#1F5137',
+    marginBottom: 10,
     ...Platform.select({
       ios: {
-        shadowColor: '#1B4332',
+        shadowColor: '#0E2B1E',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.2,
+        shadowOpacity: 0.1,
         shadowRadius: 4,
       },
       android: {
@@ -1331,20 +1320,21 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  playerMetaCol: {
-    flex: 1,
+  voiceHelpButtonActive: {
+    backgroundColor: '#143825',
+    borderColor: '#C7A45A',
   },
-  playerMetaTitle: {
-    color: '#0F2419',
-    fontSize: 14,
-    fontWeight: '700',
-    marginBottom: 2,
+  voiceHelpIconWrap: {
+    width: 18,
+    height: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  playerMetaTimer: {
-    color: '#557A66',
+  voiceHelpButtonText: {
+    color: '#FFFEFA',
     fontSize: 12,
-    fontWeight: '600',
-    fontVariant: ['tabular-nums'],
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
   progressBarTrack: {
     width: '100%',

@@ -15,6 +15,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
 import { registerUser } from '../config/api';
 import { saveAuthToken } from '../config/tokenStore';
+import GoogleIcon from '../components/GoogleIcon';
 
 type FieldName = 'name' | 'mobile' | 'email' | 'password' | 'confirmPassword' | 'terms';
 type PrototypeRegistration = {
@@ -104,7 +105,7 @@ const copy = {
 
 export default function RegisterScreen() {
   const router = useRouter();
-  const { language, setLanguage } = useLanguage();
+  const { language } = useLanguage();
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [email, setEmail] = useState('');
@@ -365,9 +366,7 @@ export default function RegisterScreen() {
                 onPress={() => setMessage(text.googleInfo)}
                 style={({ pressed }) => [styles.googleButton, pressed ? styles.googlePressed : null]}
               >
-                <View style={styles.googleGlyph}>
-                  <Text style={styles.googleGlyphText}>G</Text>
-                </View>
+                <GoogleIcon size={20} />
                 <Text style={styles.googleButtonText}>{text.google}</Text>
               </Pressable>
 
@@ -381,33 +380,6 @@ export default function RegisterScreen() {
                   <Text style={styles.loginLink}>{text.login}</Text>
                 </Pressable>
               </View>
-            </View>
-
-            <View style={styles.languageSelector} accessibilityLabel="Select language">
-              {(['en', 'mr', 'hi'] as const).map((option) => {
-                const label = option === 'en' ? 'English' : option === 'mr' ? 'मराठी' : 'हिन्दी';
-                return (
-                  <Pressable
-                    key={option}
-                    accessibilityRole="button"
-                    accessibilityState={{ selected: language === option }}
-                    onPress={() => {
-                      setLanguage(option);
-                      setMessage('');
-                    }}
-                    style={[styles.languageOption, language === option ? styles.languageSelected : null]}
-                  >
-                    <Text
-                      style={[
-                        styles.languageText,
-                        language === option ? styles.languageTextSelected : null,
-                      ]}
-                    >
-                      {label}
-                    </Text>
-                  </Pressable>
-                );
-              })}
             </View>
           </View>
         </ScrollView>
@@ -714,21 +686,7 @@ const styles = StyleSheet.create({
   googlePressed: {
     backgroundColor: '#F0F2EB',
   },
-  googleGlyph: {
-    width: 21,
-    height: 21,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: '#C9D1C6',
-    borderRadius: 11,
-    backgroundColor: '#FFFFFF',
-  },
-  googleGlyphText: {
-    color: '#397356',
-    fontSize: 13,
-    fontWeight: '700',
-  },
+
   googleButtonText: {
     color: '#34493B',
     fontSize: 13,
@@ -749,35 +707,6 @@ const styles = StyleSheet.create({
   loginLink: {
     color: '#236C4C',
     fontSize: 12,
-    fontWeight: '700',
-  },
-  languageSelector: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 8,
-    marginTop: 16,
-  },
-  languageOption: {
-    minWidth: 82,
-    minHeight: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'rgba(230, 235, 222, 0.25)',
-    borderRadius: 18,
-  },
-  languageSelected: {
-    borderColor: '#C5A45C',
-    backgroundColor: 'rgba(197, 164, 92, 0.13)',
-  },
-  languageText: {
-    color: '#D3DDCF',
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  languageTextSelected: {
-    color: '#E5D09A',
     fontWeight: '700',
   },
 });

@@ -1,4 +1,4 @@
-import React, {
+﻿import React, {
   createContext,
   useCallback,
   useContext,
@@ -21,6 +21,7 @@ interface LanguageContextType {
   tDisease: (name?: string) => string;
   tSeverity: (severity?: string) => string;
   isReady: boolean;
+  hasSavedLanguage: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
@@ -30,6 +31,7 @@ const LanguageContext = createContext<LanguageContextType>({
   tDisease: (n) => n || '',
   tSeverity: (s) => s || '',
   isReady: false,
+  hasSavedLanguage: false,
 });
 
 function getStorageFilePath(): string {
@@ -92,7 +94,8 @@ async function writeStoredLanguage(lang: Language): Promise<void> {
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en');
-  const [isReady, setIsReady] = useState(false);
+  const [hasSavedLanguage, setHasSavedLanguage] = useState<boolean>(false);
+  const [isReady, setIsReady] = useState<boolean>(false);
 
   // Load language preference on startup
   useEffect(() => {
@@ -101,6 +104,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       .then((saved) => {
         if (isMounted && saved) {
           setLanguageState(saved);
+          setHasSavedLanguage(true);
         }
       })
       .finally(() => {
@@ -117,6 +121,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   // Update language globally and persist immediately
   const setLanguage = useCallback((newLang: Language) => {
     setLanguageState(newLang);
+    setHasSavedLanguage(true);
     void writeStoredLanguage(newLang);
   }, []);
 
@@ -153,6 +158,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         tDisease,
         tSeverity,
         isReady,
+        hasSavedLanguage,
       }}
     >
       {children}
