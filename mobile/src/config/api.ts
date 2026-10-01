@@ -14,17 +14,28 @@ export const getBaseUrl = (): string => {
     return 'http://localhost:8000';
   }
   // Dynamically derive laptop LAN IP from Expo Go metadata properties
-  const rawHostUri =
-    Constants.expoConfig?.hostUri ||
-    Constants.manifest2?.extra?.expoGo?.debuggerHost ||
-    (Constants as any).manifest?.debuggerHost ||
-    (Constants as any).linkingUri;
+  const candidateHostUris = [
+    Constants.expoConfig?.hostUri,
+    Constants.manifest2?.extra?.expoGo?.debuggerHost,
+    (Constants as any).manifest2?.extra?.expoGo?.developer?.tool,
+    (Constants as any).manifest?.debuggerHost,
+    (Constants as any).linkingUri,
+    (Constants as any).experienceUrl,
+  ];
 
-  if (rawHostUri && typeof rawHostUri === 'string') {
-    const cleanUri = rawHostUri.replace(/^(exp|http|https):\/\//, '');
-    const lanIp = cleanUri.split(':')[0];
-    if (lanIp && lanIp !== 'localhost' && lanIp !== '127.0.0.1') {
-      return `http://${lanIp}:8000`;
+  for (const rawHostUri of candidateHostUris) {
+    if (rawHostUri && typeof rawHostUri === 'string') {
+      const cleanUri = rawHostUri.replace(/^(exp|http|https):\/\//, '');
+      const lanIp = cleanUri.split(':')[0];
+      if (
+        lanIp &&
+        lanIp !== 'localhost' &&
+        lanIp !== '127.0.0.1' &&
+        lanIp !== '10.0.2.2' &&
+        lanIp !== '0.0.0.0'
+      ) {
+        return `http://${lanIp}:8000`;
+      }
     }
   }
   return 'http://10.211.50.75:8000';

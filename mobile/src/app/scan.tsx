@@ -2,11 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
-import {
-  setAudioModeAsync,
-  useAudioPlayer,
-  useAudioPlayerStatus,
-} from 'expo-audio';
+import * as Speech from 'expo-speech';
 import * as FileSystem from 'expo-file-system/legacy';
 import {
   ActivityIndicator,
@@ -23,6 +19,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
+import { uploadScanImage, ScanUploadError } from '../config/scanApi';
+import { getAuthToken } from '../config/tokenStore';
 
 type GlyphName =
   | 'back'
@@ -39,17 +37,12 @@ type GlyphName =
 
 type PhotoSource = 'camera' | 'gallery';
 
-// Predefined voice guidance audio asset
-let VOICE_GUIDE_ASSET: number | null = null;
-try {
-  VOICE_GUIDE_ASSET = require('../../assets/audio/tur_leaf_scan_guide.mp3');
-} catch {
-  try {
-    VOICE_GUIDE_ASSET = require('../../assets/audio/tur_leaf_scan_guide.wav');
-  } catch {
-    VOICE_GUIDE_ASSET = null;
-  }
-}
+// Speech locales matching selected language
+const SPEECH_LOCALES: Record<Language, string> = {
+  en: 'en-IN',
+  mr: 'mr-IN',
+  hi: 'hi-IN',
+};
 
 // Localized strings for the premium scan camera UX
 const SCAN_STRINGS: Record<
@@ -291,20 +284,18 @@ export default function ScanScreen() {
   const [isPhotoReady, setIsPhotoReady] = useState(false);
   const [galleryMessage, setGalleryMessage] = useState<string | null>(null);
 
-  // Pre-recorded Voice Help playback state (expo-audio)
+  // Upload pipeline state
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const uploadGuard = useRef(false); // Prevents duplicate uploads from double-tap
+
+  // Voice Help speech playback state (expo-speech)
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [hasPlayedOnce, setHasPlayedOnce] = useState(false);
   const [audioMessage, setAudioMessage] = useState<string | null>(null);
 
-  // Expo-audio player for predefined voice guide
-  const audioPlayer = useAudioPlayer(VOICE_GUIDE_ASSET);
-  const audioPlayerStatus = useAudioPlayerStatus(audioPlayer);
-
   const cameraAvailable = Boolean(cameraPermission?.granted);
-  const isPlaying = Boolean(audioPlayerStatus.playing);
-  const isFinished = Boolean(
-    audioPlayerStatus.didJustFinish ||
-      (audioPlayerStatus.duration > 0 && audioPlayerStatus.currentTime >= audioPlayerStatus.duration)
-  );
+  const isPlaying = isSpeaking;
 
   // Guide corners pulsing animation
   useEffect(() => {
@@ -334,12 +325,22 @@ export default function ScanScreen() {
     return () => loop.stop();
   }, [isPlaying, playbackPulse]);
 
-  // Track completion of playback
+  // Unmount cleanup - stop speech
   useEffect(() => {
-    if (isFinished) {
-      setHasPlayedOnce(true);
-    }
-  }, [isFinished]);
+    return () => {
+      try {
+        Speech.stop();
+      } catch {}
+    };
+  }, []);
+
+  // Stop speech if language changes
+  useEffect(() => {
+    try {
+      Speech.stop();
+    } catch {}
+    setIsSpeaking(false);
+  }, [language]);
 
   // Scanning laser animation
   useEffect(() => {
@@ -521,6 +522,11 @@ export default function ScanScreen() {
       return;
     }
 
+    // Prevent duplicate uploads from double-tap
+    if (uploadGuard.current || isUploading) {
+      return;
+    }
+
     if (Platform.OS !== 'web') {
       try {
         const fileInfo = await FileSystem.getInfoAsync(imageUri);
@@ -529,52 +535,103 @@ export default function ScanScreen() {
           return;
         }
       } catch (err) {
-        console.warn('[SCAN] Could not verify file existence before navigation:', err);
+        console.warn('[SCAN] Could not verify file existence before upload:', err);
       }
     }
 
-    const encodedImageUri = encodeURIComponent(imageUri);
-    console.log('[SCAN] stable image URI:', imageUri);
-    console.log('[SCAN] encoded problem description URI:', encodedImageUri);
-    setIsPhotoReady(true);
-    router.push({
-      pathname: '/problem-description',
-      params: {
-        imageUri: encodedImageUri,
-      },
-    });
+    // ── Upload pipeline ────────────────────────────────────────────────────
+    uploadGuard.current = true;
+    setIsUploading(true);
+    setUploadError(null);
+
+    try {
+      // Retrieve stored JWT token
+      const token = await getAuthToken();
+      if (!token) {
+        setUploadError('Session expired. Please log in again.');
+        setIsUploading(false);
+        uploadGuard.current = false;
+        return;
+      }
+
+      console.log('[SCAN] Starting image upload to backend...');
+      const scanResult = await uploadScanImage(imageUri, token, 'tur');
+      console.log('[SCAN] Upload successful. scan_id:', scanResult.scan_id);
+
+      const encodedImageUri = encodeURIComponent(imageUri);
+      setIsPhotoReady(true);
+      setIsUploading(false);
+      uploadGuard.current = false;
+
+      // Navigate to problem-description with both imageUri and scan_id
+      router.push({
+        pathname: '/problem-description',
+        params: {
+          imageUri: encodedImageUri,
+          scanId: String(scanResult.scan_id),
+        },
+      });
+    } catch (err) {
+      setIsUploading(false);
+      uploadGuard.current = false;
+
+      if (err instanceof ScanUploadError) {
+        const canRetry = err.isRetryable;
+        setUploadError(
+          err.message + (canRetry ? ' Tap "Use This Photo" to retry.' : '')
+        );
+        console.error('[SCAN] Upload error (HTTP', err.httpStatus, '):', err.message);
+      } else {
+        setUploadError('Upload failed. Please check your connection and try again.');
+        console.error('[SCAN] Unexpected upload error:', err);
+      }
+    }
   };
 
-  // Play / Pause / Replay predefined voice guide using expo-audio
+  // Play / Pause / Replay localized voice help using expo-speech
   const handlePlayVoiceGuide = async () => {
-    if (!VOICE_GUIDE_ASSET) {
-      setAudioMessage(t('scan.voiceUnavailable'));
-      return;
-    }
     setAudioMessage(null);
 
-    if (isPlaying) {
+    if (isSpeaking) {
       try {
-        audioPlayer.pause();
-      } catch {
-        // Safe fallback
-      }
+        await Speech.stop();
+      } catch {}
+      setIsSpeaking(false);
       return;
     }
 
     try {
-      await setAudioModeAsync({
-        playsInSilentMode: true,
-        allowsRecording: false,
+      await Speech.stop();
+    } catch {}
+
+    const textToSpeak = scanText.voiceGuide;
+    const locale = SPEECH_LOCALES[language] || 'en-IN';
+
+    setIsSpeaking(true);
+
+    try {
+      Speech.speak(textToSpeak, {
+        language: locale,
+        rate: 0.9,
+        pitch: 1.0,
+        onStart: () => {
+          setIsSpeaking(true);
+        },
+        onDone: () => {
+          setIsSpeaking(false);
+        },
+        onStopped: () => {
+          setIsSpeaking(false);
+        },
+        onError: (err) => {
+          console.warn('[SCAN] Speech error:', err);
+          setIsSpeaking(false);
+        },
       });
-
-      if (isFinished || (audioPlayerStatus.duration > 0 && audioPlayerStatus.currentTime >= audioPlayerStatus.duration)) {
-        await audioPlayer.seekTo(0);
-      }
-
-      audioPlayer.play();
       setHasPlayedOnce(true);
-    } catch {
+    } catch (err) {
+      console.warn('[SCAN] Failed to invoke Speech.speak:', err);
+      setIsSpeaking(false);
       setAudioMessage(t('scan.voiceUnavailable'));
     }
   };
@@ -584,7 +641,7 @@ export default function ScanScreen() {
 
   const playButtonLabel = isPlaying
     ? t('scan.playing')
-    : hasPlayedOnce || isFinished
+    : hasPlayedOnce
       ? t('scan.playAgain')
       : scanText.playVoiceHelp;
 
@@ -651,8 +708,9 @@ export default function ScanScreen() {
                     accessibilityHint="Clears current photo and reopens camera preview"
                     accessibilityLabel={photoSource === 'gallery' ? t('scan.chooseAnother') : t('scan.retake')}
                     accessibilityRole="button"
+                    disabled={isUploading}
                     onPress={photoSource === 'gallery' ? () => void chooseFromGallery() : retakePhoto}
-                    style={({ pressed }) => [styles.secondaryButton, pressed && styles.secondaryPressed]}
+                    style={({ pressed }) => [styles.secondaryButton, isUploading && { opacity: 0.4 }, pressed && !isUploading && styles.secondaryPressed]}
                   >
                     <Glyph name={photoSource === 'gallery' ? 'gallery' : 'camera'} color="#1F5137" />
                     <Text style={styles.secondaryButtonText}>
@@ -661,23 +719,39 @@ export default function ScanScreen() {
                   </Pressable>
 
                   <Pressable
-                    accessibilityHint="Proceeds to leaf analysis with the current photo"
-                    accessibilityLabel={t('scan.useThisPhoto')}
+                    accessibilityHint="Uploads photo and proceeds to leaf analysis"
+                    accessibilityLabel={isUploading ? 'Uploading...' : t('scan.useThisPhoto')}
                     accessibilityRole="button"
-                    onPress={continueWithPhoto}
-                    style={({ pressed }) => [styles.primaryButton, pressed && styles.buttonPressed]}
+                    disabled={isUploading}
+                    onPress={() => void continueWithPhoto()}
+                    style={({ pressed }) => [styles.primaryButton, isUploading && { opacity: 0.75 }, pressed && !isUploading && styles.buttonPressed]}
                   >
-                    <Text style={styles.primaryButtonText}>{t('scan.useThisPhoto')}</Text>
+                    {isUploading ? (
+                      <ActivityIndicator color="#FFFEFA" size="small" />
+                    ) : (
+                      <Text style={styles.primaryButtonText}>{t('scan.useThisPhoto')}</Text>
+                    )}
                   </Pressable>
                 </View>
+
+                {/* Upload error message */}
+                {uploadError && (
+                  <Text accessibilityRole="alert" style={styles.uploadErrorText}>
+                    {uploadError}
+                  </Text>
+                )}
 
                 <View style={styles.photoReadyCard}>
                   <View style={styles.checkWrap}>
                     <Glyph name="check" color="#1F5137" />
                   </View>
                   <View style={styles.photoReadyCopy}>
-                    <Text style={styles.photoReadyTitle}>{t('scan.photoReady')}</Text>
-                    <Text style={styles.photoReadySubtitle}>{t('scan.reviewBeforeAnalysis')}</Text>
+                    <Text style={styles.photoReadyTitle}>
+                      {isUploading ? 'Uploading image...' : t('scan.photoReady')}
+                    </Text>
+                    <Text style={styles.photoReadySubtitle}>
+                      {isUploading ? 'Please wait while we save your photo.' : t('scan.reviewBeforeAnalysis')}
+                    </Text>
                   </View>
                 </View>
               </View>
@@ -2074,5 +2148,14 @@ const styles = StyleSheet.create({
     height: 3.5,
     borderRadius: 2,
     backgroundColor: '#D5BB79',
+  },
+  uploadErrorText: {
+    marginTop: 10,
+    marginHorizontal: 4,
+    color: '#B03030',
+    fontSize: 13,
+    lineHeight: 18,
+    textAlign: 'center',
+    fontWeight: '500',
   },
 });

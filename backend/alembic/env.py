@@ -21,7 +21,9 @@ if config.config_file_name:
 target_metadata = Base.metadata
 
 # Override sqlalchemy.url with dynamic DATABASE_URL from core config / env
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+# configparser treats '%' as an interpolation character, so we escape it by doubling.
+_db_url_escaped = settings.DATABASE_URL.replace("%", "%%")
+config.set_main_option("sqlalchemy.url", _db_url_escaped)
 
 
 def run_migrations_offline() -> None:

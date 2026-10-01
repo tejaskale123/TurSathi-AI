@@ -15,6 +15,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
 
 import { loginUser } from '../config/api';
+import { saveAuthToken } from '../config/tokenStore';
 
 type FieldName = 'identity' | 'password';
 
@@ -110,6 +111,8 @@ export default function LoginScreen() {
         password: password,
       });
       if (authResult && authResult.access_token && authResult.user) {
+        // Persist the JWT so the scan screen can use it for authenticated uploads
+        await saveAuthToken(authResult.access_token);
         setIsLoading(false);
         router.replace('/scan' as Href);
       } else {

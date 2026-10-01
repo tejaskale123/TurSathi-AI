@@ -32,7 +32,10 @@ const LanguageContext = createContext<LanguageContextType>({
   isReady: false,
 });
 
-const STORAGE_FILE = `${FileSystem.documentDirectory || FileSystem.cacheDirectory || ''}tursathi_language_setting.txt`;
+function getStorageFilePath(): string {
+  const dir = FileSystem.documentDirectory || FileSystem.cacheDirectory || '';
+  return dir ? `${dir}tursathi_language_setting.txt` : '';
+}
 
 // Read persisted language from file system or local storage
 async function readStoredLanguage(): Promise<Language | null> {
@@ -47,9 +50,12 @@ async function readStoredLanguage(): Promise<Language | null> {
       return null;
     }
 
-    const fileInfo = await FileSystem.getInfoAsync(STORAGE_FILE);
+    const filePath = getStorageFilePath();
+    if (!filePath) return null;
+
+    const fileInfo = await FileSystem.getInfoAsync(filePath);
     if (fileInfo.exists) {
-      const content = await FileSystem.readAsStringAsync(STORAGE_FILE, {
+      const content = await FileSystem.readAsStringAsync(filePath, {
         encoding: FileSystem.EncodingType.UTF8,
       });
       const trimmed = content.trim();
@@ -73,7 +79,10 @@ async function writeStoredLanguage(lang: Language): Promise<void> {
       return;
     }
 
-    await FileSystem.writeAsStringAsync(STORAGE_FILE, lang, {
+    const filePath = getStorageFilePath();
+    if (!filePath) return;
+
+    await FileSystem.writeAsStringAsync(filePath, lang, {
       encoding: FileSystem.EncodingType.UTF8,
     });
   } catch (err) {

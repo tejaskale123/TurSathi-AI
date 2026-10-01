@@ -32,7 +32,7 @@ try {
 }
 
 // ============================================================================
-// PRESCRIPTION LOCALIZED STRINGS (English, Marathi, Hindi)
+// LOCALIZED STRINGS (English, Marathi, Hindi)
 // ============================================================================
 const LOCALIZED_STRINGS: Record<
   Language,
@@ -46,142 +46,122 @@ const LOCALIZED_STRINGS: Record<
     errorSubtitle: string;
     tryAgain: string;
     scanAnotherLeaf: string;
-    leafPhotoBadge: string;
-    diseaseDetected: string;
-    howSure: string;
-    diseaseLevel: string;
-    resultUnavailable: string;
-    invalidImageTitle: string;
-    invalidImageDesc: string;
-    healthyTitle: string;
-    healthyDesc: string;
-    treatmentTitle: string;
+    detectedProblem: string;
+    detectionConfidence: string;
+    whatDoesThisMean: string;
+    recommendedTreatment: string;
     treatmentUnavailable: string;
-    applicationMethod: string;
-    timing: string;
-    precautions: string;
-    sprayGuidanceTitle: string;
-    whenToSpray: string;
-    howToApply: string;
-    coverageGuidance: string;
-    safetyPrecautions: string;
-    importantNotes: string;
+    applicationDetails: string;
+    recommendedQuantity: string;
+    waterRequired: string;
+    perPump: string;
+    sprayTiming: string;
+    importantTitle: string;
+    importantNotice: string;
+    viewSprayGuidance: string;
     listenAction: string;
     pauseAction: string;
-    smartSprayButton: string;
-    verifiedAdvisory: string;
+    healthyTitle: string;
+    healthyDesc: string;
+    invalidImageTitle: string;
+    invalidImageDesc: string;
   }
 > = {
   en: {
     brand: 'TurSathi AI',
     title: 'Treatment Recommendation',
-    subtitle: 'Guidance based on your Tur leaf condition.',
-    loadingTitle: 'Preparing Your Treatment Guidance',
-    loadingSubtitle: 'Please wait while we process your Tur leaf.',
-    errorTitle: 'Guidance Could Not Be Prepared',
+    subtitle: 'Recommended treatment based on your Tur leaf analysis',
+    loadingTitle: 'Preparing Your Treatment Recommendation',
+    loadingSubtitle: 'Please wait while we process your Tur leaf analysis.',
+    errorTitle: 'Recommendation Could Not Be Prepared',
     errorSubtitle: 'Please try again with a clear Tur leaf photo.',
     tryAgain: 'Try Again',
     scanAnotherLeaf: 'Scan Another Leaf',
-    leafPhotoBadge: 'Tur Leaf Photo',
-    diseaseDetected: 'Disease Detected',
-    howSure: 'How Sure We Are',
-    diseaseLevel: 'Disease Level',
-    resultUnavailable: 'Result Not Available',
-    invalidImageTitle: 'Invalid Image',
-    invalidImageDesc: 'Please capture a clear photo of a Tur leaf.',
+    detectedProblem: 'Detected Problem',
+    detectionConfidence: 'Detection Confidence',
+    whatDoesThisMean: 'What does this mean?',
+    recommendedTreatment: 'Recommended Treatment',
+    treatmentUnavailable: 'Verified treatment information will appear here.',
+    applicationDetails: 'Application Details',
+    recommendedQuantity: 'Recommended Quantity',
+    waterRequired: 'Water Required',
+    perPump: 'Per Pump',
+    sprayTiming: 'Spray Timing',
+    importantTitle: 'Important',
+    importantNotice:
+      'Always follow the verified agricultural recommendation and the product label before application.',
+    viewSprayGuidance: 'View Spray Guidance',
+    listenAction: 'Listen',
+    pauseAction: 'Pause',
     healthyTitle: 'No Disease Detected',
     healthyDesc:
       'Your Tur leaf appears healthy. Continue regular field monitoring and balanced irrigation without applying unnecessary chemical sprays.',
-    treatmentTitle: 'Recommended Treatment',
-    treatmentUnavailable: 'Treatment information is currently unavailable.',
-    applicationMethod: 'Application Method',
-    timing: 'Timing',
-    precautions: 'Precautions',
-    sprayGuidanceTitle: 'Smart Spray Guidance',
-    whenToSpray: 'When to Spray',
-    howToApply: 'How to Apply',
-    coverageGuidance: 'Coverage Guidance',
-    safetyPrecautions: 'Safety & Precautions',
-    importantNotes: 'Important Notes',
-    listenAction: 'Listen',
-    pauseAction: 'Pause',
-    smartSprayButton: 'Smart Spray Guidance',
-    verifiedAdvisory:
-      'Always follow approved agricultural guidelines and product container labels before applying any crop protection measures.',
+    invalidImageTitle: 'Invalid Image',
+    invalidImageDesc: 'Please capture a clear photo of a Tur leaf.',
   },
   mr: {
     brand: 'TurSathi AI',
     title: 'उपचार शिफारस',
-    subtitle: 'तुमच्या तूर पानांच्या स्थितीनुसार मार्गदर्शन.',
-    loadingTitle: 'तुमचे उपचार मार्गदर्शन तयार करत आहे',
-    loadingSubtitle: 'कृपया थांबा, आम्ही तुमच्या तूर पानाची तपासणी करत आहोत.',
-    errorTitle: 'मार्गदर्शन तयार करता आले नाही',
+    subtitle: 'तुमच्या तूर पानांच्या विश्लेषणावर आधारित शिफारस केलेले उपचार',
+    loadingTitle: 'तुमची उपचार शिफारस तयार करत आहे',
+    loadingSubtitle: 'कृपया थांबा, आम्ही तुमच्या तूर पानाचे विश्लेषण करत आहोत.',
+    errorTitle: 'शिफारस तयार करता आली नाही',
     errorSubtitle: 'कृपया स्पष्ट तूर पानाच्या फोटोसह पुन्हा प्रयत्न करा.',
     tryAgain: 'पुन्हा प्रयत्न करा',
     scanAnotherLeaf: 'दुसरे पान स्कॅन करा',
-    leafPhotoBadge: 'तूर पानाचा फोटो',
-    diseaseDetected: 'रोग आढळला',
-    howSure: 'अचूकता प्रमाण',
-    diseaseLevel: 'रोगाची तीव्रता',
-    resultUnavailable: 'निकाल उपलब्ध नाही',
-    invalidImageTitle: 'अवैध फोटो',
-    invalidImageDesc: 'कृपया तूर पानाचा स्पष्ट फोटो घ्या.',
+    detectedProblem: 'आढळलेली समस्या',
+    detectionConfidence: 'तपासणी अचूकता',
+    whatDoesThisMean: 'याचा अर्थ काय आहे?',
+    recommendedTreatment: 'शिफारस केलेले उपचार',
+    treatmentUnavailable: 'पडताळलेली उपचारांची माहिती येथे दिसेल.',
+    applicationDetails: 'वापर व फवारणी तपशील',
+    recommendedQuantity: 'शिफारस केलेले प्रमाण',
+    waterRequired: 'आवश्यक पाणी',
+    perPump: 'प्रति पंप प्रमाण',
+    sprayTiming: 'फवारणीची वेळ',
+    importantTitle: 'महत्त्वाचे',
+    importantNotice:
+      'कोणत्याही उपचाराचा वापर करण्यापूर्वी नेहमी पडताळलेली कृषी शिफारस आणि उत्पादन लेबलचे पालन करा.',
+    viewSprayGuidance: 'फवारणी मार्गदर्शन पहा',
+    listenAction: 'ऐका',
+    pauseAction: 'थांबवा',
     healthyTitle: 'रोग आढळला नाही',
     healthyDesc:
       'तुमचे तूर पान निरोगी दिसत आहे. नियमित शेती निरीक्षण आणि योग्य पाणी व्यवस्थापन सुरू ठेवा; अनावश्यक फवारणी टाळा.',
-    treatmentTitle: 'शिफारस केलेले उपचार',
-    treatmentUnavailable: 'उपचारांची माहिती सध्या उपलब्ध नाही.',
-    applicationMethod: 'फवारणी पद्धत',
-    timing: 'योग्य वेळ',
-    precautions: 'दक्षता व काळजी',
-    sprayGuidanceTitle: 'स्मार्ट फवारणी मार्गदर्शन',
-    whenToSpray: 'कधी फवारणी करावी',
-    howToApply: 'कशी फवारणी करावी',
-    coverageGuidance: 'कवरेज मार्गदर्शन',
-    safetyPrecautions: 'सुरक्षा आणि काळजी',
-    importantNotes: 'महत्त्वाच्या बाबी',
-    listenAction: 'ऐका',
-    pauseAction: 'थांबवा',
-    smartSprayButton: 'स्मार्ट फवारणी मार्गदर्शन',
-    verifiedAdvisory:
-      'कोणतीही पीक संरक्षण फवारणी करण्यापूर्वी नेहमी अधिकृत कृषी मार्गदर्शक तत्त्वे आणि उत्पादन लेबल तपासा.',
+    invalidImageTitle: 'अवैध फोटो',
+    invalidImageDesc: 'कृपया तूर पानाचा स्पष्ट फोटो घ्या.',
   },
   hi: {
     brand: 'TurSathi AI',
     title: 'उपचार सिफारिश',
-    subtitle: 'आपकी तूर पत्ती की स्थिति पर आधारित मार्गदर्शन।',
-    loadingTitle: 'आपका उपचार मार्गदर्शन तैयार हो रहा है',
-    loadingSubtitle: 'कृपया प्रतीक्षा करें, हम आपकी तूर पत्ती की जांच कर रहे हैं।',
-    errorTitle: 'मार्गदर्शन तैयार नहीं किया जा सका',
+    subtitle: 'आपकी तूर पत्ती के विश्लेषण पर आधारित अनुशंसित उपचार',
+    loadingTitle: 'आपकी उपचार सिफारिश तैयार हो रही है',
+    loadingSubtitle: 'कृपया प्रतीक्षा करें, हम आपकी तूर पत्ती का विश्लेषण कर रहे हैं।',
+    errorTitle: 'सिफारिश तैयार नहीं की जा सकी',
     errorSubtitle: 'कृपया स्पष्ट तूर पत्ती की फोटो के साथ पुनः प्रयास करें।',
     tryAgain: 'पुनः प्रयास करें',
     scanAnotherLeaf: 'दूसरी पत्ती स्कैन करें',
-    leafPhotoBadge: 'तूर पत्ती की फोटो',
-    diseaseDetected: 'रोग पहचाना गया',
-    howSure: 'विश्वसनीयता स्तर',
-    diseaseLevel: 'रोग का स्तर',
-    resultUnavailable: 'परिणाम उपलब्ध नहीं',
-    invalidImageTitle: 'अमान्य फोटो',
-    invalidImageDesc: 'कृपया तूर पत्ती की स्पष्ट फोटो लें।',
+    detectedProblem: 'पहचानी गई समस्या',
+    detectionConfidence: 'जांच विश्वसनीयता',
+    whatDoesThisMean: 'इसका क्या अर्थ है?',
+    recommendedTreatment: 'अनुशंसित उपचार',
+    treatmentUnavailable: 'सत्यापित उपचार की जानकारी यहां दिखाई देगी।',
+    applicationDetails: 'उपयोग एवं विवरण',
+    recommendedQuantity: 'अनुशंसित मात्रा',
+    waterRequired: 'आवश्यक पानी',
+    perPump: 'प्रति पंप मात्रा',
+    sprayTiming: 'छिड़काव का समय',
+    importantTitle: 'महत्वपूर्ण',
+    importantNotice:
+      'किसी भी उपचार का उपयोग करने से पहले हमेशा सत्यापित कृषि सिफारिश और उत्पाद लेबल का पालन करें।',
+    viewSprayGuidance: 'छिड़काव मार्गदर्शन देखें',
+    listenAction: 'सुनें',
+    pauseAction: 'रोकें',
     healthyTitle: 'कोई रोग नहीं मिला',
     healthyDesc:
       'आपकी तूर पत्ती स्वस्थ दिखाई दे रही है। नियमित खेत की निगरानी और उचित सिंचाई जारी रखें; अनावश्यक कीटनाशक से बचें।',
-    treatmentTitle: 'अनुशंसित उपचार',
-    treatmentUnavailable: 'उपचार की जानकारी अभी उपलब्ध नहीं है।',
-    applicationMethod: 'छिड़काव विधि',
-    timing: 'उचित समय',
-    precautions: 'सावधानियां',
-    sprayGuidanceTitle: 'स्मार्ट छिड़काव मार्गदर्शन',
-    whenToSpray: 'कब छिड़काव करें',
-    howToApply: 'कैसे छिड़काव करें',
-    coverageGuidance: 'कवरेज मार्गदर्शन',
-    safetyPrecautions: 'सुरक्षा और सावधानियां',
-    importantNotes: 'महत्वपूर्ण बातें',
-    listenAction: 'सुनें',
-    pauseAction: 'रोकें',
-    smartSprayButton: 'स्मार्ट छिड़काव मार्गदर्शन',
-    verifiedAdvisory:
-      'किसी भी फसल सुरक्षा छिड़काव से पहले हमेशा अनुमोदित कृषि दिशा-निर्देशों और उत्पाद लेबल की जांच करें।',
+    invalidImageTitle: 'अमान्य फोटो',
+    invalidImageDesc: 'कृपया तूर पत्ती की स्पष्ट फोटो लें।',
   },
 };
 
@@ -244,8 +224,6 @@ function SpeakerGlyph({ color = '#1B4332', size = 18 }: { color?: string; size?:
   );
 }
 
-
-
 function InfoGlyph({ color = '#1B4332' }: { color?: string }) {
   return (
     <View style={[styles.infoCircle, { borderColor: color }]}>
@@ -274,24 +252,31 @@ function ArrowGlyph({ color = '#FFFFFF', size = 16 }: { color?: string; size?: n
 
 // Normalizer for confidence percentage
 const formatConfidence = (val?: string | number): string => {
-  if (val === undefined || val === null || val === '') return '92%';
+  if (val === undefined || val === null || val === '') return '';
   const num = typeof val === 'string' ? parseFloat(val) : val;
-  if (isNaN(num)) return '92%';
+  if (isNaN(num)) return '';
   const normalized = num <= 1 && num > 0 ? Math.round(num * 100) : Math.round(num);
   return `${Math.min(Math.max(normalized, 0), 100)}%`;
 };
 
 export default function PrescriptionScreen() {
   const router = useRouter();
-  const { language, tDisease, tSeverity } = useLanguage();
+  const { language, tDisease } = useLanguage();
   const labels = LOCALIZED_STRINGS[language] || LOCALIZED_STRINGS.en;
 
   const params = useLocalSearchParams<{
     imageUri?: string | string[];
     voiceUri?: string | string[];
+    scanId?: string | string[];
     diseaseName?: string;
     confidence?: string;
-    severity?: string;
+    explanation?: string;
+    treatment?: string;
+    activeIngredient?: string;
+    recommendedQuantity?: string;
+    waterQuantity?: string;
+    perPumpQuantity?: string;
+    sprayTiming?: string;
     status?: string;
   }>();
 
@@ -318,9 +303,8 @@ export default function PrescriptionScreen() {
     normalizedImageUri = rawImageUri;
   }
 
-  // Dynamic values received or derived from model pipeline
+  // Dynamic values received from ML/backend parameters
   const incomingDisease = params.diseaseName?.trim();
-  const incomingSeverity = params.severity?.trim();
   const incomingConfidence = params.confidence;
   const status = params.status || 'success';
 
@@ -328,15 +312,15 @@ export default function PrescriptionScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // Audio player for Listen action
+  // Audio player for Read Aloud / Listen action
   const audioPlayer = useAudioPlayer(VOICE_GUIDANCE_ASSET);
   const audioPlayerStatus = useAudioPlayerStatus(audioPlayer);
   const isPlayingAudio = Boolean(audioPlayerStatus.playing);
 
-  // Subtle page entrance animation
+  // Entrance animation
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Simulate internal service preparation pipeline (direct from Submit)
+  // Page entrance transition
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -345,12 +329,12 @@ export default function PrescriptionScreen() {
         duration: 350,
         useNativeDriver: true,
       }).start();
-    }, 1400);
+    }, 600);
 
     return () => clearTimeout(timer);
   }, [fadeAnim]);
 
-  // Safe unmount audio cleanup
+  // Audio cleanup on unmount
   useEffect(() => {
     return () => {
       try {
@@ -416,9 +400,10 @@ export default function PrescriptionScreen() {
       pathname: '/spray-guidance',
       params: {
         imageUri: encodeURIComponent(normalizedImageUri),
-        diseaseName: incomingDisease || 'Tur Leaf Spot',
-        confidence: String(incomingConfidence || '92'),
-        severity: incomingSeverity || 'Moderate',
+        ...(incomingDisease ? { diseaseName: incomingDisease } : {}),
+        ...(incomingConfidence ? { confidence: String(incomingConfidence) } : {}),
+        ...(params.treatment ? { treatment: params.treatment } : {}),
+        ...(params.scanId ? { scanId: Array.isArray(params.scanId) ? params.scanId[0] : params.scanId } : {}),
       },
     });
   };
@@ -438,7 +423,7 @@ export default function PrescriptionScreen() {
     );
   }
 
-  // 2. ERROR STATE: Missing photo URI or processing failure
+  // 2. ERROR STATE
   if (!normalizedImageUri || hasError) {
     return (
       <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
@@ -499,7 +484,7 @@ export default function PrescriptionScreen() {
     );
   }
 
-  // Dynamic disease resolution (without permanent hardcoding)
+  // Dynamic disease & state resolution
   const isHealthy =
     status === 'no_disease_detected' ||
     incomingDisease?.toLowerCase() === 'healthy leaf' ||
@@ -509,15 +494,32 @@ export default function PrescriptionScreen() {
     ? labels.healthyTitle
     : incomingDisease
       ? tDisease(incomingDisease)
-      : tDisease('Tur Leaf Spot');
-
-  const displaySeverity = isHealthy
-    ? ''
-    : incomingSeverity
-      ? tSeverity(incomingSeverity)
-      : tSeverity('Moderate');
+      : (language === 'mr' ? 'तूर पानावरील डाग' : language === 'hi' ? 'तूर पत्ती का धब्बा' : 'Tur Leaf Spot');
 
   const displayConfidence = isHealthy ? '' : formatConfidence(incomingConfidence);
+
+  // Section 3: Farmer Explanation
+  const explanationText =
+    params.explanation?.trim() ||
+    (isHealthy
+      ? labels.healthyDesc
+      : language === 'mr'
+        ? 'ही परिस्थिती तूर पिकाच्या पानांवर परिणाम करते. वेळेवर खबरदारी आणि लागवड व्यवस्थापन न केल्यास पिकाच्या वाढीवर परिणाम होऊ शकतो.'
+        : language === 'hi'
+          ? 'यह स्थिति तूर फसल की पत्तियों को प्रभावित करती है। समय पर उचित देखभाल न करने से फसल की वृद्धि पर असर पड़ सकता है।'
+          : 'This condition affects the leaves of your Tur plant and may reduce crop health if unmanaged.');
+
+  // Section 4: Recommended Treatment
+  const treatmentText =
+    params.treatment?.trim() ||
+    (isHealthy ? null : labels.treatmentUnavailable);
+
+  // Section 5: Application Details (Dynamic verified fields only)
+  const reqQty = params.recommendedQuantity?.trim();
+  const reqWater = params.waterQuantity?.trim();
+  const reqPerPump = params.perPumpQuantity?.trim();
+  const reqTiming = params.sprayTiming?.trim();
+  const hasAppDetails = Boolean(reqQty || reqWater || reqPerPump || reqTiming);
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
@@ -558,133 +560,97 @@ export default function PrescriptionScreen() {
             </Pressable>
           </View>
 
-          {/* PAGE TITLE & SUBTITLE */}
+          {/* SECTION 1 — PAGE HEADER */}
           <View style={styles.titleSection}>
             <Text style={styles.headerTitle}>{labels.title}</Text>
             <Text style={styles.headerSubtitle}>{labels.subtitle}</Text>
           </View>
 
-
-          {/* 8. DISEASE RESULT CARD */}
-          <View style={styles.resultCard}>
-            <View style={styles.resultHeaderRow}>
-              <View style={styles.statusPill}>
-                <Text style={styles.statusPillText}>
-                  {isHealthy ? labels.healthyTitle : labels.diseaseDetected}
-                </Text>
-              </View>
+          {/* SECTION 2 — DETECTED PROBLEM */}
+          <View style={styles.card}>
+            <View style={styles.cardHeaderRow}>
+              <Text style={styles.cardCategoryLabel}>{labels.detectedProblem}</Text>
             </View>
 
             <Text style={styles.diseaseNameText}>{displayDisease}</Text>
 
-            {!isHealthy && (
-              <View style={styles.metricsRow}>
-                {/* Confidence Metric */}
-                <View style={styles.metricBox}>
-                  <Text style={styles.metricLabel}>{labels.howSure}</Text>
-                  <Text style={styles.metricValue}>{displayConfidence}</Text>
-                </View>
-
-                {/* Severity Metric */}
-                <View style={styles.metricBox}>
-                  <Text style={styles.metricLabel}>{labels.diseaseLevel}</Text>
-                  <Text style={styles.metricValue}>{displaySeverity}</Text>
-                </View>
+            {!isHealthy && displayConfidence !== '' && (
+              <View style={styles.confidenceRow}>
+                <Text style={styles.confidenceLabel}>{labels.detectionConfidence}</Text>
+                <Text style={styles.confidenceValue}>{displayConfidence}</Text>
               </View>
             )}
-
-            {isHealthy && <Text style={styles.healthyBodyText}>{labels.healthyDesc}</Text>}
           </View>
 
-          {/* 9. RECOMMENDED TREATMENT SECTION */}
+          {/* SECTION 3 — WHAT DOES THIS MEAN? */}
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>{labels.whatDoesThisMean}</Text>
+            <Text style={styles.explanationText}>{explanationText}</Text>
+          </View>
+
+          {/* SECTION 4 — RECOMMENDED TREATMENT */}
           {!isHealthy && (
-            <View style={styles.sectionCard}>
-              <View style={styles.sectionTitleRow}>
-                <View style={styles.bulletDot} />
-                <Text style={styles.sectionTitle}>{labels.treatmentTitle}</Text>
-              </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>{labels.recommendedTreatment}</Text>
+              <Text style={styles.treatmentText}>{treatmentText}</Text>
+            </View>
+          )}
 
-              {/* Dynamic Treatment Details */}
-              <View style={styles.fieldItem}>
-                <Text style={styles.fieldLabel}>{labels.treatmentTitle}</Text>
-                <Text style={styles.fieldValue}>
-                  {displayDisease.includes('Spot') || displayDisease.includes('डाग')
-                    ? 'Copper Oxychloride 50 WP / Chlorothalonil 75 WP'
-                    : 'Foliar Bio-fungicide / Organic Neem formulation'}
-                </Text>
-              </View>
-
-              <View style={styles.fieldItem}>
-                <Text style={styles.fieldLabel}>{labels.applicationMethod}</Text>
-                <Text style={styles.fieldValue}>
-                  Foliar spray targeting upper and lower leaf canopy
-                </Text>
-              </View>
-
-              <View style={styles.fieldItem}>
-                <Text style={styles.fieldLabel}>{labels.timing}</Text>
-                <Text style={styles.fieldValue}>
-                  Early morning (7:00 AM – 10:30 AM) during calm winds
-                </Text>
-              </View>
-
-              <View style={styles.fieldItem}>
-                <Text style={styles.fieldLabel}>{labels.precautions}</Text>
-                <Text style={styles.fieldValue}>
-                  Wear protective gloves and mask. Avoid spraying right before expected rainfall.
-                </Text>
+          {/* SECTION 5 — APPLICATION DETAILS (Only displayed if verified dynamic data exists) */}
+          {!isHealthy && hasAppDetails && (
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>{labels.applicationDetails}</Text>
+              <View style={styles.appDetailsGrid}>
+                {Boolean(reqQty) && (
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>{labels.recommendedQuantity}</Text>
+                    <Text style={styles.detailValue}>{reqQty}</Text>
+                  </View>
+                )}
+                {Boolean(reqWater) && (
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>{labels.waterRequired}</Text>
+                    <Text style={styles.detailValue}>{reqWater}</Text>
+                  </View>
+                )}
+                {Boolean(reqPerPump) && (
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>{labels.perPump}</Text>
+                    <Text style={styles.detailValue}>{reqPerPump}</Text>
+                  </View>
+                )}
+                {Boolean(reqTiming) && (
+                  <View style={styles.detailRow}>
+                    <Text style={styles.detailLabel}>{labels.sprayTiming}</Text>
+                    <Text style={styles.detailValue}>{reqTiming}</Text>
+                  </View>
+                )}
               </View>
             </View>
           )}
 
-          {/* 10. SMART SPRAY GUIDANCE SECTION */}
-          {!isHealthy && (
-            <View style={styles.sectionCard}>
-              <View style={styles.sectionTitleRow}>
-                <View style={styles.bulletDot} />
-                <Text style={styles.sectionTitle}>{labels.sprayGuidanceTitle}</Text>
-              </View>
-
-              <View style={styles.guidanceItem}>
-                <Text style={styles.guidanceItemLabel}>{labels.whenToSpray}</Text>
-                <Text style={styles.guidanceItemText}>
-                  Apply when active symptoms appear, preferably in clear daylight without heavy dew.
-                </Text>
-              </View>
-
-              <View style={styles.guidanceItem}>
-                <Text style={styles.guidanceItemLabel}>{labels.howToApply}</Text>
-                <Text style={styles.guidanceItemText}>
-                  Use fine-cone nozzle for thorough coverage across infected plant patches.
-                </Text>
-              </View>
-
-              <View style={styles.guidanceItem}>
-                <Text style={styles.guidanceItemLabel}>{labels.safetyPrecautions}</Text>
-                <Text style={styles.guidanceItemText}>
-                  Keep safety distance from water bodies and maintain harvest waiting period.
-                </Text>
-              </View>
+          {/* SECTION 6 — IMPORTANT NOTE */}
+          <View style={styles.importantCard}>
+            <View style={styles.importantIconWrap}>
+              <InfoGlyph color="#1B4332" />
             </View>
-          )}
-
-          {/* TRUST ADVISORY */}
-          <View style={styles.advisoryBox}>
-            <InfoGlyph color="#607668" />
-            <Text style={styles.advisoryText}>{labels.verifiedAdvisory}</Text>
+            <View style={styles.importantCopyWrap}>
+              <Text style={styles.importantTitle}>{labels.importantTitle}</Text>
+              <Text style={styles.importantText}>{labels.importantNotice}</Text>
+            </View>
           </View>
 
-          {/* 12. FARMER-FRIENDLY BOTTOM ACTIONS */}
+          {/* SECTION 7 — PRIMARY NEXT ACTION */}
           <View style={styles.actionsSection}>
             {!isHealthy && (
               <Pressable
                 accessibilityHint="Navigates to detailed smart spray guidance"
-                accessibilityLabel={labels.smartSprayButton}
+                accessibilityLabel={labels.viewSprayGuidance}
                 accessibilityRole="button"
                 onPress={handleOpenSprayGuidance}
                 style={({ pressed }) => [styles.primaryButton, pressed && styles.buttonPressed]}
               >
-                <Text style={styles.primaryButtonText}>{labels.smartSprayButton}</Text>
+                <Text style={styles.primaryButtonText}>{labels.viewSprayGuidance}</Text>
                 <ArrowGlyph color="#FFFFFF" size={16} />
               </Pressable>
             )}
@@ -793,16 +759,20 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   listenButton: {
+    height: 38,
+    paddingHorizontal: 14,
+    borderRadius: 19,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#CBE2D1',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 18,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#D4E2D8',
     elevation: 1,
+    shadowColor: '#1B4332',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
   },
   listenButtonText: {
     color: '#1B4332',
@@ -813,7 +783,7 @@ const styles = StyleSheet.create({
   // Title Section
   titleSection: {
     marginTop: 6,
-    marginBottom: 16,
+    marginBottom: 20,
     alignItems: 'flex-start',
   },
   headerTitle: {
@@ -821,7 +791,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#0F2419',
     letterSpacing: -0.3,
-    marginBottom: 4,
+    marginBottom: 6,
   },
   headerSubtitle: {
     fontSize: 15,
@@ -830,16 +800,14 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
 
-
-
-  // Result Card
-  resultCard: {
+  // Cards
+  card: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    borderRadius: 22,
     padding: 20,
     borderWidth: 1,
     borderColor: '#E2E8DC',
-    marginBottom: 16,
+    marginBottom: 18,
     ...Platform.select({
       ios: {
         shadowColor: '#1A4D33',
@@ -852,179 +820,122 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  resultHeaderRow: {
+  cardHeaderRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 10,
   },
-  statusPill: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 10,
-    backgroundColor: '#EBF4ED',
-    borderWidth: 1,
-    borderColor: '#CBE0D1',
-  },
-  statusPillText: {
-    color: '#1B4332',
-    fontSize: 11,
+  cardCategoryLabel: {
+    fontSize: 12,
     fontWeight: '700',
-    letterSpacing: 0.5,
+    color: '#2D6A4F',
     textTransform: 'uppercase',
+    letterSpacing: 0.8,
   },
   diseaseNameText: {
     fontSize: 22,
     fontWeight: '800',
     color: '#0F2419',
-    marginBottom: 14,
+    letterSpacing: -0.3,
+    marginBottom: 8,
   },
-  metricsRow: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  metricBox: {
-    flex: 1,
-    backgroundColor: '#F5FAF6',
-    borderRadius: 14,
-    padding: 12,
-    borderWidth: 1,
-    borderColor: '#DBE9DF',
-  },
-  metricLabel: {
-    color: '#557A66',
-    fontSize: 12,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  metricValue: {
-    color: '#1B4332',
-    fontSize: 18,
-    fontWeight: '800',
-  },
-  healthyBodyText: {
-    color: '#3B5848',
-    fontSize: 14,
-    lineHeight: 22,
-    fontWeight: '500',
-  },
-
-  // Section Cards (Treatment / Spray)
-  sectionCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: '#E2E8DC',
-    marginBottom: 16,
-    ...Platform.select({
-      ios: {
-        shadowColor: '#1A4D33',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.05,
-        shadowRadius: 8,
-      },
-      android: {
-        elevation: 2,
-      },
-    }),
-  },
-  sectionTitleRow: {
+  confidenceRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    marginBottom: 14,
+    marginTop: 4,
   },
-  bulletDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#2D6A4F',
-  },
-  sectionTitle: {
-    color: '#0F2419',
-    fontSize: 17,
-    fontWeight: '800',
-  },
-  fieldItem: {
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F4F0',
-  },
-  fieldLabel: {
-    color: '#658172',
-    fontSize: 12,
+  confidenceLabel: {
+    fontSize: 13,
     fontWeight: '600',
-    marginBottom: 2,
-    textTransform: 'uppercase',
+    color: '#557A66',
   },
-  fieldValue: {
-    color: '#1A3324',
+  confidenceValue: {
     fontSize: 14,
-    fontWeight: '600',
-    lineHeight: 20,
-  },
-  guidanceItem: {
-    marginBottom: 12,
-  },
-  guidanceItemLabel: {
+    fontWeight: '800',
     color: '#1B4332',
-    fontSize: 13,
-    fontWeight: '700',
-    marginBottom: 3,
   },
-  guidanceItemText: {
-    color: '#476355',
-    fontSize: 13,
-    lineHeight: 19,
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#0F2419',
+    marginBottom: 10,
+  },
+  explanationText: {
+    fontSize: 14,
+    lineHeight: 22,
     fontWeight: '500',
+    color: '#344E41',
+  },
+  treatmentText: {
+    fontSize: 15,
+    lineHeight: 23,
+    fontWeight: '600',
+    color: '#1B4332',
   },
 
-  // Advisory Box
-  advisoryBox: {
+  // Application Details Grid
+  appDetailsGrid: {
+    gap: 12,
+    marginTop: 4,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F4EE',
+  },
+  detailLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#557A66',
+  },
+  detailValue: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#0F2419',
+  },
+
+  // Important Card
+  importantCard: {
+    backgroundColor: '#F7FAF7',
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#DDE9DF',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    gap: 10,
-    backgroundColor: '#F3F6F2',
-    borderRadius: 14,
-    padding: 14,
-    borderWidth: 1,
-    borderColor: '#DDE5DF',
+    gap: 12,
     marginBottom: 24,
   },
-  advisoryText: {
+  importantIconWrap: {
+    marginTop: 2,
+  },
+  importantCopyWrap: {
     flex: 1,
-    color: '#556E5E',
+  },
+  importantTitle: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#1B4332',
+    marginBottom: 3,
+  },
+  importantText: {
     fontSize: 12,
     lineHeight: 18,
     fontWeight: '500',
-  },
-  infoCircle: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    borderWidth: 1.6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 1,
-  },
-  infoDot: {
-    width: 2,
-    height: 2,
-    borderRadius: 1,
-    marginBottom: 2,
-  },
-  infoStem: {
-    width: 1.6,
-    height: 5,
-    borderRadius: 0.8,
+    color: '#476355',
   },
 
-  // Action Buttons
+  // Actions Section
   actionsSection: {
     gap: 12,
+    marginBottom: 16,
   },
   primaryButton: {
-    height: 56,
+    height: 52,
     borderRadius: 16,
     backgroundColor: '#1B4332',
     flexDirection: 'row',
@@ -1036,7 +947,7 @@ const styles = StyleSheet.create({
         shadowColor: '#1B4332',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.28,
-        shadowRadius: 8,
+        shadowRadius: 10,
       },
       android: {
         elevation: 4,
@@ -1049,11 +960,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   secondaryButton: {
-    height: 52,
+    height: 48,
     borderRadius: 16,
-    borderWidth: 1.5,
-    borderColor: '#1B4332',
     backgroundColor: '#FFFFFF',
+    borderWidth: 1.5,
+    borderColor: '#CBE2D1',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1063,51 +974,51 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  // Loading & Error States
+  // Loading & Error Containers
   loadingContainer: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    alignItems: 'center',
+    padding: 24,
   },
   loadingCard: {
-    width: '100%',
-    maxWidth: 400,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
-    padding: 36,
+    padding: 32,
     alignItems: 'center',
+    width: '100%',
+    maxWidth: 400,
     borderWidth: 1,
     borderColor: '#E2E8DC',
     elevation: 3,
   },
   loadingTitle: {
-    color: '#0F2419',
-    fontSize: 19,
+    fontSize: 18,
     fontWeight: '800',
-    marginTop: 20,
-    marginBottom: 8,
+    color: '#0F2419',
+    marginTop: 18,
+    marginBottom: 6,
     textAlign: 'center',
   },
   loadingSubtitle: {
-    color: '#557A66',
     fontSize: 14,
+    fontWeight: '500',
+    color: '#557A66',
     textAlign: 'center',
-    lineHeight: 20,
   },
   errorContainer: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    alignItems: 'center',
+    padding: 24,
   },
   errorCard: {
-    width: '100%',
-    maxWidth: 400,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
-    padding: 30,
+    padding: 28,
     alignItems: 'center',
+    width: '100%',
+    maxWidth: 400,
     borderWidth: 1,
     borderColor: '#E2E8DC',
     elevation: 3,
@@ -1117,25 +1028,43 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#FFF8E8',
+    backgroundColor: '#FFFBEB',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 6,
   },
   errorTitle: {
-    color: '#0F2419',
     fontSize: 18,
     fontWeight: '800',
+    color: '#0F2419',
     textAlign: 'center',
   },
   errorSubtitle: {
-    color: '#557A66',
     fontSize: 14,
+    fontWeight: '500',
+    color: '#557A66',
     textAlign: 'center',
     lineHeight: 20,
     marginBottom: 8,
   },
-
+  infoCircle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  infoDot: {
+    width: 3,
+    height: 3,
+    borderRadius: 1.5,
+    marginBottom: 2,
+  },
+  infoStem: {
+    width: 2,
+    height: 8,
+    borderRadius: 1,
+  },
   buttonPressed: {
     opacity: 0.88,
     transform: [{ scale: 0.985 }],

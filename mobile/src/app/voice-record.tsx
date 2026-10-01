@@ -22,6 +22,8 @@ import {
 } from 'expo-audio';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
+import { uploadVoiceReport, ScanUploadError } from '../config/scanApi';
+import { getAuthToken } from '../config/tokenStore';
 
 // ============================================================================
 // STEP 2 LOCALIZED STRINGS (English, Marathi, Hindi)
@@ -315,10 +317,14 @@ export default function VoiceRecordScreen() {
   const labels = LOCALIZED_STRINGS[language] || LOCALIZED_STRINGS.en;
 
   // Route parameters received from problem-description screen
-  const params = useLocalSearchParams<{ imageUri?: string | string[] }>();
+  const params = useLocalSearchParams<{ imageUri?: string | string[]; scanId?: string | string[] }>();
   const rawImageUri = Array.isArray(params.imageUri)
     ? params.imageUri[0]
     : (params.imageUri ?? '');
+
+  // scanId links this voice recording to the backend scan/case
+  const rawScanId = Array.isArray(params.scanId) ? params.scanId[0] : (params.scanId ?? '');
+  const scanId = rawScanId ? parseInt(rawScanId, 10) : null;
 
   let normalizedImageUri = '';
   try {
@@ -560,8 +566,8 @@ export default function VoiceRecordScreen() {
     setRecordedDuration(0);
   };
 
-  // 5. SUBMIT: Forward preserved imageUri and voiceUri directly to /prescription
-  const handleSubmit = () => {
+  // 5. SUBMIT: Upload voice recording (best-effort), then navigate to /prescription
+  const handleSubmit = async () => {
     if (!recordedUri) {
       return;
     }
@@ -576,12 +582,41 @@ export default function VoiceRecordScreen() {
     console.log('[VOICE-RECORD] Submitting to Prescription:');
     console.log('  imageUri:', finalImageUri);
     console.log('  voiceUri:', recordedUri);
+    console.log('  scanId:', scanId);
+
+    // Upload voice recording to backend (best-effort: failure doesn't block prescription)
+    if (scanId !== null && !isNaN(scanId)) {
+      try {
+        const token = await getAuthToken();
+        if (token) {
+          const langCode = language === 'mr' ? 'mr' : language === 'hi' ? 'hi' : 'en';
+          await uploadVoiceReport(
+            scanId,
+            recordedUri,
+            token,
+            langCode,
+            recordedDuration > 0 ? recordedDuration : undefined,
+          );
+          console.log('[VOICE-RECORD] Voice uploaded successfully for scan_id:', scanId);
+        }
+      } catch (uploadErr) {
+        // Log but do NOT block the farmer — prescription must always be reachable
+        if (uploadErr instanceof ScanUploadError) {
+          console.warn('[VOICE-RECORD] Voice upload failed (HTTP', uploadErr.httpStatus, '):', uploadErr.message);
+        } else {
+          console.warn('[VOICE-RECORD] Voice upload error:', uploadErr);
+        }
+      }
+    } else {
+      console.warn('[VOICE-RECORD] No scanId available — voice upload skipped.');
+    }
 
     router.push({
       pathname: '/prescription',
       params: {
         imageUri: encodeURIComponent(finalImageUri),
         voiceUri: encodeURIComponent(recordedUri),
+        ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
       },
     });
   };
@@ -600,6 +635,7 @@ export default function VoiceRecordScreen() {
       pathname: '/problem-description',
       params: {
         imageUri: encodeURIComponent(finalImageUri),
+        ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
       },
     });
   };

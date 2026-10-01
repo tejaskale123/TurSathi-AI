@@ -14,6 +14,7 @@ import { useRouter } from 'expo-router';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
 import { registerUser } from '../config/api';
+import { saveAuthToken } from '../config/tokenStore';
 
 type FieldName = 'name' | 'mobile' | 'email' | 'password' | 'confirmPassword' | 'terms';
 type PrototypeRegistration = {
@@ -153,13 +154,17 @@ export default function RegisterScreen() {
 
     setIsLoading(true);
     try {
-      await registerUser({
+      const regResult = await registerUser({
         full_name: name.trim(),
         mobile_number: normalizedMobile,
         email: email.trim() || undefined,
         password: password,
         confirm_password: confirmPassword,
-      });
+      }) as any;
+      // Backend returns Token { access_token, user } — save it for scan uploads
+      if (regResult?.access_token) {
+        await saveAuthToken(regResult.access_token);
+      }
       setIsLoading(false);
       router.replace('/scan');
     } catch (err: any) {
