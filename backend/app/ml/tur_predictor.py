@@ -1,24 +1,22 @@
 """
-ML Predictor interface for Tur leaf disease classification.
+Real EfficientNet-B0 predictor for Tur leaf disease classification.
 
-Architecture:
-    API route → PredictionService → TurDiseasePredictor → Real ML model (future)
+Flow:
+    API route
+        ↓
+    PredictionService
+        ↓
+    TurDiseasePredictor
+        ↓
+    EfficientNet-B0
+        ↓
+    Disease + confidence
 
-The predictor is intentionally decoupled from the API layer so that:
-1. The real ML model can be plugged in here without touching the API or database.
-2. The prediction service can call any model backend (local inference, remote API, etc.).
-3. The absence of the ML model is cleanly signalled via ModelNotConfiguredError.
-
-DO NOT:
-- Invent disease names.
-- Invent confidence values.
-- Return fake predictions.
-- Put ML inference code in the API route.
-
-When the real model is ready:
-    1. Load the model inside `TurDiseasePredictor.__init__`.
-    2. Implement `predict()` to return real results.
-    3. Set MODEL_AVAILABLE = True.
+Supported classes:
+    Healthy
+    Leaf_Spot
+    Leaf_webber
+    Sterilic_mosaic
 """
 
 import logging
@@ -26,136 +24,408 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
+import torch
+import torch.nn as nn
+from PIL import Image
+from torchvision import models, transforms
+
+
 logger = logging.getLogger("tursathi.ml")
 
-# ── Feature flag ─────────────────────────────────────────────────────────────
-# Set to True only when the real ML model files are present and loaded.
-MODEL_AVAILABLE: bool = False
+
+# ============================================================
+# PATHS
+# ============================================================
+
+# backend/app/ml/tur_predictor.py
+# parents[0] = ml
+# parents[1] = app
+# parents[2] = backend
+# parents[3] = TurSathi AI project root
+
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+
+MODEL_PATH = (
+    PROJECT_ROOT
+    / "models"
+    / "best_ppld_efficientnet_b0.pth"
+)
 
 
-# ── Result dataclass ──────────────────────────────────────────────────────────
+# ============================================================
+# DEVICE
+# ============================================================
+
+DEVICE = torch.device(
+    "cuda" if torch.cuda.is_available() else "cpu"
+)
+
+
+# ============================================================
+# MODEL FEATURE FLAG
+# ============================================================
+
+MODEL_AVAILABLE: bool = MODEL_PATH.exists()
+
+
+# ============================================================
+# RESULT
+# ============================================================
 
 @dataclass
 class PredictionResult:
     """
     Structured result from the Tur disease ML model.
-    All fields are populated only when prediction_status == "completed".
     """
+
     disease_name: str
-    confidence: float          # 0.0 – 1.0
-    severity: str              # "mild" | "moderate" | "severe"
+    confidence: float
+    severity: str
     prediction_status: str = "completed"
 
 
-# ── Custom exception ──────────────────────────────────────────────────────────
+# ============================================================
+# EXCEPTION
+# ============================================================
 
 class ModelNotConfiguredError(Exception):
     """
-    Raised when the Tur disease ML model is not yet configured.
-    The API layer catches this and returns HTTP 503.
+    Raised when the Tur disease ML model is not configured.
     """
+
     pass
 
 
-# ── Predictor ─────────────────────────────────────────────────────────────────
+# ============================================================
+# PREDICTOR
+# ============================================================
 
 class TurDiseasePredictor:
     """
-    Clean abstraction layer for Tur leaf disease prediction.
-
-    Future integration steps:
-    1. Install the ML framework (e.g. torch, tensorflow, onnxruntime).
-    2. Load your model weights in __init__ (e.g. from a .onnx or .pt file).
-    3. Implement the prediction logic in predict().
-    4. Set MODEL_AVAILABLE = True.
-    5. No changes needed in the API layer or database layer.
+    EfficientNet-B0 based Tur leaf disease predictor.
     """
 
     def __init__(self) -> None:
+
         self._model = None
-        if MODEL_AVAILABLE:
-            self._load_model()
+
+        self._classes: list[str] = []
+
+        self._transform = transforms.Compose([
+            transforms.Resize((224, 224)),
+
+            transforms.ToTensor(),
+
+            transforms.Normalize(
+                mean=[
+                    0.485,
+                    0.456,
+                    0.406,
+                ],
+                std=[
+                    0.229,
+                    0.224,
+                    0.225,
+                ],
+            ),
+        ])
+
+        if not MODEL_AVAILABLE:
+
+            logger.warning(
+                "[TurDiseasePredictor] "
+                f"Model file not found: {MODEL_PATH}"
+            )
+
+            return
+
+        self._load_model()
+
+
+    # ========================================================
+    # LOAD MODEL
+    # ========================================================
 
     def _load_model(self) -> None:
         """
-        Load the Tur disease ML model weights.
-        Implement this when the model is available.
+        Load the trained EfficientNet-B0 checkpoint.
         """
-        logger.info("[TurDiseasePredictor] Loading Tur disease ML model...")
-        # Example (future implementation):
-        # import onnxruntime as ort
-        # model_path = Path(__file__).parent / "weights" / "tur_disease_v1.onnx"
-        # self._model = ort.InferenceSession(str(model_path))
-        # logger.info("[TurDiseasePredictor] Model loaded successfully.")
-        raise NotImplementedError("ML model loading not yet implemented.")
+
+        logger.info(
+            "[TurDiseasePredictor] "
+            f"Loading model from: {MODEL_PATH}"
+        )
+
+        if not MODEL_PATH.exists():
+
+            raise ModelNotConfiguredError(
+                "Tur disease ML model file was not found."
+            )
+
+        try:
+
+            checkpoint = torch.load(
+                MODEL_PATH,
+                map_location=DEVICE,
+                weights_only=False,
+            )
+
+            classes = checkpoint.get("classes")
+
+            if not classes:
+
+                raise ModelNotConfiguredError(
+                    "Model checkpoint does not contain class information."
+                )
+
+            self._classes = list(classes)
+
+            num_classes = len(
+                self._classes
+            )
+
+            # -----------------------------------------------
+            # Create EfficientNet-B0 architecture
+            # -----------------------------------------------
+
+            model = models.efficientnet_b0(
+                weights=None
+            )
+
+            in_features = (
+                model.classifier[1].in_features
+            )
+
+            model.classifier[1] = nn.Linear(
+                in_features,
+                num_classes,
+            )
+
+            # -----------------------------------------------
+            # Load trained weights
+            # -----------------------------------------------
+
+            model.load_state_dict(
+                checkpoint["model_state_dict"]
+            )
+
+            model = model.to(
+                DEVICE
+            )
+
+            model.eval()
+
+            self._model = model
+
+            logger.info(
+                "[TurDiseasePredictor] "
+                "Model loaded successfully."
+            )
+
+            logger.info(
+                "[TurDiseasePredictor] "
+                f"Device: {DEVICE}"
+            )
+
+            logger.info(
+                "[TurDiseasePredictor] "
+                f"Classes: {self._classes}"
+            )
+
+            if torch.cuda.is_available():
+
+                logger.info(
+                    "[TurDiseasePredictor] "
+                    f"GPU: "
+                    f"{torch.cuda.get_device_name(0)}"
+                )
+
+        except ModelNotConfiguredError:
+
+            raise
+
+        except Exception as exc:
+
+            logger.exception(
+                "[TurDiseasePredictor] "
+                "Failed to load model."
+            )
+
+            raise ModelNotConfiguredError(
+                "Tur disease ML model could not be loaded."
+            ) from exc
+
+
+    # ========================================================
+    # AVAILABILITY
+    # ========================================================
 
     def is_available(self) -> bool:
-        """Returns True if the predictor is ready to make inferences."""
-        return MODEL_AVAILABLE and self._model is not None
-
-    def predict(self, image_path: Path) -> PredictionResult:
         """
-        Run Tur leaf disease prediction on the provided image.
-
-        Parameters
-        ----------
-        image_path : Absolute path to the stored scan image on the server filesystem.
-
-        Returns
-        -------
-        PredictionResult with disease_name, confidence, severity.
-
-        Raises
-        ------
-        ModelNotConfiguredError : If the ML model is not yet configured.
-        FileNotFoundError       : If the image file does not exist.
-        ValueError              : If the image cannot be processed.
+        Returns True when the model is loaded and ready.
         """
+
+        return (
+            MODEL_AVAILABLE
+            and self._model is not None
+        )
+
+
+    # ========================================================
+    # SEVERITY
+    # ========================================================
+
+    @staticmethod
+    def _map_severity(
+        confidence: float,
+    ) -> str:
+        """
+        The trained classifier predicts disease class and
+        confidence, not biological disease severity.
+
+        Until a separately validated severity model/rule is
+        available, keep severity conservative.
+        """
+
+        if confidence >= 0.90:
+            return "high_confidence"
+
+        if confidence >= 0.70:
+            return "moderate_confidence"
+
+        return "low_confidence"
+
+
+    # ========================================================
+    # PREDICT
+    # ========================================================
+
+    def predict(
+        self,
+        image_path: Path,
+    ) -> PredictionResult:
+        """
+        Run EfficientNet-B0 inference on a stored scan image.
+        """
+
         if not self.is_available():
+
             raise ModelNotConfiguredError(
                 "Tur disease ML model is not configured yet."
             )
 
         if not image_path.exists():
+
             raise FileNotFoundError(
-                f"Scan image not found at expected path. Cannot run prediction."
+                "Scan image not found at expected path. "
+                "Cannot run prediction."
             )
 
-        # ── Implement real inference here when model is ready ─────────────────
-        # Example skeleton:
-        #
-        # import PIL.Image
-        # import numpy as np
-        #
-        # img = PIL.Image.open(image_path).convert("RGB")
-        # img_resized = img.resize((224, 224))
-        # input_array = np.array(img_resized, dtype=np.float32) / 255.0
-        # input_tensor = input_array[np.newaxis, ...]
-        #
-        # outputs = self._model.run(None, {"input": input_tensor})
-        # class_id = np.argmax(outputs[0])
-        # confidence = float(np.max(outputs[0]))
-        #
-        # return PredictionResult(
-        #     disease_name=CLASS_NAMES[class_id],
-        #     confidence=confidence,
-        #     severity=map_severity(confidence),
-        # )
-        # ─────────────────────────────────────────────────────────────────────
+        try:
 
-        raise ModelNotConfiguredError(
-            "Tur disease ML model is not configured yet."
-        )
+            # -----------------------------------------------
+            # Load image
+            # -----------------------------------------------
+
+            image = Image.open(
+                image_path
+            ).convert("RGB")
+
+            # -----------------------------------------------
+            # Transform image
+            # -----------------------------------------------
+
+            input_tensor = self._transform(
+                image
+            ).unsqueeze(0)
+
+            input_tensor = input_tensor.to(
+                DEVICE
+            )
+
+            # -----------------------------------------------
+            # Inference
+            # -----------------------------------------------
+
+            with torch.no_grad():
+
+                output = self._model(
+                    input_tensor
+                )
+
+                probabilities = torch.softmax(
+                    output,
+                    dim=1,
+                )[0]
+
+                predicted_index = (
+                    probabilities.argmax().item()
+                )
+
+                confidence = (
+                    probabilities[
+                        predicted_index
+                    ].item()
+                )
+
+            disease_name = self._classes[
+                predicted_index
+            ]
+
+            severity = self._map_severity(
+                confidence
+            )
+
+            logger.info(
+                "[TurDiseasePredictor] "
+                f"Prediction: {disease_name} "
+                f"confidence={confidence:.4f}"
+            )
+
+            return PredictionResult(
+                disease_name=disease_name,
+                confidence=confidence,
+                severity=severity,
+                prediction_status="completed",
+            )
+
+        except FileNotFoundError:
+
+            raise
+
+        except Exception as exc:
+
+            logger.exception(
+                "[TurDiseasePredictor] "
+                "Prediction failed."
+            )
+
+            raise ValueError(
+                "The scan image could not be processed "
+                "for disease prediction."
+            ) from exc
 
 
-# ── Module-level singleton (instantiated lazily) ───────────────────────────────
+# ============================================================
+# MODULE-LEVEL SINGLETON
+# ============================================================
 
-_predictor_instance: Optional[TurDiseasePredictor] = None
+_predictor_instance: Optional[
+    TurDiseasePredictor
+] = None
 
 
 def get_predictor() -> TurDiseasePredictor:
-    """Returns the module-level predictor singleton."""
+    """
+    Returns the module-level predictor singleton.
+    """
+
     global _predictor_instance
+
     if _predictor_instance is None:
-        _predictor_instance = TurDiseasePredictor()
+
+        _predictor_instance = (
+            TurDiseasePredictor()
+        )
+
     return _predictor_instance

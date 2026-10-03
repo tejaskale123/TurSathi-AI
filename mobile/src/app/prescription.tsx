@@ -268,15 +268,9 @@ export default function PrescriptionScreen() {
     imageUri?: string | string[];
     voiceUri?: string | string[];
     scanId?: string | string[];
-    diseaseName?: string;
+    disease_name?: string;
     confidence?: string;
-    explanation?: string;
-    treatment?: string;
-    activeIngredient?: string;
-    recommendedQuantity?: string;
-    waterQuantity?: string;
-    perPumpQuantity?: string;
-    sprayTiming?: string;
+    severity?: string;
     status?: string;
   }>();
 
@@ -304,13 +298,16 @@ export default function PrescriptionScreen() {
   }
 
   // Dynamic values received from ML/backend parameters
-  const incomingDisease = params.diseaseName?.trim();
+  const incomingDisease = params.disease_name?.trim();
   const incomingConfidence = params.confidence;
-  const status = params.status || 'success';
+  const status = params.status || 'completed';
 
   // State management
   const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(
+    (status !== 'completed' && status !== 'success' && status !== 'invalid_image') || 
+    (!incomingDisease && status !== 'invalid_image')
+  );
 
   // Audio player for Read Aloud / Listen action
   const audioPlayer = useAudioPlayer(VOICE_GUIDANCE_ASSET);
@@ -402,7 +399,6 @@ export default function PrescriptionScreen() {
         imageUri: encodeURIComponent(normalizedImageUri),
         ...(incomingDisease ? { diseaseName: incomingDisease } : {}),
         ...(incomingConfidence ? { confidence: String(incomingConfidence) } : {}),
-        ...(params.treatment ? { treatment: params.treatment } : {}),
         ...(params.scanId ? { scanId: Array.isArray(params.scanId) ? params.scanId[0] : params.scanId } : {}),
       },
     });
@@ -494,31 +490,27 @@ export default function PrescriptionScreen() {
     ? labels.healthyTitle
     : incomingDisease
       ? tDisease(incomingDisease)
-      : (language === 'mr' ? 'तूर पानावरील डाग' : language === 'hi' ? 'तूर पत्ती का धब्बा' : 'Tur Leaf Spot');
+      : labels.errorTitle;
 
   const displayConfidence = isHealthy ? '' : formatConfidence(incomingConfidence);
 
   // Section 3: Farmer Explanation
-  const explanationText =
-    params.explanation?.trim() ||
-    (isHealthy
+  const explanationText = isHealthy
       ? labels.healthyDesc
       : language === 'mr'
         ? 'ही परिस्थिती तूर पिकाच्या पानांवर परिणाम करते. वेळेवर खबरदारी आणि लागवड व्यवस्थापन न केल्यास पिकाच्या वाढीवर परिणाम होऊ शकतो.'
         : language === 'hi'
-          ? 'यह स्थिति तूर फसल की पत्तियों को प्रभावित करती है। समय पर उचित देखभाल न करने से फसल की वृद्धि पर असर पड़ सकता है।'
-          : 'This condition affects the leaves of your Tur plant and may reduce crop health if unmanaged.');
+           ? 'यह स्थिति तूर फसल की पत्तियों को प्रभावित करती है। समय पर उचित देखभाल न करने से फसल की वृद्धि पर असर पड़ सकता है।'
+           : 'This condition affects the leaves of your Tur plant and may reduce crop health if unmanaged.';
 
   // Section 4: Recommended Treatment
-  const treatmentText =
-    params.treatment?.trim() ||
-    (isHealthy ? null : labels.treatmentUnavailable);
+  const treatmentText = isHealthy ? null : labels.treatmentUnavailable;
 
   // Section 5: Application Details (Dynamic verified fields only)
-  const reqQty = params.recommendedQuantity?.trim();
-  const reqWater = params.waterQuantity?.trim();
-  const reqPerPump = params.perPumpQuantity?.trim();
-  const reqTiming = params.sprayTiming?.trim();
+  const reqQty = undefined;
+  const reqWater = undefined;
+  const reqPerPump = undefined;
+  const reqTiming = undefined;
   const hasAppDetails = Boolean(reqQty || reqWater || reqPerPump || reqTiming);
 
   return (
@@ -642,7 +634,7 @@ export default function PrescriptionScreen() {
 
           {/* SECTION 7 — PRIMARY NEXT ACTION */}
           <View style={styles.actionsSection}>
-            {!isHealthy && (
+            {!isHealthy && Number.isFinite(Number(incomingConfidence)) && Number(incomingConfidence) >= 0.60 && (
               <Pressable
                 accessibilityHint="Navigates to detailed smart spray guidance"
                 accessibilityLabel={labels.viewSprayGuidance}

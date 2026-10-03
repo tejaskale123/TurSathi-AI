@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     # Optional direct DATABASE_URL override
     SQLALCHEMY_DATABASE_URI: Optional[str] = None
 
+    # Anthropic Claude Configuration
+    ANTHROPIC_API_KEY: Optional[str] = None
+    ANTHROPIC_MODEL: str = "claude-sonnet-4-5-20250929"
+
     @computed_field
     @property
     def DATABASE_URL(self) -> str:

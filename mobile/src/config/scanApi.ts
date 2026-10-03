@@ -36,6 +36,16 @@ export interface VoiceReportCreateResponse {
   status: string;
 }
 
+export interface PredictionResponse {
+  scan_id: number;
+  crop: string;
+  status: string;
+  message: string | null;
+  disease_name: string | null;
+  confidence: number | null;
+  severity: string | null;
+}
+
 // ── Error classification ──────────────────────────────────────────────────────
 
 export class ScanUploadError extends Error {
@@ -146,7 +156,7 @@ export async function uploadScanImage(
     }
   }
 
-  // Web fallback: Use standard fetch with FormData
+  // Web fallback: fetch the blob: URL to get real image bytes, then POST with FormData
   const formData = new FormData();
   const filename = imageUri.split('/').pop() || 'tur_leaf.jpg';
   const ext = filename.split('.').pop()?.toLowerCase() || 'jpg';
@@ -157,11 +167,24 @@ export async function uploadScanImage(
     ext === 'heif' ? 'image/heif' :
     'image/jpeg';
 
-  formData.append('image', {
-    uri: imageUri,
-    name: filename,
-    type: mimeType,
-  } as any);
+  // Fetch the blob: URL to obtain the actual image bytes
+  let blob: Blob;
+  try {
+    const blobResponse = await fetch(imageUri);
+    if (!blobResponse.ok) {
+      throw new ScanUploadError(null, 'Failed to read image data. Please try again.', true);
+    }
+    blob = await blobResponse.blob();
+  } catch (err: any) {
+    if (err instanceof ScanUploadError) throw err;
+    throw new ScanUploadError(null, 'Failed to read image data. Please try again.', true);
+  }
+
+  // Use the blob's own MIME type if available, otherwise fall back to the detected mimeType
+  const effectiveMime = blob.type || mimeType;
+  const finalBlob = effectiveMime !== blob.type ? new Blob([blob], { type: effectiveMime }) : blob;
+
+  formData.append('image', finalBlob, filename);
 
   formData.append('crop', crop);
 
@@ -292,7 +315,7 @@ export async function uploadVoiceReport(
     }
   }
 
-  // Web fallback
+  // Web fallback: fetch the blob: URL to get real audio bytes, then POST with FormData
   const formData = new FormData();
   const filename = audioUri.split('/').pop() || 'voice_report.m4a';
   const ext = filename.split('.').pop()?.toLowerCase() || 'm4a';
@@ -305,11 +328,26 @@ export async function uploadVoiceReport(
     ext === '3gp' ? 'audio/3gpp' :
     'audio/mp4';
 
-  formData.append('audio', {
-    uri: audioUri,
-    name: filename,
-    type: mimeType,
-  } as any);
+  // Fetch the blob: URL to obtain the actual audio bytes
+  let audioBlob: Blob;
+  try {
+    const audioResponse = await fetch(audioUri);
+    if (!audioResponse.ok) {
+      throw new ScanUploadError(null, 'Failed to read audio data. Please try again.', true);
+    }
+    audioBlob = await audioResponse.blob();
+  } catch (err: any) {
+    if (err instanceof ScanUploadError) throw err;
+    throw new ScanUploadError(null, 'Failed to read audio data. Please try again.', true);
+  }
+
+  // Use the blob's own MIME type if available, otherwise fall back to the detected mimeType
+  const effectiveAudioMime = audioBlob.type || mimeType;
+  const finalAudioBlob = effectiveAudioMime !== audioBlob.type
+    ? new Blob([audioBlob], { type: effectiveAudioMime })
+    : audioBlob;
+
+  formData.append('audio', finalAudioBlob, filename);
 
   if (language) formData.append('language', language);
   if (duration !== undefined && duration !== null) formData.append('duration', String(duration));
@@ -364,3 +402,58 @@ export async function uploadVoiceReport(
 
   return data as VoiceReportCreateResponse;
 }
+
+// ── Prediction ────────────────────────────────────────────────────────────────
+
+/**
+ * Calls the ML prediction API for a specific scan.
+ *
+ * @param scanId     Scan ID returned by uploadScanImage
+ * @param token      Bearer JWT access token
+ * @returns          PredictionResponse
+ * @throws           ScanUploadError
+ */
+export async function predictTurLeaf(
+  scanId: number,
+  token: string
+): Promise<PredictionResponse> {
+  const baseUrl = getBaseUrl();
+  const url = `${baseUrl}/api/v1/predictions/tur-leaf/${scanId}`;
+  console.log(`[SCAN API] Requesting prediction for scan ${scanId} at: ${url}`);
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    let data: any = {};
+    try {
+      data = await response.json();
+    } catch {
+      if (!response.ok) {
+        throw new ScanUploadError(response.status, `Server returned HTTP ${response.status}.`, response.status >= 500);
+      }
+    }
+
+    if (!response.ok) {
+      const detail = typeof data?.detail === 'string' ? data.detail : undefined;
+      throw classifyHttpError(response.status, detail);
+    }
+
+    return data as PredictionResponse;
+  } catch (err: any) {
+    if (err instanceof ScanUploadError) {
+      throw err;
+    }
+    console.error('[SCAN API] predictTurLeaf error:', err);
+    throw new ScanUploadError(
+      null,
+      'Unable to reach the server. Please check your connection.',
+      true,
+    );
+  }
+}
+

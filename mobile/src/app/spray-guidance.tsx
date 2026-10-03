@@ -13,11 +13,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Speech from 'expo-speech';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
-import { tokenStore } from '../config/tokenStore';
+import { getAuthToken } from '../config/tokenStore';
 import {
-  fetchTurSprayGuidance,
+  fetchAIGuidance,
   RecommendationApiError,
-  SprayGuidanceResponse,
+  ClaudeGuidanceResponse,
 } from '../config/recommendationApi';
 
 // Reusable SVG-like Glyph vectors (strictly no emojis, stickers, or AI graphics)
@@ -345,7 +345,8 @@ export default function SprayGuidanceScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isUnverified, setIsUnverified] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
-  const [data, setData] = useState<SprayGuidanceResponse | null>(null);
+  const [data, setData] = useState<ClaudeGuidanceResponse | null>(null);
+  const [isLowConfidence, setIsLowConfidence] = useState<boolean>(false);
 
   // Voice narration state
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
@@ -365,10 +366,44 @@ export default function SprayGuidanceScreen() {
     setIsLoading(true);
     setHasError(false);
     setIsUnverified(false);
+    setIsLowConfidence(false);
+    setData(null);
+
+    const parsedConfidence = Number(params.confidence);
+
+    // Safety gate:
+    // Do not request disease-specific spray guidance
+    // when AI confidence is below 60%.
+    if (!Number.isFinite(parsedConfidence) || parsedConfidence < 0.60) {
+      console.warn(
+        `[SPRAY GUIDANCE] Low confidence prediction. ` +
+        `confidence=${params.confidence ?? 'missing'}`
+      );
+
+      setIsLowConfidence(true);
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      const token = await tokenStore.getToken();
-      const res = await fetchTurSprayGuidance(diseaseName, token || undefined);
+      const token = await getAuthToken();
+
+      if (!params.scanId) {
+        throw new Error('Missing scanId');
+      }
+
+      const res = await fetchAIGuidance(
+        Number(params.scanId),
+        language,
+        token || undefined,
+      );
+
+      if (res.status === 'low_confidence') {
+        setIsLowConfidence(true);
+      } else if (res.spray_guidance_available === false && res.disease_name?.toLowerCase() !== 'healthy') {
+        setIsUnverified(true);
+      }
+
       setData(res);
     } catch (err: any) {
       if (err instanceof RecommendationApiError && err.isNotFound) {
@@ -380,7 +415,7 @@ export default function SprayGuidanceScreen() {
     } finally {
       setIsLoading(false);
     }
-  }, [diseaseName]);
+  }, [diseaseName, params.confidence]);
 
   useEffect(() => {
     loadGuidance();
@@ -391,7 +426,7 @@ export default function SprayGuidanceScreen() {
     return () => {
       try {
         Speech.stop();
-      } catch {}
+      } catch { }
     };
   }, []);
 
@@ -400,22 +435,36 @@ export default function SprayGuidanceScreen() {
     if (isSpeaking) {
       try {
         Speech.stop();
-      } catch {}
+      } catch { }
       setIsSpeaking(false);
       return;
     }
 
-    const steps = data?.spray_guidance || DEFAULT_SPRAY_STEPS[language] || DEFAULT_SPRAY_STEPS.en;
-    const after = data?.after_spraying || DEFAULT_AFTER_SPRAYING[language] || DEFAULT_AFTER_SPRAYING.en;
-    const safety = data?.safety_precautions || DEFAULT_SAFETY_PRECAUTIONS[language] || DEFAULT_SAFETY_PRECAUTIONS.en;
+    const getStepText = () => {
+        if (!data?.spray_guidance) return DEFAULT_SPRAY_STEPS[language] || DEFAULT_SPRAY_STEPS.en;
+        return [
+            data.spray_guidance.treatment,
+            data.spray_guidance.active_ingredient,
+            data.spray_guidance.recommended_quantity,
+            data.spray_guidance.water_quantity,
+            data.spray_guidance.per_pump_quantity,
+            data.spray_guidance.spray_timing,
+            data.spray_guidance.application_method
+        ].filter(Boolean) as string[];
+    };
+    
+    const steps = getStepText();
+    const after = data?.spray_guidance?.after_spray_advisory ? [data.spray_guidance.after_spray_advisory] : DEFAULT_AFTER_SPRAYING[language] || DEFAULT_AFTER_SPRAYING.en;
+    const safety = data?.spray_guidance?.safety_precautions ? [data.spray_guidance.safety_precautions] : DEFAULT_SAFETY_PRECAUTIONS[language] || DEFAULT_SAFETY_PRECAUTIONS.en;
+    const farmerAct = data?.farmer_action?.join('. ') || ui.farmerActionMessage;
 
     const speechText = [
       ui.headerTitle,
-      ui.importantTitle + ': ' + ui.importantMessage,
+      ui.importantTitle + ': ' + (data?.warnings?.[0] || ui.importantMessage),
       ui.sprayGuidanceTitle + ': ' + ui.sprayGuidanceSubtitle + '. ' + steps.join('. '),
       ui.afterSprayingTitle + ': ' + after.join('. '),
       ui.safetyTitle + ': ' + safety.join('. '),
-      ui.farmerActionTitle + ': ' + ui.farmerActionMessage,
+      ui.farmerActionTitle + ': ' + farmerAct,
     ].join('\n\n');
 
     setIsSpeaking(true);
@@ -438,19 +487,19 @@ export default function SprayGuidanceScreen() {
   const handleBack = () => {
     try {
       Speech.stop();
-    } catch {}
+    } catch { }
     router.back();
   };
 
   const handleScanAnotherLeaf = () => {
     try {
       Speech.stop();
-    } catch {}
+    } catch { }
     router.replace('/scan');
   };
 
   // Determine dynamic leaf condition badge text
-  const conditionStatus = data?.leaf_condition || ui.statusNeedsTreatment;
+  const conditionStatus = data?.disease_name || ui.statusNeedsTreatment;
 
   // Render Loading State
   if (isLoading) {
@@ -460,6 +509,65 @@ export default function SprayGuidanceScreen() {
           <View style={styles.stateCard}>
             <ActivityIndicator color="#1A4D33" size="large" />
             <Text style={styles.loadingText}>{ui.loadingTitle}</Text>
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // Render Low Confidence State
+  if (isLowConfidence) {
+    return (
+      <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
+        <View style={styles.stateContainer}>
+          <View style={styles.stateCard}>
+            <Glyph color="#8B6822" name="alert" size={28} />
+
+            <Text style={styles.stateTitle}>
+              {language === 'mr'
+                ? 'निदानाची खात्री पुरेशी नाही'
+                : language === 'hi'
+                  ? 'निदान की पुष्टि पर्याप्त नहीं है'
+                  : 'Prediction needs confirmation'}
+            </Text>
+
+            <Text style={styles.cardBodyText}>
+              {language === 'mr'
+                ? 'AI ला तूर पानाची स्थिती पुरेशा खात्रीने ओळखता आली नाही. कृपया चांगल्या प्रकाशात एका स्पष्ट तूर पानाचा फोटो पुन्हा घ्या.'
+                : language === 'hi'
+                  ? 'AI तूर की पत्ती की स्थिति को पर्याप्त विश्वास के साथ पहचान नहीं सका। कृपया अच्छी रोशनी में तूर की एक साफ पत्ती की फोटो फिर से लें।'
+                  : 'The AI could not identify the Tur leaf condition with enough confidence. Please capture a clear photo of a single Tur leaf in good daylight.'}
+            </Text>
+
+            <View style={{ marginTop: 16, alignItems: 'center' }}>
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontWeight: '700',
+                  color: '#8B6822',
+                }}
+              >
+                {language === 'mr'
+                  ? `AI Confidence: ${(Number(params.confidence) * 100).toFixed(1)}%`
+                  : language === 'hi'
+                    ? `AI Confidence: ${(Number(params.confidence) * 100).toFixed(1)}%`
+                    : `AI Confidence: ${(Number(params.confidence) * 100).toFixed(1)}%`}
+              </Text>
+            </View>
+
+            <Pressable
+              accessibilityRole="button"
+              onPress={handleScanAnotherLeaf}
+              style={({ pressed }) => [
+                styles.primaryCta,
+                pressed && styles.buttonPressed,
+                { marginTop: 20 },
+              ]}
+            >
+              <Text style={styles.primaryCtaText}>
+                {ui.scanAnotherLeaf}
+              </Text>
+            </Pressable>
           </View>
         </View>
       </SafeAreaView>
@@ -498,17 +606,65 @@ export default function SprayGuidanceScreen() {
 
   // Render Unverified / Empty Recommendation State
   if (isUnverified) {
+    const confPct = (Number(params.confidence) * 100).toFixed(1);
+    
+    const unverifiedContent = {
+      en: {
+        title: "Guidance Unavailable",
+        confLabel: "Detection Confidence:",
+        availLabel: "Verified Spray Guidance:",
+        availValue: "Not available for this condition",
+        message: "Verified spray guidance is not available for this condition yet.\n\nPlease do not apply a pesticide based only on this result. You can scan another clear Tur leaf photo or consult an agricultural expert for treatment advice."
+      },
+      mr: {
+        title: "मार्गदर्शन उपलब्ध नाही",
+        confLabel: "रोग निदानाची खात्री (Confidence):",
+        availLabel: "प्रमाणित फवारणी मार्गदर्शन:",
+        availValue: "या स्थितीसाठी उपलब्ध नाही",
+        message: "या स्थितीसाठी सध्या प्रमाणित फवारणी मार्गदर्शन उपलब्ध नाही.\n\nफक्त या निकालावर आधारित कोणतेही कीटकनाशक किंवा बुरशीनाशक वापरू नका. Tur पानाचा आणखी एक स्पष्ट फोटो स्कॅन करा किंवा कृषी तज्ज्ञांचा सल्ला घ्या."
+      },
+      hi: {
+        title: "मार्गदर्शन उपलब्ध नहीं",
+        confLabel: "रोग निदान की निश्चितता (Confidence):",
+        availLabel: "सत्यापित छिड़काव मार्गदर्शन:",
+        availValue: "इस स्थिति के लिए उपलब्ध नहीं है",
+        message: "इस स्थिति के लिए अभी सत्यापित छिड़काव मार्गदर्शन उपलब्ध नहीं है।\n\nकेवल इस परिणाम के आधार पर कोई दवा या कीटनाशक का उपयोग न करें। तुअर के पत्ते की एक और स्पष्ट फोटो स्कैन करें या कृषि विशेषज्ञ से सलाह लें।"
+      }
+    };
+    
+    // Fallback safely to 'en' if language isn't matched
+    const localeStr = unverifiedContent[language as keyof typeof unverifiedContent] || unverifiedContent.en;
+
     return (
       <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
         <View style={styles.stateContainer}>
           <View style={styles.stateCard}>
-            <Glyph color="#8B6822" name="info" size={24} />
-            <Text style={styles.stateTitle}>{ui.unverifiedTitle}</Text>
+            <Glyph color="#8B6822" name="info" size={28} />
+            <Text style={styles.stateTitle}>{localeStr.title}</Text>
+
+            <View style={{ marginTop: 16, width: '100%', backgroundColor: '#F9F5EC', padding: 12, borderRadius: 8 }}>
+              <Text style={{ fontSize: 13, color: '#476355', marginBottom: 4 }}>
+                <Text style={{ fontWeight: '700' }}>{localeStr.confLabel} </Text>
+                <Text style={{ fontWeight: '700', color: '#1A4D33' }}>{confPct}%</Text>
+              </Text>
+              <Text style={{ fontSize: 13, color: '#476355' }}>
+                <Text style={{ fontWeight: '700' }}>{localeStr.availLabel} </Text>
+                <Text style={{ color: '#8B6822', fontWeight: '600' }}>{localeStr.availValue}</Text>
+              </Text>
+            </View>
+
+            <Text style={[styles.cardBodyText, { marginTop: 16 }]}>
+              {localeStr.message}
+            </Text>
 
             <Pressable
               accessibilityRole="button"
               onPress={handleScanAnotherLeaf}
-              style={({ pressed }) => [styles.primaryCta, pressed && styles.buttonPressed]}
+              style={({ pressed }) => [
+                styles.primaryCta,
+                pressed && styles.buttonPressed,
+                { marginTop: 24 },
+              ]}
             >
               <Text style={styles.primaryCtaText}>{ui.scanAnotherLeaf}</Text>
             </Pressable>
@@ -519,9 +675,48 @@ export default function SprayGuidanceScreen() {
   }
 
   // Dynamic arrays from backend data or localized default fallback steps
-  const stepsList = data?.spray_guidance || DEFAULT_SPRAY_STEPS[language] || DEFAULT_SPRAY_STEPS.en;
-  const afterList = data?.after_spraying || DEFAULT_AFTER_SPRAYING[language] || DEFAULT_AFTER_SPRAYING.en;
-  const safetyList = data?.safety_precautions || DEFAULT_SAFETY_PRECAUTIONS[language] || DEFAULT_SAFETY_PRECAUTIONS.en;
+  const fieldLabels: Record<string, Record<Language, string>> = {
+    treatment: { en: 'Treatment', mr: 'उपचार', hi: 'उपचार' },
+    active_ingredient: { en: 'Active Ingredient', mr: 'सक्रिय घटक', hi: 'सक्रिय घटक' },
+    recommended_quantity: { en: 'Recommended Qty', mr: 'शिफारस केलेले प्रमाण', hi: 'अनुशंसित मात्रा' },
+    water_quantity: { en: 'Water Qty', mr: 'पाण्याचे प्रमाण', hi: 'पानी की मात्रा' },
+    per_pump_quantity: { en: 'Per Pump Qty', mr: 'प्रति पंप प्रमाण', hi: 'प्रति पंप मात्रा' },
+    spray_timing: { en: 'Spray Timing', mr: 'फवारणीची वेळ', hi: 'छिड़काव का समय' },
+    application_method: { en: 'Application Method', mr: 'फवारणी पद्धत', hi: 'छिड़काव विधि' },
+  };
+
+  const PUMP_TITLE: Record<Language, string> = {
+    en: 'For a 15-Litre Pump',
+    mr: '15 लिटर पंपासाठी',
+    hi: '15 लीटर पंप के लिए'
+  };
+
+  const MIXING_ADVISORY: Record<Language, string> = {
+    en: 'Before mixing more than one product, check the product label or verified agricultural recommendation.',
+    mr: 'एकापेक्षा जास्त औषधे एकत्र मिसळण्यापूर्वी उत्पादनाच्या label वरील सूचना किंवा अधिकृत कृषी शिफारस तपासा.',
+    hi: 'एक से अधिक दवाओं को मिलाने से पहले उत्पाद के label या आधिकारिक कृषि सिफारिश की जांच करें।'
+  };
+
+  const getStepsList = () => {
+      if (!data?.spray_guidance) {
+          return (DEFAULT_SPRAY_STEPS[language] || DEFAULT_SPRAY_STEPS.en).map(text => ({ id: '', label: '', value: text }));
+      }
+      const sg = data.spray_guidance;
+      const fields = [
+          { key: 'treatment', value: sg.treatment },
+          { key: 'active_ingredient', value: sg.active_ingredient },
+          { key: 'recommended_quantity', value: sg.recommended_quantity },
+          sg.water_quantity ? { key: 'water_quantity', value: sg.water_quantity } : null,
+          { key: 'spray_timing', value: sg.spray_timing },
+          { key: 'application_method', value: sg.application_method },
+      ].filter(f => f && f.value) as { key: string; value: string }[];
+      return fields.map(f => ({ id: f.key, label: fieldLabels[f.key][language], value: f.value }));
+  };
+
+  const stepsList = getStepsList();
+  const afterList = data?.spray_guidance?.after_spray_advisory ? [data.spray_guidance.after_spray_advisory] : DEFAULT_AFTER_SPRAYING[language] || DEFAULT_AFTER_SPRAYING.en;
+  const safetyList = data?.spray_guidance?.safety_precautions ? [data.spray_guidance.safety_precautions] : DEFAULT_SAFETY_PRECAUTIONS[language] || DEFAULT_SAFETY_PRECAUTIONS.en;
+  const farmerAct = data?.farmer_action?.length ? data.farmer_action.join('\n\n') : ui.farmerActionMessage;
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
@@ -574,6 +769,11 @@ export default function SprayGuidanceScreen() {
                 <Text style={styles.conditionBadgeText}>{conditionStatus}</Text>
               </View>
             </View>
+            {Boolean(data?.disease_explanation) && (
+              <Text style={[styles.cardBodyText, { marginTop: 12 }]}>
+                {data!.disease_explanation}
+              </Text>
+            )}
           </View>
 
           {/* SECTION C: SPRAY GUIDANCE */}
@@ -584,21 +784,52 @@ export default function SprayGuidanceScreen() {
             </View>
 
             <View style={styles.stepsContainer}>
-              {stepsList.map((stepText, idx) => {
-                // Parse "01 Step" if prefixed, otherwise format index
+              {stepsList.map((stepItem: { id?: string; label: string; value: string }, idx: number) => {
                 let numStr = String(idx + 1).padStart(2, '0');
-                let bodyText = stepText;
-                if (/^\d{2}\s+/.test(stepText)) {
-                  numStr = stepText.substring(0, 2);
-                  bodyText = stepText.substring(3).trim();
+                let bodyText = stepItem.value;
+                if (!stepItem.label && /^\d{2}\s+/.test(stepItem.value)) {
+                  numStr = stepItem.value.substring(0, 2);
+                  bodyText = stepItem.value.substring(3).trim();
                 }
 
                 return (
-                  <View key={idx} style={styles.stepCard}>
-                    <View style={styles.stepBadge}>
-                      <Text style={styles.stepNumber}>{numStr}</Text>
+                  <View key={idx}>
+                    <View style={styles.stepCard}>
+                      <View style={styles.stepBadge}>
+                        <Text style={styles.stepNumber}>{numStr}</Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        {Boolean(stepItem.label) && (
+                          <Text style={[styles.stepText, { fontWeight: '700', marginBottom: 2 }]}>
+                            {stepItem.label}
+                          </Text>
+                        )}
+                        <Text style={styles.stepText}>{bodyText}</Text>
+                      </View>
                     </View>
-                    <Text style={styles.stepText}>{bodyText}</Text>
+
+                    {stepItem.id === 'recommended_quantity' && data?.spray_guidance?.per_pump_quantity && (
+                      <View style={{
+                        marginTop: 2,
+                        marginBottom: 4,
+                        marginLeft: 40,
+                        borderWidth: 1,
+                        borderColor: '#EAD7A6',
+                        borderRadius: 10,
+                        backgroundColor: '#FBF3DD',
+                        padding: 12,
+                      }}>
+                        <Text style={{ fontSize: 13, fontWeight: '700', color: '#8B6822', marginBottom: 4 }}>
+                          {PUMP_TITLE[language] || PUMP_TITLE.en}
+                        </Text>
+                        <Text style={{ fontSize: 14, fontWeight: '700', color: '#2A4433', marginBottom: 8 }}>
+                          {data.spray_guidance.per_pump_quantity}
+                        </Text>
+                        <Text style={{ fontSize: 12, color: '#6B5420', lineHeight: 16 }}>
+                          {MIXING_ADVISORY[language] || MIXING_ADVISORY.en}
+                        </Text>
+                      </View>
+                    )}
                   </View>
                 );
               })}
@@ -645,7 +876,7 @@ export default function SprayGuidanceScreen() {
           <View style={styles.card}>
             <Text style={styles.cardTitle}>{ui.farmerActionTitle}</Text>
             <Text style={styles.cardBodyText}>
-              {data?.farmer_action || ui.farmerActionMessage}
+              {farmerAct}
             </Text>
           </View>
 

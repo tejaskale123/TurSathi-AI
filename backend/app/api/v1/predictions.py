@@ -23,14 +23,17 @@ Security:
 
 import logging
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
 from app.api.v1.auth import get_current_user
 from app.database.models.user import User
 from app.database.session import get_db
 from app.schemas.prediction import PredictionResponse
+from app.schemas.claude_guidance import ClaudeGuidanceResponse
 from app.services.prediction_service import run_prediction
+from app.services.scan_service import get_scan_for_user
+from app.services.claude_guidance_service import generate_claude_guidance
 
 logger = logging.getLogger("tursathi.api.predictions")
 
@@ -80,3 +83,42 @@ def predict_tur_leaf(
         confidence=scan.confidence,
         severity=scan.severity,
     )
+
+
+@router.post(
+    "/tur-leaf/{scan_id}/ai-guidance",
+    response_model=ClaudeGuidanceResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Get secondary AI guidance and explanation layer powered by Claude Sonnet 4.5",
+)
+def get_ai_guidance_for_tur_scan(
+    scan_id: int,
+    language: str = Query("en", description="Target language code: en | mr | hi"),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ClaudeGuidanceResponse:
+    """
+    Retrieves secondary AI guidance for a Tur scan using Claude Sonnet 4.5.
+
+    - Authenticates the user and validates scan ownership.
+    - Uses existing ML prediction (or runs inference if pending).
+    - Enforces confidence threshold (>= 60%).
+    - Enforces Healthy safety (no pesticide recommendations for healthy leaves).
+    - Uses verified recommendation database as the single source of truth.
+    - Returns structured AI explanation or database fallback.
+    """
+    logger.info(
+        "[API/PREDICTIONS] AI Guidance requested: scan_id=%d user_id=%d language=%s",
+        scan_id, current_user.id, language,
+    )
+
+    # 1. Verify scan ownership
+    scan = get_scan_for_user(db=db, scan_id=scan_id, user_id=current_user.id)
+
+    # 2. Ensure prediction is run
+    if scan.prediction_status != "completed" or not scan.disease_name:
+        logger.info("[API/PREDICTIONS] Scan #%d prediction not yet completed. Running prediction now...", scan_id)
+        scan = run_prediction(db=db, scan_id=scan_id, user_id=current_user.id)
+
+    # 3. Generate Claude guidance
+    return generate_claude_guidance(db=db, scan=scan, language=language)

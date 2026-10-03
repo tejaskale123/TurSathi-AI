@@ -25,7 +25,7 @@ import {
 } from 'expo-audio';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
-import { uploadVoiceReport, ScanUploadError } from '../config/scanApi';
+import { uploadVoiceReport, predictTurLeaf, ScanUploadError } from '../config/scanApi';
 import { getAuthToken } from '../config/tokenStore';
 
 // ============================================================================
@@ -820,6 +820,8 @@ export default function ProblemDescriptionScreen() {
     console.log('  voiceUri:', recordedUri);
     console.log('  scanId:', scanId);
 
+    let prediction: any = null;
+
     // Upload voice recording to backend
     if (scanId !== null && !isNaN(scanId)) {
       try {
@@ -834,13 +836,21 @@ export default function ProblemDescriptionScreen() {
             recordedDuration > 0 ? recordedDuration : undefined,
           );
           console.log('[PROBLEM-DESCRIPTION] Voice uploaded successfully for scan_id:', scanId);
+
+          console.log('[PROBLEM-DESCRIPTION] Requesting prediction for scan_id:', scanId);
+          prediction = await predictTurLeaf(scanId, token);
+          console.log('[PROBLEM-DESCRIPTION] Prediction completed successfully.');
         }
-      } catch (uploadErr) {
-        if (uploadErr instanceof ScanUploadError) {
-          console.warn('[PROBLEM-DESCRIPTION] Voice upload failed (HTTP', uploadErr.httpStatus, '):', uploadErr.message);
+      } catch (err) {
+        setIsSubmitting(false);
+        if (err instanceof ScanUploadError) {
+          console.warn('[PROBLEM-DESCRIPTION] Pipeline failed (HTTP', err.httpStatus, '):', err.message);
+          Alert.alert('Error', err.message);
         } else {
-          console.warn('[PROBLEM-DESCRIPTION] Voice upload error:', uploadErr);
+          console.warn('[PROBLEM-DESCRIPTION] Pipeline error:', err);
+          Alert.alert('Error', 'An unexpected error occurred. Please try again.');
         }
+        return; // Stop navigation, keep modal open for retry
       }
     } else {
       console.warn('[PROBLEM-DESCRIPTION] No scanId available — voice upload skipped.');
@@ -855,6 +865,13 @@ export default function ProblemDescriptionScreen() {
         imageUri: encodeURIComponent(finalImageUri),
         voiceUri: encodeURIComponent(recordedUri),
         ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
+        disease_name: prediction?.disease_name ?? '',
+        confidence:
+          prediction?.confidence !== null && prediction?.confidence !== undefined
+            ? String(prediction.confidence)
+            : '',
+        severity: prediction?.severity ?? '',
+        status: prediction?.status ?? '',
       },
     });
   };
