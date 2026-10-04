@@ -1,0 +1,31 @@
+FINAL 5-CLASS PIGEONPEA DISEASE DATASET REPORT
+==============================================
+Source datasets used:
+- c:\Users\admin\OneDrive\Documents\Desktop\TurSathi AI\datasets\pigeonpea_disease_clean
+- c:\Users\admin\OneDrive\Documents\Desktop\TurSathi AI\datasets\incoming\wilt_pigeonpea
+Final dataset path: c:\Users\admin\OneDrive\Documents\Desktop\TurSathi AI\datasets\pigeonpea_disease_final
+Class names: Healthy, Leaf_Spot, Leaf_webber, Sterilic_mosaic, Wilt
+Random seed used: 42
+Confirmation that original source datasets were not modified: Yes
+Confirmation that train/validation/test leakage was checked: Yes (Original splits preserved, Wilt augmented only in train)
+
+Dataset Cleaning Stats:
+- Corrupted image count: 0
+- Duplicate image count (SHA256 verified): 0
+- SHA256 duplicate verification result: Checked globally across all splits/classes
+
+Wilt Class Generation Stats:
+- Wilt original images: 30
+- Wilt augmented images: 270
+- Final Wilt images: 300
+
+Final Dataset Distribution:
+Class              | Train   | Val     | Test    | Total  
+-------------------------------------------------------
+Healthy            | 136     | 29      | 30      | 195    
+Leaf_Spot          | 197     | 42      | 43      | 282    
+Leaf_webber        | 102     | 21      | 23      | 146    
+Sterilic_mosaic    | 165     | 35      | 37      | 237    
+Wilt               | 291     | 4       | 5       | 300    
+-------------------------------------------------------
+TOTAL              | 891     | 131     | 138     | 1160   

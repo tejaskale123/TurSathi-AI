@@ -1,0 +1,11 @@
+Classes:
+0: Healthy
+1: Leaf_Spot
+2: Leaf_webber
+3: Sterilic_mosaic
+
+Confusion Matrix:
+30 0 0 0
+0 39 1 3
+0 0 22 1
+1 3 0 33
