@@ -3,7 +3,7 @@ from torchvision import models, transforms
 from PIL import Image
 from pathlib import Path
 
-MODEL_PATH = Path("models/best_pigeonpea_disease_efficientnet_b0.pth")
+MODEL_PATH = Path("models/best_pigeonpea_disease_final_efficientnet_b0.pth")
 
 def load_model():
     checkpoint = torch.load(

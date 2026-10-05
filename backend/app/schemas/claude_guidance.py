@@ -35,5 +35,6 @@ class ClaudeGuidanceResponse(BaseModel):
     spray_guidance: Optional[SprayGuidanceDetails] = Field(None, description="Verified spray guidance object")
     warnings: List[str] = Field(default_factory=list, description="Safety warnings or low-confidence notes")
     language: str = Field(default="en", description="Language of human-readable guidance (en, mr, hi)")
+    important_alert: Optional[str] = Field(None, description="Override alert message for special cases (e.g., seed treatment instead of foliar spray)")
 
     model_config = ConfigDict(from_attributes=True)

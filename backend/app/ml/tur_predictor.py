@@ -48,7 +48,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 MODEL_PATH = (
     PROJECT_ROOT
     / "models"
-    / "best_ppld_efficientnet_b0.pth"
+    / "best_pigeonpea_disease_final_efficientnet_b0.pth"
 )
 
 

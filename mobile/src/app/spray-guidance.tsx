@@ -610,25 +610,25 @@ export default function SprayGuidanceScreen() {
     
     const unverifiedContent = {
       en: {
-        title: "Guidance Unavailable",
-        confLabel: "Detection Confidence:",
-        availLabel: "Verified Spray Guidance:",
-        availValue: "Not available for this condition",
-        message: "Verified spray guidance is not available for this condition yet.\n\nPlease do not apply a pesticide based only on this result. You can scan another clear Tur leaf photo or consult an agricultural expert for treatment advice."
+        title: "Diagnosis detected successfully",
+        confLabel: "Confidence:",
+        availLabel: "Spray Guidance:",
+        availValue: "Not available in verified database",
+        message: "Verified spray guidance is currently unavailable for this disease.\n\nPlease consult a qualified agricultural expert before applying any pesticide."
       },
       mr: {
-        title: "मार्गदर्शन उपलब्ध नाही",
-        confLabel: "रोग निदानाची खात्री (Confidence):",
-        availLabel: "प्रमाणित फवारणी मार्गदर्शन:",
-        availValue: "या स्थितीसाठी उपलब्ध नाही",
-        message: "या स्थितीसाठी सध्या प्रमाणित फवारणी मार्गदर्शन उपलब्ध नाही.\n\nफक्त या निकालावर आधारित कोणतेही कीटकनाशक किंवा बुरशीनाशक वापरू नका. Tur पानाचा आणखी एक स्पष्ट फोटो स्कॅन करा किंवा कृषी तज्ज्ञांचा सल्ला घ्या."
+        title: "रोग यशस्वीरित्या ओळखला",
+        confLabel: "खात्री (Confidence):",
+        availLabel: "फवारणी मार्गदर्शन:",
+        availValue: "प्रमाणित डेटामध्ये उपलब्ध नाही",
+        message: "या आजारासाठी प्रमाणित फवारणी मार्गदर्शन सध्या उपलब्ध नाही.\n\nकोणतेही कीटकनाशक फवारण्यापूर्वी कृपया पात्र कृषी तज्ज्ञांचा सल्ला घ्या."
       },
       hi: {
-        title: "मार्गदर्शन उपलब्ध नहीं",
-        confLabel: "रोग निदान की निश्चितता (Confidence):",
-        availLabel: "सत्यापित छिड़काव मार्गदर्शन:",
-        availValue: "इस स्थिति के लिए उपलब्ध नहीं है",
-        message: "इस स्थिति के लिए अभी सत्यापित छिड़काव मार्गदर्शन उपलब्ध नहीं है।\n\nकेवल इस परिणाम के आधार पर कोई दवा या कीटनाशक का उपयोग न करें। तुअर के पत्ते की एक और स्पष्ट फोटो स्कैन करें या कृषि विशेषज्ञ से सलाह लें।"
+        title: "रोग का सफलतापूर्वक पता चला",
+        confLabel: "निश्चितता (Confidence):",
+        availLabel: "छिड़काव मार्गदर्शन:",
+        availValue: "सत्यापित डेटाबेस में उपलब्ध नहीं है",
+        message: "इस बीमारी के लिए सत्यापित छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है।\n\nकिसी भी कीटनाशक का उपयोग करने से पहले कृपया एक योग्य कृषि विशेषज्ञ से परामर्श लें।"
       }
     };
     
@@ -675,14 +675,25 @@ export default function SprayGuidanceScreen() {
   }
 
   // Dynamic arrays from backend data or localized default fallback steps
+  // Detect if this recommendation is a seed treatment (not a foliar spray)
+  const isSeedTreatment = Boolean(
+    data?.spray_guidance?.application_method &&
+    (data.spray_guidance.application_method.toLowerCase().includes('seed treatment') ||
+     data.spray_guidance.application_method.toLowerCase().includes('seed treat'))
+  );
+
   const fieldLabels: Record<string, Record<Language, string>> = {
     treatment: { en: 'Treatment', mr: 'उपचार', hi: 'उपचार' },
     active_ingredient: { en: 'Active Ingredient', mr: 'सक्रिय घटक', hi: 'सक्रिय घटक' },
     recommended_quantity: { en: 'Recommended Qty', mr: 'शिफारस केलेले प्रमाण', hi: 'अनुशंसित मात्रा' },
     water_quantity: { en: 'Water Qty', mr: 'पाण्याचे प्रमाण', hi: 'पानी की मात्रा' },
     per_pump_quantity: { en: 'Per Pump Qty', mr: 'प्रति पंप प्रमाण', hi: 'प्रति पंप मात्रा' },
-    spray_timing: { en: 'Spray Timing', mr: 'फवारणीची वेळ', hi: 'छिड़काव का समय' },
-    application_method: { en: 'Application Method', mr: 'फवारणी पद्धत', hi: 'छिड़काव विधि' },
+    spray_timing: isSeedTreatment
+      ? { en: 'Application Timing', mr: 'वापराची वेळ', hi: 'उपयोग का समय' }
+      : { en: 'Spray Timing', mr: 'फवारणीची वेळ', hi: 'छिड़काव का समय' },
+    application_method: isSeedTreatment
+      ? { en: 'Application Method', mr: 'वापर पद्धत', hi: 'उपयोग विधि' }
+      : { en: 'Application Method', mr: 'फवारणी पद्धत', hi: 'छिड़काव विधि' },
   };
 
   const PUMP_TITLE: Record<Language, string> = {

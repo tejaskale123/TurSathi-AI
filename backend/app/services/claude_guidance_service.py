@@ -74,6 +74,22 @@ def _get_lang_key(language: str) -> str:
     return lang if lang in ("en", "mr", "hi") else "en"
 
 
+def _is_seed_treatment(rec: Optional[TurDiseaseRecommendation]) -> bool:
+    """Returns True if the recommendation is a seed treatment (not a foliar spray)."""
+    if not rec:
+        return False
+    app = (rec.application_method or "").lower()
+    return "seed treatment" in app or "seed treat" in app
+
+
+# Localized important alerts for seed treatment (not a foliar spray)
+SEED_TREATMENT_ALERT: Dict[str, str] = {
+    "en": "This is a SEED TREATMENT — apply before sowing, not as a foliar spray. Trichoderma viride is a biological agent. Follow the product label instructions.",
+    "mr": "हे बियाणे उपचार आहे — पेरणीपूर्वी वापरावे, पान फवारणी नाही. Trichoderma viride एक जैविक बुरशीनाशक आहे. उत्पादनाच्या label वरील सूचनांचे पालन करा.",
+    "hi": "यह बीज उपचार है — बुवाई से पहले उपयोग करें, पत्तियों पर छिड़काव नहीं। Trichoderma viride एक जैविक फफूंदनाशक है। उत्पाद के label पर दिए निर्देशों का पालन करें।",
+}
+
+
 def _build_fallback_guidance(
     scan: TurScan,
     rec: Optional[TurDiseaseRecommendation],
@@ -90,14 +106,16 @@ def _build_fallback_guidance(
             disease_name=scan.disease_name,
             confidence=scan.confidence,
             confidence_percent=conf_pct,
-            disease_explanation=f"Detected disease: {scan.disease_name}. Verified treatment information is currently unavailable in database.",
-            farmer_action=["Monitor crop condition closely.", "Consult a local agricultural officer."],
+            disease_explanation=f"Detected disease: {scan.disease_name}. Verified spray guidance is currently unavailable for this disease.",
+            farmer_action=["Monitor crop condition closely.", "Please consult a qualified agricultural expert before applying any pesticide."],
             spray_guidance_available=False,
-            ai_guidance_available=False,
+            ai_guidance_available=True,
             spray_guidance=None,
-            warnings=warnings + ["No active recommendation record found in database."],
+            warnings=warnings + ["Verified spray guidance is currently unavailable for this disease."],
             language=lang_key,
         )
+
+    is_seed = _is_seed_treatment(rec)
 
     verified_details = SprayGuidanceDetails(
         treatment=rec.treatment,
@@ -113,25 +131,49 @@ def _build_fallback_guidance(
 
     if lang_key == "mr":
         explanation = f"आढळलेला रोग: {rec.disease_name}. {rec.disease_description or ''}"
-        actions = [
-            f"प्रमाणित उपचार वापरा: {rec.treatment or 'कृषी सल्लागाराचा सल्ला घ्या'}.",
-            f"प्रमाण: {rec.recommended_quantity or 'लेबलनुसार'}.",
-            "फवारणी करताना योग्य सुरक्षा साधनांचा वापर करा."
-        ]
+        if is_seed:
+            actions = [
+                f"प्रमाणित बियाणे उपचार वापरा: {rec.treatment or 'कृषी सल्लागाराचा सल्ला घ्या'}.",
+                f"प्रमाण: {rec.recommended_quantity or 'लेबलनुसार'}.",
+                "बियाणे उपचारानंतर सावलीत वाळवा, उन्हात नाही.",
+                "उपचारित बियाणे हाताळताना हात धुवा."
+            ]
+        else:
+            actions = [
+                f"प्रमाणित उपचार वापरा: {rec.treatment or 'कृषी सल्लागाराचा सल्ला घ्या'}.",
+                f"प्रमाण: {rec.recommended_quantity or 'लेबलनुसार'}.",
+                "फवारणी करताना योग्य सुरक्षा साधनांचा वापर करा."
+            ]
     elif lang_key == "hi":
         explanation = f"पहचाना गया रोग: {rec.disease_name}। {rec.disease_description or ''}"
-        actions = [
-            f"सत्यापित उपचार: {rec.treatment or 'कृषि अधिकारी की सलाह लें'}।",
-            f"मात्रा: {rec.recommended_quantity or 'लेबल के अनुसार'}।",
-            "छिड़काव के समय सुरक्षात्मक कपड़े पहनें।"
-        ]
+        if is_seed:
+            actions = [
+                f"सत्यापित बीज उपचार: {rec.treatment or 'कृषि अधिकारी की सलाह लें'}।",
+                f"मात्रा: {rec.recommended_quantity or 'लेबल के अनुसार'}।",
+                "बीज उपचार के बाद छाया में सुखाएं, धूप में नहीं।",
+                "उपचारित बीज को संभालने के बाद हाथ धोएं।"
+            ]
+        else:
+            actions = [
+                f"सत्यापित उपचार: {rec.treatment or 'कृषि अधिकारी की सलाह लें'}।",
+                f"मात्रा: {rec.recommended_quantity or 'लेबल के अनुसार'}।",
+                "छिड़काव के समय सुरक्षात्मक कपड़े पहनें।"
+            ]
     else:
         explanation = f"Detected condition: {rec.disease_name}. {rec.disease_description or ''}"
-        actions = [
-            f"Apply verified treatment: {rec.treatment or 'Consult agricultural advisor'}.",
-            f"Recommended dose: {rec.recommended_quantity or 'As per product label'}.",
-            "Follow all safety precautions during spraying."
-        ]
+        if is_seed:
+            actions = [
+                f"Apply verified seed treatment: {rec.treatment or 'Consult agricultural advisor'}.",
+                f"Recommended dose: {rec.recommended_quantity or 'As per product label'}.",
+                "After treating seeds, shade-dry for ~2 hours before sowing.",
+                "Wash hands after handling treated seeds."
+            ]
+        else:
+            actions = [
+                f"Apply verified treatment: {rec.treatment or 'Consult agricultural advisor'}.",
+                f"Recommended dose: {rec.recommended_quantity or 'As per product label'}.",
+                "Follow all safety precautions during spraying."
+            ]
 
     return ClaudeGuidanceResponse(
         status="fallback",
@@ -146,6 +188,7 @@ def _build_fallback_guidance(
         spray_guidance=verified_details,
         warnings=warnings,
         language=lang_key,
+        important_alert=SEED_TREATMENT_ALERT.get(lang_key) if is_seed else None,
     )
 
 
@@ -323,6 +366,8 @@ def generate_claude_guidance(
         if not disease_explanation or not isinstance(farmer_action, list):
             raise ValueError("Invalid JSON schema returned by Claude")
 
+        is_seed_treat = _is_seed_treatment(rec)
+
         return ClaudeGuidanceResponse(
             status="success",
             crop="tur",
@@ -336,6 +381,7 @@ def generate_claude_guidance(
             spray_guidance=verified_details,
             warnings=[],
             language=lang_key,
+            important_alert=SEED_TREATMENT_ALERT.get(lang_key) if is_seed_treat else None,
         )
 
     except Exception as exc:

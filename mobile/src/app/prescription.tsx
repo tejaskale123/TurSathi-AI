@@ -18,6 +18,8 @@ import {
 } from 'expo-audio';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
+import { getAuthToken } from '../config/tokenStore';
+import { fetchAIGuidance, ClaudeGuidanceResponse } from '../config/recommendationApi';
 
 // Pre-bundled instructional voice audio asset for read-aloud / guidance
 let VOICE_GUIDANCE_ASSET: number | null = null;
@@ -51,6 +53,7 @@ const LOCALIZED_STRINGS: Record<
     whatDoesThisMean: string;
     recommendedTreatment: string;
     treatmentUnavailable: string;
+    sprayGuidanceUnavailable: string;
     applicationDetails: string;
     recommendedQuantity: string;
     waterRequired: string;
@@ -77,11 +80,12 @@ const LOCALIZED_STRINGS: Record<
     errorSubtitle: 'Please try again with a clear Tur leaf photo.',
     tryAgain: 'Try Again',
     scanAnotherLeaf: 'Scan Another Leaf',
-    detectedProblem: 'Detected Problem',
-    detectionConfidence: 'Detection Confidence',
+    detectedProblem: 'Diagnosis',
+    detectionConfidence: 'Confidence',
     whatDoesThisMean: 'What does this mean?',
-    recommendedTreatment: 'Recommended Treatment',
-    treatmentUnavailable: 'Verified treatment information will appear here.',
+    recommendedTreatment: 'Treatment Guidance',
+    treatmentUnavailable: 'Verified treatment information is currently unavailable for this disease.',
+    sprayGuidanceUnavailable: 'Verified spray guidance is currently unavailable for this disease.',
     applicationDetails: 'Application Details',
     recommendedQuantity: 'Recommended Quantity',
     waterRequired: 'Water Required',
@@ -89,7 +93,7 @@ const LOCALIZED_STRINGS: Record<
     sprayTiming: 'Spray Timing',
     importantTitle: 'Important',
     importantNotice:
-      'Always follow the verified agricultural recommendation and the product label before application.',
+      'Please consult a qualified agricultural expert before applying any pesticide.',
     viewSprayGuidance: 'View Spray Guidance',
     listenAction: 'Listen',
     pauseAction: 'Pause',
@@ -109,11 +113,12 @@ const LOCALIZED_STRINGS: Record<
     errorSubtitle: 'कृपया स्पष्ट तूर पानाच्या फोटोसह पुन्हा प्रयत्न करा.',
     tryAgain: 'पुन्हा प्रयत्न करा',
     scanAnotherLeaf: 'दुसरे पान स्कॅन करा',
-    detectedProblem: 'आढळलेली समस्या',
-    detectionConfidence: 'तपासणी अचूकता',
+    detectedProblem: 'निदान',
+    detectionConfidence: 'खात्री (Confidence)',
     whatDoesThisMean: 'याचा अर्थ काय आहे?',
-    recommendedTreatment: 'शिफारस केलेले उपचार',
-    treatmentUnavailable: 'पडताळलेली उपचारांची माहिती येथे दिसेल.',
+    recommendedTreatment: 'उपचार मार्गदर्शन',
+    treatmentUnavailable: 'या आजारासाठी प्रमाणित उपचारांची माहिती सध्या उपलब्ध नाही.',
+    sprayGuidanceUnavailable: 'या आजारासाठी प्रमाणित फवारणी मार्गदर्शन सध्या उपलब्ध नाही.',
     applicationDetails: 'वापर व फवारणी तपशील',
     recommendedQuantity: 'शिफारस केलेले प्रमाण',
     waterRequired: 'आवश्यक पाणी',
@@ -121,7 +126,7 @@ const LOCALIZED_STRINGS: Record<
     sprayTiming: 'फवारणीची वेळ',
     importantTitle: 'महत्त्वाचे',
     importantNotice:
-      'कोणत्याही उपचाराचा वापर करण्यापूर्वी नेहमी पडताळलेली कृषी शिफारस आणि उत्पादन लेबलचे पालन करा.',
+      'कोणतेही कीटकनाशक फवारण्यापूर्वी कृपया पात्र कृषी तज्ज्ञांचा सल्ला घ्या.',
     viewSprayGuidance: 'फवारणी मार्गदर्शन पहा',
     listenAction: 'ऐका',
     pauseAction: 'थांबवा',
@@ -141,19 +146,20 @@ const LOCALIZED_STRINGS: Record<
     errorSubtitle: 'कृपया स्पष्ट तूर पत्ती की फोटो के साथ पुनः प्रयास करें।',
     tryAgain: 'पुनः प्रयास करें',
     scanAnotherLeaf: 'दूसरी पत्ती स्कैन करें',
-    detectedProblem: 'पहचानी गई समस्या',
-    detectionConfidence: 'जांच विश्वसनीयता',
+    detectedProblem: 'निदान',
+    detectionConfidence: 'निश्चितता (Confidence)',
     whatDoesThisMean: 'इसका क्या अर्थ है?',
-    recommendedTreatment: 'अनुशंसित उपचार',
-    treatmentUnavailable: 'सत्यापित उपचार की जानकारी यहां दिखाई देगी।',
+    recommendedTreatment: 'उपचार मार्गदर्शन',
+    treatmentUnavailable: 'इस बीमारी के लिए सत्यापित उपचार जानकारी वर्तमान में उपलब्ध नहीं है।',
+    sprayGuidanceUnavailable: 'इस बीमारी के लिए सत्यापित छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है।',
     applicationDetails: 'उपयोग एवं विवरण',
     recommendedQuantity: 'अनुशंसित मात्रा',
-    waterRequired: 'आवश्यक पानी',
+    waterRequired: 'आवश्यक पाणी',
     perPump: 'प्रति पंप मात्रा',
     sprayTiming: 'छिड़काव का समय',
     importantTitle: 'महत्वपूर्ण',
     importantNotice:
-      'किसी भी उपचार का उपयोग करने से पहले हमेशा सत्यापित कृषि सिफारिश और उत्पाद लेबल का पालन करें।',
+      'किसी भी कीटनाशक का उपयोग करने से पहले कृपया एक योग्य कृषि विशेषज्ञ से परामर्श लें।',
     viewSprayGuidance: 'छिड़काव मार्गदर्शन देखें',
     listenAction: 'सुनें',
     pauseAction: 'रोकें',
@@ -272,7 +278,18 @@ export default function PrescriptionScreen() {
     confidence?: string;
     severity?: string;
     status?: string;
+    crop?: string;
   }>();
+
+  // Extract crop and capitalize
+  const rawCrop = params.crop ? (Array.isArray(params.crop) ? params.crop[0] : params.crop) : 'Tur';
+  const cropName = rawCrop.charAt(0).toUpperCase() + rawCrop.slice(1);
+
+  // Helper to replace hardcoded crop names in localized strings
+  const formatCrop = (text: string) => {
+    if (!text) return text;
+    return text.replace(/Tur/g, cropName).replace(/तूर/g, cropName);
+  };
 
   // Extract raw and normalized image URI safely
   const rawImageUri = Array.isArray(params.imageUri)
@@ -301,6 +318,7 @@ export default function PrescriptionScreen() {
   const incomingDisease = params.disease_name?.trim();
   const incomingConfidence = params.confidence;
   const status = params.status || 'completed';
+  const scanId = params.scanId ? (Array.isArray(params.scanId) ? params.scanId[0] : params.scanId) : undefined;
 
   // State management
   const [isLoading, setIsLoading] = useState(true);
@@ -308,6 +326,27 @@ export default function PrescriptionScreen() {
     (status !== 'completed' && status !== 'success' && status !== 'invalid_image') || 
     (!incomingDisease && status !== 'invalid_image')
   );
+  const [treatmentData, setTreatmentData] = useState<ClaudeGuidanceResponse | null>(null);
+
+  // Load treatment guidance from API
+  useEffect(() => {
+    async function loadTreatment() {
+      if (!scanId || !incomingDisease || incomingDisease.toLowerCase() === 'healthy' || incomingDisease.toLowerCase() === 'healthy leaf') {
+        setIsLoading(false);
+        return;
+      }
+      try {
+        const token = await getAuthToken();
+        const res = await fetchAIGuidance(Number(scanId), language, token || undefined);
+        setTreatmentData(res);
+      } catch (err) {
+        console.warn('[PRESCRIPTION] Failed to load treatment:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadTreatment();
+  }, [scanId, incomingDisease, language]);
 
   // Audio player for Read Aloud / Listen action
   const audioPlayer = useAudioPlayer(VOICE_GUIDANCE_ASSET);
@@ -319,17 +358,14 @@ export default function PrescriptionScreen() {
 
   // Page entrance transition
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
+    if (!isLoading) {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 350,
         useNativeDriver: true,
       }).start();
-    }, 600);
-
-    return () => clearTimeout(timer);
-  }, [fadeAnim]);
+    }
+  }, [fadeAnim, isLoading]);
 
   // Audio cleanup on unmount
   useEffect(() => {
@@ -412,7 +448,7 @@ export default function PrescriptionScreen() {
           <View style={styles.loadingCard}>
             <ActivityIndicator color="#1B4332" size="large" />
             <Text style={styles.loadingTitle}>{labels.loadingTitle}</Text>
-            <Text style={styles.loadingSubtitle}>{labels.loadingSubtitle}</Text>
+            <Text style={styles.loadingSubtitle}>{formatCrop(labels.loadingSubtitle)}</Text>
           </View>
         </View>
       </SafeAreaView>
@@ -429,7 +465,7 @@ export default function PrescriptionScreen() {
               <InfoGlyph color="#C7A45A" />
             </View>
             <Text style={styles.errorTitle}>{labels.errorTitle}</Text>
-            <Text style={styles.errorSubtitle}>{labels.errorSubtitle}</Text>
+            <Text style={styles.errorSubtitle}>{formatCrop(labels.errorSubtitle)}</Text>
 
             <Pressable
               accessibilityRole="button"
@@ -465,7 +501,7 @@ export default function PrescriptionScreen() {
               <InfoGlyph color="#C7A45A" />
             </View>
             <Text style={styles.errorTitle}>{labels.invalidImageTitle}</Text>
-            <Text style={styles.errorSubtitle}>{labels.invalidImageDesc}</Text>
+            <Text style={styles.errorSubtitle}>{formatCrop(labels.invalidImageDesc)}</Text>
 
             <Pressable
               accessibilityRole="button"
@@ -496,21 +532,23 @@ export default function PrescriptionScreen() {
 
   // Section 3: Farmer Explanation
   const explanationText = isHealthy
-      ? labels.healthyDesc
+      ? formatCrop(labels.healthyDesc)
       : language === 'mr'
-        ? 'ही परिस्थिती तूर पिकाच्या पानांवर परिणाम करते. वेळेवर खबरदारी आणि लागवड व्यवस्थापन न केल्यास पिकाच्या वाढीवर परिणाम होऊ शकतो.'
+        ? formatCrop('ही परिस्थिती तूर पिकाच्या पानांवर परिणाम करते. वेळेवर खबरदारी आणि लागवड व्यवस्थापन न केल्यास पिकाच्या वाढीवर परिणाम होऊ शकतो.')
         : language === 'hi'
-           ? 'यह स्थिति तूर फसल की पत्तियों को प्रभावित करती है। समय पर उचित देखभाल न करने से फसल की वृद्धि पर असर पड़ सकता है।'
-           : 'This condition affects the leaves of your Tur plant and may reduce crop health if unmanaged.';
+           ? formatCrop('यह स्थिति तूर फसल की पत्तियों को प्रभावित करती है। समय पर उचित देखभाल न करने से फसल की वृद्धि पर असर पड़ सकता है।')
+           : formatCrop('This condition affects the leaves of your Tur plant and may reduce crop health if unmanaged.');
 
   // Section 4: Recommended Treatment
-  const treatmentText = isHealthy ? null : labels.treatmentUnavailable;
+  const treatmentText = isHealthy 
+    ? null 
+    : (treatmentData?.spray_guidance?.treatment || labels.treatmentUnavailable);
 
   // Section 5: Application Details (Dynamic verified fields only)
-  const reqQty = undefined;
-  const reqWater = undefined;
-  const reqPerPump = undefined;
-  const reqTiming = undefined;
+  const reqQty = treatmentData?.spray_guidance?.recommended_quantity || undefined;
+  const reqWater = treatmentData?.spray_guidance?.water_quantity || undefined;
+  const reqPerPump = treatmentData?.spray_guidance?.per_pump_quantity || undefined;
+  const reqTiming = treatmentData?.spray_guidance?.spray_timing || undefined;
   const hasAppDetails = Boolean(reqQty || reqWater || reqPerPump || reqTiming);
 
   return (
@@ -555,7 +593,7 @@ export default function PrescriptionScreen() {
           {/* SECTION 1 — PAGE HEADER */}
           <View style={styles.titleSection}>
             <Text style={styles.headerTitle}>{labels.title}</Text>
-            <Text style={styles.headerSubtitle}>{labels.subtitle}</Text>
+            <Text style={styles.headerSubtitle}>{formatCrop(labels.subtitle)}</Text>
           </View>
 
           {/* SECTION 2 — DETECTED PROBLEM */}
@@ -585,6 +623,16 @@ export default function PrescriptionScreen() {
             <View style={styles.card}>
               <Text style={styles.cardTitle}>{labels.recommendedTreatment}</Text>
               <Text style={styles.treatmentText}>{treatmentText}</Text>
+            </View>
+          )}
+
+          {/* SECTION 4B — SPRAY GUIDANCE UNAVAILABLE (If no data) */}
+          {!isHealthy && !treatmentData?.spray_guidance && (
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>
+                {language === 'mr' ? 'फवारणी मार्गदर्शन' : language === 'hi' ? 'छिड़काव मार्गदर्शन' : 'Spray Guidance'}
+              </Text>
+              <Text style={styles.treatmentText}>{labels.sprayGuidanceUnavailable}</Text>
             </View>
           )}
 

@@ -887,6 +887,31 @@ export function translate(
 
 // Known disease names translation map (preserves underlying dynamic ML value)
 export const KNOWN_DISEASES: Record<string, Record<Language, string>> = {
+  'Healthy': {
+    en: 'Healthy',
+    mr: 'निरोगी',
+    hi: 'स्वस्थ',
+  },
+  'Leaf_Spot': {
+    en: 'Leaf Spot',
+    mr: 'पानांवरील ठिपके',
+    hi: 'पत्ती धब्बा',
+  },
+  'Leaf_webber': {
+    en: 'Leaf Webber',
+    mr: 'पानावरील अळी',
+    hi: 'पत्ती लपेटक सूंडी',
+  },
+  'Sterilic_mosaic': {
+    en: 'Sterility Mosaic Disease',
+    mr: 'वांझ रोग (स्टेरिलिटी मोझॅक)',
+    hi: 'बांझपन मोज़ेक',
+  },
+  'Wilt': {
+    en: 'Wilt',
+    mr: 'मर रोग (विल्ट)',
+    hi: 'उकठा रोग (विल्ट)',
+  },
   'Tur Leaf Spot': {
     en: 'Tur Leaf Spot',
     mr: 'तूर पानांवरील ठिपके',

@@ -866,6 +866,7 @@ export default function ProblemDescriptionScreen() {
         voiceUri: encodeURIComponent(recordedUri),
         ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
         disease_name: prediction?.disease_name ?? '',
+        crop: prediction?.crop ?? '',
         confidence:
           prediction?.confidence !== null && prediction?.confidence !== undefined
             ? String(prediction.confidence)
