@@ -173,6 +173,7 @@ const UI_TEXT: Record<
     farmerActionMessage: string;
     listenGuidance: string;
     stopGuidance: string;
+    moreInformation: string;
     scanAnotherLeaf: string;
     loadingTitle: string;
     errorTitle: string;
@@ -200,6 +201,7 @@ const UI_TEXT: Record<
       'Monitor your Tur crop regularly. If symptoms continue, increase, or change, scan a fresh leaf again.',
     listenGuidance: 'Listen to Guidance',
     stopGuidance: 'Stop',
+    moreInformation: 'More Information',
     scanAnotherLeaf: 'Scan Another Leaf →',
     loadingTitle: 'Preparing spray guidance...',
     errorTitle: 'Verified spray guidance is currently unavailable.',
@@ -226,6 +228,7 @@ const UI_TEXT: Record<
       'तुमच्या तूर पिकाचे नियमित निरीक्षण करा. लक्षणे तशीच राहिल्यास, वाढल्यास किंवा बदलल्यास पुन्हा नवीन पान स्कॅन करा.',
     listenGuidance: 'मार्गदर्शन ऐका',
     stopGuidance: 'थांबवा',
+    moreInformation: 'अधिक माहिती',
     scanAnotherLeaf: 'दुसरे पान स्कॅन करा →',
     loadingTitle: 'फवारणी मार्गदर्शन तयार होत आहे...',
     errorTitle: 'पडताळलेले फवारणी मार्गदर्शन सध्या उपलब्ध नाही.',
@@ -252,6 +255,7 @@ const UI_TEXT: Record<
       'अपनी तूर फसल की नियमित निगरानी करें। यदि लक्षण बने रहते हैं, बढ़ते हैं या बदलते हैं, तो नई पत्ती स्कैन करें।',
     listenGuidance: 'मार्गदर्शन सुनें',
     stopGuidance: 'रोकें',
+    moreInformation: 'अधिक जानकारी',
     scanAnotherLeaf: 'दूसरी पत्ती स्कैन करें →',
     loadingTitle: 'छिड़काव मार्गदर्शन तैयार हो रहा है...',
     errorTitle: 'सत्यापित छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है।',
@@ -334,12 +338,17 @@ export default function SprayGuidanceScreen() {
 
   const params = useLocalSearchParams<{
     diseaseName?: string;
+    disease_name?: string;
     confidence?: string;
     severity?: string;
     status?: string;
+    imageUri?: string;
+    voiceUri?: string;
+    scanId?: string;
+    crop?: string;
   }>();
 
-  const diseaseName = params.diseaseName?.trim() || 'Tur Leaf Spot';
+  const diseaseName = params.diseaseName?.trim() || params.disease_name?.trim() || 'Tur Leaf Spot';
 
   // API State
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -496,6 +505,26 @@ export default function SprayGuidanceScreen() {
       Speech.stop();
     } catch { }
     router.replace('/scan');
+  };
+
+  const handleMoreInformation = () => {
+    try {
+      Speech.stop();
+    } catch { }
+    const diseaseParam = params.disease_name || params.diseaseName;
+    router.push({
+      pathname: '/prescription',
+      params: {
+        ...(params.imageUri ? { imageUri: params.imageUri } : {}),
+        ...(params.voiceUri ? { voiceUri: params.voiceUri } : {}),
+        ...(diseaseParam ? { disease_name: diseaseParam } : {}),
+        ...(params.confidence ? { confidence: String(params.confidence) } : {}),
+        ...(params.severity ? { severity: params.severity } : {}),
+        ...(params.status ? { status: params.status } : {}),
+        ...(params.scanId ? { scanId: params.scanId } : {}),
+        ...(params.crop ? { crop: params.crop } : {}),
+      },
+    });
   };
 
   // Determine dynamic leaf condition badge text
@@ -923,6 +952,16 @@ export default function SprayGuidanceScreen() {
           {/* SECTION H: FINAL CTA */}
           <View style={styles.ctaSection}>
             <Pressable
+              accessibilityHint="Navigates to treatment recommendation page"
+              accessibilityLabel={ui.moreInformation}
+              accessibilityRole="button"
+              onPress={handleMoreInformation}
+              style={({ pressed }) => [styles.moreInfoCta, pressed && styles.buttonPressed]}
+            >
+              <Text style={styles.moreInfoCtaText}>{ui.moreInformation}</Text>
+            </Pressable>
+
+            <Pressable
               accessibilityHint="Navigates to scan screen to inspect another leaf"
               accessibilityLabel={ui.scanAnotherLeaf}
               accessibilityRole="button"
@@ -1342,6 +1381,23 @@ const styles = StyleSheet.create({
   primaryCtaText: {
     color: '#FFFFFF',
     fontSize: 15,
+    fontWeight: '700',
+    letterSpacing: 0.2,
+  },
+  moreInfoCta: {
+    width: '100%',
+    height: 48,
+    borderRadius: 16,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#D4E0D7',
+    marginBottom: 10,
+  },
+  moreInfoCtaText: {
+    color: '#1A4D33',
+    fontSize: 14,
     fontWeight: '700',
     letterSpacing: 0.2,
   },

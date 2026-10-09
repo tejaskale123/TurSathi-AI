@@ -24,6 +24,7 @@ from sqlalchemy.orm import Session
 
 from app.database.models.tur_scan import TurScan
 from app.ml.tur_predictor import ModelNotConfiguredError, get_predictor
+from app.ml.tur_image_gate import get_tur_image_gate
 from app.services.scan_service import get_scan_for_user
 from app.services.storage_service import UPLOAD_DIR
 
@@ -41,13 +42,15 @@ def run_prediction(
     Steps:
     1. Retrieves and verifies scan ownership.
     2. Resolves the stored image path.
-    3. Calls the ML predictor.
-    4. Persists result to TurScan record.
-    5. Returns updated TurScan.
+    3. Validates the image using TurImageGate.
+    4. Calls the ML predictor.
+    5. Persists result to TurScan record.
+    6. Returns updated TurScan.
 
     Raises:
         HTTP 404 — scan not found.
         HTTP 403 — scan belongs to another user.
+        HTTP 422 — validation failed (not a Tur image).
         HTTP 503 — ML model not yet configured (model_not_configured).
         HTTP 500 — unexpected prediction failure.
     """
@@ -63,18 +66,38 @@ def run_prediction(
 
     image_abs_path = (UPLOAD_DIR / scan.image_path).resolve()
 
-    # 3. Mark as processing
+    # 3. Gate Validation
+    gate = get_tur_image_gate()
+    gate_result = gate.validate(image_abs_path)
+    
+    if not gate_result.is_valid_tur:
+        scan.status = "rejected"
+        scan.prediction_status = "rejected"
+        db.commit()
+        logger.warning(
+            "[PREDICTION_SERVICE] Scan #%d rejected by gate: %s (reason: %s)",
+            scan_id, gate_result.label, gate_result.reason
+        )
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "status": "validation_failed",
+                "message": gate_result.message or "This image does not appear to be a valid Tur (Pigeonpea) leaf."
+            }
+        )
+
+    # 4. Mark as processing
     scan.status = "processing"
     scan.prediction_status = "processing"
     db.commit()
     db.refresh(scan)
 
-    # 4. Run predictor
+    # 5. Run predictor
     predictor = get_predictor()
     try:
         result = predictor.predict(image_abs_path)
 
-        # 5a. Persist completed result
+        # 6a. Persist completed result
         scan.disease_name = result.disease_name
         scan.confidence = result.confidence
         scan.severity = result.severity

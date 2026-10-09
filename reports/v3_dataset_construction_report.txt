@@ -1,0 +1,37 @@
+============================================================
+V3 DATASET CONSTRUCTION REPORT
+============================================================
+1. Total images before construction (V2 Base) : 3440
+2. Total images after construction (V3 Total) : 3561
+
+3. Tur Count by Split:
+   - Train : 1581
+   - Val   : 127
+   - Test  : 133
+
+4. Not_Tur Count by Split:
+   - Train : 1460
+   - Val   : 127
+   - Test  : 133
+
+--- CANDIDATE PROCESSING ---
+5. Number of approved real-world candidates considered : 121
+6. Number actually added                               : 121
+7. Number skipped because of exact duplicate (V2)      : 0
+8. Number skipped because of holdout duplication       : 0
+9. Number skipped for any other reason                 : 0
+
+10. Final Class Balance (Train):
+    - Tur     : 1581
+    - Not_Tur : 1460
+
+11. Image Dimension/Aspect-Ratio Summary (V3 Total):
+    - Portrait  : 223
+    - Landscape : 345
+    - Square    : 2993
+
+--- SECURITY & SAFETY CONFIRMATIONS ---
+12. Confirmed: V1/V2 datasets were NOT modified (read-only copy operations).
+13. Confirmed: Frozen real-world holdout was NOT used or duplicated.
+14. Confirmed: No model training occurred.
+============================================================

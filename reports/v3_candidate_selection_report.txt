@@ -1,0 +1,27 @@
+============================================================
+V3 CANDIDATE SELECTION REPORT
+============================================================
+A. Proposed Wilt selection count          : 40 (Filtered from 287)
+B. Proposed Leaf_Spot selection count     : 37 (All available)
+C. Proposed Sterilic_mosaic selection cnt : 17 (All available)
+D. Leaf_webber candidate                  : 1 (All available)
+E. UNKNOWN images requiring human review  : 26 (Marked NEEDS_HUMAN_REVIEW)
+------------------------------------------------------------
+F. Total proposed selected candidates     : 95 (excluding UNKNOWN)
+G. Aspect-ratio distribution of selections:
+   - Portrait  : 37
+   - Landscape : 3
+   - Square    : 55
+------------------------------------------------------------
+H. Near-duplicate groups avoided          : 6 redundant wilt images skipped
+
+I. Selection Rationale:
+   - 'Leaf_Spot', 'Sterilic_mosaic', and 'Leaf_webber' candidates were small enough to include entirely,
+     ensuring maximum class coverage.
+   - 'Wilt' had massive class imbalance (287 images) and high visual redundancy. 
+     A perceptual diversity filter (dHash) was applied to select a visually distinct subset
+     of ~30-40 Wilt images, maximizing variation in lighting, background, and scale 
+     while discarding near-identical burst frames.
+   - 'UNKNOWN' images (26) were segregated into a dedicated contact sheet (contact_sheet_UNKNOWN.jpg)
+     for manual human visual verification before inclusion, as their provenance is less strict.
+============================================================

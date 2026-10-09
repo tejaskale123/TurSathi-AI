@@ -145,3 +145,38 @@ export async function loginUser(payload: LoginPayload): Promise<AuthTokenRespons
 
   return data as AuthTokenResponse;
 }
+
+export async function exchangeGoogleCode(code: string): Promise<AuthTokenResponse> {
+  const baseUrl = getBaseUrl();
+  console.log(`[MOBILE AUTH] Exchanging Google Code at: ${baseUrl}/api/v1/auth/google/exchange`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/api/v1/auth/google/exchange`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ exchange_code: code }),
+      signal: controller.signal,
+    });
+  } catch (_netErr) {
+    throw new Error('Unable to connect to server. Please check your connection and try again.');
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.detail || 'Google authentication failed.');
+  }
+
+  if (!data.access_token || !data.user) {
+    throw new Error('Invalid authentication response from server.');
+  }
+
+  return data as AuthTokenResponse;
+}

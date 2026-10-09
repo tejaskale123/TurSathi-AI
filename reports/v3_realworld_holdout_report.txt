@@ -1,0 +1,105 @@
+============================================================
+V3 FROZEN REAL-WORLD HOLDOUT REPORT
+============================================================
+Total images      : 20
+Total Correct     : 20
+Total Accuracy    : 1.0000
+------------------------------------------------------------
+Tur Total         : 11
+Tur Correct       : 11
+Tur Recall/Acc    : 1.0000
+------------------------------------------------------------
+Not_Tur Total     : 9
+Not_Tur Correct   : 9
+Not_Tur Recall/Acc: 1.0000
+------------------------------------------------------------
+Confusion Matrix:
+                 Predicted Not_Tur    Predicted Tur
+Actual Not_Tur        9               0
+Actual Tur        0               11
+------------------------------------------------------------
+False Acceptance (Predicted Tur, Actual Not_Tur) : 0
+False Rejection  (Predicted Not_Tur, Actual Tur) : 0
+
+============================================================
+IMAGE PREDICTIONS
+============================================================
+realworld_nottur_01.png
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0010, Not_Tur=0.9990
+
+realworld_nottur_02.png
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0028, Not_Tur=0.9972
+
+realworld_nottur_03.jpg
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0043, Not_Tur=0.9957
+
+realworld_nottur_04.jpg
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0041, Not_Tur=0.9959
+
+realworld_nottur_05.jpg
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0002, Not_Tur=0.9998
+
+realworld_nottur_06.png
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0004, Not_Tur=0.9996
+
+realworld_nottur_07.jpg
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0306, Not_Tur=0.9694
+
+realworld_nottur_08.png
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0008, Not_Tur=0.9992
+
+realworld_nottur_09.png
+  Actual: Not_Tur -> Predicted: Not_Tur [CORRECT]
+  Probs : Tur=0.0022, Not_Tur=0.9978
+
+realworld_tur_01.png
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9697, Not_Tur=0.0303
+
+realworld_tur_02.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9961, Not_Tur=0.0039
+
+realworld_tur_03.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9995, Not_Tur=0.0005
+
+realworld_tur_04.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9950, Not_Tur=0.0050
+
+realworld_tur_05.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9995, Not_Tur=0.0005
+
+realworld_tur_06.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9961, Not_Tur=0.0039
+
+realworld_tur_07.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9972, Not_Tur=0.0028
+
+realworld_tur_08.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9923, Not_Tur=0.0077
+
+realworld_tur_09.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9995, Not_Tur=0.0005
+
+realworld_tur_10.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.8070, Not_Tur=0.1930
+
+realworld_tur_11.jpg
+  Actual: Tur -> Predicted: Tur [CORRECT]
+  Probs : Tur=0.9912, Not_Tur=0.0088

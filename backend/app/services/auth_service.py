@@ -8,11 +8,27 @@ from app.database.models.user import User
 from app.schemas.auth import UserRegister
 
 
+def normalize_mobile(mobile: str) -> str:
+    if not mobile:
+        return mobile
+    cleaned = re.sub(r"[\s()\-\+]", "", mobile.strip())
+    if cleaned.startswith("91") and len(cleaned) == 12:
+        return cleaned[2:]
+    return cleaned
+
+def normalize_email(email: Optional[str]) -> Optional[str]:
+    if not email:
+        return email
+    return email.strip().lower()
+
 def register_user(db: Session, user_in: UserRegister) -> User:
     """
     Registers a new user after verifying duplicate mobile number and email.
     Hashes the password securely and commits the user to PostgreSQL.
     """
+    user_in.mobile_number = normalize_mobile(user_in.mobile_number)
+    user_in.email = normalize_email(user_in.email)
+
     # 1. Check duplicate mobile number
     existing_mobile = db.query(User).filter(User.mobile_number == user_in.mobile_number).first()
     if existing_mobile:
@@ -55,17 +71,15 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
     """
     cleaned_identifier = identifier.strip()
     
-    # Normalize mobile number if identifier looks like mobile
-    cleaned_mobile = re.sub(r"[\s()\-\+]", "", cleaned_identifier)
-    if cleaned_mobile.startswith("91") and len(cleaned_mobile) == 12:
-        cleaned_mobile = cleaned_mobile[2:]
+    # Normalize mobile number and email
+    cleaned_mobile = normalize_mobile(cleaned_identifier)
+    cleaned_email = normalize_email(cleaned_identifier)
 
     # Query user by mobile number OR email
     db_user = db.query(User).filter(
         or_(
             User.mobile_number == cleaned_mobile,
-            User.mobile_number == cleaned_identifier,
-            User.email == cleaned_identifier.lower()
+            User.email == cleaned_email
         )
     ).first()
 
@@ -90,3 +104,43 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
         )
 
     return db_user
+
+
+def authenticate_google_user(db: Session, google_id: str, email: str, name: str) -> User:
+    """
+    Finds or creates a TurSathi user from Google OAuth profile data.
+    """
+    normalized_email = normalize_email(email)
+    
+    # 1. Check if google_id already exists
+    user = db.query(User).filter(User.google_id == google_id).first()
+    if user:
+        if not user.is_active:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User account is inactive. Please contact support.")
+        return user
+        
+    # 2. Check if a local user exists with the SAME verified email
+    if normalized_email:
+        existing_email_user = db.query(User).filter(User.email == normalized_email).first()
+        if existing_email_user:
+            # Safely link the google_id to the existing user
+            existing_email_user.google_id = google_id
+            db.commit()
+            db.refresh(existing_email_user)
+            if not existing_email_user.is_active:
+                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User account is inactive. Please contact support.")
+            return existing_email_user
+            
+    # 3. Create a NEW Google-only user
+    new_user = User(
+        full_name=name or "Google User",
+        email=normalized_email,
+        google_id=google_id,
+        auth_provider="google",
+        is_active=True
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+

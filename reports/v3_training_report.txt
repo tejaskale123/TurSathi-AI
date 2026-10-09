@@ -1,0 +1,18 @@
+============================================================
+V3 TRAINING REPORT
+============================================================
+Model Architecture       : EfficientNet-B0
+Pretrained Initialization: ImageNet (DEFAULT weights)
+Input Image Size         : 224x224
+Augmentations Used       : Resize, RandomHorizontalFlip, RandomVerticalFlip, RandomRotation(15), ColorJitter, RandomResizedCrop
+Optimizer                : AdamW
+Initial Learning Rate    : 0.0001
+Batch Size               : 32
+Total Epochs Run         : 15
+Best Epoch               : 2
+Best Training Loss       : 0.0201
+Best Validation Loss     : 0.0025
+Best Training Acc        : 0.9954
+Best Validation Acc      : 1.0000
+Checkpoint Path          : models/tur_image_validator_efficientnet_b0_v3.pth
+============================================================

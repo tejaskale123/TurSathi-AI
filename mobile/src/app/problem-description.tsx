@@ -860,11 +860,12 @@ export default function ProblemDescriptionScreen() {
     setIsModalVisible(false);
 
     router.push({
-      pathname: '/prescription',
+      pathname: '/spray-guidance',
       params: {
         imageUri: encodeURIComponent(finalImageUri),
         voiceUri: encodeURIComponent(recordedUri),
         ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
+        diseaseName: prediction?.disease_name ?? '',
         disease_name: prediction?.disease_name ?? '',
         crop: prediction?.crop ?? '',
         confidence:

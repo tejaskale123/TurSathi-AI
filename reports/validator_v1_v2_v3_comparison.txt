@@ -1,0 +1,30 @@
+============================================================
+VALIDATOR V1 vs V2 vs V3 COMPARISON
+============================================================
+Metric                         | V1              | V2              | V3             
+------------------------------------------------------------------------------------
+Training Dataset Size          | 2,460 (Square)  | 2,920 (Square)  | 3,041 (Square/Portrait/Landscape)
+Internal Test Accuracy         | N/A             | 100.00%         | 100.00%        
+Real-World Total Accuracy      | 55.00%          | 50.00%          | 100.00%        
+Real-World Tur Accuracy        | 18.18%          | 18.18%          | 100.00%        
+Real-World Not_Tur Accuracy    | 100.00%         | 100.00%         | 100.00%        
+Tur Recall                     | 18.18%          | 18.18%          | 100.00%        
+Not_Tur Recall                 | 100.00%         | 100.00%         | 100.00%        
+False Acceptance Count         | 0.00%           | 0.00%           | 0.00%          
+False Rejection Count          | 9               | 9               | 0              
+
+============================================================
+ANALYSIS
+============================================================
+1. Did V3 improve real-world Tur recognition?
+   Yes. Tur recall improved from 18.18% to 100.00%.
+2. Did V3 improve total real-world accuracy?
+   Yes. Total accuracy is now 100.00%.
+3. Did V3 reduce false rejection of real Tur images?
+   Yes. False rejections decreased from 9 to 0.
+4. Did V3 introduce any increase in false acceptance?
+   No. False accepts remained at 0.
+5. Is V3 clearly better than V1?
+   Yes, on the real-world holdout V3 outperforms V1 significantly.
+6. Is V3 clearly better than V2?
+   Yes, V3 overcomes the domain gap that crippled V2.

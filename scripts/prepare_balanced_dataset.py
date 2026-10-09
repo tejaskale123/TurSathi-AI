@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 TurSathi AI - Balanced Pigeonpea Disease Dataset Preparation
 Target: 500 images/class  (train=300, val=100, test=100)
@@ -193,12 +193,36 @@ def main():
             n_train, n_val, n_test = TARGET_TRAIN, TARGET_VAL, TARGET_TEST
             print(f"  OK: Using {usable} of {len(unique)} available.")
 
+        # Ensure augmented families stay together to prevent data leakage across splits
+        groups = {}
+        for img in unique:
+            name = img.stem.lower()
+            # Strip common augmentation suffixes
+            for kw in ['_aug', '_flip', '_rot', '_bright', '_noise', '_blur', '_crop']:
+                if kw in name:
+                    name = name[:name.find(kw)]
+            groups.setdefault(name, []).append(img)
+            
+        group_keys = list(groups.keys())
         random.seed(RANDOM_SEED)
-        random.shuffle(unique)
-        selected = unique[:usable]
-        train_imgs = selected[:n_train]
-        val_imgs   = selected[n_train: n_train + n_val]
-        test_imgs  = selected[n_train + n_val:]
+        random.shuffle(group_keys)
+        
+        train_imgs, val_imgs, test_imgs = [], [], []
+        # Distribute whole families instead of individual images
+        for key in group_keys:
+            family = groups[key]
+            if len(train_imgs) < n_train:
+                train_imgs.extend(family)
+            elif len(val_imgs) < n_val:
+                val_imgs.extend(family)
+            else:
+                test_imgs.extend(family)
+        
+        # Truncate to exact target sizes. Since a family is only added to one list, 
+        # dropping the excess prevents leakage across splits.
+        train_imgs = train_imgs[:n_train]
+        val_imgs = val_imgs[:n_val]
+        test_imgs = test_imgs[:n_test]
         print(f"  [4] Split: train={len(train_imgs)}, val={len(val_imgs)}, test={len(test_imgs)}")
 
         # Clear & rebuild output

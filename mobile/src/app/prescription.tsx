@@ -425,21 +425,6 @@ export default function PrescriptionScreen() {
     router.replace('/scan');
   };
 
-  const handleOpenSprayGuidance = () => {
-    try {
-      if (isPlayingAudio) audioPlayer.pause();
-    } catch {}
-    router.push({
-      pathname: '/spray-guidance',
-      params: {
-        imageUri: encodeURIComponent(normalizedImageUri),
-        ...(incomingDisease ? { diseaseName: incomingDisease } : {}),
-        ...(incomingConfidence ? { confidence: String(incomingConfidence) } : {}),
-        ...(params.scanId ? { scanId: Array.isArray(params.scanId) ? params.scanId[0] : params.scanId } : {}),
-      },
-    });
-  };
-
   // 1. INLINE LOADING STATE
   if (isLoading) {
     return (
@@ -682,38 +667,14 @@ export default function PrescriptionScreen() {
 
           {/* SECTION 7 — PRIMARY NEXT ACTION */}
           <View style={styles.actionsSection}>
-            {!isHealthy && Number.isFinite(Number(incomingConfidence)) && Number(incomingConfidence) >= 0.60 && (
-              <Pressable
-                accessibilityHint="Navigates to detailed smart spray guidance"
-                accessibilityLabel={labels.viewSprayGuidance}
-                accessibilityRole="button"
-                onPress={handleOpenSprayGuidance}
-                style={({ pressed }) => [styles.primaryButton, pressed && styles.buttonPressed]}
-              >
-                <Text style={styles.primaryButtonText}>{labels.viewSprayGuidance}</Text>
-                <ArrowGlyph color="#FFFFFF" size={16} />
-              </Pressable>
-            )}
-
             <Pressable
               accessibilityHint="Returns to scan another Tur leaf"
               accessibilityLabel={labels.scanAnotherLeaf}
               accessibilityRole="button"
               onPress={handleScanAnother}
-              style={({ pressed }) => [
-                styles.secondaryButton,
-                isHealthy && styles.primaryButton,
-                pressed && styles.buttonPressed,
-              ]}
+              style={({ pressed }) => [styles.primaryButton, pressed && styles.buttonPressed]}
             >
-              <Text
-                style={[
-                  styles.secondaryButtonText,
-                  isHealthy && styles.primaryButtonText,
-                ]}
-              >
-                {labels.scanAnotherLeaf}
-              </Text>
+              <Text style={styles.primaryButtonText}>{labels.scanAnotherLeaf}</Text>
             </Pressable>
           </View>
         </Animated.View>
@@ -922,7 +883,8 @@ const styles = StyleSheet.create({
   detailRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    gap: 12,
     paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#F0F4EE',
@@ -931,11 +893,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#557A66',
+    flexShrink: 0,
+    maxWidth: '45%',
   },
   detailValue: {
     fontSize: 14,
     fontWeight: '700',
     color: '#0F2419',
+    flex: 1,
+    textAlign: 'right',
+    flexWrap: 'wrap',
   },
 
   // Important Card

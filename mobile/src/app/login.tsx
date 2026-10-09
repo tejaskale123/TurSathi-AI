@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -10,11 +10,11 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter, type Href } from 'expo-router';
+import { useRouter, useLocalSearchParams, type Href } from 'expo-router';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
 
-import { loginUser } from '../config/api';
+import { loginUser, exchangeGoogleCode, API_BASE_URL } from '../config/api';
 import { saveAuthToken } from '../config/tokenStore';
 import GoogleIcon from '../components/GoogleIcon';
 
@@ -94,6 +94,41 @@ export default function LoginScreen() {
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
   const [message, setMessage] = useState('');
   const text = copy[language];
+  const params = useLocalSearchParams();
+
+  useEffect(() => {
+    if (params.exchange_code) {
+      handleGoogleExchange(params.exchange_code as string);
+    }
+  }, [params.exchange_code]);
+
+  const handleGoogleExchange = async (code: string) => {
+    setIsLoading(true);
+    setMessage('Completing Google Login...');
+    try {
+      const authResult = await exchangeGoogleCode(code);
+      if (authResult && authResult.access_token && authResult.user) {
+        await saveAuthToken(authResult.access_token);
+        setIsLoading(false);
+        router.replace('/scan' as Href);
+      } else {
+        throw new Error('Invalid authentication response from server.');
+      }
+    } catch (err: any) {
+      setIsLoading(false);
+      setMessage(err.message || 'Google login failed.');
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    if (Platform.OS === 'web') {
+      window.location.href = `${API_BASE_URL}/api/v1/auth/google/login`;
+    } else {
+      import('expo-linking').then(Linking => {
+        Linking.default.openURL(`${API_BASE_URL}/api/v1/auth/google/login`);
+      });
+    }
+  };
 
   const handleLogin = async () => {
     if (isLoading) return;
@@ -259,7 +294,7 @@ export default function LoginScreen() {
 
               <Pressable
                 accessibilityRole="button"
-                onPress={() => setMessage(text.googleInfo)}
+                onPress={handleGoogleLogin}
                 style={({ pressed }) => [styles.googleButton, pressed ? styles.googlePressed : null]}
               >
                 <GoogleIcon size={20} />

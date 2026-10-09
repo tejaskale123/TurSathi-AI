@@ -40,13 +40,7 @@ async def log_incoming_requests(request: Request, call_next):
 # CORS Configuration for Mobile / Web clients
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8081",
-        "http://127.0.0.1:8081",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-        "*",
-    ],
+    allow_origins=[origin.strip() for origin in settings.FRONTEND_CORS_ORIGINS.split(",")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

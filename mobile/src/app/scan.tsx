@@ -19,7 +19,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
-import { uploadScanImage, ScanUploadError } from '../config/scanApi';
+import { uploadScanImage, predictTurLeaf, ScanUploadError } from '../config/scanApi';
 import { getAuthToken } from '../config/tokenStore';
 
 type GlyphName =
@@ -514,6 +514,8 @@ export default function ScanScreen() {
     setIsCameraReady(false);
     setIsCameraActive(true);
     setCameraVersion((current) => current + 1);
+    uploadGuard.current = false;
+    setIsUploading(false);
   };
 
   const continueWithPhoto = async () => {
@@ -558,10 +560,12 @@ export default function ScanScreen() {
       const scanResult = await uploadScanImage(imageUri, token, 'tur');
       console.log('[SCAN] Upload successful. scan_id:', scanResult.scan_id);
 
+      console.log('[SCAN] Validating Tur image...');
+      await predictTurLeaf(scanResult.scan_id, token);
+      console.log('[SCAN] Validation passed!');
+
       const encodedImageUri = encodeURIComponent(imageUri);
       setIsPhotoReady(true);
-      setIsUploading(false);
-      uploadGuard.current = false;
 
       // Navigate to problem-description with both imageUri and scan_id
       router.push({
@@ -577,9 +581,18 @@ export default function ScanScreen() {
 
       if (err instanceof ScanUploadError) {
         const canRetry = err.isRetryable;
-        setUploadError(
-          err.message + (canRetry ? ' Tap "Use This Photo" to retry.' : '')
-        );
+        if (err.httpStatus === 422) {
+          const errMsg = language === 'mr' 
+            ? 'कृपया तूर पिकाच्या पानाचा स्पष्ट फोटो अपलोड करा.' 
+            : language === 'hi'
+            ? 'कृपया तूर पत्ती का स्पष्ट फोटो अपलोड करें।'
+            : 'Please upload a clear image of a Tur/Pigeon Pea leaf.';
+          setUploadError(errMsg);
+        } else {
+          setUploadError(
+            err.message + (canRetry ? ' Tap "Use This Photo" to retry.' : '')
+          );
+        }
         console.error('[SCAN] Upload error (HTTP', err.httpStatus, '):', err.message);
       } else {
         setUploadError('Upload failed. Please check your connection and try again.');

@@ -1,0 +1,70 @@
+============================================================
+V3 CANDIDATE DISTRIBUTION REPORT
+============================================================
+Total Clean Candidates : 368
+
+--- DISTRIBUTION BY ORIGINAL CLASS ---
+
+CLASS: UNKNOWN (26 images)
+  Shape: 10 Portrait, 11 Landscape, 5 Square
+  Width: Mean 442.6, Median 447.0 (Range 281-738)
+  Height: Mean 456.8, Median 447.0 (Range 209-678)
+  Aspect Ratio: Mean 1.0709, Median 1.0000
+  Extensions: .jpg: 23, .png: 2, .webp: 1
+
+CLASS: Leaf_Spot (37 images)
+  Shape: 0 Portrait, 0 Landscape, 37 Square
+  Width: Mean 256.0, Median 256.0 (Range 256-256)
+  Height: Mean 256.0, Median 256.0 (Range 256-256)
+  Aspect Ratio: Mean 1.0000, Median 1.0000
+  Extensions: .jpg: 37
+
+CLASS: Sterilic_mosaic (17 images)
+  Shape: 0 Portrait, 0 Landscape, 17 Square
+  Width: Mean 256.0, Median 256.0 (Range 256-256)
+  Height: Mean 256.0, Median 256.0 (Range 256-256)
+  Aspect Ratio: Mean 1.0000, Median 1.0000
+  Extensions: .jpg: 17
+
+CLASS: Wilt (287 images)
+  Shape: 274 Portrait, 13 Landscape, 0 Square
+  Width: Mean 1106.3, Median 1204.0 (Range 187-1220)
+  Height: Mean 1464.4, Median 1600.0 (Range 269-1600)
+  Aspect Ratio: Mean 0.7743, Median 0.7525
+  Extensions: .jpg: 287
+
+CLASS: Leaf_webber (1 images)
+  Shape: 0 Portrait, 0 Landscape, 1 Square
+  Width: Mean 256.0, Median 256.0 (Range 256-256)
+  Height: Mean 256.0, Median 256.0 (Range 256-256)
+  Aspect Ratio: Mean 1.0000, Median 1.0000
+  Extensions: .jpg: 1
+
+--- DISTRIBUTION BY SOURCE ---
+
+SOURCE: new_disease_images (26 images)
+  Shape: 10 Portrait, 11 Landscape, 5 Square
+
+SOURCE: pigeonpea_disease_final (342 images)
+  Shape: 274 Portrait, 13 Landscape, 55 Square
+
+--- VISUAL REDUNDANCY AUDIT ---
+Method: dHash (8x8 = 64 bit hash)
+Threshold for near-identical: <= 5 bits difference
+Found 59 near-duplicate groups.
+Total images involved in near-duplicate groups: 204
+Estimated visually redundant images (if preserving 1 per group): 145
+Estimated redundancy rate: 39.4%
+
+--- RECOMMENDATIONS & SAMPLING STRATEGY ---
+1. Should all 368 candidates be used?
+   No. Using all 368 images directly would heavily bias the validator towards 'Wilt' (287 images), leading to a validator that might associate 'Tur' heavily with wilt symptoms rather than general leaf structure.
+2. Is a class-balanced/subsampled candidate pool safer?
+   Yes. A balanced pool prevents feature bias and ensures the validator learns generic 'Tur' features rather than specific disease features.
+3. How many images per class would be reasonable?
+   Since Sterilic_mosaic has 17 images and Leaf_Spot has 37, a reasonable subsampling strategy would be to cap the 'Wilt' class at ~30-40 images. This would create a balanced pool of ~100 diverse, high-quality, non-redundant real-world images.
+4. Should UNKNOWN images be manually reviewed?
+   Yes. The 26 UNKNOWN images from 'new_disease_images' should be quickly visually inspected to ensure they are indeed Tur leaves, as their provenance is less strict than the finalized disease dataset.
+5. Does any class appear too small?
+   'Leaf_webber' has only 1 image, which is statistically insignificant for representing that specific disease state, but still useful as a generic Tur leaf instance.
+============================================================

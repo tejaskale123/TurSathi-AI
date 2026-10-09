@@ -1,0 +1,30 @@
+============================================================
+V3 CANDIDATE SUMMARY
+============================================================
+Total Source Images          : 439
+Excluded Internal Duplicates : 59
+Excluded Holdout Duplicates  : 12
+Final Candidate Count        : 368
+------------------------------------------------------------
+Candidate Count by Source Group:
+  - new_disease_images: 26
+  - pigeonpea_disease_final: 342
+------------------------------------------------------------
+Candidate Count by Original Class:
+  - UNKNOWN: 26
+  - Leaf_Spot: 37
+  - Sterilic_mosaic: 17
+  - Wilt: 287
+  - Leaf_webber: 1
+------------------------------------------------------------
+Portrait Images              : 284
+Landscape Images             : 24
+Square Images                : 60
+------------------------------------------------------------
+Mean Width                   : 932.33
+Median Width                 : 1200.00
+Mean Height                  : 1212.63
+Median Height                : 1600.00
+Mean Aspect Ratio            : 0.8290
+Median Aspect Ratio          : 0.7525
+============================================================

@@ -1,0 +1,92 @@
+UNKNOWN HUMAN REVIEW
+====================
+
+01. 488313_0_En_25-1_Fig1_HTML.jpg -> CLEAR_TUR
+    Reason: Clearly shows a pigeonpea field/plantation.
+
+02. images (1).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves and stems.
+
+03. images (10).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea stems/branches with foliage.
+
+04. images (11).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves with pods.
+
+05. images (14).jpg -> CLEAR_TUR
+    Reason: Clearly shows a pigeonpea bush/shrub.
+
+06. images (15).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea crop in the field.
+
+07. images (2).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea stems and leaves.
+
+08. images (21).jpg -> CLEAR_TUR
+    Reason: Clearly shows a full pigeonpea field.
+
+09. images (24).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea plant canopy.
+
+10. images (26).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea branches held by a hand.
+
+11. images (27).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea foliage.
+
+12. images (29).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves.
+
+13. images (30).jpg -> CLEAR_TUR
+    Reason: Clearly shows a full pigeonpea shrub.
+
+14. images (31).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea crop.
+
+15. images (32).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea plants with yellow flowers.
+
+16. images (33).jpg -> CLEAR_TUR
+    Reason: Clearly shows dry/diseased pigeonpea plant.
+
+17. images (4).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves and pods close-up.
+
+18. images (5).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves showing disease symptoms.
+
+19. images (6).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea seedlings/small plants in soil.
+
+20. images (7).jpg -> CLEAR_TUR
+    Reason: Clearly shows healthy pigeonpea leaves.
+
+21. images (8).jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea stems and leaves.
+
+22. images.jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea crop.
+
+23. Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. © Maundu, 2021.jpg -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea plant with fruit pods.
+
+24. image copy 2.png -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves.
+
+25. image copy.png -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves.
+
+26. AAlternaria-blight-symptom-on-leaves-and-B-aerial-plant-parts-leaves-stem-buds-and.webp -> CLEAR_TUR
+    Reason: Clearly shows pigeonpea leaves with blight symptoms.
+
+SUMMARY
+=======
+CLEAR_TUR     : 26
+NOT_TUR       : 0
+UNCERTAIN     : 0
+
+RECOMMENDATION
+==============
+Only CLEAR_TUR images are eligible for possible inclusion in the V3 real-world Tur candidate pool.
+NOT_TUR images must be excluded.
+UNCERTAIN images must remain excluded until manually resolved.

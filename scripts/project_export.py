@@ -38,7 +38,7 @@ def get_project_structure(root_dir, prefix="", max_depth=10, current_depth=0, ig
         String containing formatted directory tree
     """
     if ignore_dirs is None:
-        ignore_dirs = {".git", "__pycache__", ".pytest_cache", "*.egg-info", ".venv", "venv", "env", ".csv"}
+        ignore_dirs = {".git", "__pycache__", ".pytest_cache", "*.egg-info", ".venv", "venv", "env", ".csv", "node_modules", "dist", "build", ".expo"}
     
     if current_depth >= max_depth:
         return ""
@@ -101,7 +101,7 @@ def extract_python_files(root_dir, output_file):
     # Collect all Python files
     for root, dirs, files in os.walk(root_dir):
         # Skip certain directories
-        dirs[:] = [d for d in dirs if d not in {".git", "__pycache__", ".pytest_cache", ".venv", "venv", "env", ".csv"}]
+        dirs[:] = [d for d in dirs if d not in {".git", "__pycache__", ".pytest_cache", ".venv", "venv", "env", ".csv", "node_modules", "dist", "build", ".expo"}]
         
         for file in files:
             if file.endswith(".py"):

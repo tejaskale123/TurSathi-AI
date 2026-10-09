@@ -1,0 +1,33 @@
+============================================================
+V3 INTERNAL TEST REPORT
+============================================================
+Total test images      : 266
+Correct predictions    : 266
+Incorrect predictions  : 0
+Accuracy               : 1.0000
+Macro Precision        : 1.0000
+Macro Recall           : 1.0000
+Macro F1-score         : 1.0000
+------------------------------------------------------------
+Tur Precision          : 1.0000
+Tur Recall             : 1.0000
+Not_Tur Precision      : 1.0000
+Not_Tur Recall         : 1.0000
+------------------------------------------------------------
+Confusion Matrix:
+                 Predicted Not_Tur    Predicted Tur
+Actual Not_Tur        133             0
+Actual Tur        0               133
+------------------------------------------------------------
+Confidence Distribution:
+Tur Images (Predicted Tur Probability):
+  [0.0 - 0.5): 0
+  [0.5 - 0.7): 0
+  [0.7 - 0.9): 0
+  [0.9 - 1.0]: 133
+Not_Tur Images (Predicted Tur Probability):
+  [0.0 - 0.5): 133
+  [0.5 - 0.7): 0
+  [0.7 - 0.9): 0
+  [0.9 - 1.0]: 0
+============================================================

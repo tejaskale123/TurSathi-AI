@@ -73,7 +73,7 @@ class UserLogin(BaseModel):
 class UserResponse(BaseModel):
     id: int
     full_name: str
-    mobile_number: str
+    mobile_number: Optional[str] = None
     email: Optional[str] = None
     is_active: bool
     created_at: datetime

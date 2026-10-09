@@ -12,15 +12,23 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # Security & JWT Configuration
-    SECRET_KEY: str = "tursathi_ai_super_secret_jwt_key_2026_production_ready"
+    SECRET_KEY: str = "default_unsafe_secret"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+
+    # CORS Configuration
+    FRONTEND_CORS_ORIGINS: str = "http://localhost:8081,http://127.0.0.1:8081,http://localhost:8000,http://127.0.0.1:8000"
+
+    # Google OAuth Configuration
+    GOOGLE_CLIENT_ID: Optional[str] = None
+    GOOGLE_CLIENT_SECRET: Optional[str] = None
+    GOOGLE_REDIRECT_URI: str = "http://localhost:8000/api/v1/auth/google/callback"
 
     # PostgreSQL Database Configuration
     POSTGRES_SERVER: str = "127.0.0.1"
     POSTGRES_PORT: int = 5432
     POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgres123"
+    POSTGRES_PASSWORD: str = ""
     POSTGRES_DB: str = "tursathi_db"
 
     # Optional direct DATABASE_URL override

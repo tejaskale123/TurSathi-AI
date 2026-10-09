@@ -1,0 +1,25 @@
+============================================================
+V3 CANDIDATE VERIFICATION REPORT
+============================================================
+Total Source Candidates      : 439
+Exact Duplicate Groups (MD5) : 60
+
+--- DISCREPANCY EXPLANATION ---
+Phase 4C counted sets vs files sequentially:
+If a file was a holdout dup AND an internal dup, 4C might have counted it as BOTH, or the order of seen_hashes mattered.
+Phase 4D prioritized seen_hashes (internal dups) BEFORE holdout checks if order varied.
+By mutually exclusive categorization (Holdout is highest priority):
+Holdout Duplicate Files      : 12
+Internal Duplicate Files     : 59
+Final Clean Candidate Count  : 368
+
+--- MANIFEST VERIFICATION ---
+Manifest Rows Verified       : 439
+Manifest Inconsistencies     : 0
+
+--- CROSS DIRECTORY DUPLICATES ---
+No cross-directory duplicates found.
+
+--- FINAL RECOMMENDATION ---
+SAFE_TO_BUILD_V3_DATASET
+============================================================

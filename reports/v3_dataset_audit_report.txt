@@ -1,0 +1,39 @@
+============================================================
+V3 DATASET AUDIT REPORT
+============================================================
+A. File counts:
+   - train/Tur: 1581
+   - train/Not_Tur: 1460
+   - val/Tur: 127
+   - val/Not_Tur: 127
+   - test/Tur: 133
+   - test/Not_Tur: 133
+
+B. Corrupt/unreadable images : 0
+C. Exact MD5 duplicates      : 260 redundant files
+D. Cross-split exact dups    : 260 groups
+E. Cross-class exact dups    : 0 groups
+
+G-J. Dimensions and Resolutions:
+   - Mean Width    : 556.11
+   - Mean Height   : 530.37
+   - Mean AR       : 1.0290
+
+I. Portrait / landscape / square distribution:
+   - Portrait  : 223
+   - Landscape : 345
+   - Square    : 2993
+
+K-L. Photometric Stats:
+   - Mean Brightness : 156.92
+   - Mean Saturation : 71.73
+
+M. Confirm 121 newly added real-world images:
+   - CONFIRMED: train/Tur has exactly 1581 images (1460 base + 121 real-world).
+
+N. Confirm NO frozen holdout image exists in V3:
+   - CONFIRMED: Zero holdout images leaked into V3.
+
+O. Confirm V1/V2 datasets were not modified: CONFIRMED (read-only audit).
+P. Confirm no production model/code modified: CONFIRMED (read-only audit).
+============================================================

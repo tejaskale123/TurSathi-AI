@@ -1,0 +1,162 @@
+[
+  {
+    "filename": "realworld_nottur_01.png",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.0010237697279080749,
+    "not_tur_prob": 0.9989762306213379,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_02.png",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.002798895351588726,
+    "not_tur_prob": 0.9972010850906372,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_03.jpg",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.004322976339608431,
+    "not_tur_prob": 0.9956770539283752,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_04.jpg",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.004143525846302509,
+    "not_tur_prob": 0.9958564639091492,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_05.jpg",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.0001698890991974622,
+    "not_tur_prob": 0.9998301267623901,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_06.png",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.00038901763036847115,
+    "not_tur_prob": 0.999610960483551,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_07.jpg",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.030555294826626778,
+    "not_tur_prob": 0.9694446921348572,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_08.png",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.000809932651463896,
+    "not_tur_prob": 0.9991900324821472,
+    "correct": true
+  },
+  {
+    "filename": "realworld_nottur_09.png",
+    "actual": "Not_Tur",
+    "predicted": "Not_Tur",
+    "tur_prob": 0.0022036500740796328,
+    "not_tur_prob": 0.9977964162826538,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_01.png",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9696729779243469,
+    "not_tur_prob": 0.03032705746591091,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_02.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9960792660713196,
+    "not_tur_prob": 0.003920793533325195,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_03.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9994545578956604,
+    "not_tur_prob": 0.0005454866914078593,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_04.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9949518442153931,
+    "not_tur_prob": 0.005048184655606747,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_05.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9995272159576416,
+    "not_tur_prob": 0.0004728265048470348,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_06.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9961434006690979,
+    "not_tur_prob": 0.003856656840071082,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_07.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9971827268600464,
+    "not_tur_prob": 0.0028172978200018406,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_08.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9923034906387329,
+    "not_tur_prob": 0.0076965647749602795,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_09.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9995272159576416,
+    "not_tur_prob": 0.0004728265048470348,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_10.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.8070375919342041,
+    "not_tur_prob": 0.1929624080657959,
+    "correct": true
+  },
+  {
+    "filename": "realworld_tur_11.jpg",
+    "actual": "Tur",
+    "predicted": "Tur",
+    "tur_prob": 0.9911571741104126,
+    "not_tur_prob": 0.008842873387038708,
+    "correct": true
+  }
+]

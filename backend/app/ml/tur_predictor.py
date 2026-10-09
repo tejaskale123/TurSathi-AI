@@ -17,6 +17,7 @@ Supported classes:
     Leaf_Spot
     Leaf_webber
     Sterilic_mosaic
+    Wilt
 """
 
 import logging
@@ -272,19 +273,18 @@ class TurDiseasePredictor:
 
 
     # ========================================================
-    # SEVERITY
+    # CONFIDENCE LEVEL
     # ========================================================
 
     @staticmethod
-    def _map_severity(
+    def _map_confidence_level(
         confidence: float,
     ) -> str:
         """
         The trained classifier predicts disease class and
         confidence, not biological disease severity.
 
-        Until a separately validated severity model/rule is
-        available, keep severity conservative.
+        This returns a confidence level category.
         """
 
         if confidence >= 0.90:
@@ -372,7 +372,7 @@ class TurDiseasePredictor:
                 predicted_index
             ]
 
-            severity = self._map_severity(
+            confidence_level = self._map_confidence_level(
                 confidence
             )
 
@@ -385,7 +385,7 @@ class TurDiseasePredictor:
             return PredictionResult(
                 disease_name=disease_name,
                 confidence=confidence,
-                severity=severity,
+                severity=confidence_level,  # API compatibility
                 prediction_status="completed",
             )
 
