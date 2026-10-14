@@ -161,7 +161,7 @@ export default function RegisterScreen() {
         email: email.trim() || undefined,
         password: password,
         confirm_password: confirmPassword,
-      }) as any;
+      });
       // Backend returns Token { access_token, user } — save it for scan uploads
       if (regResult?.access_token) {
         await saveAuthToken(regResult.access_token);

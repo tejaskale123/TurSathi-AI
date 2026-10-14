@@ -97,6 +97,22 @@ def run_prediction(
     try:
         result = predictor.predict(image_abs_path)
 
+        if result.confidence < 0.65:
+            scan.status = "rejected"
+            scan.prediction_status = "rejected"
+            db.commit()
+            logger.warning(
+                "[PREDICTION_SERVICE] Scan #%d rejected due to low confidence: %.3f. Possibly an unsupported disease.",
+                scan_id, result.confidence
+            )
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail={
+                    "status": "unsupported_disease",
+                    "message": "Unsupported Tur disease. This disease is not included in the current model. Please upload an image of one of the supported conditions."
+                }
+            )
+
         # 6a. Persist completed result
         scan.disease_name = result.disease_name
         scan.confidence = result.confidence
@@ -141,6 +157,10 @@ def run_prediction(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Scan image could not be found on the server.",
         )
+
+    except HTTPException:
+        # Pass through intentional HTTP exceptions (like 422 for low confidence)
+        raise
 
     except Exception as exc:
         # Unexpected error — mark failed but preserve the record

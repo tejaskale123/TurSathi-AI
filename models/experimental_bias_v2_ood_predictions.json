@@ -1,0 +1,221 @@
+{
+    "summary": {
+        "total_found": 41,
+        "processed": 41,
+        "unreadable": 0,
+        "class_counts": {
+            "Healthy": 0,
+            "Leaf_Spot": 0,
+            "Leaf_webber": 2,
+            "Sterilic_mosaic": 2,
+            "Wilt": 37
+        }
+    },
+    "predictions": [
+        {
+            "file": "488313_0_En_25-1_Fig1_HTML.jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9996465444564819
+        },
+        {
+            "file": "64c83c99-f128-4a18-b6d0-1fcfc8ed6e84.png",
+            "predicted": "Wilt",
+            "confidence": 0.9972769618034363
+        },
+        {
+            "file": "AAlternaria-blight-symptom-on-leaves-and-B-aerial-plant-parts-leaves-stem-buds-and.webp",
+            "predicted": "Wilt",
+            "confidence": 0.9946179986000061
+        },
+        {
+            "file": "image copy 2.png",
+            "predicted": "Wilt",
+            "confidence": 0.9996095299720764
+        },
+        {
+            "file": "image copy.png",
+            "predicted": "Wilt",
+            "confidence": 0.8808623552322388
+        },
+        {
+            "file": "image.png",
+            "predicted": "Wilt",
+            "confidence": 0.8808623552322388
+        },
+        {
+            "file": "images (1).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9972862005233765
+        },
+        {
+            "file": "images (10).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9991031885147095
+        },
+        {
+            "file": "images (11).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9998181462287903
+        },
+        {
+            "file": "images (12).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.995640754699707
+        },
+        {
+            "file": "images (13).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.996068000793457
+        },
+        {
+            "file": "images (14).jpg",
+            "predicted": "Sterilic_mosaic",
+            "confidence": 0.551532506942749
+        },
+        {
+            "file": "images (15).jpg",
+            "predicted": "Leaf_webber",
+            "confidence": 0.9456493854522705
+        },
+        {
+            "file": "images (16).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9902414679527283
+        },
+        {
+            "file": "images (17).jpg",
+            "predicted": "Leaf_webber",
+            "confidence": 0.9456493854522705
+        },
+        {
+            "file": "images (18).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9999250173568726
+        },
+        {
+            "file": "images (19).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9973074197769165
+        },
+        {
+            "file": "images (2).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.996925413608551
+        },
+        {
+            "file": "images (20).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9996961355209351
+        },
+        {
+            "file": "images (21).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.5674864053726196
+        },
+        {
+            "file": "images (22).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9446824193000793
+        },
+        {
+            "file": "images (23).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9999250173568726
+        },
+        {
+            "file": "images (24).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9994589686393738
+        },
+        {
+            "file": "images (25).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9999393224716187
+        },
+        {
+            "file": "images (26).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9992035031318665
+        },
+        {
+            "file": "images (27).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9934694766998291
+        },
+        {
+            "file": "images (28).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9984266757965088
+        },
+        {
+            "file": "images (29).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9997686743736267
+        },
+        {
+            "file": "images (3).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9991031885147095
+        },
+        {
+            "file": "images (30).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.8231788277626038
+        },
+        {
+            "file": "images (31).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9032376408576965
+        },
+        {
+            "file": "images (32).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9996846914291382
+        },
+        {
+            "file": "images (33).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.6773130893707275
+        },
+        {
+            "file": "images (4).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9997981190681458
+        },
+        {
+            "file": "images (5).jpg",
+            "predicted": "Sterilic_mosaic",
+            "confidence": 0.9992262125015259
+        },
+        {
+            "file": "images (6).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9999669790267944
+        },
+        {
+            "file": "images (7).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9999970197677612
+        },
+        {
+            "file": "images (8).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.971025288105011
+        },
+        {
+            "file": "images (9).jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9996961355209351
+        },
+        {
+            "file": "images.jpg",
+            "predicted": "Wilt",
+            "confidence": 0.998250424861908
+        },
+        {
+            "file": "Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. \u00a9 Maundu, 2021.jpg",
+            "predicted": "Wilt",
+            "confidence": 0.9974855184555054
+        }
+    ]
+}

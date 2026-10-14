@@ -1,4 +1,4 @@
-﻿import logging
+import logging
 from typing import Optional, List
 from sqlalchemy import select, func
 from sqlalchemy.orm import Session

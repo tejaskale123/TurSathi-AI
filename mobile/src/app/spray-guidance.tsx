@@ -348,14 +348,17 @@ export default function SprayGuidanceScreen() {
     crop?: string;
   }>();
 
-  const diseaseName = params.diseaseName?.trim() || params.disease_name?.trim() || 'Tur Leaf Spot';
+  const rawDiseaseName = (params.diseaseName?.trim() || params.disease_name?.trim() || '').trim();
+  const parsedConfidence = Number(params.confidence);
+  const hasValidConfidence = Number.isFinite(parsedConfidence);
+  const isConfidenceTooLow = hasValidConfidence && parsedConfidence < 0.60;
 
   // API State
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isGuidanceLoading, setIsGuidanceLoading] = useState<boolean>(true);
   const [isUnverified, setIsUnverified] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
   const [data, setData] = useState<ClaudeGuidanceResponse | null>(null);
-  const [isLowConfidence, setIsLowConfidence] = useState<boolean>(false);
+  const [isLowConfidence, setIsLowConfidence] = useState<boolean>(isConfidenceTooLow);
 
   // Voice narration state
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
@@ -371,14 +374,13 @@ export default function SprayGuidanceScreen() {
   }, [fadeAnim]);
 
   // Load spray guidance from API
-  const loadGuidance = useCallback(async () => {
-    setIsLoading(true);
+  const loadGuidance = useCallback(async (signal?: AbortSignal) => {
+    setIsGuidanceLoading(true);
     setHasError(false);
     setIsUnverified(false);
-    setIsLowConfidence(false);
-    setData(null);
 
-    const parsedConfidence = Number(params.confidence);
+    const guidanceStartTime = Date.now();
+    console.log(`[PERF][SPRAY_GUIDANCE] AI guidance requested at: ${guidanceStartTime}`);
 
     // Safety gate:
     // Do not request disease-specific spray guidance
@@ -390,22 +392,29 @@ export default function SprayGuidanceScreen() {
       );
 
       setIsLowConfidence(true);
-      setIsLoading(false);
+      setIsGuidanceLoading(false);
       return;
     }
 
     try {
       const token = await getAuthToken();
 
-      if (!params.scanId) {
-        throw new Error('Missing scanId');
+      const rawScanId = Array.isArray(params.scanId) ? params.scanId[0] : params.scanId;
+      const parsedScanId = rawScanId ? parseInt(rawScanId, 10) : NaN;
+
+      if (!Number.isFinite(parsedScanId)) {
+        throw new RecommendationApiError(400, 'Missing or invalid scanId for spray guidance.');
       }
 
       const res = await fetchAIGuidance(
-        Number(params.scanId),
+        parsedScanId,
         language,
         token || undefined,
+        signal,
       );
+
+      const guidanceDuration = Date.now() - guidanceStartTime;
+      console.log(`[PERF][SPRAY_GUIDANCE] AI guidance loaded successfully in ${guidanceDuration}ms`);
 
       if (res.status === 'low_confidence') {
         setIsLowConfidence(true);
@@ -415,19 +424,29 @@ export default function SprayGuidanceScreen() {
 
       setData(res);
     } catch (err: any) {
-      if (err instanceof RecommendationApiError && err.isNotFound) {
+      if (signal?.aborted || err?.message === 'Request was canceled.') {
+        // Intentional cancellation when navigating away or unmounting
+        return;
+      }
+      if ((err instanceof RecommendationApiError || err?.name === 'RecommendationApiError') && err.isNotFound) {
         setIsUnverified(true);
       } else {
-        console.warn('[SPRAY GUIDANCE] API Error:', err);
+        console.warn('[SPRAY GUIDANCE] API Error:', err?.message || err);
         setHasError(true);
       }
     } finally {
-      setIsLoading(false);
+      if (!signal?.aborted) {
+        setIsGuidanceLoading(false);
+      }
     }
-  }, [diseaseName, params.confidence]);
+  }, [rawDiseaseName, params.confidence, params.scanId, language, parsedConfidence]);
 
   useEffect(() => {
-    loadGuidance();
+    const controller = new AbortController();
+    loadGuidance(controller.signal);
+    return () => {
+      controller.abort();
+    };
   }, [loadGuidance]);
 
   // Cleanup speech on unmount
@@ -528,10 +547,12 @@ export default function SprayGuidanceScreen() {
   };
 
   // Determine dynamic leaf condition badge text
-  const conditionStatus = data?.disease_name || ui.statusNeedsTreatment;
+  const conditionStatus = data?.disease_name || rawDiseaseName || ui.statusNeedsTreatment;
+  const displayConditionName = tDisease(conditionStatus) || conditionStatus;
 
-  // Render Loading State
-  if (isLoading) {
+  // Render Full-Screen Loading State only if no disease was forwarded and no data loaded yet
+  const isInitialLoading = !rawDiseaseName && !data && isGuidanceLoading && !isLowConfidence && !hasError && !isUnverified;
+  if (isInitialLoading) {
     return (
       <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
         <View style={styles.stateContainer}>
@@ -603,8 +624,8 @@ export default function SprayGuidanceScreen() {
     );
   }
 
-  // Render Error State
-  if (hasError) {
+  // Render Full-Screen Error State only if no disease prediction is available
+  if (hasError && !rawDiseaseName) {
     return (
       <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
         <View style={styles.stateContainer}>
@@ -806,9 +827,33 @@ export default function SprayGuidanceScreen() {
             <View style={styles.conditionRow}>
               <Text style={styles.cardCategoryLabel}>{ui.leafConditionTitle}</Text>
               <View style={styles.conditionBadge}>
-                <Text style={styles.conditionBadgeText}>{conditionStatus}</Text>
+                <Text style={styles.conditionBadgeText}>{displayConditionName}</Text>
               </View>
             </View>
+
+            {hasValidConfidence && (
+              <Text style={styles.confidenceSubText}>
+                {language === 'mr'
+                  ? `AI खात्री (Confidence): ${(parsedConfidence * 100).toFixed(1)}%`
+                  : language === 'hi'
+                    ? `AI निश्चितता (Confidence): ${(parsedConfidence * 100).toFixed(1)}%`
+                    : `AI Confidence: ${(parsedConfidence * 100).toFixed(1)}%`}
+              </Text>
+            )}
+
+            {isGuidanceLoading && !data?.disease_explanation && (
+              <View style={styles.inlineAiStatusWrap}>
+                <ActivityIndicator color="#1A4D33" size="small" />
+                <Text style={styles.inlineAiStatusText}>
+                  {language === 'mr'
+                    ? 'तज्ज्ञ AI विश्लेषण आणि फवारणी मार्गदर्शन तयार होत आहे...'
+                    : language === 'hi'
+                    ? 'विशेषज्ञ AI विश्लेषण और छिड़काव मार्गदर्शन तैयार हो रहा है...'
+                    : 'Generating expert AI explanation & tailored dosage...'}
+                </Text>
+              </View>
+            )}
+
             {Boolean(data?.disease_explanation) && (
               <Text style={[styles.cardBodyText, { marginTop: 12 }]}>
                 {data!.disease_explanation}
@@ -822,6 +867,38 @@ export default function SprayGuidanceScreen() {
               <Text style={styles.cardTitle}>{ui.sprayGuidanceTitle}</Text>
               <Text style={styles.cardSubtitle}>{ui.sprayGuidanceSubtitle}</Text>
             </View>
+
+            {isGuidanceLoading && !data?.spray_guidance && (
+              <View style={styles.inlineAiStatusWrap}>
+                <ActivityIndicator color="#8B6822" size="small" />
+                <Text style={styles.inlineAiStatusText}>
+                  {language === 'mr'
+                    ? 'पडताळलेल्या औषध शिफारसी व प्रमाण लोड होत आहेत...'
+                    : language === 'hi'
+                    ? 'सत्यापित दवा की सिफारिशें और मात्रा लोड हो रही हैं...'
+                    : 'Loading verified spray recommendations and dosage...'}
+                </Text>
+              </View>
+            )}
+
+            {hasError && !data && (
+              <View style={styles.inlineErrorWrap}>
+                <Text style={styles.inlineErrorText}>
+                  {language === 'mr'
+                    ? 'तपशीलवार AI फवारणी मार्गदर्शन लोड करण्यात अडचण आली.'
+                    : language === 'hi'
+                    ? 'विस्तृत AI छिड़काव मार्गदर्शन लोड करने में समस्या आई।'
+                    : 'Unable to load detailed AI spray guidance.'}
+                </Text>
+                <Pressable
+                  accessibilityRole="button"
+                  onPress={() => loadGuidance()}
+                  style={({ pressed }) => [styles.inlineRetryButton, pressed && styles.buttonPressed]}
+                >
+                  <Text style={styles.inlineRetryButtonText}>{ui.tryAgain}</Text>
+                </Pressable>
+              </View>
+            )}
 
             <View style={styles.stepsContainer}>
               {stepsList.map((stepItem: { id?: string; label: string; value: string }, idx: number) => {
@@ -1226,6 +1303,60 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
     color: '#8B6822',
+  },
+  confidenceSubText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#8B6822',
+    marginTop: 6,
+  },
+  inlineAiStatusWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F4F7F4',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 10,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: '#E2EBDD',
+  },
+  inlineAiStatusText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#1A4D33',
+    flex: 1,
+    lineHeight: 16,
+  },
+  inlineErrorWrap: {
+    backgroundColor: '#FDF8F0',
+    padding: 12,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#F3E4C8',
+    marginTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 8,
+  },
+  inlineErrorText: {
+    fontSize: 12,
+    color: '#8B6822',
+    fontWeight: '600',
+    flex: 1,
+  },
+  inlineRetryButton: {
+    backgroundColor: '#1A4D33',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+  },
+  inlineRetryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: '700',
   },
 
   // Section C: Spray Guidance

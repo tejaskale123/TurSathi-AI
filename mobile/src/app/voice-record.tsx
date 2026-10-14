@@ -353,6 +353,7 @@ export default function VoiceRecordScreen() {
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const rippleAnim = useRef(new Animated.Value(1)).current;
   const rippleOpacity = useRef(new Animated.Value(0.4)).current;
+  const submitGuard = useRef(false);
 
   // expo-audio recorder instance
   const recorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
@@ -568,9 +569,10 @@ export default function VoiceRecordScreen() {
 
   // 5. SUBMIT: Upload voice recording (best-effort), then navigate to /prescription
   const handleSubmit = async () => {
-    if (!recordedUri) {
+    if (!recordedUri || submitGuard.current) {
       return;
     }
+    submitGuard.current = true;
 
     if (isPlaying) {
       try {
@@ -578,6 +580,8 @@ export default function VoiceRecordScreen() {
       } catch {}
     }
 
+    const tSubmitStart = Date.now();
+    console.log(`[PERF][VOICE_RECORD] Submit pressed at: ${tSubmitStart}`);
     const finalImageUri = normalizedImageUri || rawImageUri;
     console.log('[VOICE-RECORD] Submitting to Prescription:');
     console.log('  imageUri:', finalImageUri);
@@ -590,6 +594,7 @@ export default function VoiceRecordScreen() {
         const token = await getAuthToken();
         if (token) {
           const langCode = language === 'mr' ? 'mr' : language === 'hi' ? 'hi' : 'en';
+          const tUploadStart = Date.now();
           await uploadVoiceReport(
             scanId,
             recordedUri,
@@ -597,7 +602,8 @@ export default function VoiceRecordScreen() {
             langCode,
             recordedDuration > 0 ? recordedDuration : undefined,
           );
-          console.log('[VOICE-RECORD] Voice uploaded successfully for scan_id:', scanId);
+          const tUploadEnd = Date.now();
+          console.log(`[PERF][VOICE_RECORD] Voice uploaded in ${tUploadEnd - tUploadStart}ms for scan_id: ${scanId}`);
         }
       } catch (uploadErr) {
         // Log but do NOT block the farmer — prescription must always be reachable
@@ -611,6 +617,7 @@ export default function VoiceRecordScreen() {
       console.warn('[VOICE-RECORD] No scanId available — voice upload skipped.');
     }
 
+    submitGuard.current = false;
     router.push({
       pathname: '/prescription',
       params: {

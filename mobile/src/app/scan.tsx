@@ -20,7 +20,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
 import { uploadScanImage, predictTurLeaf, ScanUploadError } from '../config/scanApi';
-import { getAuthToken } from '../config/tokenStore';
+import { getAuthToken, clearAuthToken } from '../config/tokenStore';
 
 type GlyphName =
   | 'back'
@@ -297,6 +297,19 @@ export default function ScanScreen() {
   const cameraAvailable = Boolean(cameraPermission?.granted);
   const isPlaying = isSpeaking;
 
+  // Authenticated route guard: redirect to /login if no valid token exists
+  useEffect(() => {
+    let isMounted = true;
+    getAuthToken().then((token) => {
+      if (isMounted && !token) {
+        router.replace('/login');
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, [router]);
+
   // Guide corners pulsing animation
   useEffect(() => {
     const loop = Animated.loop(
@@ -407,6 +420,15 @@ export default function ScanScreen() {
     } else {
       router.back();
     }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await clearAuthToken();
+    } catch (err) {
+      console.warn('[SCAN] Error during logout:', err);
+    }
+    router.replace('/login');
   };
 
   const requestCameraAccess = async () => {
@@ -561,18 +583,26 @@ export default function ScanScreen() {
       console.log('[SCAN] Upload successful. scan_id:', scanResult.scan_id);
 
       console.log('[SCAN] Validating Tur image...');
-      await predictTurLeaf(scanResult.scan_id, token);
-      console.log('[SCAN] Validation passed!');
+      const prediction = await predictTurLeaf(scanResult.scan_id, token);
+      console.log('[SCAN] Validation passed! Disease:', prediction.disease_name, 'Confidence:', prediction.confidence);
 
       const encodedImageUri = encodeURIComponent(imageUri);
       setIsPhotoReady(true);
 
-      // Navigate to problem-description with both imageUri and scan_id
+      // Navigate to problem-description with imageUri, scan_id, and verified prediction details
       router.push({
         pathname: '/problem-description',
         params: {
           imageUri: encodedImageUri,
           scanId: String(scanResult.scan_id),
+          diseaseName: prediction.disease_name ?? '',
+          confidence:
+            prediction.confidence !== null && prediction.confidence !== undefined
+              ? String(prediction.confidence)
+              : '',
+          severity: prediction.severity ?? '',
+          crop: prediction.crop ?? '',
+          status: prediction.status ?? '',
         },
       });
     } catch (err) {
@@ -678,8 +708,19 @@ export default function ScanScreen() {
 
 
 
-            {/* Spacer for symmetrical header centering */}
-            <View style={styles.headerSpacer} />
+            {/* Logout button */}
+            <Pressable
+              accessibilityHint="Logs out of your account"
+              accessibilityLabel="Logout"
+              accessibilityRole="button"
+              hitSlop={8}
+              onPress={handleLogout}
+              style={({ pressed }) => [styles.logoutButton, pressed && styles.iconPressed]}
+            >
+              <Text style={styles.logoutText}>
+                {language === 'mr' ? 'लॉगआउट' : language === 'hi' ? 'लॉगआउट' : 'Logout'}
+              </Text>
+            </Pressable>
           </View>
 
           {/* 2. INSTRUCTION TITLE (Shown in Initial & Full Camera modes) */}
@@ -1055,6 +1096,26 @@ const styles = StyleSheet.create({
   headerSpacer: {
     width: 44,
     height: 44,
+  },
+  logoutButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 16,
+    backgroundColor: '#FFFEFA',
+    borderWidth: 1,
+    borderColor: '#E3E2D9',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#163B2C',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  logoutText: {
+    color: '#8A2D2D',
+    fontSize: 12,
+    fontWeight: '600',
   },
   iconPressed: {
     opacity: 0.86,

@@ -1,0 +1,91 @@
+{
+  "experiment_id": "ood_eval_f26",
+  "timestamp": "2026-10-13T13:30:00Z",
+  "evaluation_rules": {
+    "calibration_separation": "Strictly separated - zero threshold tuning performed",
+    "duplicate_resolution": "24 cross-label contradictory test images quarantined prior to scoring",
+    "leakage_auditing": "Image-level and parent-ID checks executed across all datasets"
+  },
+  "metrics": {
+    "CAT-1_supported_pigeonpea_frr": {
+      "metric_name": "False Rejection Rate (FRR) on Clean Supported Pigeonpea",
+      "evaluable": true,
+      "numerator_false_rejections": 0,
+      "denominator_total_clean": 352,
+      "rate": 0.0,
+      "percentage": "0.00%",
+      "acceptance_target": "<= 5.0%",
+      "accepted": true,
+      "quarantined_samples": 24
+    },
+    "CAT-1_classifier_accuracy_clean": {
+      "metric_name": "5-Class Disease Classifier Accuracy on Clean Supported Pigeonpea",
+      "evaluable": true,
+      "numerator_correct": 339,
+      "denominator_total_clean": 352,
+      "accuracy": 0.963068,
+      "percentage": "96.31%",
+      "note": "Includes 51 Wilt samples with train-derivative augmentation leakage"
+    },
+    "CAT-1_classifier_accuracy_leak_free": {
+      "metric_name": "5-Class Disease Classifier Accuracy on Leak-Free & Conflict-Free Subset",
+      "evaluable": true,
+      "numerator_correct": 288,
+      "denominator_total": 301,
+      "accuracy": 0.956811,
+      "percentage": "95.68%",
+      "note": "Excludes 24 cross-label conflicts and 51 Wilt training derivatives"
+    },
+    "CAT-2_non_tur_leaves_far": {
+      "metric_name": "False Acceptance Rate (FAR) on Known Non-Tur Crop Leaves",
+      "evaluable": true,
+      "numerator_false_acceptances": 0,
+      "denominator_total": 79,
+      "rate": 0.0,
+      "percentage": "0.00%",
+      "acceptance_target": "<= 10.0%",
+      "accepted": true,
+      "subsets": {
+        "val_isolated_far": {
+          "numerator": 0,
+          "denominator": 69,
+          "rate": 0.0,
+          "percentage": "0.00%"
+        }
+      }
+    },
+    "CAT-3_unsupported_diseases_far": {
+      "metric_name": "False Acceptance Rate (FAR) on Unsupported Pigeonpea Diseases",
+      "evaluable": true,
+      "numerator_false_acceptances": 0,
+      "denominator_total": 54,
+      "rate": 0.0,
+      "percentage": "0.00%",
+      "acceptance_target": "<= 15.0%",
+      "accepted": true,
+      "breakdown": {
+        "alternaria_blight": {
+          "numerator_false_acceptances": 0,
+          "denominator_total": 25,
+          "rate": 0.0
+        },
+        "bacterial_canker": {
+          "numerator_false_acceptances": 0,
+          "denominator_total": 29,
+          "rate": 0.0
+        }
+      }
+    },
+    "CAT-4_exploratory_unverified_ood": {
+      "metric_name": "Exploratory Negative / Unverified OOD Set (new_disease_images)",
+      "evaluable": false,
+      "status": "NOT EVALUABLE FOR FORMAL BENCHMARK",
+      "reason": "Missing ground truth annotations, collection logs, and verified provenance",
+      "exploratory_observation": {
+        "numerator_gate_accepted": 40,
+        "denominator_total": 40,
+        "gate_accepted_percentage": "100.00%"
+      }
+    }
+  }
+}

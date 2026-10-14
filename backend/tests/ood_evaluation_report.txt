@@ -1,0 +1,58 @@
+==================================================
+STAGE 2: OUT-OF-DISTRIBUTION (OOD) EVALUATION REPORT
+==================================================
+
+--- VERIFIED NOT_TUR IMAGES ---
+Total Evaluated: 133
+Correctly Rejected by Gate (validation_failed): 133 (100.0%)
+Rejected by Confidence (unsupported_disease): 0
+Confirmed False Acceptance (FAR / High-Confidence Incorrect): 0 (0.0%)
+Errors (Upload/503/Other): 0
+
+--- UNVERIFIED UNSUPPORTED TUR DISEASES ---
+Total Evaluated: 41
+Rejected by Gate (validation_failed): 0
+Rejected by Confidence (unsupported_disease): 2 (4.9%)
+Exploratory Acceptance (Unknown if correct/incorrect): 39 (95.1%)
+Errors (Upload/503/Other): 0
+
+--- ACCEPTED IMAGES BREAKDOWN ---
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999681711196899) | File: 488313_0_En_25-1_Fig1_HTML.jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (1).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999998807907104) | File: images (10).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9976608753204346) | File: images (11).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (13).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999998807907104) | File: images (14).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999995231628418) | File: images (15).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999932050704956) | File: images (12).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (16).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999995231628418) | File: images (17).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (18).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999929666519165) | File: images (19).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999908208847046) | File: images (21).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999923706054688) | File: images (22).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (20).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (23).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9998531341552734) | File: images (24).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999737739562988) | File: images (25).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (26).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999995231628418) | File: images (29).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (28).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (27).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999998807907104) | File: images (3).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9992032647132874) | File: images (30).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (31).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999998807907104) | File: images (32).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9998785257339478) | File: images (33).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9998925924301147) | File: images (4).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999855756759644) | File: images (6).jpg
+[Exploratory Acceptance] Pred: Sterilic_mosaic (Conf: 0.9996379613876343) | File: images (5).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999998807907104) | File: images (7).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9991300702095032) | File: images (8).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: images (9).jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999430179595947) | File: images.jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999189376831055) | File: Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. © Maundu, 2021.jpg
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.9999639987945557) | File: 64c83c99-f128-4a18-b6d0-1fcfc8ed6e84.png
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.972377598285675) | File: image.png
+[Exploratory Acceptance] Pred: Wilt (Conf: 0.972377598285675) | File: image copy.png
+[Exploratory Acceptance] Pred: Wilt (Conf: 1.0) | File: image copy 2.png

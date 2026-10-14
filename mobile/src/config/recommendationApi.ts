@@ -38,6 +38,22 @@ export interface ClaudeGuidanceResponse {
   language: string;
 }
 
+function extractErrorDetail(data: any, fallback: string): string {
+  if (typeof data?.detail === 'string' && data.detail.trim()) {
+    return data.detail.trim();
+  }
+  if (Array.isArray(data?.detail) && data.detail.length > 0) {
+    const first = data.detail[0];
+    if (typeof first?.msg === 'string' && first.msg.trim()) {
+      return first.msg.trim();
+    }
+  }
+  if (typeof data?.message === 'string' && data.message.trim()) {
+    return data.message.trim();
+  }
+  return fallback;
+}
+
 export class RecommendationApiError extends Error {
   constructor(
     public readonly httpStatus: number | null,
@@ -46,6 +62,7 @@ export class RecommendationApiError extends Error {
   ) {
     super(message);
     this.name = 'RecommendationApiError';
+    Object.setPrototypeOf(this, RecommendationApiError.prototype);
   }
 }
 
@@ -76,41 +93,39 @@ export async function fetchTurSprayGuidance(
 
     if (response.status === 404) {
       const data = await response.json().catch(() => ({}));
-      throw new RecommendationApiError(
-        404,
-        data.detail || 'Verified spray guidance is not available for this condition yet.',
-        true,
-      );
+      const message = extractErrorDetail(data, 'Verified spray guidance is not available for this condition yet.');
+      throw new RecommendationApiError(404, message, true);
     }
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      throw new RecommendationApiError(
-        response.status,
-        data.detail || `Server error (HTTP ${response.status})`,
-        false,
-      );
+      const message = extractErrorDetail(data, `Server error (HTTP ${response.status})`);
+      throw new RecommendationApiError(response.status, message, false);
     }
 
     const data = await response.json();
     return data as SprayGuidanceResponse;
   } catch (err: any) {
-    if (err instanceof RecommendationApiError) {
+    if (err instanceof RecommendationApiError || err?.name === 'RecommendationApiError') {
       throw err;
     }
     if (err?.name === 'AbortError') {
       throw new RecommendationApiError(null, 'Connection timed out. Please try again.');
     }
+    console.error('[RECOMMENDATION API] Tur spray guidance fetch error:', err);
     throw new RecommendationApiError(null, 'Unable to connect to server. Please check your connection.');
   } finally {
     clearTimeout(timeoutId);
   }
 }
 
+const AI_GUIDANCE_TIMEOUT_MS = 60000;
+
 export async function fetchAIGuidance(
   scanId: number,
   language: string,
   token?: string,
+  signal?: AbortSignal,
 ): Promise<ClaudeGuidanceResponse> {
   const baseUrl = getBaseUrl();
   const langQuery = language ? `?language=${encodeURIComponent(language)}` : '';
@@ -125,45 +140,66 @@ export async function fetchAIGuidance(
   }
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 15000);
+  const timeoutId = setTimeout(() => controller.abort(), AI_GUIDANCE_TIMEOUT_MS);
+
+  const onExternalAbort = () => controller.abort();
+  if (signal) {
+    if (signal.aborted) {
+      clearTimeout(timeoutId);
+      throw new RecommendationApiError(null, 'Request was canceled.');
+    }
+    signal.addEventListener('abort', onExternalAbort, { once: true });
+  }
 
   try {
     const response = await fetch(url, {
       method: 'POST',
       headers,
+      body: JSON.stringify({}),
       signal: controller.signal,
     });
 
     if (response.status === 404) {
       const data = await response.json().catch(() => ({}));
-      throw new RecommendationApiError(
-        404,
-        data.detail || 'Scan not found for AI guidance.',
-        true,
-      );
+      const message = extractErrorDetail(data, 'Scan not found for AI guidance.');
+      throw new RecommendationApiError(404, message, true);
     }
 
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
-      throw new RecommendationApiError(
-        response.status,
-        data.detail || `Server error (HTTP ${response.status})`,
-        false,
-      );
+      const message = extractErrorDetail(data, `Server error (HTTP ${response.status})`);
+      throw new RecommendationApiError(response.status, message, false);
     }
 
     const data = await response.json();
     return data as ClaudeGuidanceResponse;
   } catch (err: any) {
-    if (err instanceof RecommendationApiError) {
+    if (err instanceof RecommendationApiError || err?.name === 'RecommendationApiError') {
       throw err;
     }
-    if (err?.name === 'AbortError') {
+
+    const isAborted =
+      err?.name === 'AbortError' ||
+      err?.name === 'CanceledError' ||
+      (typeof err?.message === 'string' &&
+        (err.message.includes('canceled') || err.message.includes('aborted'))) ||
+      controller.signal.aborted ||
+      Boolean(signal?.aborted);
+
+    if (isAborted) {
+      if (signal?.aborted) {
+        throw new RecommendationApiError(null, 'Request was canceled.');
+      }
       throw new RecommendationApiError(null, 'Connection timed out. Please try again.');
     }
+
+    console.error('[RECOMMENDATION API] AI guidance fetch error:', err);
     throw new RecommendationApiError(null, 'Unable to connect to server. Please check your connection.');
   } finally {
     clearTimeout(timeoutId);
+    if (signal) {
+      signal.removeEventListener('abort', onExternalAbort);
+    }
   }
 }
 

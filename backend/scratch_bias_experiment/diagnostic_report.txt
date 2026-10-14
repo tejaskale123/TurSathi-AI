@@ -1,0 +1,85 @@
+STAGE 7: CONTROLLED BACKGROUND-BIAS DIAGNOSTIC REPORT
+=====================================================
+DISCLAIMER: This is a small, one-sided diagnostic. It cannot independently prove or rule out dataset bias, establish field accuracy, or justify retraining. Segmentation artifacts may act as confounding factors.
+
+Image: leaf_spot_train_0000.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 75.1%
+  [Original] Prediction: Leaf_Spot (0.9658)
+      Original Scores: Healthy:0.0000, Leaf_Spot:0.9658, Leaf_webber:0.0000, Sterilic_mosaic:0.0342, Wilt:0.0000
+  [Swapped]  Prediction: Wilt (1.0000)
+      Swapped Scores:  Healthy:0.0000, Leaf_Spot:0.0000, Leaf_webber:0.0000, Sterilic_mosaic:0.0000, Wilt:1.0000
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0001.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 43.2%
+  [Original] Prediction: Leaf_Spot (0.8358)
+      Original Scores: Healthy:0.0005, Leaf_Spot:0.8358, Leaf_webber:0.0064, Sterilic_mosaic:0.1572, Wilt:0.0000
+  [Swapped]  Prediction: Wilt (0.6125)
+      Swapped Scores:  Healthy:0.0030, Leaf_Spot:0.0541, Leaf_webber:0.2236, Sterilic_mosaic:0.1068, Wilt:0.6125
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0002.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 75.8%
+  [Original] Prediction: Leaf_Spot (0.8716)
+      Original Scores: Healthy:0.0012, Leaf_Spot:0.8716, Leaf_webber:0.0015, Sterilic_mosaic:0.1256, Wilt:0.0002
+  [Swapped]  Prediction: Wilt (1.0000)
+      Swapped Scores:  Healthy:0.0000, Leaf_Spot:0.0000, Leaf_webber:0.0000, Sterilic_mosaic:0.0000, Wilt:1.0000
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0003.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 61.8%
+  [Original] Prediction: Leaf_Spot (0.8561)
+      Original Scores: Healthy:0.0004, Leaf_Spot:0.8561, Leaf_webber:0.0014, Sterilic_mosaic:0.1421, Wilt:0.0000
+  [Swapped]  Prediction: Wilt (0.9262)
+      Swapped Scores:  Healthy:0.0044, Leaf_Spot:0.0477, Leaf_webber:0.0085, Sterilic_mosaic:0.0132, Wilt:0.9262
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0004.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 63.9%
+  [Original] Prediction: Leaf_Spot (0.8111)
+      Original Scores: Healthy:0.0013, Leaf_Spot:0.8111, Leaf_webber:0.0123, Sterilic_mosaic:0.1751, Wilt:0.0002
+  [Swapped]  Prediction: Wilt (0.9872)
+      Swapped Scores:  Healthy:0.0001, Leaf_Spot:0.0105, Leaf_webber:0.0001, Sterilic_mosaic:0.0022, Wilt:0.9872
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0005.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 70.5%
+  [Original] Prediction: Leaf_Spot (0.9858)
+      Original Scores: Healthy:0.0000, Leaf_Spot:0.9858, Leaf_webber:0.0000, Sterilic_mosaic:0.0142, Wilt:0.0000
+  [Swapped]  Prediction: Wilt (1.0000)
+      Swapped Scores:  Healthy:0.0000, Leaf_Spot:0.0000, Leaf_webber:0.0000, Sterilic_mosaic:0.0000, Wilt:1.0000
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0006.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 56.9%
+  [Original] Prediction: Leaf_Spot (0.9901)
+      Original Scores: Healthy:0.0000, Leaf_Spot:0.9901, Leaf_webber:0.0000, Sterilic_mosaic:0.0099, Wilt:0.0000
+  [Swapped]  Prediction: Leaf_Spot (0.5938)
+      Swapped Scores:  Healthy:0.0030, Leaf_Spot:0.5938, Leaf_webber:0.0064, Sterilic_mosaic:0.0464, Wilt:0.3505
+--------------------------------------------------
+Image: leaf_spot_train_0007.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 71.3%
+  [Original] Prediction: Leaf_Spot (0.6496)
+      Original Scores: Healthy:0.0005, Leaf_Spot:0.6496, Leaf_webber:0.0055, Sterilic_mosaic:0.3444, Wilt:0.0001
+  [Swapped]  Prediction: Wilt (1.0000)
+      Swapped Scores:  Healthy:0.0000, Leaf_Spot:0.0000, Leaf_webber:0.0000, Sterilic_mosaic:0.0000, Wilt:1.0000
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0008.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 74.0%
+  [Original] Prediction: Leaf_Spot (0.9314)
+      Original Scores: Healthy:0.0000, Leaf_Spot:0.9314, Leaf_webber:0.0001, Sterilic_mosaic:0.0685, Wilt:0.0000
+  [Swapped]  Prediction: Wilt (1.0000)
+      Swapped Scores:  Healthy:0.0000, Leaf_Spot:0.0000, Leaf_webber:0.0000, Sterilic_mosaic:0.0000, Wilt:1.0000
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+Image: leaf_spot_train_0009.jpg (True Label: Leaf_Spot)
+  -> Replaced Background Ratio: 70.9%
+  [Original] Prediction: Leaf_Spot (0.9683)
+      Original Scores: Healthy:0.0000, Leaf_Spot:0.9683, Leaf_webber:0.0000, Sterilic_mosaic:0.0317, Wilt:0.0000
+  [Swapped]  Prediction: Wilt (0.9997)
+      Swapped Scores:  Healthy:0.0000, Leaf_Spot:0.0003, Leaf_webber:0.0000, Sterilic_mosaic:0.0000, Wilt:0.9997
+  *** PREDICTION CHANGED TO Wilt ***
+--------------------------------------------------
+
+Conclusion limitation: Visual artifacts (halos, ragged edges) are visible in the transformed images due to basic NumPy segmentation. These edges may be contributing to the prediction shift alongside the background itself.

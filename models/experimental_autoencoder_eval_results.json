@@ -1,0 +1,2133 @@
+{
+    "metadata": {
+        "checkpoint": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\experimental_autoencoder.pth",
+        "threshold_method": "95th percentile validation MSE",
+        "threshold_value": 0.016958272084593773,
+        "limitations": [
+            "OOD data is exploratory and unlabeled",
+            "Cannot formally establish exact FAR"
+        ]
+    },
+    "metrics": {
+        "total_supported_test": 376,
+        "false_rejection_rate": 0.061170212765957445,
+        "total_exploratory_ood": 41,
+        "exploratory_false_acceptance_rate": 0.7804878048780488,
+        "class_rejections": {
+            "Healthy": {
+                "total": 73,
+                "rejected": 0,
+                "frr": 0.0
+            },
+            "Leaf_Spot": {
+                "total": 89,
+                "rejected": 0,
+                "frr": 0.0
+            },
+            "Leaf_webber": {
+                "total": 70,
+                "rejected": 8,
+                "frr": 0.11428571428571428
+            },
+            "Sterilic_mosaic": {
+                "total": 86,
+                "rejected": 4,
+                "frr": 0.046511627906976744
+            },
+            "Wilt": {
+                "total": 58,
+                "rejected": 11,
+                "frr": 0.1896551724137931
+            }
+        }
+    },
+    "id_results": [
+        {
+            "path": "healthy_test_0000.jpg",
+            "label": "Healthy",
+            "mse": 0.00514268409460783
+        },
+        {
+            "path": "healthy_test_0001.jpg",
+            "label": "Healthy",
+            "mse": 0.00565603282302618
+        },
+        {
+            "path": "healthy_test_0002.jpg",
+            "label": "Healthy",
+            "mse": 0.0036979701835662127
+        },
+        {
+            "path": "healthy_test_0003.jpg",
+            "label": "Healthy",
+            "mse": 0.005447923671454191
+        },
+        {
+            "path": "healthy_test_0004.jpg",
+            "label": "Healthy",
+            "mse": 0.005126789212226868
+        },
+        {
+            "path": "healthy_test_0005.jpg",
+            "label": "Healthy",
+            "mse": 0.010582474060356617
+        },
+        {
+            "path": "healthy_test_0006.jpg",
+            "label": "Healthy",
+            "mse": 0.0072633130475878716
+        },
+        {
+            "path": "healthy_test_0007.jpg",
+            "label": "Healthy",
+            "mse": 0.009515391662716866
+        },
+        {
+            "path": "healthy_test_0008.jpg",
+            "label": "Healthy",
+            "mse": 0.008132311515510082
+        },
+        {
+            "path": "healthy_test_0009.jpg",
+            "label": "Healthy",
+            "mse": 0.0047892308793962
+        },
+        {
+            "path": "healthy_test_0010.jpg",
+            "label": "Healthy",
+            "mse": 0.012973504140973091
+        },
+        {
+            "path": "healthy_test_0011.jpg",
+            "label": "Healthy",
+            "mse": 0.006153182592242956
+        },
+        {
+            "path": "healthy_test_0012.jpg",
+            "label": "Healthy",
+            "mse": 0.00660465843975544
+        },
+        {
+            "path": "healthy_test_0013.jpg",
+            "label": "Healthy",
+            "mse": 0.0036566248163580894
+        },
+        {
+            "path": "healthy_test_0014.jpg",
+            "label": "Healthy",
+            "mse": 0.010599742643535137
+        },
+        {
+            "path": "healthy_test_0015.jpg",
+            "label": "Healthy",
+            "mse": 0.005633097607642412
+        },
+        {
+            "path": "healthy_test_0016.jpg",
+            "label": "Healthy",
+            "mse": 0.009713508188724518
+        },
+        {
+            "path": "healthy_test_0017.jpg",
+            "label": "Healthy",
+            "mse": 0.006461228709667921
+        },
+        {
+            "path": "healthy_test_0018.jpg",
+            "label": "Healthy",
+            "mse": 0.007626568898558617
+        },
+        {
+            "path": "healthy_test_0019.jpg",
+            "label": "Healthy",
+            "mse": 0.005744387395679951
+        },
+        {
+            "path": "healthy_test_0020.jpg",
+            "label": "Healthy",
+            "mse": 0.006681405007839203
+        },
+        {
+            "path": "healthy_test_0021.jpg",
+            "label": "Healthy",
+            "mse": 0.0034778036642819643
+        },
+        {
+            "path": "healthy_test_0022.jpg",
+            "label": "Healthy",
+            "mse": 0.005429636687040329
+        },
+        {
+            "path": "healthy_test_0023.jpg",
+            "label": "Healthy",
+            "mse": 0.00800664909183979
+        },
+        {
+            "path": "healthy_test_0024.jpg",
+            "label": "Healthy",
+            "mse": 0.006457427516579628
+        },
+        {
+            "path": "healthy_test_0025.jpg",
+            "label": "Healthy",
+            "mse": 0.007638733834028244
+        },
+        {
+            "path": "healthy_test_0026.jpg",
+            "label": "Healthy",
+            "mse": 0.003795440774410963
+        },
+        {
+            "path": "healthy_test_0027.jpg",
+            "label": "Healthy",
+            "mse": 0.0029755185823887587
+        },
+        {
+            "path": "healthy_test_0028.jpg",
+            "label": "Healthy",
+            "mse": 0.00790957547724247
+        },
+        {
+            "path": "healthy_test_0029.jpg",
+            "label": "Healthy",
+            "mse": 0.007652899716049433
+        },
+        {
+            "path": "healthy_test_0030.jpg",
+            "label": "Healthy",
+            "mse": 0.008974083699285984
+        },
+        {
+            "path": "healthy_test_0031.jpg",
+            "label": "Healthy",
+            "mse": 0.0039060681592673063
+        },
+        {
+            "path": "healthy_test_0032.jpg",
+            "label": "Healthy",
+            "mse": 0.0030491456855088472
+        },
+        {
+            "path": "healthy_test_0033.jpg",
+            "label": "Healthy",
+            "mse": 0.010969695635139942
+        },
+        {
+            "path": "healthy_test_0034.jpg",
+            "label": "Healthy",
+            "mse": 0.005631192121654749
+        },
+        {
+            "path": "healthy_test_0035.jpg",
+            "label": "Healthy",
+            "mse": 0.009430453181266785
+        },
+        {
+            "path": "healthy_test_0036.jpg",
+            "label": "Healthy",
+            "mse": 0.007978607900440693
+        },
+        {
+            "path": "healthy_test_0037.jpg",
+            "label": "Healthy",
+            "mse": 0.007602135185152292
+        },
+        {
+            "path": "healthy_test_0038.jpg",
+            "label": "Healthy",
+            "mse": 0.008565310388803482
+        },
+        {
+            "path": "healthy_test_0039.jpg",
+            "label": "Healthy",
+            "mse": 0.004659740254282951
+        },
+        {
+            "path": "healthy_test_0040.jpg",
+            "label": "Healthy",
+            "mse": 0.007920079864561558
+        },
+        {
+            "path": "healthy_test_0041.jpg",
+            "label": "Healthy",
+            "mse": 0.0025546883698552847
+        },
+        {
+            "path": "healthy_test_0042.jpg",
+            "label": "Healthy",
+            "mse": 0.003455409314483404
+        },
+        {
+            "path": "healthy_test_0043.jpg",
+            "label": "Healthy",
+            "mse": 0.007657371927052736
+        },
+        {
+            "path": "healthy_test_0044.jpg",
+            "label": "Healthy",
+            "mse": 0.005864735692739487
+        },
+        {
+            "path": "healthy_test_0045.jpg",
+            "label": "Healthy",
+            "mse": 0.005878383759409189
+        },
+        {
+            "path": "healthy_test_0046.jpg",
+            "label": "Healthy",
+            "mse": 0.004003171343356371
+        },
+        {
+            "path": "healthy_test_0047.jpg",
+            "label": "Healthy",
+            "mse": 0.00851555448025465
+        },
+        {
+            "path": "healthy_test_0048.jpg",
+            "label": "Healthy",
+            "mse": 0.009332466870546341
+        },
+        {
+            "path": "healthy_test_0049.jpg",
+            "label": "Healthy",
+            "mse": 0.006319680716842413
+        },
+        {
+            "path": "healthy_test_0050.jpg",
+            "label": "Healthy",
+            "mse": 0.008679520338773727
+        },
+        {
+            "path": "healthy_test_0051.jpg",
+            "label": "Healthy",
+            "mse": 0.006950266193598509
+        },
+        {
+            "path": "healthy_test_0052.jpg",
+            "label": "Healthy",
+            "mse": 0.007021106779575348
+        },
+        {
+            "path": "healthy_test_0053.jpg",
+            "label": "Healthy",
+            "mse": 0.009113910607993603
+        },
+        {
+            "path": "healthy_test_0054.jpg",
+            "label": "Healthy",
+            "mse": 0.005944111384451389
+        },
+        {
+            "path": "healthy_test_0055.jpg",
+            "label": "Healthy",
+            "mse": 0.008197424933314323
+        },
+        {
+            "path": "healthy_test_0056.jpg",
+            "label": "Healthy",
+            "mse": 0.008062317036092281
+        },
+        {
+            "path": "healthy_test_0057.jpg",
+            "label": "Healthy",
+            "mse": 0.0043055652640759945
+        },
+        {
+            "path": "healthy_test_0058.jpg",
+            "label": "Healthy",
+            "mse": 0.0036777483765035868
+        },
+        {
+            "path": "healthy_test_0059.jpg",
+            "label": "Healthy",
+            "mse": 0.0035655100364238024
+        },
+        {
+            "path": "healthy_test_0060.jpg",
+            "label": "Healthy",
+            "mse": 0.006759330164641142
+        },
+        {
+            "path": "healthy_test_0061.jpg",
+            "label": "Healthy",
+            "mse": 0.0071016461588442326
+        },
+        {
+            "path": "healthy_test_0062.jpg",
+            "label": "Healthy",
+            "mse": 0.0047783516347408295
+        },
+        {
+            "path": "healthy_test_0063.jpg",
+            "label": "Healthy",
+            "mse": 0.006069295573979616
+        },
+        {
+            "path": "healthy_test_0064.jpg",
+            "label": "Healthy",
+            "mse": 0.00959053635597229
+        },
+        {
+            "path": "healthy_test_0065.jpg",
+            "label": "Healthy",
+            "mse": 0.0029449898283928633
+        },
+        {
+            "path": "healthy_test_0066.jpg",
+            "label": "Healthy",
+            "mse": 0.004993479698896408
+        },
+        {
+            "path": "healthy_test_0067.jpg",
+            "label": "Healthy",
+            "mse": 0.007922892458736897
+        },
+        {
+            "path": "healthy_test_0068.jpg",
+            "label": "Healthy",
+            "mse": 0.005570764187723398
+        },
+        {
+            "path": "healthy_test_0069.jpg",
+            "label": "Healthy",
+            "mse": 0.00455276807770133
+        },
+        {
+            "path": "healthy_test_0070.jpg",
+            "label": "Healthy",
+            "mse": 0.006429032888263464
+        },
+        {
+            "path": "healthy_test_0071.jpg",
+            "label": "Healthy",
+            "mse": 0.004034006502479315
+        },
+        {
+            "path": "healthy_test_0072.jpg",
+            "label": "Healthy",
+            "mse": 0.006291670724749565
+        },
+        {
+            "path": "leaf_spot_test_0000.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005406185053288937
+        },
+        {
+            "path": "leaf_spot_test_0001.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004402183461934328
+        },
+        {
+            "path": "leaf_spot_test_0002.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005657420493662357
+        },
+        {
+            "path": "leaf_spot_test_0003.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0026022857055068016
+        },
+        {
+            "path": "leaf_spot_test_0004.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0035870333667844534
+        },
+        {
+            "path": "leaf_spot_test_0005.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0037347571924328804
+        },
+        {
+            "path": "leaf_spot_test_0006.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003283899975940585
+        },
+        {
+            "path": "leaf_spot_test_0007.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0038612063508480787
+        },
+        {
+            "path": "leaf_spot_test_0008.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004605404566973448
+        },
+        {
+            "path": "leaf_spot_test_0009.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0050344611518085
+        },
+        {
+            "path": "leaf_spot_test_0010.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0033492762595415115
+        },
+        {
+            "path": "leaf_spot_test_0011.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0029144068248569965
+        },
+        {
+            "path": "leaf_spot_test_0012.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006783564109355211
+        },
+        {
+            "path": "leaf_spot_test_0013.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.007769655901938677
+        },
+        {
+            "path": "leaf_spot_test_0014.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004553080536425114
+        },
+        {
+            "path": "leaf_spot_test_0015.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005407152231782675
+        },
+        {
+            "path": "leaf_spot_test_0016.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003549325978383422
+        },
+        {
+            "path": "leaf_spot_test_0017.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003727611154317856
+        },
+        {
+            "path": "leaf_spot_test_0018.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0032273749820888042
+        },
+        {
+            "path": "leaf_spot_test_0019.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003455221885815263
+        },
+        {
+            "path": "leaf_spot_test_0020.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.00901088397949934
+        },
+        {
+            "path": "leaf_spot_test_0021.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0038235413376241922
+        },
+        {
+            "path": "leaf_spot_test_0022.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.007882468402385712
+        },
+        {
+            "path": "leaf_spot_test_0023.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005486609414219856
+        },
+        {
+            "path": "leaf_spot_test_0024.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006479213945567608
+        },
+        {
+            "path": "leaf_spot_test_0025.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004479528404772282
+        },
+        {
+            "path": "leaf_spot_test_0026.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0024198072496801615
+        },
+        {
+            "path": "leaf_spot_test_0027.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0041106571443378925
+        },
+        {
+            "path": "leaf_spot_test_0028.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004360729828476906
+        },
+        {
+            "path": "leaf_spot_test_0029.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.00425039092078805
+        },
+        {
+            "path": "leaf_spot_test_0030.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005524646490812302
+        },
+        {
+            "path": "leaf_spot_test_0031.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002868716372177005
+        },
+        {
+            "path": "leaf_spot_test_0032.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.010388554073870182
+        },
+        {
+            "path": "leaf_spot_test_0033.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0036464198492467403
+        },
+        {
+            "path": "leaf_spot_test_0034.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002939104102551937
+        },
+        {
+            "path": "leaf_spot_test_0035.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0035725629422813654
+        },
+        {
+            "path": "leaf_spot_test_0036.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0066787307150661945
+        },
+        {
+            "path": "leaf_spot_test_0037.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004318119026720524
+        },
+        {
+            "path": "leaf_spot_test_0038.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004438844043761492
+        },
+        {
+            "path": "leaf_spot_test_0039.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002581035951152444
+        },
+        {
+            "path": "leaf_spot_test_0040.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005066410172730684
+        },
+        {
+            "path": "leaf_spot_test_0041.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005854352843016386
+        },
+        {
+            "path": "leaf_spot_test_0042.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005543902516365051
+        },
+        {
+            "path": "leaf_spot_test_0043.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0036108214408159256
+        },
+        {
+            "path": "leaf_spot_test_0044.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005539693869650364
+        },
+        {
+            "path": "leaf_spot_test_0045.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004067125730216503
+        },
+        {
+            "path": "leaf_spot_test_0046.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003102682065218687
+        },
+        {
+            "path": "leaf_spot_test_0047.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005021282471716404
+        },
+        {
+            "path": "leaf_spot_test_0048.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003584072692319751
+        },
+        {
+            "path": "leaf_spot_test_0049.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005770750343799591
+        },
+        {
+            "path": "leaf_spot_test_0050.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005592370871454477
+        },
+        {
+            "path": "leaf_spot_test_0051.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0037607725244015455
+        },
+        {
+            "path": "leaf_spot_test_0052.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004733225330710411
+        },
+        {
+            "path": "leaf_spot_test_0053.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003161063650622964
+        },
+        {
+            "path": "leaf_spot_test_0054.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0028297784738242626
+        },
+        {
+            "path": "leaf_spot_test_0055.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005769737530499697
+        },
+        {
+            "path": "leaf_spot_test_0056.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004158657975494862
+        },
+        {
+            "path": "leaf_spot_test_0057.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005243667401373386
+        },
+        {
+            "path": "leaf_spot_test_0058.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004704489838331938
+        },
+        {
+            "path": "leaf_spot_test_0059.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0030422010459005833
+        },
+        {
+            "path": "leaf_spot_test_0060.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006316753104329109
+        },
+        {
+            "path": "leaf_spot_test_0061.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002667107153683901
+        },
+        {
+            "path": "leaf_spot_test_0062.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0038426066748797894
+        },
+        {
+            "path": "leaf_spot_test_0063.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005718533415347338
+        },
+        {
+            "path": "leaf_spot_test_0064.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006081497296690941
+        },
+        {
+            "path": "leaf_spot_test_0065.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0023408723063766956
+        },
+        {
+            "path": "leaf_spot_test_0066.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006035012658685446
+        },
+        {
+            "path": "leaf_spot_test_0067.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0028308257460594177
+        },
+        {
+            "path": "leaf_spot_test_0068.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004829047247767448
+        },
+        {
+            "path": "leaf_spot_test_0069.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006260972935706377
+        },
+        {
+            "path": "leaf_spot_test_0070.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002963819308206439
+        },
+        {
+            "path": "leaf_spot_test_0071.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0037397793494164944
+        },
+        {
+            "path": "leaf_spot_test_0072.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0030587702058255672
+        },
+        {
+            "path": "leaf_spot_test_0073.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.00341372424736619
+        },
+        {
+            "path": "leaf_spot_test_0074.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0030135693959891796
+        },
+        {
+            "path": "leaf_spot_test_0075.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005436922889202833
+        },
+        {
+            "path": "leaf_spot_test_0076.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.006887368392199278
+        },
+        {
+            "path": "leaf_spot_test_0077.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0033753877505660057
+        },
+        {
+            "path": "leaf_spot_test_0078.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.007142299320548773
+        },
+        {
+            "path": "leaf_spot_test_0079.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0037032393738627434
+        },
+        {
+            "path": "leaf_spot_test_0080.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002671448513865471
+        },
+        {
+            "path": "leaf_spot_test_0081.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005181657616049051
+        },
+        {
+            "path": "leaf_spot_test_0082.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002381084254011512
+        },
+        {
+            "path": "leaf_spot_test_0083.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.002732931636273861
+        },
+        {
+            "path": "leaf_spot_test_0084.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.003267155261710286
+        },
+        {
+            "path": "leaf_spot_test_0085.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004119588062167168
+        },
+        {
+            "path": "leaf_spot_test_0086.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.004332703072577715
+        },
+        {
+            "path": "leaf_spot_test_0087.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.0024962476454675198
+        },
+        {
+            "path": "leaf_spot_test_0088.jpg",
+            "label": "Leaf_Spot",
+            "mse": 0.005919144954532385
+        },
+        {
+            "path": "leaf_webber_test_0000.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01659521646797657
+        },
+        {
+            "path": "leaf_webber_test_0001.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006435759831219912
+        },
+        {
+            "path": "leaf_webber_test_0002.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.017560046166181564
+        },
+        {
+            "path": "leaf_webber_test_0003.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006971767172217369
+        },
+        {
+            "path": "leaf_webber_test_0004.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006755937356501818
+        },
+        {
+            "path": "leaf_webber_test_0005.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.0038218465633690357
+        },
+        {
+            "path": "leaf_webber_test_0006.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01108052209019661
+        },
+        {
+            "path": "leaf_webber_test_0007.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007266375236213207
+        },
+        {
+            "path": "leaf_webber_test_0008.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006404721178114414
+        },
+        {
+            "path": "leaf_webber_test_0009.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.004891598597168922
+        },
+        {
+            "path": "leaf_webber_test_0010.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007342701777815819
+        },
+        {
+            "path": "leaf_webber_test_0011.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.010268406942486763
+        },
+        {
+            "path": "leaf_webber_test_0012.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.00892370380461216
+        },
+        {
+            "path": "leaf_webber_test_0013.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.011167258955538273
+        },
+        {
+            "path": "leaf_webber_test_0014.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.005092716310173273
+        },
+        {
+            "path": "leaf_webber_test_0015.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.004536749329417944
+        },
+        {
+            "path": "leaf_webber_test_0016.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.017131781205534935
+        },
+        {
+            "path": "leaf_webber_test_0017.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.004687926732003689
+        },
+        {
+            "path": "leaf_webber_test_0018.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.016017403453588486
+        },
+        {
+            "path": "leaf_webber_test_0019.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.022061852738261223
+        },
+        {
+            "path": "leaf_webber_test_0020.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.008807259611785412
+        },
+        {
+            "path": "leaf_webber_test_0021.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007259604055434465
+        },
+        {
+            "path": "leaf_webber_test_0022.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006059166043996811
+        },
+        {
+            "path": "leaf_webber_test_0023.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006496641784906387
+        },
+        {
+            "path": "leaf_webber_test_0024.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.010404163040220737
+        },
+        {
+            "path": "leaf_webber_test_0025.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.0038669356144964695
+        },
+        {
+            "path": "leaf_webber_test_0026.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.0045846812427043915
+        },
+        {
+            "path": "leaf_webber_test_0027.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01752692088484764
+        },
+        {
+            "path": "leaf_webber_test_0028.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.009430701844394207
+        },
+        {
+            "path": "leaf_webber_test_0029.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.008947333320975304
+        },
+        {
+            "path": "leaf_webber_test_0030.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.004752222448587418
+        },
+        {
+            "path": "leaf_webber_test_0031.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.0034690219908952713
+        },
+        {
+            "path": "leaf_webber_test_0032.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01229779701679945
+        },
+        {
+            "path": "leaf_webber_test_0033.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.012811215594410896
+        },
+        {
+            "path": "leaf_webber_test_0034.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007144955452531576
+        },
+        {
+            "path": "leaf_webber_test_0035.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01166930329054594
+        },
+        {
+            "path": "leaf_webber_test_0036.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.016253367066383362
+        },
+        {
+            "path": "leaf_webber_test_0037.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007115811575204134
+        },
+        {
+            "path": "leaf_webber_test_0038.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.003005168866366148
+        },
+        {
+            "path": "leaf_webber_test_0039.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.010375048965215683
+        },
+        {
+            "path": "leaf_webber_test_0040.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.0048756590113043785
+        },
+        {
+            "path": "leaf_webber_test_0041.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01319022849202156
+        },
+        {
+            "path": "leaf_webber_test_0042.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01716592349112034
+        },
+        {
+            "path": "leaf_webber_test_0043.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.012040745466947556
+        },
+        {
+            "path": "leaf_webber_test_0044.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.005240360740572214
+        },
+        {
+            "path": "leaf_webber_test_0045.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.00748753547668457
+        },
+        {
+            "path": "leaf_webber_test_0046.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.012412688694894314
+        },
+        {
+            "path": "leaf_webber_test_0047.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.011091899126768112
+        },
+        {
+            "path": "leaf_webber_test_0048.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.00405566580593586
+        },
+        {
+            "path": "leaf_webber_test_0049.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006660974584519863
+        },
+        {
+            "path": "leaf_webber_test_0050.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.010738756507635117
+        },
+        {
+            "path": "leaf_webber_test_0051.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.010205437429249287
+        },
+        {
+            "path": "leaf_webber_test_0052.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.011382590048015118
+        },
+        {
+            "path": "leaf_webber_test_0053.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.003438738640397787
+        },
+        {
+            "path": "leaf_webber_test_0054.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007098322734236717
+        },
+        {
+            "path": "leaf_webber_test_0055.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.005397433415055275
+        },
+        {
+            "path": "leaf_webber_test_0056.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.011976164765655994
+        },
+        {
+            "path": "leaf_webber_test_0057.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.004780634772032499
+        },
+        {
+            "path": "leaf_webber_test_0058.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.026610126718878746
+        },
+        {
+            "path": "leaf_webber_test_0059.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.006138902623206377
+        },
+        {
+            "path": "leaf_webber_test_0060.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007813257165253162
+        },
+        {
+            "path": "leaf_webber_test_0061.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.00849718414247036
+        },
+        {
+            "path": "leaf_webber_test_0062.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.007297922857105732
+        },
+        {
+            "path": "leaf_webber_test_0063.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.013748914934694767
+        },
+        {
+            "path": "leaf_webber_test_0064.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.008047785609960556
+        },
+        {
+            "path": "leaf_webber_test_0065.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.0042814891785383224
+        },
+        {
+            "path": "leaf_webber_test_0066.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.021889889612793922
+        },
+        {
+            "path": "leaf_webber_test_0067.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.01167245488613844
+        },
+        {
+            "path": "leaf_webber_test_0068.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.017286673188209534
+        },
+        {
+            "path": "leaf_webber_test_0069.jpg",
+            "label": "Leaf_webber",
+            "mse": 0.008848046883940697
+        },
+        {
+            "path": "sterilic_mosaic_test_0000.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004730199929326773
+        },
+        {
+            "path": "sterilic_mosaic_test_0001.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0036663622595369816
+        },
+        {
+            "path": "sterilic_mosaic_test_0002.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.002877357415854931
+        },
+        {
+            "path": "sterilic_mosaic_test_0003.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.011435450054705143
+        },
+        {
+            "path": "sterilic_mosaic_test_0004.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.010601285845041275
+        },
+        {
+            "path": "sterilic_mosaic_test_0005.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0034888633526861668
+        },
+        {
+            "path": "sterilic_mosaic_test_0006.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005095862317830324
+        },
+        {
+            "path": "sterilic_mosaic_test_0007.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004035142250359058
+        },
+        {
+            "path": "sterilic_mosaic_test_0008.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005156491417437792
+        },
+        {
+            "path": "sterilic_mosaic_test_0009.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006149272434413433
+        },
+        {
+            "path": "sterilic_mosaic_test_0010.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.018884755671024323
+        },
+        {
+            "path": "sterilic_mosaic_test_0011.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0028915361035615206
+        },
+        {
+            "path": "sterilic_mosaic_test_0012.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.010731707327067852
+        },
+        {
+            "path": "sterilic_mosaic_test_0013.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0030704273376613855
+        },
+        {
+            "path": "sterilic_mosaic_test_0014.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0037885287310928106
+        },
+        {
+            "path": "sterilic_mosaic_test_0015.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003466876922175288
+        },
+        {
+            "path": "sterilic_mosaic_test_0016.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0037105216179043055
+        },
+        {
+            "path": "sterilic_mosaic_test_0017.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009047689847648144
+        },
+        {
+            "path": "sterilic_mosaic_test_0018.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.00911515112966299
+        },
+        {
+            "path": "sterilic_mosaic_test_0019.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0031753757502883673
+        },
+        {
+            "path": "sterilic_mosaic_test_0020.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004023014567792416
+        },
+        {
+            "path": "sterilic_mosaic_test_0021.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009760908782482147
+        },
+        {
+            "path": "sterilic_mosaic_test_0022.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003777076955884695
+        },
+        {
+            "path": "sterilic_mosaic_test_0023.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003194849705323577
+        },
+        {
+            "path": "sterilic_mosaic_test_0024.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.010801299475133419
+        },
+        {
+            "path": "sterilic_mosaic_test_0025.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0036941850557923317
+        },
+        {
+            "path": "sterilic_mosaic_test_0026.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.016569580882787704
+        },
+        {
+            "path": "sterilic_mosaic_test_0027.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005368586629629135
+        },
+        {
+            "path": "sterilic_mosaic_test_0028.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0077268523164093494
+        },
+        {
+            "path": "sterilic_mosaic_test_0029.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.013274838216602802
+        },
+        {
+            "path": "sterilic_mosaic_test_0030.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.00952526181936264
+        },
+        {
+            "path": "sterilic_mosaic_test_0031.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003823899431154132
+        },
+        {
+            "path": "sterilic_mosaic_test_0032.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004987738560885191
+        },
+        {
+            "path": "sterilic_mosaic_test_0033.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0042831385508179665
+        },
+        {
+            "path": "sterilic_mosaic_test_0034.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0071149724535644054
+        },
+        {
+            "path": "sterilic_mosaic_test_0035.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0029909475706517696
+        },
+        {
+            "path": "sterilic_mosaic_test_0036.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009710547514259815
+        },
+        {
+            "path": "sterilic_mosaic_test_0037.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0037014419212937355
+        },
+        {
+            "path": "sterilic_mosaic_test_0038.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006073795258998871
+        },
+        {
+            "path": "sterilic_mosaic_test_0039.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.010810473002493382
+        },
+        {
+            "path": "sterilic_mosaic_test_0040.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005673623643815517
+        },
+        {
+            "path": "sterilic_mosaic_test_0041.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004741278477013111
+        },
+        {
+            "path": "sterilic_mosaic_test_0042.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.012023743242025375
+        },
+        {
+            "path": "sterilic_mosaic_test_0043.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.00472131697461009
+        },
+        {
+            "path": "sterilic_mosaic_test_0044.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005136738531291485
+        },
+        {
+            "path": "sterilic_mosaic_test_0045.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.01006384938955307
+        },
+        {
+            "path": "sterilic_mosaic_test_0046.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004461171571165323
+        },
+        {
+            "path": "sterilic_mosaic_test_0047.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.010374194011092186
+        },
+        {
+            "path": "sterilic_mosaic_test_0048.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003055850276723504
+        },
+        {
+            "path": "sterilic_mosaic_test_0049.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003013569163158536
+        },
+        {
+            "path": "sterilic_mosaic_test_0050.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005510866641998291
+        },
+        {
+            "path": "sterilic_mosaic_test_0051.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0046707382425665855
+        },
+        {
+            "path": "sterilic_mosaic_test_0052.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.008706117048859596
+        },
+        {
+            "path": "sterilic_mosaic_test_0053.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0026761239860206842
+        },
+        {
+            "path": "sterilic_mosaic_test_0054.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.01026157382875681
+        },
+        {
+            "path": "sterilic_mosaic_test_0055.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006495632231235504
+        },
+        {
+            "path": "sterilic_mosaic_test_0056.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006052335258573294
+        },
+        {
+            "path": "sterilic_mosaic_test_0057.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.018102562054991722
+        },
+        {
+            "path": "sterilic_mosaic_test_0058.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006018598098307848
+        },
+        {
+            "path": "sterilic_mosaic_test_0059.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006651915609836578
+        },
+        {
+            "path": "sterilic_mosaic_test_0060.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.006597940344363451
+        },
+        {
+            "path": "sterilic_mosaic_test_0061.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0050369068048894405
+        },
+        {
+            "path": "sterilic_mosaic_test_0062.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0091048339381814
+        },
+        {
+            "path": "sterilic_mosaic_test_0063.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.005568181164562702
+        },
+        {
+            "path": "sterilic_mosaic_test_0064.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009395754896104336
+        },
+        {
+            "path": "sterilic_mosaic_test_0065.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.01336133573204279
+        },
+        {
+            "path": "sterilic_mosaic_test_0066.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0032768419478088617
+        },
+        {
+            "path": "sterilic_mosaic_test_0067.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003294815309345722
+        },
+        {
+            "path": "sterilic_mosaic_test_0068.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009903103113174438
+        },
+        {
+            "path": "sterilic_mosaic_test_0069.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.008611011318862438
+        },
+        {
+            "path": "sterilic_mosaic_test_0070.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.01722620613873005
+        },
+        {
+            "path": "sterilic_mosaic_test_0071.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.013328217901289463
+        },
+        {
+            "path": "sterilic_mosaic_test_0072.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.008743438869714737
+        },
+        {
+            "path": "sterilic_mosaic_test_0073.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.00297253904864192
+        },
+        {
+            "path": "sterilic_mosaic_test_0074.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004307881463319063
+        },
+        {
+            "path": "sterilic_mosaic_test_0075.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.0037952240090817213
+        },
+        {
+            "path": "sterilic_mosaic_test_0076.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.014439134858548641
+        },
+        {
+            "path": "sterilic_mosaic_test_0077.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.016570447012782097
+        },
+        {
+            "path": "sterilic_mosaic_test_0078.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009894615970551968
+        },
+        {
+            "path": "sterilic_mosaic_test_0079.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.003822803497314453
+        },
+        {
+            "path": "sterilic_mosaic_test_0080.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.018582338467240334
+        },
+        {
+            "path": "sterilic_mosaic_test_0081.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.002788164187222719
+        },
+        {
+            "path": "sterilic_mosaic_test_0082.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.004989224951714277
+        },
+        {
+            "path": "sterilic_mosaic_test_0083.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.009340844117105007
+        },
+        {
+            "path": "sterilic_mosaic_test_0084.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.00430842163041234
+        },
+        {
+            "path": "sterilic_mosaic_test_0085.jpg",
+            "label": "Sterilic_mosaic",
+            "mse": 0.002792879706248641
+        },
+        {
+            "path": "wilt_test_0000.jpg",
+            "label": "Wilt",
+            "mse": 0.012692364864051342
+        },
+        {
+            "path": "wilt_test_0001.jpg",
+            "label": "Wilt",
+            "mse": 0.008598298765718937
+        },
+        {
+            "path": "wilt_test_0002.jpg",
+            "label": "Wilt",
+            "mse": 0.02284524217247963
+        },
+        {
+            "path": "wilt_test_0003.jpg",
+            "label": "Wilt",
+            "mse": 0.013936301693320274
+        },
+        {
+            "path": "wilt_test_0004.jpg",
+            "label": "Wilt",
+            "mse": 0.012077394872903824
+        },
+        {
+            "path": "wilt_test_0005.jpg",
+            "label": "Wilt",
+            "mse": 0.009991856291890144
+        },
+        {
+            "path": "wilt_test_0006.jpg",
+            "label": "Wilt",
+            "mse": 0.014851151034235954
+        },
+        {
+            "path": "wilt_test_0007.jpg",
+            "label": "Wilt",
+            "mse": 0.023951658979058266
+        },
+        {
+            "path": "wilt_test_0008.jpg",
+            "label": "Wilt",
+            "mse": 0.013451585546135902
+        },
+        {
+            "path": "wilt_test_0009.jpg",
+            "label": "Wilt",
+            "mse": 0.010826381854712963
+        },
+        {
+            "path": "wilt_test_0010.jpg",
+            "label": "Wilt",
+            "mse": 0.013235978782176971
+        },
+        {
+            "path": "wilt_test_0011.jpg",
+            "label": "Wilt",
+            "mse": 0.015600261278450489
+        },
+        {
+            "path": "wilt_test_0012.jpg",
+            "label": "Wilt",
+            "mse": 0.01493147760629654
+        },
+        {
+            "path": "wilt_test_0013.jpg",
+            "label": "Wilt",
+            "mse": 0.00787944532930851
+        },
+        {
+            "path": "wilt_test_0014.jpg",
+            "label": "Wilt",
+            "mse": 0.02165401540696621
+        },
+        {
+            "path": "wilt_test_0015.jpg",
+            "label": "Wilt",
+            "mse": 0.018769429996609688
+        },
+        {
+            "path": "wilt_test_0016.jpg",
+            "label": "Wilt",
+            "mse": 0.014812489040195942
+        },
+        {
+            "path": "wilt_test_0017.jpg",
+            "label": "Wilt",
+            "mse": 0.011116933077573776
+        },
+        {
+            "path": "wilt_test_0018.jpg",
+            "label": "Wilt",
+            "mse": 0.013768867589533329
+        },
+        {
+            "path": "wilt_test_0019.jpg",
+            "label": "Wilt",
+            "mse": 0.017773879691958427
+        },
+        {
+            "path": "wilt_test_0020.jpg",
+            "label": "Wilt",
+            "mse": 0.007003250531852245
+        },
+        {
+            "path": "wilt_test_0021.jpg",
+            "label": "Wilt",
+            "mse": 0.007879666052758694
+        },
+        {
+            "path": "wilt_test_0022.jpg",
+            "label": "Wilt",
+            "mse": 0.009838342666625977
+        },
+        {
+            "path": "wilt_test_0023.jpg",
+            "label": "Wilt",
+            "mse": 0.014355359598994255
+        },
+        {
+            "path": "wilt_test_0024.jpg",
+            "label": "Wilt",
+            "mse": 0.024957576766610146
+        },
+        {
+            "path": "wilt_test_0025.jpg",
+            "label": "Wilt",
+            "mse": 0.014501679688692093
+        },
+        {
+            "path": "wilt_test_0026.jpg",
+            "label": "Wilt",
+            "mse": 0.020124036818742752
+        },
+        {
+            "path": "wilt_test_0027.jpg",
+            "label": "Wilt",
+            "mse": 0.010509934276342392
+        },
+        {
+            "path": "wilt_test_0028.jpg",
+            "label": "Wilt",
+            "mse": 0.009814625605940819
+        },
+        {
+            "path": "wilt_test_0029.jpg",
+            "label": "Wilt",
+            "mse": 0.010182194411754608
+        },
+        {
+            "path": "wilt_test_0030.jpg",
+            "label": "Wilt",
+            "mse": 0.009710186161100864
+        },
+        {
+            "path": "wilt_test_0031.jpg",
+            "label": "Wilt",
+            "mse": 0.011223932728171349
+        },
+        {
+            "path": "wilt_test_0032.jpg",
+            "label": "Wilt",
+            "mse": 0.008772900328040123
+        },
+        {
+            "path": "wilt_test_0033.jpg",
+            "label": "Wilt",
+            "mse": 0.01305954810231924
+        },
+        {
+            "path": "wilt_test_0034.jpg",
+            "label": "Wilt",
+            "mse": 0.007176742888987064
+        },
+        {
+            "path": "wilt_test_0035.jpg",
+            "label": "Wilt",
+            "mse": 0.01663375273346901
+        },
+        {
+            "path": "wilt_test_0036.jpg",
+            "label": "Wilt",
+            "mse": 0.03012246824800968
+        },
+        {
+            "path": "wilt_test_0037.jpg",
+            "label": "Wilt",
+            "mse": 0.012058649212121964
+        },
+        {
+            "path": "wilt_test_0038.jpg",
+            "label": "Wilt",
+            "mse": 0.012410002760589123
+        },
+        {
+            "path": "wilt_test_0039.jpg",
+            "label": "Wilt",
+            "mse": 0.013434558175504208
+        },
+        {
+            "path": "wilt_test_0040.jpg",
+            "label": "Wilt",
+            "mse": 0.01091601699590683
+        },
+        {
+            "path": "wilt_test_0041.jpg",
+            "label": "Wilt",
+            "mse": 0.009781201370060444
+        },
+        {
+            "path": "wilt_test_0042.jpg",
+            "label": "Wilt",
+            "mse": 0.010821915231645107
+        },
+        {
+            "path": "wilt_test_0043.jpg",
+            "label": "Wilt",
+            "mse": 0.012452002614736557
+        },
+        {
+            "path": "wilt_test_0044.jpg",
+            "label": "Wilt",
+            "mse": 0.014034767635166645
+        },
+        {
+            "path": "wilt_test_0045.jpg",
+            "label": "Wilt",
+            "mse": 0.010134213604032993
+        },
+        {
+            "path": "wilt_test_0046.jpg",
+            "label": "Wilt",
+            "mse": 0.014395243488252163
+        },
+        {
+            "path": "wilt_test_0047.jpg",
+            "label": "Wilt",
+            "mse": 0.014868906699120998
+        },
+        {
+            "path": "wilt_test_0048.jpg",
+            "label": "Wilt",
+            "mse": 0.016412585973739624
+        },
+        {
+            "path": "wilt_test_0049.jpg",
+            "label": "Wilt",
+            "mse": 0.016247078776359558
+        },
+        {
+            "path": "wilt_test_0050.jpg",
+            "label": "Wilt",
+            "mse": 0.015896840021014214
+        },
+        {
+            "path": "wilt_test_0051.jpg",
+            "label": "Wilt",
+            "mse": 0.014372562989592552
+        },
+        {
+            "path": "wilt_test_0052.jpg",
+            "label": "Wilt",
+            "mse": 0.0062689585611224174
+        },
+        {
+            "path": "wilt_test_0053.jpg",
+            "label": "Wilt",
+            "mse": 0.026419909670948982
+        },
+        {
+            "path": "wilt_test_0054.jpg",
+            "label": "Wilt",
+            "mse": 0.027765288949012756
+        },
+        {
+            "path": "wilt_test_0055.jpg",
+            "label": "Wilt",
+            "mse": 0.00882487092167139
+        },
+        {
+            "path": "wilt_test_0056.jpg",
+            "label": "Wilt",
+            "mse": 0.02151225507259369
+        },
+        {
+            "path": "wilt_test_0057.jpg",
+            "label": "Wilt",
+            "mse": 0.011283681727945805
+        }
+    ],
+    "ood_results": [
+        {
+            "path": "488313_0_En_25-1_Fig1_HTML.jpg",
+            "label": "Unsupported",
+            "mse": 0.0054563856683671474
+        },
+        {
+            "path": "images (1).jpg",
+            "label": "Unsupported",
+            "mse": 0.009121851064264774
+        },
+        {
+            "path": "images (10).jpg",
+            "label": "Unsupported",
+            "mse": 0.012023796327412128
+        },
+        {
+            "path": "images (11).jpg",
+            "label": "Unsupported",
+            "mse": 0.00899641215801239
+        },
+        {
+            "path": "images (12).jpg",
+            "label": "Unsupported",
+            "mse": 0.009034844115376472
+        },
+        {
+            "path": "images (13).jpg",
+            "label": "Unsupported",
+            "mse": 0.01182821299880743
+        },
+        {
+            "path": "images (14).jpg",
+            "label": "Unsupported",
+            "mse": 0.0075567010790109634
+        },
+        {
+            "path": "images (15).jpg",
+            "label": "Unsupported",
+            "mse": 0.020284166559576988
+        },
+        {
+            "path": "images (16).jpg",
+            "label": "Unsupported",
+            "mse": 0.01036632340401411
+        },
+        {
+            "path": "images (17).jpg",
+            "label": "Unsupported",
+            "mse": 0.020284166559576988
+        },
+        {
+            "path": "images (18).jpg",
+            "label": "Unsupported",
+            "mse": 0.014249233528971672
+        },
+        {
+            "path": "images (19).jpg",
+            "label": "Unsupported",
+            "mse": 0.01069849543273449
+        },
+        {
+            "path": "images (2).jpg",
+            "label": "Unsupported",
+            "mse": 0.007654286455363035
+        },
+        {
+            "path": "images (20).jpg",
+            "label": "Unsupported",
+            "mse": 0.014172287657856941
+        },
+        {
+            "path": "images (21).jpg",
+            "label": "Unsupported",
+            "mse": 0.00996664259582758
+        },
+        {
+            "path": "images (22).jpg",
+            "label": "Unsupported",
+            "mse": 0.012330912984907627
+        },
+        {
+            "path": "images (23).jpg",
+            "label": "Unsupported",
+            "mse": 0.014249231666326523
+        },
+        {
+            "path": "images (24).jpg",
+            "label": "Unsupported",
+            "mse": 0.011060705408453941
+        },
+        {
+            "path": "images (25).jpg",
+            "label": "Unsupported",
+            "mse": 0.01760030910372734
+        },
+        {
+            "path": "images (26).jpg",
+            "label": "Unsupported",
+            "mse": 0.02078637108206749
+        },
+        {
+            "path": "images (27).jpg",
+            "label": "Unsupported",
+            "mse": 0.01975296251475811
+        },
+        {
+            "path": "images (28).jpg",
+            "label": "Unsupported",
+            "mse": 0.014714665710926056
+        },
+        {
+            "path": "images (29).jpg",
+            "label": "Unsupported",
+            "mse": 0.024956822395324707
+        },
+        {
+            "path": "images (3).jpg",
+            "label": "Unsupported",
+            "mse": 0.012023795396089554
+        },
+        {
+            "path": "images (30).jpg",
+            "label": "Unsupported",
+            "mse": 0.010328488424420357
+        },
+        {
+            "path": "images (31).jpg",
+            "label": "Unsupported",
+            "mse": 0.009104638360440731
+        },
+        {
+            "path": "images (32).jpg",
+            "label": "Unsupported",
+            "mse": 0.007448908407241106
+        },
+        {
+            "path": "images (33).jpg",
+            "label": "Unsupported",
+            "mse": 0.01315735001116991
+        },
+        {
+            "path": "images (4).jpg",
+            "label": "Unsupported",
+            "mse": 0.015477832406759262
+        },
+        {
+            "path": "images (5).jpg",
+            "label": "Unsupported",
+            "mse": 0.012318694964051247
+        },
+        {
+            "path": "images (6).jpg",
+            "label": "Unsupported",
+            "mse": 0.016335951164364815
+        },
+        {
+            "path": "images (7).jpg",
+            "label": "Unsupported",
+            "mse": 0.0067529757507145405
+        },
+        {
+            "path": "images (8).jpg",
+            "label": "Unsupported",
+            "mse": 0.02250637859106064
+        },
+        {
+            "path": "images (9).jpg",
+            "label": "Unsupported",
+            "mse": 0.014172287657856941
+        },
+        {
+            "path": "images.jpg",
+            "label": "Unsupported",
+            "mse": 0.01968325302004814
+        },
+        {
+            "path": "Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. \u00a9 Maundu, 2021.jpg",
+            "label": "Unsupported",
+            "mse": 0.009381488896906376
+        },
+        {
+            "path": "64c83c99-f128-4a18-b6d0-1fcfc8ed6e84.png",
+            "label": "Unsupported",
+            "mse": 0.011564193293452263
+        },
+        {
+            "path": "image copy 2.png",
+            "label": "Unsupported",
+            "mse": 0.021309252828359604
+        },
+        {
+            "path": "image copy.png",
+            "label": "Unsupported",
+            "mse": 0.011362176388502121
+        },
+        {
+            "path": "image.png",
+            "label": "Unsupported",
+            "mse": 0.011362176388502121
+        },
+        {
+            "path": "AAlternaria-blight-symptom-on-leaves-and-B-aerial-plant-parts-leaves-stem-buds-and.webp",
+            "label": "Unsupported",
+            "mse": 0.016827084124088287
+        }
+    ]
+}

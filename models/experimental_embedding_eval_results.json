@@ -1,0 +1,2978 @@
+{
+    "metadata": {
+        "checkpoint": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\best_pigeonpea_disease_final_efficientnet_b0.pth",
+        "embedding_layer": "model.classifier[1] (Linear)",
+        "embedding_dimension": 1280,
+        "distance_metric": "cosine",
+        "threshold_method": "95th percentile validation distances",
+        "threshold_value": 0.49221359491348254,
+        "train_counts": {
+            "Healthy": 215,
+            "Leaf_Spot": 263,
+            "Leaf_webber": 207,
+            "Sterilic_mosaic": 256,
+            "Wilt": 172
+        },
+        "limitations": [
+            "OOD data is exploratory and unlabeled",
+            "High cosine distance is not definitive proof of unsupported disease",
+            "Low cosine distance is not definitive proof of supported disease"
+        ]
+    },
+    "metrics": {
+        "total_supported_test": 376,
+        "false_rejection_rate": 0.047872340425531915,
+        "total_exploratory_ood": 41,
+        "exploratory_false_acceptance_rate": 0.926829268292683,
+        "class_rejections": {
+            "Healthy": {
+                "total": 73,
+                "rejected": 1,
+                "frr": 0.0136986301369863
+            },
+            "Leaf_Spot": {
+                "total": 89,
+                "rejected": 7,
+                "frr": 0.07865168539325842
+            },
+            "Leaf_webber": {
+                "total": 70,
+                "rejected": 2,
+                "frr": 0.02857142857142857
+            },
+            "Sterilic_mosaic": {
+                "total": 86,
+                "rejected": 8,
+                "frr": 0.09302325581395349
+            },
+            "Wilt": {
+                "total": 58,
+                "rejected": 0,
+                "frr": 0.0
+            }
+        }
+    },
+    "id_results": [
+        {
+            "path": "healthy_test_0000.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999423027038574,
+            "distance": 0.036083221435546875
+        },
+        {
+            "path": "healthy_test_0001.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9989405274391174,
+            "distance": 0.05938071012496948
+        },
+        {
+            "path": "healthy_test_0002.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999157190322876,
+            "distance": 0.021105587482452393
+        },
+        {
+            "path": "healthy_test_0003.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998788833618164,
+            "distance": 0.021161437034606934
+        },
+        {
+            "path": "healthy_test_0004.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9994435906410217,
+            "distance": 0.17911744117736816
+        },
+        {
+            "path": "healthy_test_0005.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9997245669364929,
+            "distance": 0.030366897583007812
+        },
+        {
+            "path": "healthy_test_0006.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.999710738658905,
+            "distance": 0.04443669319152832
+        },
+        {
+            "path": "healthy_test_0007.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999779462814331,
+            "distance": 0.10468584299087524
+        },
+        {
+            "path": "healthy_test_0008.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9970299005508423,
+            "distance": 0.06764334440231323
+        },
+        {
+            "path": "healthy_test_0009.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9993488192558289,
+            "distance": 0.08422315120697021
+        },
+        {
+            "path": "healthy_test_0010.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9997580647468567,
+            "distance": 0.027936458587646484
+        },
+        {
+            "path": "healthy_test_0011.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9991850256919861,
+            "distance": 0.03369790315628052
+        },
+        {
+            "path": "healthy_test_0012.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9997691512107849,
+            "distance": 0.030523478984832764
+        },
+        {
+            "path": "healthy_test_0013.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.996250569820404,
+            "distance": 0.07582885026931763
+        },
+        {
+            "path": "healthy_test_0014.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9986273050308228,
+            "distance": 0.09279429912567139
+        },
+        {
+            "path": "healthy_test_0015.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998188614845276,
+            "distance": 0.04641115665435791
+        },
+        {
+            "path": "healthy_test_0016.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.99937504529953,
+            "distance": 0.09812569618225098
+        },
+        {
+            "path": "healthy_test_0017.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999035596847534,
+            "distance": 0.027349114418029785
+        },
+        {
+            "path": "healthy_test_0018.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9972323775291443,
+            "distance": 0.15282654762268066
+        },
+        {
+            "path": "healthy_test_0019.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9981125593185425,
+            "distance": 0.04879915714263916
+        },
+        {
+            "path": "healthy_test_0020.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9995517134666443,
+            "distance": 0.0994560718536377
+        },
+        {
+            "path": "healthy_test_0021.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999204874038696,
+            "distance": 0.07606077194213867
+        },
+        {
+            "path": "healthy_test_0022.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9993925094604492,
+            "distance": 0.05540060997009277
+        },
+        {
+            "path": "healthy_test_0023.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9989006519317627,
+            "distance": 0.06773942708969116
+        },
+        {
+            "path": "healthy_test_0024.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9989238381385803,
+            "distance": 0.07406234741210938
+        },
+        {
+            "path": "healthy_test_0025.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.999931812286377,
+            "distance": 0.025599300861358643
+        },
+        {
+            "path": "healthy_test_0026.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998779296875,
+            "distance": 0.03208756446838379
+        },
+        {
+            "path": "healthy_test_0027.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998953342437744,
+            "distance": 0.10637319087982178
+        },
+        {
+            "path": "healthy_test_0028.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9997051358222961,
+            "distance": 0.06368893384933472
+        },
+        {
+            "path": "healthy_test_0029.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9992151260375977,
+            "distance": 0.12643557786941528
+        },
+        {
+            "path": "healthy_test_0030.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.995995283126831,
+            "distance": 0.0702890157699585
+        },
+        {
+            "path": "healthy_test_0031.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9996826648712158,
+            "distance": 0.06661355495452881
+        },
+        {
+            "path": "healthy_test_0032.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9986581802368164,
+            "distance": 0.05281490087509155
+        },
+        {
+            "path": "healthy_test_0033.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9970717430114746,
+            "distance": 0.0789409875869751
+        },
+        {
+            "path": "healthy_test_0034.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998335838317871,
+            "distance": 0.06326186656951904
+        },
+        {
+            "path": "healthy_test_0035.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9994200468063354,
+            "distance": 0.06503409147262573
+        },
+        {
+            "path": "healthy_test_0036.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9974134564399719,
+            "distance": 0.05130201578140259
+        },
+        {
+            "path": "healthy_test_0037.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998824596405029,
+            "distance": 0.0711703896522522
+        },
+        {
+            "path": "healthy_test_0038.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9995796084403992,
+            "distance": 0.041667938232421875
+        },
+        {
+            "path": "healthy_test_0039.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998801946640015,
+            "distance": 0.08424454927444458
+        },
+        {
+            "path": "healthy_test_0040.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.997273862361908,
+            "distance": 0.07488912343978882
+        },
+        {
+            "path": "healthy_test_0041.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9979920387268066,
+            "distance": 0.09915250539779663
+        },
+        {
+            "path": "healthy_test_0042.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999065399169922,
+            "distance": 0.12194567918777466
+        },
+        {
+            "path": "healthy_test_0043.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9989055395126343,
+            "distance": 0.12225914001464844
+        },
+        {
+            "path": "healthy_test_0044.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.998318076133728,
+            "distance": 0.09166312217712402
+        },
+        {
+            "path": "healthy_test_0045.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9953786134719849,
+            "distance": 0.12159860134124756
+        },
+        {
+            "path": "healthy_test_0046.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9996269941329956,
+            "distance": 0.05524587631225586
+        },
+        {
+            "path": "healthy_test_0047.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9993695616722107,
+            "distance": 0.03312486410140991
+        },
+        {
+            "path": "healthy_test_0048.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9989181756973267,
+            "distance": 0.06319671869277954
+        },
+        {
+            "path": "healthy_test_0049.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9997733235359192,
+            "distance": 0.14506679773330688
+        },
+        {
+            "path": "healthy_test_0050.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.999290943145752,
+            "distance": 0.09183025360107422
+        },
+        {
+            "path": "healthy_test_0051.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9992163181304932,
+            "distance": 0.04760706424713135
+        },
+        {
+            "path": "healthy_test_0052.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9994646906852722,
+            "distance": 0.030737102031707764
+        },
+        {
+            "path": "healthy_test_0053.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9989113807678223,
+            "distance": 0.097537100315094
+        },
+        {
+            "path": "healthy_test_0054.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9980512857437134,
+            "distance": 0.07839459180831909
+        },
+        {
+            "path": "healthy_test_0055.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9991297125816345,
+            "distance": 0.04846447706222534
+        },
+        {
+            "path": "healthy_test_0056.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9994605183601379,
+            "distance": 0.0685567855834961
+        },
+        {
+            "path": "healthy_test_0057.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.999903678894043,
+            "distance": 0.02433168888092041
+        },
+        {
+            "path": "healthy_test_0058.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9983446598052979,
+            "distance": 0.11061078310012817
+        },
+        {
+            "path": "healthy_test_0059.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998255372047424,
+            "distance": 0.08294999599456787
+        },
+        {
+            "path": "healthy_test_0060.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9996930360794067,
+            "distance": 0.028843939304351807
+        },
+        {
+            "path": "healthy_test_0061.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9987819790840149,
+            "distance": 0.03580963611602783
+        },
+        {
+            "path": "healthy_test_0062.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998804330825806,
+            "distance": 0.06652450561523438
+        },
+        {
+            "path": "healthy_test_0063.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9994725584983826,
+            "distance": 0.061014533042907715
+        },
+        {
+            "path": "healthy_test_0064.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9990622401237488,
+            "distance": 0.06427657604217529
+        },
+        {
+            "path": "healthy_test_0065.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7094345688819885,
+            "distance": 0.61966872215271
+        },
+        {
+            "path": "healthy_test_0066.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9997255206108093,
+            "distance": 0.05734282732009888
+        },
+        {
+            "path": "healthy_test_0067.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9992642998695374,
+            "distance": 0.06421232223510742
+        },
+        {
+            "path": "healthy_test_0068.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9998612403869629,
+            "distance": 0.017945587635040283
+        },
+        {
+            "path": "healthy_test_0069.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9984155893325806,
+            "distance": 0.08212584257125854
+        },
+        {
+            "path": "healthy_test_0070.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999662637710571,
+            "distance": 0.06947094202041626
+        },
+        {
+            "path": "healthy_test_0071.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.999653697013855,
+            "distance": 0.04688000679016113
+        },
+        {
+            "path": "healthy_test_0072.jpg",
+            "true_class": "Healthy",
+            "pred_class": "Healthy",
+            "confidence": 0.9999648332595825,
+            "distance": 0.05325496196746826
+        },
+        {
+            "path": "leaf_spot_test_0000.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9574767351150513,
+            "distance": 0.03918290138244629
+        },
+        {
+            "path": "leaf_spot_test_0001.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9173641204833984,
+            "distance": 0.10817611217498779
+        },
+        {
+            "path": "leaf_spot_test_0002.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8611167073249817,
+            "distance": 0.10807245969772339
+        },
+        {
+            "path": "leaf_spot_test_0003.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7015766501426697,
+            "distance": 0.3352656960487366
+        },
+        {
+            "path": "leaf_spot_test_0004.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7886769771575928,
+            "distance": 0.1490234136581421
+        },
+        {
+            "path": "leaf_spot_test_0005.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9132802486419678,
+            "distance": 0.06411612033843994
+        },
+        {
+            "path": "leaf_spot_test_0006.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.930953323841095,
+            "distance": 0.05519437789916992
+        },
+        {
+            "path": "leaf_spot_test_0007.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.6523984670639038,
+            "distance": 0.22794747352600098
+        },
+        {
+            "path": "leaf_spot_test_0008.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9958893656730652,
+            "distance": 0.08389616012573242
+        },
+        {
+            "path": "leaf_spot_test_0009.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9896374940872192,
+            "distance": 0.09824120998382568
+        },
+        {
+            "path": "leaf_spot_test_0010.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5566641092300415,
+            "distance": 0.2346954345703125
+        },
+        {
+            "path": "leaf_spot_test_0011.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9886572957038879,
+            "distance": 0.0758703351020813
+        },
+        {
+            "path": "leaf_spot_test_0012.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.6409191489219666,
+            "distance": 0.4507516622543335
+        },
+        {
+            "path": "leaf_spot_test_0013.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9773768782615662,
+            "distance": 0.06470221281051636
+        },
+        {
+            "path": "leaf_spot_test_0014.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9902958273887634,
+            "distance": 0.13334894180297852
+        },
+        {
+            "path": "leaf_spot_test_0015.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9957755208015442,
+            "distance": 0.08671528100967407
+        },
+        {
+            "path": "leaf_spot_test_0016.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.49945229291915894,
+            "distance": 0.5199320912361145
+        },
+        {
+            "path": "leaf_spot_test_0017.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9761244058609009,
+            "distance": 0.2558940649032593
+        },
+        {
+            "path": "leaf_spot_test_0018.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7497767210006714,
+            "distance": 0.5027762055397034
+        },
+        {
+            "path": "leaf_spot_test_0019.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.919182538986206,
+            "distance": 0.09159016609191895
+        },
+        {
+            "path": "leaf_spot_test_0020.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7267787456512451,
+            "distance": 0.1403687596321106
+        },
+        {
+            "path": "leaf_spot_test_0021.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9769021272659302,
+            "distance": 0.04386049509048462
+        },
+        {
+            "path": "leaf_spot_test_0022.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9923275113105774,
+            "distance": 0.0611497163772583
+        },
+        {
+            "path": "leaf_spot_test_0023.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.6523721218109131,
+            "distance": 0.33335810899734497
+        },
+        {
+            "path": "leaf_spot_test_0024.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.970573902130127,
+            "distance": 0.08223247528076172
+        },
+        {
+            "path": "leaf_spot_test_0025.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.571265459060669,
+            "distance": 0.37582385540008545
+        },
+        {
+            "path": "leaf_spot_test_0026.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5605363845825195,
+            "distance": 0.5027511119842529
+        },
+        {
+            "path": "leaf_spot_test_0027.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9318714737892151,
+            "distance": 0.08945482969284058
+        },
+        {
+            "path": "leaf_spot_test_0028.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.39314717054367065,
+            "distance": 0.7945284247398376
+        },
+        {
+            "path": "leaf_spot_test_0029.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8709767460823059,
+            "distance": 0.18307840824127197
+        },
+        {
+            "path": "leaf_spot_test_0030.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9923954010009766,
+            "distance": 0.08547395467758179
+        },
+        {
+            "path": "leaf_spot_test_0031.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8801356554031372,
+            "distance": 0.31071197986602783
+        },
+        {
+            "path": "leaf_spot_test_0032.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9963510036468506,
+            "distance": 0.21119290590286255
+        },
+        {
+            "path": "leaf_spot_test_0033.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8663966059684753,
+            "distance": 0.10313701629638672
+        },
+        {
+            "path": "leaf_spot_test_0034.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7741327881813049,
+            "distance": 0.5777050256729126
+        },
+        {
+            "path": "leaf_spot_test_0035.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7904205918312073,
+            "distance": 0.21529871225357056
+        },
+        {
+            "path": "leaf_spot_test_0036.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9470919966697693,
+            "distance": 0.0596805214881897
+        },
+        {
+            "path": "leaf_spot_test_0037.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.964805543422699,
+            "distance": 0.07767629623413086
+        },
+        {
+            "path": "leaf_spot_test_0038.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9902113080024719,
+            "distance": 0.05043470859527588
+        },
+        {
+            "path": "leaf_spot_test_0039.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5561039447784424,
+            "distance": 0.21230584383010864
+        },
+        {
+            "path": "leaf_spot_test_0040.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9850471019744873,
+            "distance": 0.0788259506225586
+        },
+        {
+            "path": "leaf_spot_test_0041.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9102165699005127,
+            "distance": 0.07321244478225708
+        },
+        {
+            "path": "leaf_spot_test_0042.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9851175546646118,
+            "distance": 0.15283560752868652
+        },
+        {
+            "path": "leaf_spot_test_0043.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9530792236328125,
+            "distance": 0.07849502563476562
+        },
+        {
+            "path": "leaf_spot_test_0044.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.6120920181274414,
+            "distance": 0.3498469591140747
+        },
+        {
+            "path": "leaf_spot_test_0045.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9587607383728027,
+            "distance": 0.04914766550064087
+        },
+        {
+            "path": "leaf_spot_test_0046.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.6080917716026306,
+            "distance": 0.540938138961792
+        },
+        {
+            "path": "leaf_spot_test_0047.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9814505577087402,
+            "distance": 0.023612260818481445
+        },
+        {
+            "path": "leaf_spot_test_0048.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9355053305625916,
+            "distance": 0.12722313404083252
+        },
+        {
+            "path": "leaf_spot_test_0049.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9423700571060181,
+            "distance": 0.03256058692932129
+        },
+        {
+            "path": "leaf_spot_test_0050.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9016405940055847,
+            "distance": 0.09286099672317505
+        },
+        {
+            "path": "leaf_spot_test_0051.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.5240476131439209,
+            "distance": 0.6948697566986084
+        },
+        {
+            "path": "leaf_spot_test_0052.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.8846935629844666,
+            "distance": 0.3319109082221985
+        },
+        {
+            "path": "leaf_spot_test_0053.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9741328954696655,
+            "distance": 0.06811666488647461
+        },
+        {
+            "path": "leaf_spot_test_0054.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5388249754905701,
+            "distance": 0.4081662893295288
+        },
+        {
+            "path": "leaf_spot_test_0055.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9892317652702332,
+            "distance": 0.08825933933258057
+        },
+        {
+            "path": "leaf_spot_test_0056.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.748715877532959,
+            "distance": 0.2830306887626648
+        },
+        {
+            "path": "leaf_spot_test_0057.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9886758327484131,
+            "distance": 0.05292099714279175
+        },
+        {
+            "path": "leaf_spot_test_0058.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5112679600715637,
+            "distance": 0.2750248908996582
+        },
+        {
+            "path": "leaf_spot_test_0059.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.7057532668113708,
+            "distance": 0.48925286531448364
+        },
+        {
+            "path": "leaf_spot_test_0060.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9732643365859985,
+            "distance": 0.04301095008850098
+        },
+        {
+            "path": "leaf_spot_test_0061.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7909610867500305,
+            "distance": 0.33837634325027466
+        },
+        {
+            "path": "leaf_spot_test_0062.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.6121147871017456,
+            "distance": 0.3720879554748535
+        },
+        {
+            "path": "leaf_spot_test_0063.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9868671894073486,
+            "distance": 0.09628170728683472
+        },
+        {
+            "path": "leaf_spot_test_0064.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9515924453735352,
+            "distance": 0.057716965675354004
+        },
+        {
+            "path": "leaf_spot_test_0065.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9756637811660767,
+            "distance": 0.041879892349243164
+        },
+        {
+            "path": "leaf_spot_test_0066.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8214960098266602,
+            "distance": 0.42094850540161133
+        },
+        {
+            "path": "leaf_spot_test_0067.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7411786913871765,
+            "distance": 0.42758244276046753
+        },
+        {
+            "path": "leaf_spot_test_0068.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9655050039291382,
+            "distance": 0.07867920398712158
+        },
+        {
+            "path": "leaf_spot_test_0069.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9953961968421936,
+            "distance": 0.04934108257293701
+        },
+        {
+            "path": "leaf_spot_test_0070.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9882440567016602,
+            "distance": 0.044289588928222656
+        },
+        {
+            "path": "leaf_spot_test_0071.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8782197833061218,
+            "distance": 0.2556750774383545
+        },
+        {
+            "path": "leaf_spot_test_0072.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.6329189538955688,
+            "distance": 0.2959222197532654
+        },
+        {
+            "path": "leaf_spot_test_0073.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9904753565788269,
+            "distance": 0.0669173002243042
+        },
+        {
+            "path": "leaf_spot_test_0074.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9489871263504028,
+            "distance": 0.06431490182876587
+        },
+        {
+            "path": "leaf_spot_test_0075.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9824209809303284,
+            "distance": 0.047328174114227295
+        },
+        {
+            "path": "leaf_spot_test_0076.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9334803223609924,
+            "distance": 0.10553383827209473
+        },
+        {
+            "path": "leaf_spot_test_0077.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.7369041442871094,
+            "distance": 0.483295738697052
+        },
+        {
+            "path": "leaf_spot_test_0078.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9678984880447388,
+            "distance": 0.04963839054107666
+        },
+        {
+            "path": "leaf_spot_test_0079.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8429610729217529,
+            "distance": 0.12493085861206055
+        },
+        {
+            "path": "leaf_spot_test_0080.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8658453226089478,
+            "distance": 0.12716317176818848
+        },
+        {
+            "path": "leaf_spot_test_0081.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9577367901802063,
+            "distance": 0.06126683950424194
+        },
+        {
+            "path": "leaf_spot_test_0082.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9578183889389038,
+            "distance": 0.056870102882385254
+        },
+        {
+            "path": "leaf_spot_test_0083.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9825130701065063,
+            "distance": 0.11180746555328369
+        },
+        {
+            "path": "leaf_spot_test_0084.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8303727507591248,
+            "distance": 0.21576553583145142
+        },
+        {
+            "path": "leaf_spot_test_0085.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9747502207756042,
+            "distance": 0.09557098150253296
+        },
+        {
+            "path": "leaf_spot_test_0086.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.890417754650116,
+            "distance": 0.10709953308105469
+        },
+        {
+            "path": "leaf_spot_test_0087.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8745774030685425,
+            "distance": 0.09044796228408813
+        },
+        {
+            "path": "leaf_spot_test_0088.jpg",
+            "true_class": "Leaf_Spot",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9948917627334595,
+            "distance": 0.09723842144012451
+        },
+        {
+            "path": "leaf_webber_test_0000.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999998807907104,
+            "distance": 0.12113207578659058
+        },
+        {
+            "path": "leaf_webber_test_0001.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999977350234985,
+            "distance": 0.03968608379364014
+        },
+        {
+            "path": "leaf_webber_test_0002.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999496936798096,
+            "distance": 0.08267730474472046
+        },
+        {
+            "path": "leaf_webber_test_0003.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999980926513672,
+            "distance": 0.04971647262573242
+        },
+        {
+            "path": "leaf_webber_test_0004.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999487400054932,
+            "distance": 0.037973761558532715
+        },
+        {
+            "path": "leaf_webber_test_0005.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9577354788780212,
+            "distance": 0.1607031226158142
+        },
+        {
+            "path": "leaf_webber_test_0006.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999994039535522,
+            "distance": 0.12090253829956055
+        },
+        {
+            "path": "leaf_webber_test_0007.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9997031092643738,
+            "distance": 0.2913035750389099
+        },
+        {
+            "path": "leaf_webber_test_0008.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8064959645271301,
+            "distance": 0.5282594561576843
+        },
+        {
+            "path": "leaf_webber_test_0009.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.999823272228241,
+            "distance": 0.05667233467102051
+        },
+        {
+            "path": "leaf_webber_test_0010.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999649524688721,
+            "distance": 0.05092179775238037
+        },
+        {
+            "path": "leaf_webber_test_0011.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.999997615814209,
+            "distance": 0.15339088439941406
+        },
+        {
+            "path": "leaf_webber_test_0012.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999774694442749,
+            "distance": 0.05191755294799805
+        },
+        {
+            "path": "leaf_webber_test_0013.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.07583880424499512
+        },
+        {
+            "path": "leaf_webber_test_0014.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9981189370155334,
+            "distance": 0.07055950164794922
+        },
+        {
+            "path": "leaf_webber_test_0015.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999200105667114,
+            "distance": 0.08066225051879883
+        },
+        {
+            "path": "leaf_webber_test_0016.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999985694885254,
+            "distance": 0.13019466400146484
+        },
+        {
+            "path": "leaf_webber_test_0017.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999977350234985,
+            "distance": 0.04120826721191406
+        },
+        {
+            "path": "leaf_webber_test_0018.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999966621398926,
+            "distance": 0.021397650241851807
+        },
+        {
+            "path": "leaf_webber_test_0019.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9992967844009399,
+            "distance": 0.2307596206665039
+        },
+        {
+            "path": "leaf_webber_test_0020.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999755620956421,
+            "distance": 0.04676711559295654
+        },
+        {
+            "path": "leaf_webber_test_0021.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9995336532592773,
+            "distance": 0.0967835783958435
+        },
+        {
+            "path": "leaf_webber_test_0022.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9951855540275574,
+            "distance": 0.1662629246711731
+        },
+        {
+            "path": "leaf_webber_test_0023.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9864879250526428,
+            "distance": 0.12897711992263794
+        },
+        {
+            "path": "leaf_webber_test_0024.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9989897608757019,
+            "distance": 0.11290508508682251
+        },
+        {
+            "path": "leaf_webber_test_0025.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9990571141242981,
+            "distance": 0.3464333415031433
+        },
+        {
+            "path": "leaf_webber_test_0026.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9998687505722046,
+            "distance": 0.06734949350357056
+        },
+        {
+            "path": "leaf_webber_test_0027.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999997615814209,
+            "distance": 0.019676923751831055
+        },
+        {
+            "path": "leaf_webber_test_0028.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999306201934814,
+            "distance": 0.06865358352661133
+        },
+        {
+            "path": "leaf_webber_test_0029.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999024868011475,
+            "distance": 0.05883586406707764
+        },
+        {
+            "path": "leaf_webber_test_0030.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999343156814575,
+            "distance": 0.035488128662109375
+        },
+        {
+            "path": "leaf_webber_test_0031.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7508590221405029,
+            "distance": 0.34661567211151123
+        },
+        {
+            "path": "leaf_webber_test_0032.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.07459920644760132
+        },
+        {
+            "path": "leaf_webber_test_0033.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9998502731323242,
+            "distance": 0.046876728534698486
+        },
+        {
+            "path": "leaf_webber_test_0034.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9948924779891968,
+            "distance": 0.10449463129043579
+        },
+        {
+            "path": "leaf_webber_test_0035.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999960660934448,
+            "distance": 0.21352368593215942
+        },
+        {
+            "path": "leaf_webber_test_0036.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999901056289673,
+            "distance": 0.06621581315994263
+        },
+        {
+            "path": "leaf_webber_test_0037.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999405145645142,
+            "distance": 0.06426370143890381
+        },
+        {
+            "path": "leaf_webber_test_0038.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.6222556829452515,
+            "distance": 0.6325359344482422
+        },
+        {
+            "path": "leaf_webber_test_0039.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9033132791519165,
+            "distance": 0.2256641983985901
+        },
+        {
+            "path": "leaf_webber_test_0040.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9988659620285034,
+            "distance": 0.08950549364089966
+        },
+        {
+            "path": "leaf_webber_test_0041.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9997475743293762,
+            "distance": 0.10465151071548462
+        },
+        {
+            "path": "leaf_webber_test_0042.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9997757077217102,
+            "distance": 0.10044074058532715
+        },
+        {
+            "path": "leaf_webber_test_0043.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999997615814209,
+            "distance": 0.09090501070022583
+        },
+        {
+            "path": "leaf_webber_test_0044.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.7534101605415344,
+            "distance": 0.3868677020072937
+        },
+        {
+            "path": "leaf_webber_test_0045.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9923812747001648,
+            "distance": 0.1732175350189209
+        },
+        {
+            "path": "leaf_webber_test_0046.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999995231628418,
+            "distance": 0.1386948823928833
+        },
+        {
+            "path": "leaf_webber_test_0047.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999974966049194,
+            "distance": 0.06023329496383667
+        },
+        {
+            "path": "leaf_webber_test_0048.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9983835220336914,
+            "distance": 0.365648090839386
+        },
+        {
+            "path": "leaf_webber_test_0049.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9997133612632751,
+            "distance": 0.05912595987319946
+        },
+        {
+            "path": "leaf_webber_test_0050.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.10156220197677612
+        },
+        {
+            "path": "leaf_webber_test_0051.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9985393285751343,
+            "distance": 0.10056185722351074
+        },
+        {
+            "path": "leaf_webber_test_0052.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.08757597208023071
+        },
+        {
+            "path": "leaf_webber_test_0053.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9989838004112244,
+            "distance": 0.0996810793876648
+        },
+        {
+            "path": "leaf_webber_test_0054.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9978637099266052,
+            "distance": 0.10060715675354004
+        },
+        {
+            "path": "leaf_webber_test_0055.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999719858169556,
+            "distance": 0.05517476797103882
+        },
+        {
+            "path": "leaf_webber_test_0056.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999998807907104,
+            "distance": 0.08781802654266357
+        },
+        {
+            "path": "leaf_webber_test_0057.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9884480834007263,
+            "distance": 0.1317552924156189
+        },
+        {
+            "path": "leaf_webber_test_0058.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.03779590129852295
+        },
+        {
+            "path": "leaf_webber_test_0059.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999866485595703,
+            "distance": 0.043240249156951904
+        },
+        {
+            "path": "leaf_webber_test_0060.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999547004699707,
+            "distance": 0.06094658374786377
+        },
+        {
+            "path": "leaf_webber_test_0061.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.019451558589935303
+        },
+        {
+            "path": "leaf_webber_test_0062.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999047517776489,
+            "distance": 0.05780130624771118
+        },
+        {
+            "path": "leaf_webber_test_0063.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999998807907104,
+            "distance": 0.05813872814178467
+        },
+        {
+            "path": "leaf_webber_test_0064.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9998362064361572,
+            "distance": 0.0653846263885498
+        },
+        {
+            "path": "leaf_webber_test_0065.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999936819076538,
+            "distance": 0.082652747631073
+        },
+        {
+            "path": "leaf_webber_test_0066.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 1.0,
+            "distance": 0.023264169692993164
+        },
+        {
+            "path": "leaf_webber_test_0067.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999997615814209,
+            "distance": 0.1332605481147766
+        },
+        {
+            "path": "leaf_webber_test_0068.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.999459445476532,
+            "distance": 0.12206625938415527
+        },
+        {
+            "path": "leaf_webber_test_0069.jpg",
+            "true_class": "Leaf_webber",
+            "pred_class": "Leaf_webber",
+            "confidence": 0.9999351501464844,
+            "distance": 0.07425063848495483
+        },
+        {
+            "path": "sterilic_mosaic_test_0000.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9981347322463989,
+            "distance": 0.1137305498123169
+        },
+        {
+            "path": "sterilic_mosaic_test_0001.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.7450880408287048,
+            "distance": 0.4905371069908142
+        },
+        {
+            "path": "sterilic_mosaic_test_0002.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8712428212165833,
+            "distance": 0.11325311660766602
+        },
+        {
+            "path": "sterilic_mosaic_test_0003.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9998158812522888,
+            "distance": 0.07797527313232422
+        },
+        {
+            "path": "sterilic_mosaic_test_0004.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9993391633033752,
+            "distance": 0.07352715730667114
+        },
+        {
+            "path": "sterilic_mosaic_test_0005.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7523941993713379,
+            "distance": 0.3809446692466736
+        },
+        {
+            "path": "sterilic_mosaic_test_0006.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9993501305580139,
+            "distance": 0.07090950012207031
+        },
+        {
+            "path": "sterilic_mosaic_test_0007.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5291333198547363,
+            "distance": 0.3928956389427185
+        },
+        {
+            "path": "sterilic_mosaic_test_0008.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9995761513710022,
+            "distance": 0.08215683698654175
+        },
+        {
+            "path": "sterilic_mosaic_test_0009.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.6265328526496887,
+            "distance": 0.5812933444976807
+        },
+        {
+            "path": "sterilic_mosaic_test_0010.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9992306232452393,
+            "distance": 0.19295668601989746
+        },
+        {
+            "path": "sterilic_mosaic_test_0011.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9508131742477417,
+            "distance": 0.3197018504142761
+        },
+        {
+            "path": "sterilic_mosaic_test_0012.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9997883439064026,
+            "distance": 0.08925223350524902
+        },
+        {
+            "path": "sterilic_mosaic_test_0013.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.6102551221847534,
+            "distance": 0.5612037181854248
+        },
+        {
+            "path": "sterilic_mosaic_test_0014.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8667301535606384,
+            "distance": 0.08980345726013184
+        },
+        {
+            "path": "sterilic_mosaic_test_0015.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9992094039916992,
+            "distance": 0.04941052198410034
+        },
+        {
+            "path": "sterilic_mosaic_test_0016.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9990028738975525,
+            "distance": 0.07204937934875488
+        },
+        {
+            "path": "sterilic_mosaic_test_0017.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.999923586845398,
+            "distance": 0.08228820562362671
+        },
+        {
+            "path": "sterilic_mosaic_test_0018.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9999539852142334,
+            "distance": 0.05530136823654175
+        },
+        {
+            "path": "sterilic_mosaic_test_0019.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8413718938827515,
+            "distance": 0.12139737606048584
+        },
+        {
+            "path": "sterilic_mosaic_test_0020.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.7598196268081665,
+            "distance": 0.333281934261322
+        },
+        {
+            "path": "sterilic_mosaic_test_0021.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9988700747489929,
+            "distance": 0.11778968572616577
+        },
+        {
+            "path": "sterilic_mosaic_test_0022.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9947394728660583,
+            "distance": 0.20473897457122803
+        },
+        {
+            "path": "sterilic_mosaic_test_0023.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.858512818813324,
+            "distance": 0.11346018314361572
+        },
+        {
+            "path": "sterilic_mosaic_test_0024.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9992696642875671,
+            "distance": 0.07521307468414307
+        },
+        {
+            "path": "sterilic_mosaic_test_0025.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7740344405174255,
+            "distance": 0.3071707487106323
+        },
+        {
+            "path": "sterilic_mosaic_test_0026.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.999675989151001,
+            "distance": 0.15373682975769043
+        },
+        {
+            "path": "sterilic_mosaic_test_0027.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9432100057601929,
+            "distance": 0.2902880907058716
+        },
+        {
+            "path": "sterilic_mosaic_test_0028.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.999554455280304,
+            "distance": 0.09484738111495972
+        },
+        {
+            "path": "sterilic_mosaic_test_0029.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9996761083602905,
+            "distance": 0.04049926996231079
+        },
+        {
+            "path": "sterilic_mosaic_test_0030.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9996846914291382,
+            "distance": 0.08429324626922607
+        },
+        {
+            "path": "sterilic_mosaic_test_0031.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9903920888900757,
+            "distance": 0.12043178081512451
+        },
+        {
+            "path": "sterilic_mosaic_test_0032.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9858776330947876,
+            "distance": 0.3508882522583008
+        },
+        {
+            "path": "sterilic_mosaic_test_0033.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9805514812469482,
+            "distance": 0.12752658128738403
+        },
+        {
+            "path": "sterilic_mosaic_test_0034.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.6410399079322815,
+            "distance": 0.5643373131752014
+        },
+        {
+            "path": "sterilic_mosaic_test_0035.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9538804888725281,
+            "distance": 0.16343003511428833
+        },
+        {
+            "path": "sterilic_mosaic_test_0036.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9997015595436096,
+            "distance": 0.07608151435852051
+        },
+        {
+            "path": "sterilic_mosaic_test_0037.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9517818093299866,
+            "distance": 0.045944273471832275
+        },
+        {
+            "path": "sterilic_mosaic_test_0038.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.999174177646637,
+            "distance": 0.08286398649215698
+        },
+        {
+            "path": "sterilic_mosaic_test_0039.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9956324696540833,
+            "distance": 0.1034887433052063
+        },
+        {
+            "path": "sterilic_mosaic_test_0040.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.7874799370765686,
+            "distance": 0.4497005343437195
+        },
+        {
+            "path": "sterilic_mosaic_test_0041.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9998101592063904,
+            "distance": 0.06485944986343384
+        },
+        {
+            "path": "sterilic_mosaic_test_0042.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9997434020042419,
+            "distance": 0.046388208866119385
+        },
+        {
+            "path": "sterilic_mosaic_test_0043.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.8465979695320129,
+            "distance": 0.21124672889709473
+        },
+        {
+            "path": "sterilic_mosaic_test_0044.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9995371103286743,
+            "distance": 0.16649627685546875
+        },
+        {
+            "path": "sterilic_mosaic_test_0045.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.999313473701477,
+            "distance": 0.1687713861465454
+        },
+        {
+            "path": "sterilic_mosaic_test_0046.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9463391900062561,
+            "distance": 0.11670583486557007
+        },
+        {
+            "path": "sterilic_mosaic_test_0047.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9989838004112244,
+            "distance": 0.06434762477874756
+        },
+        {
+            "path": "sterilic_mosaic_test_0048.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.6276652812957764,
+            "distance": 0.3816434144973755
+        },
+        {
+            "path": "sterilic_mosaic_test_0049.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9489871263504028,
+            "distance": 0.06431490182876587
+        },
+        {
+            "path": "sterilic_mosaic_test_0050.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.5185456871986389,
+            "distance": 0.5958377718925476
+        },
+        {
+            "path": "sterilic_mosaic_test_0051.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.5550312995910645,
+            "distance": 0.591638445854187
+        },
+        {
+            "path": "sterilic_mosaic_test_0052.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9990718364715576,
+            "distance": 0.12299096584320068
+        },
+        {
+            "path": "sterilic_mosaic_test_0053.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9992807507514954,
+            "distance": 0.10866653919219971
+        },
+        {
+            "path": "sterilic_mosaic_test_0054.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.996246874332428,
+            "distance": 0.13597726821899414
+        },
+        {
+            "path": "sterilic_mosaic_test_0055.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9997802376747131,
+            "distance": 0.05357193946838379
+        },
+        {
+            "path": "sterilic_mosaic_test_0056.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.945745587348938,
+            "distance": 0.2968800663948059
+        },
+        {
+            "path": "sterilic_mosaic_test_0057.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9998086094856262,
+            "distance": 0.11872076988220215
+        },
+        {
+            "path": "sterilic_mosaic_test_0058.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9997588992118835,
+            "distance": 0.16419434547424316
+        },
+        {
+            "path": "sterilic_mosaic_test_0059.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9838601350784302,
+            "distance": 0.1561240553855896
+        },
+        {
+            "path": "sterilic_mosaic_test_0060.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.993959903717041,
+            "distance": 0.12152981758117676
+        },
+        {
+            "path": "sterilic_mosaic_test_0061.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9999157190322876,
+            "distance": 0.0657205581665039
+        },
+        {
+            "path": "sterilic_mosaic_test_0062.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9999212026596069,
+            "distance": 0.08406144380569458
+        },
+        {
+            "path": "sterilic_mosaic_test_0063.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.5112716555595398,
+            "distance": 0.4876963496208191
+        },
+        {
+            "path": "sterilic_mosaic_test_0064.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.999950647354126,
+            "distance": 0.08156847953796387
+        },
+        {
+            "path": "sterilic_mosaic_test_0065.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.99969482421875,
+            "distance": 0.0777050256729126
+        },
+        {
+            "path": "sterilic_mosaic_test_0066.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9314302206039429,
+            "distance": 0.04585188627243042
+        },
+        {
+            "path": "sterilic_mosaic_test_0067.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.7976379990577698,
+            "distance": 0.11652660369873047
+        },
+        {
+            "path": "sterilic_mosaic_test_0068.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9999744892120361,
+            "distance": 0.05414336919784546
+        },
+        {
+            "path": "sterilic_mosaic_test_0069.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9999384880065918,
+            "distance": 0.08269494771957397
+        },
+        {
+            "path": "sterilic_mosaic_test_0070.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9945639371871948,
+            "distance": 0.22520434856414795
+        },
+        {
+            "path": "sterilic_mosaic_test_0071.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9990921020507812,
+            "distance": 0.1874481439590454
+        },
+        {
+            "path": "sterilic_mosaic_test_0072.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9956543445587158,
+            "distance": 0.20655840635299683
+        },
+        {
+            "path": "sterilic_mosaic_test_0073.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.558880627155304,
+            "distance": 0.6534522771835327
+        },
+        {
+            "path": "sterilic_mosaic_test_0074.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.5076810121536255,
+            "distance": 0.6453677415847778
+        },
+        {
+            "path": "sterilic_mosaic_test_0075.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9618658423423767,
+            "distance": 0.17367416620254517
+        },
+        {
+            "path": "sterilic_mosaic_test_0076.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9994511008262634,
+            "distance": 0.14785367250442505
+        },
+        {
+            "path": "sterilic_mosaic_test_0077.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9981881976127625,
+            "distance": 0.18873661756515503
+        },
+        {
+            "path": "sterilic_mosaic_test_0078.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9998705387115479,
+            "distance": 0.07964032888412476
+        },
+        {
+            "path": "sterilic_mosaic_test_0079.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.972501814365387,
+            "distance": 0.1524592638015747
+        },
+        {
+            "path": "sterilic_mosaic_test_0080.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.997944176197052,
+            "distance": 0.32860225439071655
+        },
+        {
+            "path": "sterilic_mosaic_test_0081.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.5751298666000366,
+            "distance": 0.5104638338088989
+        },
+        {
+            "path": "sterilic_mosaic_test_0082.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9991534948348999,
+            "distance": 0.09742969274520874
+        },
+        {
+            "path": "sterilic_mosaic_test_0083.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9984846711158752,
+            "distance": 0.08381634950637817
+        },
+        {
+            "path": "sterilic_mosaic_test_0084.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9999198913574219,
+            "distance": 0.21206563711166382
+        },
+        {
+            "path": "sterilic_mosaic_test_0085.jpg",
+            "true_class": "Sterilic_mosaic",
+            "pred_class": "Leaf_Spot",
+            "confidence": 0.9178449511528015,
+            "distance": 0.09441554546356201
+        },
+        {
+            "path": "wilt_test_0000.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.03628581762313843
+        },
+        {
+            "path": "wilt_test_0001.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.038232624530792236
+        },
+        {
+            "path": "wilt_test_0002.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.16610318422317505
+        },
+        {
+            "path": "wilt_test_0003.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06922721862792969
+        },
+        {
+            "path": "wilt_test_0004.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.12784349918365479
+        },
+        {
+            "path": "wilt_test_0005.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.03293418884277344
+        },
+        {
+            "path": "wilt_test_0006.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.011925816535949707
+        },
+        {
+            "path": "wilt_test_0007.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.10275006294250488
+        },
+        {
+            "path": "wilt_test_0008.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06255906820297241
+        },
+        {
+            "path": "wilt_test_0009.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.10872310400009155
+        },
+        {
+            "path": "wilt_test_0010.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.011915206909179688
+        },
+        {
+            "path": "wilt_test_0011.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.12512391805648804
+        },
+        {
+            "path": "wilt_test_0012.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06932252645492554
+        },
+        {
+            "path": "wilt_test_0013.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.09261858463287354
+        },
+        {
+            "path": "wilt_test_0014.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.15072596073150635
+        },
+        {
+            "path": "wilt_test_0015.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.07295626401901245
+        },
+        {
+            "path": "wilt_test_0016.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.18071025609970093
+        },
+        {
+            "path": "wilt_test_0017.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.055497705936431885
+        },
+        {
+            "path": "wilt_test_0018.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.08190417289733887
+        },
+        {
+            "path": "wilt_test_0019.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.08209776878356934
+        },
+        {
+            "path": "wilt_test_0020.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.0789678692817688
+        },
+        {
+            "path": "wilt_test_0021.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.09977108240127563
+        },
+        {
+            "path": "wilt_test_0022.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06728684902191162
+        },
+        {
+            "path": "wilt_test_0023.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.1411169171333313
+        },
+        {
+            "path": "wilt_test_0024.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.16012215614318848
+        },
+        {
+            "path": "wilt_test_0025.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.016176223754882812
+        },
+        {
+            "path": "wilt_test_0026.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.1453515887260437
+        },
+        {
+            "path": "wilt_test_0027.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.03759962320327759
+        },
+        {
+            "path": "wilt_test_0028.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.07656669616699219
+        },
+        {
+            "path": "wilt_test_0029.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999983310699463,
+            "distance": 0.3981938362121582
+        },
+        {
+            "path": "wilt_test_0030.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.021880388259887695
+        },
+        {
+            "path": "wilt_test_0031.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.07710593938827515
+        },
+        {
+            "path": "wilt_test_0032.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999985694885254,
+            "distance": 0.39632928371429443
+        },
+        {
+            "path": "wilt_test_0033.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999997615814209,
+            "distance": 0.11058777570724487
+        },
+        {
+            "path": "wilt_test_0034.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.10753971338272095
+        },
+        {
+            "path": "wilt_test_0035.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.14273464679718018
+        },
+        {
+            "path": "wilt_test_0036.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999997615814209,
+            "distance": 0.251390278339386
+        },
+        {
+            "path": "wilt_test_0037.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999992847442627,
+            "distance": 0.33178985118865967
+        },
+        {
+            "path": "wilt_test_0038.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.02185499668121338
+        },
+        {
+            "path": "wilt_test_0039.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06171560287475586
+        },
+        {
+            "path": "wilt_test_0040.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999994039535522,
+            "distance": 0.33375221490859985
+        },
+        {
+            "path": "wilt_test_0041.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.044933319091796875
+        },
+        {
+            "path": "wilt_test_0042.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.031144022941589355
+        },
+        {
+            "path": "wilt_test_0043.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.04967522621154785
+        },
+        {
+            "path": "wilt_test_0044.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.01610279083251953
+        },
+        {
+            "path": "wilt_test_0045.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.10842114686965942
+        },
+        {
+            "path": "wilt_test_0046.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.019466936588287354
+        },
+        {
+            "path": "wilt_test_0047.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.019721508026123047
+        },
+        {
+            "path": "wilt_test_0048.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.03546142578125
+        },
+        {
+            "path": "wilt_test_0049.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999940395355225,
+            "distance": 0.4266505837440491
+        },
+        {
+            "path": "wilt_test_0050.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06574094295501709
+        },
+        {
+            "path": "wilt_test_0051.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999997615814209,
+            "distance": 0.13656949996948242
+        },
+        {
+            "path": "wilt_test_0052.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.05159419775009155
+        },
+        {
+            "path": "wilt_test_0053.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.15096479654312134
+        },
+        {
+            "path": "wilt_test_0054.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 0.9999998807907104,
+            "distance": 0.23116612434387207
+        },
+        {
+            "path": "wilt_test_0055.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.05519759654998779
+        },
+        {
+            "path": "wilt_test_0056.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.20387327671051025
+        },
+        {
+            "path": "wilt_test_0057.jpg",
+            "true_class": "Wilt",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.014557421207427979
+        }
+    ],
+    "ood_results": [
+        {
+            "path": "488313_0_En_25-1_Fig1_HTML.jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999681711196899,
+            "distance": 0.4140279293060303
+        },
+        {
+            "path": "images (1).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.040784358978271484
+        },
+        {
+            "path": "images (10).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999998807907104,
+            "distance": 0.12929266691207886
+        },
+        {
+            "path": "images (11).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9976608753204346,
+            "distance": 0.2434295415878296
+        },
+        {
+            "path": "images (12).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999932050704956,
+            "distance": 0.11821329593658447
+        },
+        {
+            "path": "images (13).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.022533774375915527
+        },
+        {
+            "path": "images (14).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999998807907104,
+            "distance": 0.15154707431793213
+        },
+        {
+            "path": "images (15).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999995231628418,
+            "distance": 0.1677795648574829
+        },
+        {
+            "path": "images (16).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.019176244735717773
+        },
+        {
+            "path": "images (17).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999995231628418,
+            "distance": 0.1677795648574829
+        },
+        {
+            "path": "images (18).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.022213637828826904
+        },
+        {
+            "path": "images (19).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999929666519165,
+            "distance": 0.28372055292129517
+        },
+        {
+            "path": "images (2).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.4877254068851471,
+            "distance": 0.7362194061279297
+        },
+        {
+            "path": "images (20).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.025090038776397705
+        },
+        {
+            "path": "images (21).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999908208847046,
+            "distance": 0.2908058166503906
+        },
+        {
+            "path": "images (22).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999923706054688,
+            "distance": 0.1378542184829712
+        },
+        {
+            "path": "images (23).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.022213637828826904
+        },
+        {
+            "path": "images (24).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9998531341552734,
+            "distance": 0.49556654691696167
+        },
+        {
+            "path": "images (25).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999737739562988,
+            "distance": 0.2662872076034546
+        },
+        {
+            "path": "images (26).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.1476430892944336
+        },
+        {
+            "path": "images (27).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.06588059663772583
+        },
+        {
+            "path": "images (28).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.015921592712402344
+        },
+        {
+            "path": "images (29).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999995231628418,
+            "distance": 0.2503138780593872
+        },
+        {
+            "path": "images (3).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999998807907104,
+            "distance": 0.12929266691207886
+        },
+        {
+            "path": "images (30).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9992032647132874,
+            "distance": 0.33053040504455566
+        },
+        {
+            "path": "images (31).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.09874069690704346
+        },
+        {
+            "path": "images (32).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999998807907104,
+            "distance": 0.06823188066482544
+        },
+        {
+            "path": "images (33).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9998785257339478,
+            "distance": 0.3260563015937805
+        },
+        {
+            "path": "images (4).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9998925924301147,
+            "distance": 0.2998294234275818
+        },
+        {
+            "path": "images (5).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Sterilic_mosaic",
+            "confidence": 0.9996379613876343,
+            "distance": 0.16080456972122192
+        },
+        {
+            "path": "images (6).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999855756759644,
+            "distance": 0.331508994102478
+        },
+        {
+            "path": "images (7).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999998807907104,
+            "distance": 0.10970288515090942
+        },
+        {
+            "path": "images (8).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9991300702095032,
+            "distance": 0.3645312786102295
+        },
+        {
+            "path": "images (9).jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.025090038776397705
+        },
+        {
+            "path": "images.jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999430179595947,
+            "distance": 0.3152421712875366
+        },
+        {
+            "path": "Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. \u00a9 Maundu, 2021.jpg",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999189376831055,
+            "distance": 0.1979556679725647
+        },
+        {
+            "path": "64c83c99-f128-4a18-b6d0-1fcfc8ed6e84.png",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.9999639987945557,
+            "distance": 0.16675329208374023
+        },
+        {
+            "path": "image copy 2.png",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 1.0,
+            "distance": 0.1679413914680481
+        },
+        {
+            "path": "image copy.png",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.972377598285675,
+            "distance": 0.37241315841674805
+        },
+        {
+            "path": "image.png",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.972377598285675,
+            "distance": 0.37241315841674805
+        },
+        {
+            "path": "AAlternaria-blight-symptom-on-leaves-and-B-aerial-plant-parts-leaves-stem-buds-and.webp",
+            "true_class": "Unsupported",
+            "pred_class": "Wilt",
+            "confidence": 0.529949426651001,
+            "distance": 0.834812581539154
+        }
+    ]
+}

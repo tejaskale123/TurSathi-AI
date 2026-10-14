@@ -480,7 +480,16 @@ export default function ProblemDescriptionScreen() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Route parameters received from scan screen
-  const params = useLocalSearchParams<{ imageUri?: string | string[]; scanId?: string | string[] }>();
+  const params = useLocalSearchParams<{
+    imageUri?: string | string[];
+    scanId?: string | string[];
+    diseaseName?: string | string[];
+    disease_name?: string | string[];
+    confidence?: string | string[];
+    severity?: string | string[];
+    crop?: string | string[];
+    status?: string | string[];
+  }>();
   const rawImageUri = Array.isArray(params.imageUri)
     ? params.imageUri[0]
     : (params.imageUri ?? '');
@@ -488,6 +497,27 @@ export default function ProblemDescriptionScreen() {
   // scanId links this session to the backend scan/case record
   const rawScanId = Array.isArray(params.scanId) ? params.scanId[0] : (params.scanId ?? '');
   const scanId = rawScanId ? parseInt(rawScanId, 10) : null;
+
+  const passedDiseaseName = (
+    Array.isArray(params.diseaseName)
+      ? params.diseaseName[0]
+      : params.diseaseName ||
+        (Array.isArray(params.disease_name) ? params.disease_name[0] : params.disease_name) ||
+        ''
+  ).trim();
+  const passedConfidence = Array.isArray(params.confidence)
+    ? params.confidence[0]
+    : (params.confidence ?? '');
+  const passedSeverity = Array.isArray(params.severity)
+    ? params.severity[0]
+    : (params.severity ?? '');
+  const passedCrop = Array.isArray(params.crop) ? params.crop[0] : (params.crop ?? 'tur');
+  const passedStatus = Array.isArray(params.status)
+    ? params.status[0]
+    : (params.status ?? '');
+
+  // Synchronous guard to prevent rapid double-submissions
+  const submitGuard = useRef(false);
 
   let normalizedImageUri = '';
   try {
@@ -804,7 +834,8 @@ export default function ProblemDescriptionScreen() {
 
   // 5. SUBMIT RECORDED VOICE inside modal
   const handleSubmitVoice = async () => {
-    if (!recordedUri || isSubmitting) return;
+    if (!recordedUri || isSubmitting || submitGuard.current) return;
+    submitGuard.current = true;
 
     if (isAudioPlaying) {
       try {
@@ -815,6 +846,8 @@ export default function ProblemDescriptionScreen() {
     setIsSubmitting(true);
     const finalImageUri = normalizedImageUri || rawImageUri;
 
+    const tSubmitStart = Date.now();
+    console.log(`[PERF][VOICE_SUBMIT] Submit voice pressed at: ${tSubmitStart}`);
     console.log('[PROBLEM-DESCRIPTION] Submitting voice report:');
     console.log('  imageUri:', finalImageUri);
     console.log('  voiceUri:', recordedUri);
@@ -828,6 +861,7 @@ export default function ProblemDescriptionScreen() {
         const token = await getAuthToken();
         if (token) {
           const langCode = language === 'mr' ? 'mr' : language === 'hi' ? 'hi' : 'en';
+          const tUploadStart = Date.now();
           await uploadVoiceReport(
             scanId,
             recordedUri,
@@ -835,13 +869,34 @@ export default function ProblemDescriptionScreen() {
             langCode,
             recordedDuration > 0 ? recordedDuration : undefined,
           );
-          console.log('[PROBLEM-DESCRIPTION] Voice uploaded successfully for scan_id:', scanId);
+          const tUploadEnd = Date.now();
+          console.log(`[PERF][VOICE_SUBMIT] Audio upload completed in ${tUploadEnd - tUploadStart}ms for scan_id: ${scanId}`);
 
-          console.log('[PROBLEM-DESCRIPTION] Requesting prediction for scan_id:', scanId);
-          prediction = await predictTurLeaf(scanId, token);
-          console.log('[PROBLEM-DESCRIPTION] Prediction completed successfully.');
+          // Speech-to-text timing: nullable/reserved on backend
+          console.log('[PERF][VOICE_SUBMIT] Speech-to-text transcription: 0ms (queued/reserved on backend)');
+
+          // Reuse existing verified prediction if already provided from scan screen
+          if (passedDiseaseName) {
+            console.log(
+              `[PERF][VOICE_SUBMIT] Reusing verified prediction from scan: ${passedDiseaseName} (0ms network delay saved)`
+            );
+            prediction = {
+              disease_name: passedDiseaseName,
+              confidence: passedConfidence ? parseFloat(passedConfidence) : null,
+              severity: passedSeverity || 'Moderate',
+              crop: passedCrop || 'tur',
+              status: passedStatus || 'completed',
+            };
+          } else {
+            const tPredStart = Date.now();
+            console.log('[PERF][VOICE_SUBMIT] Requesting prediction from backend for scan_id:', scanId);
+            prediction = await predictTurLeaf(scanId, token);
+            const tPredEnd = Date.now();
+            console.log(`[PERF][VOICE_SUBMIT] ML inference completed in ${tPredEnd - tPredStart}ms`);
+          }
         }
       } catch (err) {
+        submitGuard.current = false;
         setIsSubmitting(false);
         if (err instanceof ScanUploadError) {
           console.warn('[PROBLEM-DESCRIPTION] Pipeline failed (HTTP', err.httpStatus, '):', err.message);
@@ -856,8 +911,12 @@ export default function ProblemDescriptionScreen() {
       console.warn('[PROBLEM-DESCRIPTION] No scanId available — voice upload skipped.');
     }
 
+    submitGuard.current = false;
     setIsSubmitting(false);
     setIsModalVisible(false);
+
+    const tTotal = Date.now() - tSubmitStart;
+    console.log(`[PERF][VOICE_SUBMIT] Total voice submission flow duration: ${tTotal}ms`);
 
     router.push({
       pathname: '/spray-guidance',
@@ -865,15 +924,15 @@ export default function ProblemDescriptionScreen() {
         imageUri: encodeURIComponent(finalImageUri),
         voiceUri: encodeURIComponent(recordedUri),
         ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
-        diseaseName: prediction?.disease_name ?? '',
-        disease_name: prediction?.disease_name ?? '',
-        crop: prediction?.crop ?? '',
+        diseaseName: prediction?.disease_name ?? passedDiseaseName,
+        disease_name: prediction?.disease_name ?? passedDiseaseName,
+        crop: prediction?.crop ?? passedCrop,
         confidence:
           prediction?.confidence !== null && prediction?.confidence !== undefined
             ? String(prediction.confidence)
-            : '',
-        severity: prediction?.severity ?? '',
-        status: prediction?.status ?? '',
+            : passedConfidence,
+        severity: prediction?.severity ?? passedSeverity,
+        status: prediction?.status ?? passedStatus,
       },
     });
   };

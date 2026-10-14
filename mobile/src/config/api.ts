@@ -31,7 +31,6 @@ export const getBaseUrl = (): string => {
         lanIp &&
         lanIp !== 'localhost' &&
         lanIp !== '127.0.0.1' &&
-        lanIp !== '10.0.2.2' &&
         lanIp !== '0.0.0.0'
       ) {
         return `http://${lanIp}:8000`;
@@ -71,16 +70,33 @@ export interface LoginPayload {
   password: string;
 }
 
-const FETCH_TIMEOUT_MS = 10000;
+const FETCH_TIMEOUT_MS = 15000;
 
-export async function registerUser(payload: RegisterPayload): Promise<UserResponse> {
+export function extractErrorDetail(data: any, fallback: string): string {
+  if (typeof data?.detail === 'string' && data.detail.trim()) {
+    return data.detail.trim();
+  }
+  if (Array.isArray(data?.detail) && data.detail.length > 0) {
+    const first = data.detail[0];
+    if (typeof first?.msg === 'string' && first.msg.trim()) {
+      return first.msg.trim();
+    }
+  }
+  if (typeof data?.message === 'string' && data.message.trim()) {
+    return data.message.trim();
+  }
+  return fallback;
+}
+
+export async function registerUser(payload: RegisterPayload): Promise<AuthTokenResponse> {
   const baseUrl = getBaseUrl();
   console.log(`[MOBILE AUTH] Sending Register request to: ${baseUrl}/api/v1/auth/register`);
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
+  let response: Response;
   try {
-    const response = await fetch(`${baseUrl}/api/v1/auth/register`, {
+    response = await fetch(`${baseUrl}/api/v1/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -88,23 +104,27 @@ export async function registerUser(payload: RegisterPayload): Promise<UserRespon
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      const errorMessage = data.detail || 'Registration failed. Please try again.';
-      throw new Error(errorMessage);
-    }
-
-    return data as UserResponse;
   } catch (err: any) {
-    if (err.name === 'AbortError') {
-      throw new Error('Unable to connect to server. Please check your connection and try again.');
+    if (err?.name === 'AbortError') {
+      throw new Error('Connection timed out. Please check your connection and try again.');
     }
-    throw err;
+    throw new Error('Unable to connect to server. Please check your connection and try again.');
   } finally {
     clearTimeout(timeoutId);
   }
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const errorMessage = extractErrorDetail(data, 'Registration failed. Please try again.');
+    throw new Error(errorMessage);
+  }
+
+  if (!data?.access_token || !data?.user) {
+    throw new Error('Invalid authentication response from server.');
+  }
+
+  return data as AuthTokenResponse;
 }
 
 export async function loginUser(payload: LoginPayload): Promise<AuthTokenResponse> {
@@ -123,7 +143,10 @@ export async function loginUser(payload: LoginPayload): Promise<AuthTokenRespons
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
-  } catch (_netErr) {
+  } catch (_netErr: any) {
+    if (_netErr?.name === 'AbortError') {
+      throw new Error('Connection timed out. Please check your connection and try again.');
+    }
     throw new Error('Unable to connect to server. Please check your connection and try again.');
   } finally {
     clearTimeout(timeoutId);
@@ -133,9 +156,9 @@ export async function loginUser(payload: LoginPayload): Promise<AuthTokenRespons
 
   if (!response.ok) {
     if (response.status === 401 || response.status === 400) {
-      throw new Error(data.detail || 'Invalid mobile number/email or password.');
+      throw new Error(extractErrorDetail(data, 'Invalid mobile number/email or password.'));
     }
-    const errorMessage = data.detail || 'Unable to connect to server. Please check your connection and try again.';
+    const errorMessage = extractErrorDetail(data, `Server returned HTTP ${response.status}.`);
     throw new Error(errorMessage);
   }
 

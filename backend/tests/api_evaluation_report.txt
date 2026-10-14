@@ -1,0 +1,34 @@
+==================================================
+API EVALUATION REPORT - SUPPORTED CLASSES ONLY
+==================================================
+Total Images Tested: 376
+End-to-End API Accuracy: 0.8750 (Includes rejections as failures)
+Classifier Accuracy: 0.9400 (Excludes rejections)
+
+--- REJECTIONS (HTTP 422) ---
+Total Rejected: 26 out of 376
+  - unsupported_disease: 26
+
+--- CLASSIFICATION METRICS (End-to-End) ---
+                 precision    recall  f1-score   support
+
+        Healthy       1.00      0.99      0.99        73
+      Leaf_Spot       0.81      0.80      0.80        89
+    Leaf_webber       1.00      0.96      0.98        70
+Sterilic_mosaic       0.94      0.71      0.81        86
+           Wilt       1.00      1.00      1.00        58
+       Rejected       0.00      0.00      0.00         0
+
+       accuracy                           0.88       376
+      macro avg       0.79      0.74      0.76       376
+   weighted avg       0.94      0.88      0.90       376
+
+
+--- CONFUSION MATRIX ---
+Labels: Healthy, Leaf_Spot, Leaf_webber, Sterilic_mosaic, Wilt, Rejected
+[72  1  0  0  0  0]
+[ 0 71  0  4  0 14]
+[ 0  2 67  0  0  1]
+[ 0 14  0 61  0 11]
+[ 0  0  0  0 58  0]
+[0 0 0 0 0 0]

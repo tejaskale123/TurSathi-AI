@@ -113,10 +113,14 @@ const formatConfidence = (val: number): string => {
 export default function ResultScreen() {
   const router = useRouter();
   const { t, tDisease, tSeverity } = useLanguage();
-  const { imageUri } = useLocalSearchParams<{ imageUri?: string | string[] }>();
+  const { imageUri, scanId } = useLocalSearchParams<{
+    imageUri?: string | string[];
+    scanId?: string | string[];
+  }>();
 
   // Extract raw route URI
   const rawImageUri = Array.isArray(imageUri) ? imageUri[0] : (imageUri ?? '');
+  const rawScanId = Array.isArray(scanId) ? scanId[0] : (scanId ?? '');
 
   // Safely decode URI only if it hasn't been auto-decoded by Expo Router,
   // preserving Android scoped directory percent sequences (%2540 / %252F)
@@ -180,6 +184,7 @@ export default function ResultScreen() {
         diseaseName: resultData.diseaseName,
         confidence: String(resultData.confidence),
         severity: resultData.severity,
+        ...(rawScanId ? { scanId: rawScanId } : {}),
       },
     });
   };

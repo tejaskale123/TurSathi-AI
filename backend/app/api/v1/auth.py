@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Header, status, Body
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -17,13 +18,20 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
 def get_current_user(
-    authorization: str = Header(..., description="Bearer token in format: Bearer <token>"),
+    authorization: Optional[str] = Header(None, description="Bearer token in format: Bearer <token>"),
     db: Session = Depends(get_db),
 ) -> User:
     """
     Dependency that validates JWT access token from request header
     and retrieves current authenticated user.
     """
+    if not authorization:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authorization header is required.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     if not authorization.startswith("Bearer "):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
