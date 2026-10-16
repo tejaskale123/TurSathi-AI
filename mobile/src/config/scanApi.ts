@@ -53,38 +53,58 @@ export class ScanUploadError extends Error {
     public readonly httpStatus: number | null,
     message: string,
     public readonly isRetryable: boolean = true,
+    public readonly reason?: string,
+    public readonly messageMr?: string,
   ) {
     super(message);
     this.name = 'ScanUploadError';
   }
 }
 
-function classifyHttpError(status: number, detail?: string): ScanUploadError {
-  const msg = detail || `Server error (HTTP ${status})`;
+function classifyHttpError(status: number, rawDetail?: any): ScanUploadError {
+  let msg = `Server error (HTTP ${status})`;
+  let reason: string | undefined;
+  let messageMr: string | undefined;
+
+  if (typeof rawDetail === 'string') {
+    msg = rawDetail;
+  } else if (rawDetail && typeof rawDetail === 'object') {
+    if (typeof rawDetail.message === 'string') msg = rawDetail.message;
+    if (typeof rawDetail.reason === 'string') reason = rawDetail.reason;
+    if (typeof rawDetail.message_mr === 'string') messageMr = rawDetail.message_mr;
+  }
+
   switch (status) {
     case 400:
-      return new ScanUploadError(400, detail || 'Bad request. Please try again.', false);
+      return new ScanUploadError(400, msg || 'Bad request. Please try again.', false, reason, messageMr);
     case 401:
-      return new ScanUploadError(401, 'Session expired. Please log in again.', false);
+      return new ScanUploadError(401, 'Session expired. Please log in again.', false, reason, messageMr);
     case 403:
-      return new ScanUploadError(403, 'Access denied.', false);
+      return new ScanUploadError(403, 'Access denied.', false, reason, messageMr);
     case 404:
-      return new ScanUploadError(404, 'Scan not found.', false);
+      return new ScanUploadError(404, 'Scan not found.', false, reason, messageMr);
     case 413:
-      return new ScanUploadError(413, 'Image file is too large. Please use a smaller photo.', false);
+      return new ScanUploadError(413, 'Image file is too large. Please use a smaller photo.', false, reason, messageMr);
     case 422:
-      return new ScanUploadError(422, detail || 'Invalid image. Please capture a clear Tur leaf photo.', false);
+      return new ScanUploadError(
+        422,
+        msg || 'Invalid image. Please capture a clear Tur leaf photo.',
+        false,
+        reason,
+        messageMr,
+      );
     case 429:
-      return new ScanUploadError(429, 'Too many uploads. Please wait a moment and try again.', true);
+      return new ScanUploadError(429, 'Too many uploads. Please wait a moment and try again.', true, reason, messageMr);
     case 500:
-      return new ScanUploadError(500, 'Server error. Please try again.', true);
+      return new ScanUploadError(500, 'Server error. Please try again.', true, reason, messageMr);
     case 503:
       // model_not_configured is NOT an error for the upload pipeline — prediction is separate
-      return new ScanUploadError(503, detail || 'Service temporarily unavailable.', true);
+      return new ScanUploadError(503, msg || 'Service temporarily unavailable.', true, reason, messageMr);
     default:
-      return new ScanUploadError(status, msg, status >= 500);
+      return new ScanUploadError(status, msg, status >= 500, reason, messageMr);
   }
 }
+
 
 // ── Image upload ──────────────────────────────────────────────────────────────
 
@@ -134,8 +154,7 @@ export async function uploadScanImage(
       }
 
       if (result.status < 200 || result.status >= 300) {
-        const detail = typeof data?.detail === 'string' ? data.detail : undefined;
-        throw classifyHttpError(result.status, detail);
+        throw classifyHttpError(result.status, data?.detail);
       }
 
       if (typeof data?.scan_id !== 'number') {
@@ -228,9 +247,9 @@ export async function uploadScanImage(
   }
 
   if (!response.ok) {
-    const detail = typeof data?.detail === 'string' ? data.detail : undefined;
-    throw classifyHttpError(response.status, detail);
+    throw classifyHttpError(response.status, data?.detail);
   }
+
 
   if (typeof data?.scan_id !== 'number') {
     throw new ScanUploadError(null, 'Invalid response from server. Please try again.', true);
@@ -439,9 +458,9 @@ export async function predictTurLeaf(
     }
 
     if (!response.ok) {
-      const detail = typeof data?.detail === 'string' ? data.detail : undefined;
-      throw classifyHttpError(response.status, detail);
+      throw classifyHttpError(response.status, data?.detail);
     }
+
 
     return data as PredictionResponse;
   } catch (err: any) {
@@ -456,4 +475,92 @@ export async function predictTurLeaf(
     );
   }
 }
+
+// ── Stateless Camera Frame Validation ─────────────────────────────────────────
+
+export interface FrameValidationResponse {
+  is_valid_tur: boolean;
+  label: string;
+  confidence: number;
+  reason: string;
+  message?: string | null;
+}
+
+/**
+ * Statelessly validates a camera snapshot frame with the backend TurImageGate.
+ * Does not create database records or store files on server disk.
+ */
+export async function validateCameraFrame(
+  imageUri: string,
+  token: string,
+): Promise<FrameValidationResponse> {
+  const baseUrl = getBaseUrl();
+  const url = `${baseUrl}/api/v1/scans/validate-frame`;
+
+  if (Platform.OS !== 'web') {
+    try {
+      const result = await FileSystem.uploadAsync(url, imageUri, {
+        httpMethod: 'POST',
+        uploadType: FileSystem.FileSystemUploadType.MULTIPART,
+        fieldName: 'image',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (result.status >= 200 && result.status < 300) {
+        return JSON.parse(result.body) as FrameValidationResponse;
+      }
+      return {
+        is_valid_tur: false,
+        label: 'Error',
+        confidence: 0,
+        reason: `http_${result.status}`,
+        message: 'Frame validation returned non-200 status',
+      };
+    } catch (err: any) {
+      return {
+        is_valid_tur: false,
+        label: 'Error',
+        confidence: 0,
+        reason: 'network_error',
+        message: err?.message || 'Network error during frame validation',
+      };
+    }
+  } else {
+    try {
+      const blob = await (await fetch(imageUri)).blob();
+      const formData = new FormData();
+      formData.append('image', blob, 'probe_frame.jpg');
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        return (await response.json()) as FrameValidationResponse;
+      }
+      return {
+        is_valid_tur: false,
+        label: 'Error',
+        confidence: 0,
+        reason: `http_${response.status}`,
+        message: 'Frame validation returned non-200 status',
+      };
+    } catch (err: any) {
+      return {
+        is_valid_tur: false,
+        label: 'Error',
+        confidence: 0,
+        reason: 'network_error',
+        message: err?.message || 'Network error during frame validation',
+      };
+    }
+  }
+}
+
 

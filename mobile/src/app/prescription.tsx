@@ -20,6 +20,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { Language } from '../i18n/translations';
 import { getAuthToken } from '../config/tokenStore';
 import { fetchAIGuidance, ClaudeGuidanceResponse } from '../config/recommendationApi';
+import { getLocalizedRecommendation } from '../i18n/recommendationContent';
 
 // Pre-bundled instructional voice audio asset for read-aloud / guidance
 let VOICE_GUIDANCE_ASSET: number | null = null;
@@ -515,26 +516,26 @@ export default function PrescriptionScreen() {
 
   const displayConfidence = isHealthy ? '' : formatConfidence(incomingConfidence);
 
+  // Localized verified recommendation helper
+  const loc = getLocalizedRecommendation(treatmentData, language, incomingDisease);
+  const isSeedTreatment = loc.isSeedTreatment;
+
   // Section 3: Farmer Explanation
   const explanationText = isHealthy
-      ? formatCrop(labels.healthyDesc)
-      : language === 'mr'
-        ? formatCrop('ही परिस्थिती तूर पिकाच्या पानांवर परिणाम करते. वेळेवर खबरदारी आणि लागवड व्यवस्थापन न केल्यास पिकाच्या वाढीवर परिणाम होऊ शकतो.')
-        : language === 'hi'
-           ? formatCrop('यह स्थिति तूर फसल की पत्तियों को प्रभावित करती है। समय पर उचित देखभाल न करने से फसल की वृद्धि पर असर पड़ सकता है।')
-           : formatCrop('This condition affects the leaves of your Tur plant and may reduce crop health if unmanaged.');
+    ? formatCrop(labels.healthyDesc)
+    : loc.diseaseExplanation;
 
   // Section 4: Recommended Treatment
-  const treatmentText = isHealthy 
-    ? null 
-    : (treatmentData?.spray_guidance?.treatment || labels.treatmentUnavailable);
+  const treatmentText = isHealthy
+    ? null
+    : (loc.isVerified ? loc.treatment : labels.treatmentUnavailable);
 
   // Section 5: Application Details (Dynamic verified fields only)
-  const reqQty = treatmentData?.spray_guidance?.recommended_quantity || undefined;
-  const reqWater = treatmentData?.spray_guidance?.water_quantity || undefined;
-  const reqPerPump = treatmentData?.spray_guidance?.per_pump_quantity || undefined;
-  const reqTiming = treatmentData?.spray_guidance?.spray_timing || undefined;
-  const hasAppDetails = Boolean(reqQty || reqWater || reqPerPump || reqTiming);
+  const reqQty = loc.isVerified ? loc.recommendedQuantity : undefined;
+  const reqWater = loc.isVerified ? (loc.waterQuantity || undefined) : undefined;
+  const reqPerPump = loc.isVerified ? (loc.perPumpQuantity || undefined) : undefined;
+  const reqTiming = loc.isVerified ? loc.applicationTiming : undefined;
+  const hasAppDetails = Boolean(!isHealthy && loc.isVerified && (reqQty || reqWater || reqPerPump || reqTiming));
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
@@ -590,9 +591,14 @@ export default function PrescriptionScreen() {
             <Text style={styles.diseaseNameText}>{displayDisease}</Text>
 
             {!isHealthy && displayConfidence !== '' && (
-              <View style={styles.confidenceRow}>
-                <Text style={styles.confidenceLabel}>{labels.detectionConfidence}</Text>
-                <Text style={styles.confidenceValue}>{displayConfidence}</Text>
+              <View style={{ marginTop: 4 }}>
+                <View style={styles.confidenceRow}>
+                  <Text style={styles.confidenceLabel}>{labels.detectionConfidence}</Text>
+                  <Text style={styles.confidenceValue}>{displayConfidence}</Text>
+                </View>
+                <Text style={styles.confidenceDisclaimer}>
+                  {loc.confidenceDisclaimer}
+                </Text>
               </View>
             )}
           </View>
@@ -615,7 +621,9 @@ export default function PrescriptionScreen() {
           {!isHealthy && !treatmentData?.spray_guidance && (
             <View style={styles.card}>
               <Text style={styles.cardTitle}>
-                {language === 'mr' ? 'फवारणी मार्गदर्शन' : language === 'hi' ? 'छिड़काव मार्गदर्शन' : 'Spray Guidance'}
+                {isSeedTreatment
+                  ? (language === 'mr' ? 'उपचार मार्गदर्शन' : language === 'hi' ? 'उपचार मार्गदर्शन' : 'Treatment Guidance')
+                  : (language === 'mr' ? 'फवारणी मार्गदर्शन' : language === 'hi' ? 'छिड़काव मार्गदर्शन' : 'Spray Guidance')}
               </Text>
               <Text style={styles.treatmentText}>{labels.sprayGuidanceUnavailable}</Text>
             </View>
@@ -624,7 +632,11 @@ export default function PrescriptionScreen() {
           {/* SECTION 5 — APPLICATION DETAILS (Only displayed if verified dynamic data exists) */}
           {!isHealthy && hasAppDetails && (
             <View style={styles.card}>
-              <Text style={styles.cardTitle}>{labels.applicationDetails}</Text>
+              <Text style={styles.cardTitle}>
+                {isSeedTreatment
+                  ? (language === 'mr' ? 'उपचार व वापर तपशील' : language === 'hi' ? 'उपचार एवं उपयोग विवरण' : 'Application Details')
+                  : labels.applicationDetails}
+              </Text>
               <View style={styles.appDetailsGrid}>
                 {Boolean(reqQty) && (
                   <View style={styles.detailRow}>
@@ -646,7 +658,11 @@ export default function PrescriptionScreen() {
                 )}
                 {Boolean(reqTiming) && (
                   <View style={styles.detailRow}>
-                    <Text style={styles.detailLabel}>{labels.sprayTiming}</Text>
+                    <Text style={styles.detailLabel}>
+                      {isSeedTreatment
+                        ? (language === 'mr' ? 'वापराची वेळ' : language === 'hi' ? 'उपयोग का समय' : 'Application Timing')
+                        : labels.sprayTiming}
+                    </Text>
                     <Text style={styles.detailValue}>{reqTiming}</Text>
                   </View>
                 )}
@@ -661,7 +677,11 @@ export default function PrescriptionScreen() {
             </View>
             <View style={styles.importantCopyWrap}>
               <Text style={styles.importantTitle}>{labels.importantTitle}</Text>
-              <Text style={styles.importantText}>{labels.importantNotice}</Text>
+              <Text style={styles.importantText}>
+                {loc.importantAlert
+                  ? `${loc.importantAlert}\n\n${labels.importantNotice}`
+                  : labels.importantNotice}
+              </Text>
             </View>
           </View>
 
@@ -855,6 +875,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '800',
     color: '#1B4332',
+  },
+  confidenceDisclaimer: {
+    fontSize: 12,
+    color: '#476355',
+    marginTop: 4,
+    lineHeight: 16,
   },
   cardTitle: {
     fontSize: 16,

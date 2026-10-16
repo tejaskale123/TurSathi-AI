@@ -104,18 +104,26 @@ const FIELD_CHECK_KEYS = [
 ];
 
 // Safe confidence normalizer (e.g. 0.92 -> 92%, 92 -> 92%, avoiding 9200%)
+// Never claims 100% certainty because ML visual classifiers require field verification
 const formatConfidence = (val: number): string => {
   if (typeof val !== 'number' || isNaN(val)) return '0%';
   const normalized = val <= 1 && val > 0 ? Math.round(val * 100) : Math.round(val);
-  return `${Math.min(Math.max(normalized, 0), 100)}%`;
+  const capped = Math.min(Math.max(normalized, 0), 99);
+  return `${capped}%`;
 };
 
 export default function ResultScreen() {
   const router = useRouter();
-  const { t, tDisease, tSeverity } = useLanguage();
-  const { imageUri, scanId } = useLocalSearchParams<{
+  const { language, t, tDisease, tSeverity } = useLanguage();
+  const { imageUri, scanId, diseaseName, confidence, severity, status, reason, messageMr } = useLocalSearchParams<{
     imageUri?: string | string[];
     scanId?: string | string[];
+    diseaseName?: string | string[];
+    confidence?: string | string[];
+    severity?: string | string[];
+    status?: string | string[];
+    reason?: string | string[];
+    messageMr?: string | string[];
   }>();
 
   // Extract raw route URI
@@ -153,8 +161,34 @@ export default function ResultScreen() {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [imageLoadError, setImageLoadError] = useState(false);
 
+  const passedDisease = (Array.isArray(diseaseName) ? diseaseName[0] : diseaseName) || demoResult.diseaseName;
+  const passedConf = Number(Array.isArray(confidence) ? confidence[0] : confidence);
+  const passedSeverity = (Array.isArray(severity) ? severity[0] : severity) || demoResult.severity;
+
   // Dynamic Disease Result Data (ready to accept ML model API response)
-  const [resultData] = useState<DiseaseResultData>(demoResult);
+  const resultData: DiseaseResultData = {
+    ...demoResult,
+    diseaseName: passedDisease,
+    confidence: Number.isFinite(passedConf) ? passedConf : demoResult.confidence,
+    severity: passedSeverity,
+  };
+
+  useEffect(() => {
+    console.log(
+      `[RESULT_DIAGNOSTIC] diseaseName="${resultData.diseaseName}" rawConfidence=${passedConf} formattedConf="${formatConfidence(resultData.confidence)}" status="${status ?? 'none'}"`
+    );
+  }, [resultData.diseaseName, passedConf, resultData.confidence, status]);
+
+  const isSeedTreatment = resultData.diseaseName.toLowerCase().includes('wilt');
+  const isHealthy = resultData.diseaseName.toLowerCase().includes('healthy');
+  const isWebber = resultData.diseaseName.toLowerCase().includes('webber');
+  const ctaText = isSeedTreatment
+    ? (language === 'mr' ? 'स्मार्ट उपचार मार्गदर्शन पहा' : language === 'hi' ? 'स्मार्ट उपचार मार्गदर्शन देखें' : 'View Smart Treatment Guidance')
+    : isHealthy
+      ? (language === 'mr' ? 'पीक आरोग्य सल्ला पहा' : language === 'hi' ? 'फसल स्वास्थ्य सलाह देखें' : 'View Crop Health Advisory')
+      : isWebber
+        ? (language === 'mr' ? 'सुरक्षित सल्ला पहा' : language === 'hi' ? 'सुरक्षित सलाह देखें' : 'View Safe Advisory')
+        : t('result.viewSprayGuidance');
 
   // Subtle page entrance animation
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -217,8 +251,23 @@ export default function ResultScreen() {
     );
   }
 
-  // 2. Leaf validation state (for future model validation)
-  if (resultData.isValidTurLeaf === false || resultData.status === 'invalid_image') {
+  // 2. Leaf validation state (for invalid/rejected images or low confidence)
+  const rawStatus = Array.isArray(status) ? status[0] : status;
+  const rawMessageMr = Array.isArray(messageMr) ? messageMr[0] : messageMr;
+  const isInvalid =
+    resultData.isValidTurLeaf === false ||
+    resultData.status === 'invalid_image' ||
+    rawStatus === 'rejected' ||
+    rawStatus === 'validation_failed';
+
+  if (isInvalid) {
+    const errorTitle = language === 'mr'
+      ? 'फोटो पुन्हा काढा (अस्पष्ट / अवैध फोटो)'
+      : t('result.unidentifiedTitle');
+    const errorSubtitle = (language === 'mr' && rawMessageMr)
+      ? rawMessageMr
+      : t('result.unidentifiedDesc');
+
     return (
       <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
         <View style={styles.errorContainer}>
@@ -226,9 +275,9 @@ export default function ResultScreen() {
             <View style={styles.errorIconWrap}>
               <Glyph color="#C7A45A" name="info" />
             </View>
-            <Text style={styles.errorTitle}>{t('result.unidentifiedTitle')}</Text>
+            <Text style={styles.errorTitle}>{errorTitle}</Text>
             <Text style={styles.errorSubtitle}>
-              {t('result.unidentifiedDesc')}
+              {errorSubtitle}
             </Text>
             <Pressable
               accessibilityHint="Returns to the scan screen to capture photo again"
@@ -482,12 +531,12 @@ export default function ResultScreen() {
           {/* 10. PRIMARY CTA */}
           <Pressable
             accessibilityHint="Navigates to treatment and spray decision support"
-            accessibilityLabel={t('result.viewSprayGuidance')}
+            accessibilityLabel={ctaText}
             accessibilityRole="button"
             onPress={handleViewSprayGuidance}
             style={({ pressed }) => [styles.primaryCta, pressed && styles.buttonPressed]}
           >
-            <Text style={styles.primaryCtaText}>{t('result.viewSprayGuidance')}</Text>
+            <Text style={styles.primaryCtaText}>{ctaText}</Text>
             <View style={styles.primaryCtaArrow}>
               <Glyph color="#FFFFFF" name="arrow" size={16} />
             </View>

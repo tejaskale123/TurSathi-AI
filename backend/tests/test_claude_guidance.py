@@ -292,4 +292,42 @@ def test_existing_recommendation_endpoint_integrity():
         )
         assert res.status_code in (200, 404)
     finally:
+
         app.dependency_overrides.clear()
+
+
+def test_leaf_webber_safety_disabled_spray_guidance():
+    """Leaf Webber must not output chemical spray recommendations or dosages."""
+    db = MagicMock()
+    scan = mock_scan(disease_name="Leaf_webber", confidence=0.88)
+    res_en = generate_claude_guidance(db, scan, language="en")
+    assert res_en.status == "unverified"
+    assert res_en.spray_guidance_available is False
+    assert res_en.spray_guidance is None
+    assert "Grapholita critica" in res_en.disease_explanation
+
+    res_mr = generate_claude_guidance(db, scan, language="mr")
+    assert res_mr.status == "unverified"
+    assert res_mr.spray_guidance_available is False
+    assert res_mr.spray_guidance is None
+    assert "पाने गुंडाळणारी आळी" in res_mr.disease_explanation
+
+
+def test_leaf_webber_recommendation_endpoint_returns_404():
+    """GET /api/v1/recommendations/tur/Leaf_webber/spray-guidance must return 404 to avoid leaking banned chemicals."""
+    client = TestClient(app)
+    mock_user = MagicMock()
+    mock_user.id = 1
+
+    from app.api.v1.auth import get_current_user
+    app.dependency_overrides[get_current_user] = lambda: mock_user
+    try:
+        res = client.get(
+            "/api/v1/recommendations/tur/Leaf_webber/spray-guidance",
+            headers={"Authorization": "Bearer fake_token"}
+        )
+        assert res.status_code == 404
+        assert "Verified spray guidance is not available" in res.json()["detail"]
+    finally:
+        app.dependency_overrides.clear()
+

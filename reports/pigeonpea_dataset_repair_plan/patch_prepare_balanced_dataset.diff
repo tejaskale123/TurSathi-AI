@@ -1,0 +1,46 @@
+--- a/scripts/prepare_balanced_dataset.py
++++ b/scripts/prepare_balanced_dataset.py
+@@ -26,38 +26,34 @@
+ VALID_EXT        = {".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif", ".webp"}
+ 
+ # External source directories (never cleared by this script)
++# SAFETY FIX: Exclude PPLD_backup_before_duplicate_removal (contained 55 cross-class duplicates)
+ EXTERNAL_SOURCES = {
+     "Healthy": [
+         PROJECT_ROOT / "PPLD_processed" / "train" / "Healthy",
+         PROJECT_ROOT / "PPLD_processed" / "val"   / "Healthy",
+         PROJECT_ROOT / "PPLD_processed" / "test"  / "Healthy",
+-        PROJECT_ROOT / "PPLD_extracted" / "PPLD_backup_before_duplicate_removal" / "Healthy",
+         PROJECT_ROOT / "PPLD_extracted" / "PPLD"  / "Healthy",
+     ],
+     "Leaf_Spot": [
+         PROJECT_ROOT / "PPLD_processed" / "train" / "Leaf_Spot",
+         PROJECT_ROOT / "PPLD_processed" / "val"   / "Leaf_Spot",
+         PROJECT_ROOT / "PPLD_processed" / "test"  / "Leaf_Spot",
+-        PROJECT_ROOT / "PPLD_extracted" / "PPLD_backup_before_duplicate_removal" / "Leaf_Spot",
+         PROJECT_ROOT / "PPLD_extracted" / "PPLD"  / "Leaf_Spot",
+     ],
+     "Leaf_webber": [
+         PROJECT_ROOT / "PPLD_processed" / "train" / "Leaf_webber",
+         PROJECT_ROOT / "PPLD_processed" / "val"   / "Leaf_webber",
+         PROJECT_ROOT / "PPLD_processed" / "test"  / "Leaf_webber",
+-        PROJECT_ROOT / "PPLD_extracted" / "PPLD_backup_before_duplicate_removal" / "Leaf_webber",
+         PROJECT_ROOT / "PPLD_extracted" / "PPLD"  / "Leaf_webber",
+     ],
+     "Sterilic_mosaic": [
+         PROJECT_ROOT / "PPLD_processed" / "train" / "Sterilic_mosaic",
+         PROJECT_ROOT / "PPLD_processed" / "val"   / "Sterilic_mosaic",
+         PROJECT_ROOT / "PPLD_processed" / "test"  / "Sterilic_mosaic",
+-        PROJECT_ROOT / "PPLD_extracted" / "PPLD_backup_before_duplicate_removal" / "Sterilic_mosaic",
+         PROJECT_ROOT / "PPLD_extracted" / "PPLD"  / "Sterilic_mosaic",
+     ],
+-    "Wilt": [],  # No external Wilt source - only what's in OUTPUT_DIR
++    "Wilt": [
++        PROJECT_ROOT / "datasets" / "_temp_wilt_staging",
++    ],
+ }
++
++# GLOBAL CROSS-CLASS DEDUPLICATION & GROUP-AWARE SPLITTING PIPELINE
++# 1. Global SHA-256 deduplication across all 5 classes simultaneously to prevent cross-class conflicts.
++# 2. Family-based grouping for Wilt (30 families: 20 train / 5 val / 5 test).
++# 3. Enforce that val and test receive ONLY held-out original photographs, never augmentations.

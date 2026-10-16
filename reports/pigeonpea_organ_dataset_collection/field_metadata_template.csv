@@ -1,0 +1,5 @@
+filename,class_label,plant_id,farm_id,capture_date,verification_status,verifier_reference,growth_stage,camera_device,lighting_condition,notes
+# TEMPLATE EXAMPLES BELOW - REPLACE WITH ACTUAL FIELD RECORDS DURING COLLECTION
+# example_pod_001.jpg,Tur_Pod,F01_P001,FARM_MAH_01,2026-10-20,verified,Dr. A. Sharma (Agronomist #AG-104),pod_filling,Redmi_Note_11,bright_sunlight,Healthy green pod cluster in focal field
+# example_canopy_001.jpg,Tur_WholePlant_or_Canopy,F01_P002,FARM_MAH_01,2026-10-20,verified,Dr. A. Sharma (Agronomist #AG-104),flowering_canopy,Samsung_Galaxy_M32,diffuse_overcast,Whole shrub view from 1.5m showing branch architecture
+# example_quarantine_001.jpg,Tur_Pod,F02_P015,FARM_MAH_02,2026-10-21,quarantined,Pending Secondary Review,pod_maturation,Vivo_Y20,partial_shadow,Mixed view with dominant leaf obstruction; requires re-inspection

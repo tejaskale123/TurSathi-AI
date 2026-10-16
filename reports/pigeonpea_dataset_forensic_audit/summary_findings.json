@@ -1,0 +1,80 @@
+{
+  "audit_timestamp": "2026-10-14T12:19:29",
+  "dataset_root": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_final",
+  "total_files": 1858,
+  "total_unique_sha256": 1802,
+  "total_unique_decoded_pixels": 1802,
+  "total_corrupt_files": 0,
+  "exact_duplicate_groups": 55,
+  "exact_duplicate_instances": 111,
+  "exact_cross_split_leakage_groups": 34,
+  "exact_cross_class_conflict_groups": 55,
+  "near_duplicate_pairs": 408,
+  "near_duplicate_cross_split_leakage_pairs": 244,
+  "near_duplicate_cross_class_conflict_pairs": 20,
+  "wilt_cross_split_leakage_pairs": 181,
+  "label_review_candidates": 138,
+  "mutations_detected": 0,
+  "class_counts": {
+    "Healthy": {
+      "class": "Healthy",
+      "train_count": 215,
+      "train_unique_sha": 215,
+      "val_count": 71,
+      "val_unique_sha": 71,
+      "test_count": 73,
+      "test_unique_sha": 73,
+      "total_count": 359,
+      "total_unique_sha": 359,
+      "duplicate_loss": 0
+    },
+    "Leaf_Spot": {
+      "class": "Leaf_Spot",
+      "train_count": 263,
+      "train_unique_sha": 263,
+      "val_count": 87,
+      "val_unique_sha": 87,
+      "test_count": 89,
+      "test_unique_sha": 89,
+      "total_count": 439,
+      "total_unique_sha": 439,
+      "duplicate_loss": 0
+    },
+    "Leaf_webber": {
+      "class": "Leaf_webber",
+      "train_count": 207,
+      "train_unique_sha": 207,
+      "val_count": 69,
+      "val_unique_sha": 69,
+      "test_count": 70,
+      "test_unique_sha": 70,
+      "total_count": 346,
+      "total_unique_sha": 346,
+      "duplicate_loss": 0
+    },
+    "Sterilic_mosaic": {
+      "class": "Sterilic_mosaic",
+      "train_count": 256,
+      "train_unique_sha": 256,
+      "val_count": 85,
+      "val_unique_sha": 85,
+      "test_count": 86,
+      "test_unique_sha": 86,
+      "total_count": 427,
+      "total_unique_sha": 427,
+      "duplicate_loss": 0
+    },
+    "Wilt": {
+      "class": "Wilt",
+      "train_count": 172,
+      "train_unique_sha": 172,
+      "val_count": 57,
+      "val_unique_sha": 57,
+      "test_count": 58,
+      "test_unique_sha": 58,
+      "total_count": 287,
+      "total_unique_sha": 287,
+      "duplicate_loss": 0
+    }
+  }
+}

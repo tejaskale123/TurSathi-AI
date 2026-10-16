@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-10-14T12:35:00",
+  "original_dataset_total": 1858,
+  "excluded_exact_cross_class_duplicates": 111,
+  "flagged_near_duplicate_cross_class_pairs": 15,
+  "wilt_total_original_photos": 30,
+  "wilt_total_families": 30,
+  "wilt_family_distribution": {
+    "train_families": 20,
+    "val_families": 5,
+    "test_families": 5
+  },
+  "proposed_clean_counts_by_class": {
+    "Healthy": {
+      "train": 285,
+      "val": 28,
+      "test": 46,
+      "total": 359
+    },
+    "Leaf_Spot": {
+      "train": 278,
+      "val": 53,
+      "test": 54,
+      "total": 385
+    },
+    "Leaf_webber": {
+      "train": 285,
+      "val": 27,
+      "test": 32,
+      "total": 344
+    },
+    "Sterilic_mosaic": {
+      "train": 282,
+      "val": 38,
+      "test": 52,
+      "total": 372
+    },
+    "Wilt": {
+      "train": 206,
+      "val": 5,
+      "test": 5,
+      "total": 216
+    }
+  },
+  "wilt_statistical_limitation": {
+    "held_out_val_originals": 5,
+    "held_out_test_originals": 5,
+    "assessment": "Severe statistical limitation. 5 test samples is insufficient for high-confidence generalization. Additional independent field images required."
+  }
+}

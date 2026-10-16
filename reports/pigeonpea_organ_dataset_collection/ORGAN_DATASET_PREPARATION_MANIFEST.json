@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "description": "Safe mapping and preparation manifest for 4-class Pigeonpea Organ Detector",
+    "generated_date": "2026-10-15",
+    "rule_enforcement": "ORIGINAL DATASETS ARE READ-ONLY AND UNMODIFIED"
+  },
+  "reusable_inventory": {
+    "Tur_Leaf": {
+      "source_dataset": "datasets/pigeonpea_disease_final",
+      "note": "Only genuine foliar classes (Healthy, Leaf_Spot, Leaf_webber, Sterilic_mosaic). Wilt (287 whole-plant/canopy images) is strictly excluded.",
+      "train_count": 941,
+      "val_count": 312,
+      "test_count": 318,
+      "status": "READY_FOR_REUSE",
+      "total": 1571
+    },
+    "Not_Tur_or_Unsupported": {
+      "source_dataset": "datasets/tur_image_validator_v3",
+      "train_count": 1460,
+      "val_count": 127,
+      "test_count": 133,
+      "status": "READY_FOR_REUSE",
+      "total": 1720
+    },
+    "Tur_Pod": {
+      "source_dataset": null,
+      "train_count": 0,
+      "val_count": 0,
+      "test_count": 0,
+      "minimum_required": 50,
+      "recommended_target": 250,
+      "status": "MISSING_BLOCKER"
+    },
+    "Tur_WholePlant_or_Canopy": {
+      "source_dataset": null,
+      "note": "Awaiting dedicated field collection. Wilt images are quarantined due to 87.9% test leakage and dead-plant bias.",
+      "train_count": 0,
+      "val_count": 0,
+      "test_count": 0,
+      "minimum_required": 50,
+      "recommended_target": 200,
+      "status": "MISSING_BLOCKER"
+    }
+  },
+  "summary": {
+    "total_reusable_images": 3291,
+    "ready_classes": [
+      "Tur_Leaf",
+      "Not_Tur_or_Unsupported"
+    ],
+    "missing_classes": [
+      "Tur_Pod",
+      "Tur_WholePlant_or_Canopy"
+    ],
+    "training_permitted": false
+  }
+}

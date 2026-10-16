@@ -1,0 +1,409 @@
+path_1,split_1,class_1,path_2,split_2,class_2,phash_dist,dhash_dist,is_cross_split,is_cross_class,prov_1,prov_2
+train\Healthy\healthy_train_0010.jpg,train,Healthy,train\Healthy\healthy_train_0059.jpg,train,Healthy,2,2,False,False,Healthy_0053.jpg;images (168).jpg,Healthy_aug_0138.jpg
+train\Healthy\healthy_train_0012.jpg,train,Healthy,train\Healthy\healthy_train_0065.jpg,train,Healthy,3,1,False,False,Healthy_aug_0042.jpg,Healthy_0056.jpg;images (93).jpg
+train\Healthy\healthy_train_0014.jpg,train,Healthy,train\Healthy\healthy_train_0113.jpg,train,Healthy,2,0,False,False,Healthy_aug_0031.jpg,Healthy_aug_0056.jpg
+train\Healthy\healthy_train_0028.jpg,train,Healthy,test\Healthy\healthy_test_0067.jpg,test,Healthy,4,2,True,False,Healthy_aug_0096.jpg,Healthy_0129.jpg;images (28).jpg
+train\Healthy\healthy_train_0036.jpg,train,Healthy,train\Healthy\healthy_train_0039.jpg,train,Healthy,0,1,False,False,Healthy_aug_0124.jpg,Healthy_aug_0136.jpg
+train\Healthy\healthy_train_0038.jpg,train,Healthy,val\Healthy\healthy_val_0001.jpg,val,Healthy,6,4,True,False,Healthy_aug_0094.jpg,Healthy_aug_0147.jpg
+train\Healthy\healthy_train_0040.jpg,train,Healthy,test\Healthy\healthy_test_0034.jpg,test,Healthy,5,4,True,False,Healthy_aug_0022.jpg,Healthy_aug_0156.jpg
+train\Healthy\healthy_train_0061.jpg,train,Healthy,train\Healthy\healthy_train_0144.jpg,train,Healthy,4,2,False,False,Healthy_aug_0068.jpg,Healthy_aug_0149.jpg
+train\Healthy\healthy_train_0102.jpg,train,Healthy,test\Healthy\healthy_test_0036.jpg,test,Healthy,0,6,True,False,Healthy_0029.jpg;images (81).jpg,images (20).jpg;Healthy_0016.jpg
+train\Healthy\healthy_train_0123.jpg,train,Healthy,train\Healthy\healthy_train_0175.jpg,train,Healthy,3,3,False,False,Healthy_aug_0012.jpg,images (101).jpg;Healthy_0010.jpg
+train\Healthy\healthy_train_0139.jpg,train,Healthy,val\Sterilic_mosaic\sterilic_mosaic_val_0024.jpg,val,Sterilic_mosaic,4,8,True,True,Healthy_aug_0093.jpg,Sterilic_mosaic_aug_0063.jpg
+train\Healthy\healthy_train_0147.jpg,train,Healthy,val\Healthy\healthy_val_0041.jpg,val,Healthy,1,0,True,False,Healthy_aug_0059.jpg,Healthy_aug_0009.jpg
+train\Healthy\healthy_train_0147.jpg,train,Healthy,test\Healthy\healthy_test_0011.jpg,test,Healthy,5,0,True,False,Healthy_aug_0059.jpg,Healthy_aug_0112.jpg
+train\Healthy\healthy_train_0149.jpg,train,Healthy,test\Healthy\healthy_test_0051.jpg,test,Healthy,0,3,True,False,Healthy_aug_0036.jpg,Healthy_aug_0092.jpg
+train\Healthy\healthy_train_0150.jpg,train,Healthy,train\Healthy\healthy_train_0165.jpg,train,Healthy,3,5,False,False,Healthy_aug_0110.jpg,images (129).jpg;Healthy_0081.jpg
+train\Healthy\healthy_train_0191.jpg,train,Healthy,train\Healthy\healthy_train_0200.jpg,train,Healthy,2,5,False,False,Healthy_0003.jpg;images (80).jpg,Healthy_0133.jpg;images (82).jpg
+train\Healthy\healthy_train_0208.jpg,train,Healthy,test\Healthy\healthy_test_0033.jpg,test,Healthy,2,1,True,False,Healthy_aug_0000.jpg,Healthy_aug_0148.jpg
+train\Leaf_Spot\leaf_spot_train_0012.jpg,train,Leaf_Spot,test\Leaf_webber\leaf_webber_test_0031.jpg,test,Leaf_webber,4,4,True,True,Leaf_Spot_0163.jpg;images (87).jpg,images (1).jpg;Leaf_webber_0017.jpg
+train\Leaf_Spot\leaf_spot_train_0012.jpg,train,Leaf_Spot,test\Sterilic_mosaic\sterilic_mosaic_test_0005.jpg,test,Sterilic_mosaic,4,4,True,True,Leaf_Spot_0163.jpg;images (87).jpg,images(198).jpg;Sterilic_mosaic_0142.jpg
+train\Leaf_Spot\leaf_spot_train_0026.jpg,train,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0053.jpg,test,Leaf_Spot,0,1,True,False,Leaf_Spot_aug_0079.jpg,Leaf_Spot_0081.jpg;images (213).jpg
+train\Leaf_Spot\leaf_spot_train_0029.jpg,train,Leaf_Spot,train\Sterilic_mosaic\sterilic_mosaic_train_0116.jpg,train,Sterilic_mosaic,0,2,False,True,images (36).jpg;Leaf_Spot_0109.jpg,images(185).jpg;Sterilic_mosaic_0031.jpg
+train\Leaf_Spot\leaf_spot_train_0045.jpg,train,Leaf_Spot,train\Leaf_Spot\leaf_spot_train_0194.jpg,train,Leaf_Spot,0,0,False,False,Leaf_Spot_aug_0055.jpg,images (192).jpg;Leaf_Spot_0098.jpg
+train\Leaf_Spot\leaf_spot_train_0052.jpg,train,Leaf_Spot,train\Leaf_Spot\leaf_spot_train_0073.jpg,train,Leaf_Spot,0,2,False,False,Leaf_Spot_0139.jpg;images (279).jpg,images(235).jpg;images (323).jpg
+train\Leaf_Spot\leaf_spot_train_0052.jpg,train,Leaf_Spot,train\Sterilic_mosaic\sterilic_mosaic_train_0158.jpg,train,Sterilic_mosaic,0,2,False,True,Leaf_Spot_0139.jpg;images (279).jpg,images(235).jpg;images (323).jpg
+train\Leaf_Spot\leaf_spot_train_0056.jpg,train,Leaf_Spot,val\Leaf_Spot\leaf_spot_val_0086.jpg,val,Leaf_Spot,3,1,True,False,Leaf_Spot_0014.jpg;images (231).jpg,Leaf_Spot_aug_0006.jpg
+train\Leaf_Spot\leaf_spot_train_0070.jpg,train,Leaf_Spot,train\Sterilic_mosaic\sterilic_mosaic_train_0230.jpg,train,Sterilic_mosaic,4,8,False,True,Leaf_Spot_0122.jpg;images (13).jpg,Sterilic_mosaic_0046.jpg;images(188).jpg
+train\Leaf_Spot\leaf_spot_train_0072.jpg,train,Leaf_Spot,val\Leaf_Spot\leaf_spot_val_0062.jpg,val,Leaf_Spot,0,4,True,False,Leaf_Spot_0138.jpg;images (189).jpg,Leaf_Spot_aug_0015.jpg
+train\Leaf_Spot\leaf_spot_train_0095.jpg,train,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0069.jpg,test,Leaf_Spot,5,7,True,False,Leaf_Spot_aug_0061.jpg,images (196).jpg;Leaf_Spot_0052.jpg
+train\Leaf_Spot\leaf_spot_train_0099.jpg,train,Leaf_Spot,test\Sterilic_mosaic\sterilic_mosaic_test_0007.jpg,test,Sterilic_mosaic,5,5,True,True,Leaf_Spot_0010.jpg;images (25).jpg,images(179).jpg;Sterilic_mosaic_0030.jpg
+train\Leaf_Spot\leaf_spot_train_0112.jpg,train,Leaf_Spot,test\Sterilic_mosaic\sterilic_mosaic_test_0050.jpg,test,Sterilic_mosaic,5,5,True,True,images (42).jpg;Leaf_Spot_0031.jpg,Sterilic_mosaic_0101.jpg;images(189).jpg
+train\Leaf_Spot\leaf_spot_train_0115.jpg,train,Leaf_Spot,val\Leaf_Spot\leaf_spot_val_0066.jpg,val,Leaf_Spot,2,5,True,False,Leaf_Spot_0027.jpg;images (315).jpg,images (144).jpg;Leaf_Spot_0024.jpg
+train\Leaf_Spot\leaf_spot_train_0138.jpg,train,Leaf_Spot,train\Leaf_Spot\leaf_spot_train_0181.jpg,train,Leaf_Spot,0,6,False,False,images (172).jpg;Leaf_Spot_0033.jpg,images (181).jpg;Leaf_Spot_0126.jpg
+train\Leaf_Spot\leaf_spot_train_0141.jpg,train,Leaf_Spot,train\Leaf_Spot\leaf_spot_train_0199.jpg,train,Leaf_Spot,2,1,False,False,Leaf_Spot_aug_0073.jpg,Leaf_Spot_aug_0092.jpg
+train\Leaf_Spot\leaf_spot_train_0160.jpg,train,Leaf_Spot,train\Leaf_webber\leaf_webber_train_0153.jpg,train,Leaf_webber,2,1,False,True,Leaf_Spot_0038.jpg;images (86).jpg,Leaf_webber_0072.jpg;images (2).jpg
+train\Leaf_Spot\leaf_spot_train_0186.jpg,train,Leaf_Spot,val\Leaf_Spot\leaf_spot_val_0009.jpg,val,Leaf_Spot,6,4,True,False,Leaf_Spot_aug_0032.jpg,Leaf_Spot_aug_0062.jpg
+train\Leaf_Spot\leaf_spot_train_0250.jpg,train,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0085.jpg,test,Leaf_Spot,2,1,True,False,Leaf_Spot_aug_0088.jpg,Leaf_Spot_0182.jpg;images (9).jpg
+train\Leaf_Spot\leaf_spot_train_0252.jpg,train,Leaf_Spot,train\Sterilic_mosaic\sterilic_mosaic_train_0221.jpg,train,Sterilic_mosaic,6,7,False,True,Leaf_Spot_0178.jpg;images (1).jpg,Sterilic_mosaic_aug_0085.jpg
+train\Leaf_Spot\leaf_spot_train_0252.jpg,train,Leaf_Spot,val\Sterilic_mosaic\sterilic_mosaic_val_0067.jpg,val,Sterilic_mosaic,6,8,True,True,Leaf_Spot_0178.jpg;images (1).jpg,images(195).jpg;Sterilic_mosaic_0096.jpg
+train\Leaf_webber\leaf_webber_train_0001.jpg,train,Leaf_webber,test\Leaf_webber\leaf_webber_test_0049.jpg,test,Leaf_webber,4,3,True,False,Leaf_webber_aug_0133.jpg,Leaf_webber_aug_0122.jpg
+train\Leaf_webber\leaf_webber_train_0012.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0063.jpg,val,Leaf_webber,3,4,True,False,Leaf_webber_aug_0171.jpg,Leaf_webber_aug_0107.jpg
+train\Leaf_webber\leaf_webber_train_0016.jpg,train,Leaf_webber,test\Leaf_Spot\leaf_spot_test_0028.jpg,test,Leaf_Spot,3,2,True,True,Leaf_webber_0008.jpg;images (121).jpg,Leaf_Spot_0135.jpg;images (83).jpg
+train\Leaf_webber\leaf_webber_train_0019.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0165.jpg,train,Leaf_webber,4,2,False,False,Leaf_webber_aug_0116.jpg,Leaf_webber_0021.jpg;images (65).jpg
+train\Leaf_webber\leaf_webber_train_0027.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0028.jpg,train,Leaf_webber,2,4,False,False,Leaf_webber_0049.jpg;images (19).jpg,Leaf_webber_aug_0032.jpg
+train\Leaf_webber\leaf_webber_train_0040.jpg,train,Leaf_webber,test\Leaf_webber\leaf_webber_test_0062.jpg,test,Leaf_webber,4,5,True,False,Leaf_webber_aug_0014.jpg,Leaf_webber_aug_0081.jpg
+train\Leaf_webber\leaf_webber_train_0047.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0141.jpg,train,Leaf_webber,2,0,False,False,Leaf_webber_aug_0189.jpg,Leaf_webber_aug_0031.jpg
+train\Leaf_webber\leaf_webber_train_0063.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0074.jpg,train,Leaf_webber,2,3,False,False,images (114).jpg;Leaf_webber_0025.jpg,Leaf_webber_aug_0045.jpg
+train\Leaf_webber\leaf_webber_train_0069.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0085.jpg,train,Leaf_webber,0,4,False,False,Leaf_webber_aug_0142.jpg,Leaf_webber_0042.jpg;images (82).jpg
+train\Leaf_webber\leaf_webber_train_0077.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0169.jpg,train,Leaf_webber,6,6,False,False,Leaf_webber_aug_0158.jpg,Leaf_webber_aug_0114.jpg
+train\Leaf_webber\leaf_webber_train_0080.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0032.jpg,val,Leaf_webber,3,1,True,False,Leaf_webber_aug_0117.jpg,Leaf_webber_aug_0147.jpg
+train\Leaf_webber\leaf_webber_train_0082.jpg,train,Leaf_webber,test\Leaf_webber\leaf_webber_test_0035.jpg,test,Leaf_webber,2,5,True,False,Leaf_webber_aug_0049.jpg,Leaf_webber_0099.jpg;images (135).jpg
+train\Leaf_webber\leaf_webber_train_0086.jpg,train,Leaf_webber,test\Leaf_webber\leaf_webber_test_0065.jpg,test,Leaf_webber,2,0,True,False,Leaf_webber_aug_0099.jpg,Leaf_webber_0090.jpg;images (3).jpg
+train\Leaf_webber\leaf_webber_train_0087.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0124.jpg,train,Leaf_webber,4,1,False,False,images (14).jpg;Leaf_webber_0057.jpg,Leaf_webber_aug_0145.jpg
+train\Leaf_webber\leaf_webber_train_0090.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0160.jpg,train,Leaf_webber,4,0,False,False,Leaf_webber_aug_0174.jpg,Leaf_webber_aug_0053.jpg
+train\Leaf_webber\leaf_webber_train_0099.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0196.jpg,train,Leaf_webber,2,2,False,False,Leaf_webber_0005.jpg;images (106).jpg,Leaf_webber_aug_0150.jpg
+train\Leaf_webber\leaf_webber_train_0119.jpg,train,Leaf_webber,train\Leaf_webber\leaf_webber_train_0154.jpg,train,Leaf_webber,4,3,False,False,Leaf_webber_0058.jpg;images (58).jpg,Leaf_webber_aug_0075.jpg
+train\Leaf_webber\leaf_webber_train_0123.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0068.jpg,val,Leaf_webber,6,6,True,False,Leaf_webber_aug_0023.jpg,images (18).jpg;Leaf_webber_0012.jpg
+train\Leaf_webber\leaf_webber_train_0134.jpg,train,Leaf_webber,train\Sterilic_mosaic\sterilic_mosaic_train_0255.jpg,train,Sterilic_mosaic,3,3,False,True,Leaf_webber_0001.jpg;images (120).jpg,Sterilic_mosaic_0156.jpg;images(191).jpg
+train\Leaf_webber\leaf_webber_train_0146.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0040.jpg,val,Leaf_webber,2,1,True,False,Leaf_webber_aug_0110.jpg,Leaf_webber_aug_0039.jpg
+train\Leaf_webber\leaf_webber_train_0156.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0000.jpg,val,Leaf_webber,6,3,True,False,Leaf_webber_aug_0183.jpg,Leaf_webber_aug_0071.jpg
+train\Leaf_webber\leaf_webber_train_0189.jpg,train,Leaf_webber,test\Leaf_webber\leaf_webber_test_0011.jpg,test,Leaf_webber,2,3,True,False,Leaf_webber_0064.jpg;images (35).jpg,Leaf_webber_aug_0132.jpg
+train\Leaf_webber\leaf_webber_train_0190.jpg,train,Leaf_webber,test\Leaf_webber\leaf_webber_test_0013.jpg,test,Leaf_webber,5,8,True,False,Leaf_webber_aug_0091.jpg,images (71).jpg;Leaf_webber_0017.jpg
+train\Leaf_webber\leaf_webber_train_0192.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0052.jpg,val,Leaf_webber,4,0,True,False,Leaf_webber_aug_0037.jpg,Leaf_webber_0001.jpg;images (132).jpg
+train\Leaf_webber\leaf_webber_train_0199.jpg,train,Leaf_webber,val\Leaf_webber\leaf_webber_val_0050.jpg,val,Leaf_webber,2,3,True,False,Leaf_webber_aug_0009.jpg,Leaf_webber_aug_0184.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0002.jpg,train,Sterilic_mosaic,train\Sterilic_mosaic\sterilic_mosaic_train_0065.jpg,train,Sterilic_mosaic,4,3,False,False,Sterilic_mosaic_aug_0075.jpg,Sterilic_mosaic_aug_0054.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0003.jpg,train,Sterilic_mosaic,val\Leaf_Spot\leaf_spot_val_0004.jpg,val,Leaf_Spot,3,2,True,True,images(194).jpg;Sterilic_mosaic_0014.jpg,Leaf_Spot_0036.jpg;images (53).jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0020.jpg,train,Sterilic_mosaic,val\Leaf_Spot\leaf_spot_val_0070.jpg,val,Leaf_Spot,0,0,True,True,Sterilic_mosaic_0113.jpg;images(183).jpg,images (34).jpg;Leaf_Spot_0037.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0024.jpg,train,Sterilic_mosaic,val\Sterilic_mosaic\sterilic_mosaic_val_0060.jpg,val,Sterilic_mosaic,6,2,True,False,images(127).jpg;Sterilic_mosaic_0100.jpg,Sterilic_mosaic_aug_0034.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0026.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0039.jpg,test,Sterilic_mosaic,5,4,True,False,Sterilic_mosaic_aug_0126.jpg,Sterilic_mosaic_aug_0134.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0027.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0061.jpg,test,Sterilic_mosaic,4,3,True,False,images(104).jpg;Sterilic_mosaic_0005.jpg,Sterilic_mosaic_0076.jpg;images(16).jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0031.jpg,train,Sterilic_mosaic,val\Sterilic_mosaic\sterilic_mosaic_val_0028.jpg,val,Sterilic_mosaic,6,7,True,False,Sterilic_mosaic_0030.jpg;images(14).jpg,Sterilic_mosaic_aug_0079.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0037.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0041.jpg,test,Sterilic_mosaic,2,2,True,False,images(105).jpg;Sterilic_mosaic_0016.jpg,images(245).jpg;Sterilic_mosaic_0058.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0048.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0000.jpg,test,Sterilic_mosaic,2,0,True,False,Sterilic_mosaic_aug_0067.jpg,Sterilic_mosaic_aug_0033.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0058.jpg,train,Sterilic_mosaic,train\Sterilic_mosaic\sterilic_mosaic_train_0207.jpg,train,Sterilic_mosaic,1,2,False,False,Sterilic_mosaic_0149.jpg;images(6).jpg,Sterilic_mosaic_aug_0099.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0094.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0084.jpg,test,Sterilic_mosaic,3,5,True,False,images(251).jpg;Sterilic_mosaic_0111.jpg,Sterilic_mosaic_aug_0130.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0097.jpg,train,Sterilic_mosaic,train\Sterilic_mosaic\sterilic_mosaic_train_0178.jpg,train,Sterilic_mosaic,5,3,False,False,images(17).jpg;Sterilic_mosaic_0133.jpg,Sterilic_mosaic_0051.jpg;images(24).jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0098.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0006.jpg,test,Sterilic_mosaic,4,5,True,False,images(258).jpg;Sterilic_mosaic_0131.jpg,images(268).jpg;Sterilic_mosaic_0029.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0103.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0012.jpg,test,Sterilic_mosaic,5,7,True,False,Sterilic_mosaic_aug_0028.jpg,Sterilic_mosaic_aug_0133.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0120.jpg,train,Sterilic_mosaic,train\Sterilic_mosaic\sterilic_mosaic_train_0199.jpg,train,Sterilic_mosaic,5,6,False,False,Sterilic_mosaic_aug_0048.jpg,Sterilic_mosaic_aug_0053.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0135.jpg,train,Sterilic_mosaic,train\Sterilic_mosaic\sterilic_mosaic_train_0174.jpg,train,Sterilic_mosaic,4,6,False,False,Sterilic_mosaic_0154.jpg;images(252).jpg,Sterilic_mosaic_aug_0113.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0156.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0057.jpg,test,Sterilic_mosaic,2,0,True,False,Sterilic_mosaic_aug_0074.jpg,Sterilic_mosaic_aug_0017.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0179.jpg,train,Sterilic_mosaic,val\Leaf_Spot\leaf_spot_val_0071.jpg,val,Leaf_Spot,2,1,True,True,images (216).jpg;images(236).jpg,Leaf_Spot_0181.jpg;images (334).jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0198.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0000.jpg,test,Sterilic_mosaic,5,1,True,False,Sterilic_mosaic_aug_0110.jpg,Sterilic_mosaic_aug_0033.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0199.jpg,train,Sterilic_mosaic,val\Sterilic_mosaic\sterilic_mosaic_val_0057.jpg,val,Sterilic_mosaic,5,8,True,False,Sterilic_mosaic_aug_0053.jpg,images(94).jpg;Sterilic_mosaic_0007.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0203.jpg,train,Sterilic_mosaic,train\Sterilic_mosaic\sterilic_mosaic_train_0251.jpg,train,Sterilic_mosaic,3,1,False,False,Sterilic_mosaic_aug_0052.jpg,Sterilic_mosaic_0144.jpg;images(78).jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0221.jpg,train,Sterilic_mosaic,val\Leaf_Spot\leaf_spot_val_0042.jpg,val,Leaf_Spot,6,5,True,True,Sterilic_mosaic_aug_0085.jpg,images (55).jpg;Leaf_Spot_0017.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0221.jpg,train,Sterilic_mosaic,val\Sterilic_mosaic\sterilic_mosaic_val_0067.jpg,val,Sterilic_mosaic,6,7,True,False,Sterilic_mosaic_aug_0085.jpg,images(195).jpg;Sterilic_mosaic_0096.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0222.jpg,train,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0047.jpg,test,Sterilic_mosaic,3,0,True,False,images(263).jpg;Sterilic_mosaic_0024.jpg,Sterilic_mosaic_aug_0006.jpg
+train\Sterilic_mosaic\sterilic_mosaic_train_0255.jpg,train,Sterilic_mosaic,val\Sterilic_mosaic\sterilic_mosaic_val_0081.jpg,val,Sterilic_mosaic,6,7,True,False,Sterilic_mosaic_0156.jpg;images(191).jpg,Sterilic_mosaic_aug_0049.jpg
+train\Wilt\wilt_train_0000.jpg,train,Wilt,train\Wilt\wilt_train_0071.jpg,train,Wilt,0,0,False,False,train_wilt_aug_15.jpg,train_wilt_orig_train_20.jpg
+train\Wilt\wilt_train_0000.jpg,train,Wilt,train\Wilt\wilt_train_0099.jpg,train,Wilt,0,1,False,False,train_wilt_aug_15.jpg,train_wilt_aug_10.jpg
+train\Wilt\wilt_train_0000.jpg,train,Wilt,train\Wilt\wilt_train_0155.jpg,train,Wilt,0,1,False,False,train_wilt_aug_15.jpg,train_wilt_aug_214.jpg
+train\Wilt\wilt_train_0000.jpg,train,Wilt,val\Wilt\wilt_val_0029.jpg,val,Wilt,0,1,True,False,train_wilt_aug_15.jpg,train_wilt_aug_238.jpg
+train\Wilt\wilt_train_0001.jpg,train,Wilt,test\Wilt\wilt_test_0034.jpg,test,Wilt,0,2,True,False,train_wilt_aug_218.jpg,train_wilt_aug_168.jpg
+train\Wilt\wilt_train_0002.jpg,train,Wilt,val\Wilt\wilt_val_0008.jpg,val,Wilt,4,1,True,False,train_wilt_aug_37.jpg,train_wilt_aug_86.jpg
+train\Wilt\wilt_train_0003.jpg,train,Wilt,train\Wilt\wilt_train_0060.jpg,train,Wilt,2,3,False,False,train_wilt_aug_175.jpg,train_wilt_aug_216.jpg
+train\Wilt\wilt_train_0003.jpg,train,Wilt,train\Wilt\wilt_train_0110.jpg,train,Wilt,0,1,False,False,train_wilt_aug_175.jpg,train_wilt_aug_185.jpg
+train\Wilt\wilt_train_0004.jpg,train,Wilt,train\Wilt\wilt_train_0116.jpg,train,Wilt,4,2,False,False,train_wilt_aug_243.jpg,train_wilt_aug_69.jpg
+train\Wilt\wilt_train_0004.jpg,train,Wilt,val\Wilt\wilt_val_0001.jpg,val,Wilt,4,1,True,False,train_wilt_aug_243.jpg,train_wilt_aug_211.jpg
+train\Wilt\wilt_train_0005.jpg,train,Wilt,train\Wilt\wilt_train_0045.jpg,train,Wilt,0,2,False,False,train_wilt_aug_0.jpg,train_wilt_aug_90.jpg
+train\Wilt\wilt_train_0005.jpg,train,Wilt,val\Wilt\wilt_val_0012.jpg,val,Wilt,0,1,True,False,train_wilt_aug_0.jpg,train_wilt_aug_61.jpg
+train\Wilt\wilt_train_0005.jpg,train,Wilt,val\Wilt\wilt_val_0030.jpg,val,Wilt,0,1,True,False,train_wilt_aug_0.jpg,train_wilt_aug_11.jpg
+train\Wilt\wilt_train_0005.jpg,train,Wilt,val\Wilt\wilt_val_0042.jpg,val,Wilt,0,0,True,False,train_wilt_aug_0.jpg,train_wilt_aug_246.jpg
+train\Wilt\wilt_train_0005.jpg,train,Wilt,test\Wilt\wilt_test_0041.jpg,test,Wilt,6,8,True,False,train_wilt_aug_0.jpg,train_wilt_aug_105.jpg
+train\Wilt\wilt_train_0006.jpg,train,Wilt,train\Wilt\wilt_train_0022.jpg,train,Wilt,0,0,False,False,train_wilt_aug_25.jpg,train_wilt_aug_206.jpg
+train\Wilt\wilt_train_0006.jpg,train,Wilt,train\Wilt\wilt_train_0080.jpg,train,Wilt,0,0,False,False,train_wilt_aug_25.jpg,train_wilt_aug_119.jpg
+train\Wilt\wilt_train_0006.jpg,train,Wilt,train\Wilt\wilt_train_0117.jpg,train,Wilt,0,0,False,False,train_wilt_aug_25.jpg,train_wilt_aug_164.jpg
+train\Wilt\wilt_train_0006.jpg,train,Wilt,test\Wilt\wilt_test_0016.jpg,test,Wilt,0,0,True,False,train_wilt_aug_25.jpg,train_wilt_aug_269.jpg
+train\Wilt\wilt_train_0006.jpg,train,Wilt,test\Wilt\wilt_test_0056.jpg,test,Wilt,0,0,True,False,train_wilt_aug_25.jpg,train_wilt_aug_104.jpg
+train\Wilt\wilt_train_0007.jpg,train,Wilt,train\Wilt\wilt_train_0141.jpg,train,Wilt,0,1,False,False,train_wilt_aug_101.jpg,train_wilt_aug_75.jpg
+train\Wilt\wilt_train_0007.jpg,train,Wilt,train\Wilt\wilt_train_0151.jpg,train,Wilt,2,0,False,False,train_wilt_aug_101.jpg,train_wilt_aug_12.jpg
+train\Wilt\wilt_train_0007.jpg,train,Wilt,val\Wilt\wilt_val_0000.jpg,val,Wilt,2,1,True,False,train_wilt_aug_101.jpg,train_wilt_orig_train_15.jpg
+train\Wilt\wilt_train_0007.jpg,train,Wilt,test\Wilt\wilt_test_0029.jpg,test,Wilt,2,1,True,False,train_wilt_aug_101.jpg,train_wilt_aug_195.jpg;train_wilt_aug_242.jpg
+train\Wilt\wilt_train_0007.jpg,train,Wilt,test\Wilt\wilt_test_0032.jpg,test,Wilt,2,1,True,False,train_wilt_aug_101.jpg,train_wilt_aug_257.jpg
+train\Wilt\wilt_train_0008.jpg,train,Wilt,val\Wilt\wilt_val_0039.jpg,val,Wilt,0,2,True,False,train_wilt_aug_7.jpg,train_wilt_aug_131.jpg
+train\Wilt\wilt_train_0011.jpg,train,Wilt,test\Wilt\wilt_test_0015.jpg,test,Wilt,0,3,True,False,train_wilt_aug_200.jpg,train_wilt_aug_202.jpg
+train\Wilt\wilt_train_0014.jpg,train,Wilt,val\Wilt\wilt_val_0031.jpg,val,Wilt,6,8,True,False,train_wilt_aug_14.jpg,train_wilt_aug_249.jpg
+train\Wilt\wilt_train_0015.jpg,train,Wilt,train\Wilt\wilt_train_0019.jpg,train,Wilt,0,0,False,False,train_wilt_aug_47.jpg,train_wilt_orig_train_17.jpg
+train\Wilt\wilt_train_0015.jpg,train,Wilt,train\Wilt\wilt_train_0076.jpg,train,Wilt,0,0,False,False,train_wilt_aug_47.jpg,train_wilt_aug_140.jpg
+train\Wilt\wilt_train_0015.jpg,train,Wilt,train\Wilt\wilt_train_0139.jpg,train,Wilt,0,0,False,False,train_wilt_aug_47.jpg,train_wilt_aug_120.jpg
+train\Wilt\wilt_train_0015.jpg,train,Wilt,val\Wilt\wilt_val_0046.jpg,val,Wilt,0,0,True,False,train_wilt_aug_47.jpg,train_wilt_aug_117.jpg
+train\Wilt\wilt_train_0016.jpg,train,Wilt,train\Wilt\wilt_train_0048.jpg,train,Wilt,0,1,False,False,train_wilt_aug_267.jpg,train_wilt_aug_172.jpg
+train\Wilt\wilt_train_0016.jpg,train,Wilt,train\Wilt\wilt_train_0058.jpg,train,Wilt,0,1,False,False,train_wilt_aug_267.jpg,train_wilt_aug_189.jpg
+train\Wilt\wilt_train_0016.jpg,train,Wilt,train\Wilt\wilt_train_0158.jpg,train,Wilt,1,0,False,False,train_wilt_aug_267.jpg,train_wilt_aug_68.jpg
+train\Wilt\wilt_train_0016.jpg,train,Wilt,test\Wilt\wilt_test_0021.jpg,test,Wilt,0,1,True,False,train_wilt_aug_267.jpg,train_wilt_aug_184.jpg;train_wilt_aug_174.jpg
+train\Wilt\wilt_train_0018.jpg,train,Wilt,train\Wilt\wilt_train_0055.jpg,train,Wilt,0,4,False,False,train_wilt_aug_60.jpg,train_wilt_aug_144.jpg
+train\Wilt\wilt_train_0018.jpg,train,Wilt,train\Wilt\wilt_train_0163.jpg,train,Wilt,0,5,False,False,train_wilt_aug_60.jpg,train_wilt_aug_251.jpg
+train\Wilt\wilt_train_0019.jpg,train,Wilt,train\Wilt\wilt_train_0076.jpg,train,Wilt,0,0,False,False,train_wilt_orig_train_17.jpg,train_wilt_aug_140.jpg
+train\Wilt\wilt_train_0019.jpg,train,Wilt,train\Wilt\wilt_train_0139.jpg,train,Wilt,0,0,False,False,train_wilt_orig_train_17.jpg,train_wilt_aug_120.jpg
+train\Wilt\wilt_train_0019.jpg,train,Wilt,val\Wilt\wilt_val_0046.jpg,val,Wilt,0,0,True,False,train_wilt_orig_train_17.jpg,train_wilt_aug_117.jpg
+train\Wilt\wilt_train_0021.jpg,train,Wilt,train\Wilt\wilt_train_0133.jpg,train,Wilt,0,0,False,False,train_wilt_aug_199.jpg;train_wilt_aug_180.jpg,train_wilt_orig_train_19.jpg
+train\Wilt\wilt_train_0021.jpg,train,Wilt,train\Wilt\wilt_train_0146.jpg,train,Wilt,0,2,False,False,train_wilt_aug_199.jpg;train_wilt_aug_180.jpg,train_wilt_aug_183.jpg
+train\Wilt\wilt_train_0021.jpg,train,Wilt,train\Wilt\wilt_train_0147.jpg,train,Wilt,0,1,False,False,train_wilt_aug_199.jpg;train_wilt_aug_180.jpg,train_wilt_aug_43.jpg
+train\Wilt\wilt_train_0021.jpg,train,Wilt,test\Wilt\wilt_test_0011.jpg,test,Wilt,0,0,True,False,train_wilt_aug_199.jpg;train_wilt_aug_180.jpg,train_wilt_aug_181.jpg
+train\Wilt\wilt_train_0022.jpg,train,Wilt,train\Wilt\wilt_train_0080.jpg,train,Wilt,0,0,False,False,train_wilt_aug_206.jpg,train_wilt_aug_119.jpg
+train\Wilt\wilt_train_0022.jpg,train,Wilt,train\Wilt\wilt_train_0117.jpg,train,Wilt,0,0,False,False,train_wilt_aug_206.jpg,train_wilt_aug_164.jpg
+train\Wilt\wilt_train_0022.jpg,train,Wilt,test\Wilt\wilt_test_0016.jpg,test,Wilt,0,0,True,False,train_wilt_aug_206.jpg,train_wilt_aug_269.jpg
+train\Wilt\wilt_train_0022.jpg,train,Wilt,test\Wilt\wilt_test_0056.jpg,test,Wilt,0,0,True,False,train_wilt_aug_206.jpg,train_wilt_aug_104.jpg
+train\Wilt\wilt_train_0023.jpg,train,Wilt,val\Wilt\wilt_val_0019.jpg,val,Wilt,2,1,True,False,train_wilt_aug_33.jpg,train_wilt_aug_247.jpg
+train\Wilt\wilt_train_0023.jpg,train,Wilt,val\Wilt\wilt_val_0026.jpg,val,Wilt,2,1,True,False,train_wilt_aug_33.jpg,train_wilt_aug_22.jpg
+train\Wilt\wilt_train_0023.jpg,train,Wilt,test\Wilt\wilt_test_0044.jpg,test,Wilt,0,1,True,False,train_wilt_aug_33.jpg,train_wilt_aug_197.jpg
+train\Wilt\wilt_train_0024.jpg,train,Wilt,train\Wilt\wilt_train_0108.jpg,train,Wilt,0,1,False,False,train_wilt_aug_57.jpg,train_wilt_aug_4.jpg
+train\Wilt\wilt_train_0024.jpg,train,Wilt,train\Wilt\wilt_train_0144.jpg,train,Wilt,0,1,False,False,train_wilt_aug_57.jpg,train_wilt_orig_train_18.jpg
+train\Wilt\wilt_train_0024.jpg,train,Wilt,test\Wilt\wilt_test_0055.jpg,test,Wilt,0,0,True,False,train_wilt_aug_57.jpg,train_wilt_aug_223.jpg
+train\Wilt\wilt_train_0025.jpg,train,Wilt,train\Wilt\wilt_train_0069.jpg,train,Wilt,4,2,False,False,train_wilt_aug_94.jpg,train_wilt_aug_41.jpg
+train\Wilt\wilt_train_0026.jpg,train,Wilt,train\Wilt\wilt_train_0081.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_13.jpg,train_wilt_aug_27.jpg
+train\Wilt\wilt_train_0026.jpg,train,Wilt,train\Wilt\wilt_train_0091.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_13.jpg,train_wilt_aug_221.jpg;train_wilt_aug_79.jpg
+train\Wilt\wilt_train_0026.jpg,train,Wilt,val\Wilt\wilt_val_0052.jpg,val,Wilt,5,2,True,False,train_wilt_orig_train_13.jpg,train_wilt_aug_147.jpg
+train\Wilt\wilt_train_0026.jpg,train,Wilt,test\Wilt\wilt_test_0051.jpg,test,Wilt,3,3,True,False,train_wilt_orig_train_13.jpg,train_wilt_aug_141.jpg
+train\Wilt\wilt_train_0027.jpg,train,Wilt,train\Wilt\wilt_train_0113.jpg,train,Wilt,6,8,False,False,train_wilt_aug_227.jpg,train_wilt_aug_26.jpg
+train\Wilt\wilt_train_0027.jpg,train,Wilt,train\Wilt\wilt_train_0168.jpg,train,Wilt,2,1,False,False,train_wilt_aug_227.jpg,train_wilt_aug_87.jpg
+train\Wilt\wilt_train_0029.jpg,train,Wilt,train\Wilt\wilt_train_0105.jpg,train,Wilt,0,2,False,False,train_wilt_aug_236.jpg,train_wilt_aug_35.jpg
+train\Wilt\wilt_train_0029.jpg,train,Wilt,train\Wilt\wilt_train_0149.jpg,train,Wilt,0,2,False,False,train_wilt_aug_236.jpg,train_wilt_aug_130.jpg
+train\Wilt\wilt_train_0029.jpg,train,Wilt,val\Wilt\wilt_val_0056.jpg,val,Wilt,0,1,True,False,train_wilt_aug_236.jpg,train_wilt_aug_263.jpg
+train\Wilt\wilt_train_0032.jpg,train,Wilt,train\Wilt\wilt_train_0066.jpg,train,Wilt,0,2,False,False,train_wilt_aug_169.jpg,train_wilt_aug_19.jpg
+train\Wilt\wilt_train_0032.jpg,train,Wilt,val\Wilt\wilt_val_0041.jpg,val,Wilt,0,1,True,False,train_wilt_aug_169.jpg,train_wilt_aug_51.jpg
+train\Wilt\wilt_train_0032.jpg,train,Wilt,test\Wilt\wilt_test_0039.jpg,test,Wilt,0,1,True,False,train_wilt_aug_169.jpg,train_wilt_aug_52.jpg
+train\Wilt\wilt_train_0035.jpg,train,Wilt,val\Wilt\wilt_val_0055.jpg,val,Wilt,0,1,True,False,train_wilt_aug_207.jpg,train_wilt_aug_109.jpg
+train\Wilt\wilt_train_0037.jpg,train,Wilt,val\Wilt\wilt_val_0006.jpg,val,Wilt,0,0,True,False,train_wilt_aug_1.jpg,train_wilt_aug_143.jpg
+train\Wilt\wilt_train_0037.jpg,train,Wilt,test\Wilt\wilt_test_0000.jpg,test,Wilt,0,1,True,False,train_wilt_aug_1.jpg,train_wilt_aug_139.jpg
+train\Wilt\wilt_train_0037.jpg,train,Wilt,test\Wilt\wilt_test_0048.jpg,test,Wilt,0,1,True,False,train_wilt_aug_1.jpg,train_wilt_aug_54.jpg
+train\Wilt\wilt_train_0038.jpg,train,Wilt,train\Wilt\wilt_train_0126.jpg,train,Wilt,0,0,False,False,train_wilt_aug_235.jpg,train_wilt_aug_29.jpg
+train\Wilt\wilt_train_0038.jpg,train,Wilt,val\Wilt\wilt_val_0005.jpg,val,Wilt,4,4,True,False,train_wilt_aug_235.jpg,train_wilt_aug_228.jpg
+train\Wilt\wilt_train_0038.jpg,train,Wilt,val\Wilt\wilt_val_0028.jpg,val,Wilt,0,0,True,False,train_wilt_aug_235.jpg,train_wilt_orig_train_14.jpg
+train\Wilt\wilt_train_0038.jpg,train,Wilt,test\Wilt\wilt_test_0030.jpg,test,Wilt,0,1,True,False,train_wilt_aug_235.jpg,train_wilt_aug_166.jpg
+train\Wilt\wilt_train_0038.jpg,train,Wilt,test\Wilt\wilt_test_0046.jpg,test,Wilt,4,4,True,False,train_wilt_aug_235.jpg,train_wilt_aug_107.jpg
+train\Wilt\wilt_train_0038.jpg,train,Wilt,test\Wilt\wilt_test_0047.jpg,test,Wilt,0,0,True,False,train_wilt_aug_235.jpg,train_wilt_aug_108.jpg
+train\Wilt\wilt_train_0039.jpg,train,Wilt,train\Wilt\wilt_train_0092.jpg,train,Wilt,4,6,False,False,train_wilt_aug_118.jpg,train_wilt_aug_266.jpg
+train\Wilt\wilt_train_0039.jpg,train,Wilt,train\Wilt\wilt_train_0101.jpg,train,Wilt,5,4,False,False,train_wilt_aug_118.jpg,train_wilt_aug_232.jpg
+train\Wilt\wilt_train_0039.jpg,train,Wilt,val\Wilt\wilt_val_0024.jpg,val,Wilt,0,1,True,False,train_wilt_aug_118.jpg,train_wilt_aug_150.jpg
+train\Wilt\wilt_train_0040.jpg,train,Wilt,train\Wilt\wilt_train_0061.jpg,train,Wilt,0,0,False,False,train_wilt_orig_train_12.jpg,train_wilt_aug_256.jpg
+train\Wilt\wilt_train_0041.jpg,train,Wilt,train\Wilt\wilt_train_0096.jpg,train,Wilt,3,0,False,False,train_wilt_aug_205.jpg,train_wilt_aug_102.jpg
+train\Wilt\wilt_train_0041.jpg,train,Wilt,val\Wilt\wilt_val_0013.jpg,val,Wilt,3,0,True,False,train_wilt_aug_205.jpg,train_wilt_aug_115.jpg;train_wilt_aug_106.jpg
+train\Wilt\wilt_train_0041.jpg,train,Wilt,test\Wilt\wilt_test_0014.jpg,test,Wilt,1,0,True,False,train_wilt_aug_205.jpg,train_wilt_aug_220.jpg
+train\Wilt\wilt_train_0041.jpg,train,Wilt,test\Wilt\wilt_test_0026.jpg,test,Wilt,3,0,True,False,train_wilt_aug_205.jpg,train_wilt_orig_train_2.jpg
+train\Wilt\wilt_train_0041.jpg,train,Wilt,test\Wilt\wilt_test_0053.jpg,test,Wilt,1,2,True,False,train_wilt_aug_205.jpg,train_wilt_aug_20.jpg
+train\Wilt\wilt_train_0042.jpg,train,Wilt,train\Wilt\wilt_train_0119.jpg,train,Wilt,0,0,False,False,train_wilt_aug_229.jpg;train_wilt_aug_8.jpg;train_wilt_aug_44.jpg,train_wilt_orig_train_1.jpg
+train\Wilt\wilt_train_0042.jpg,train,Wilt,train\Wilt\wilt_train_0145.jpg,train,Wilt,0,1,False,False,train_wilt_aug_229.jpg;train_wilt_aug_8.jpg;train_wilt_aug_44.jpg,train_wilt_aug_32.jpg
+train\Wilt\wilt_train_0042.jpg,train,Wilt,train\Wilt\wilt_train_0157.jpg,train,Wilt,0,1,False,False,train_wilt_aug_229.jpg;train_wilt_aug_8.jpg;train_wilt_aug_44.jpg,train_wilt_aug_28.jpg
+train\Wilt\wilt_train_0043.jpg,train,Wilt,val\Wilt\wilt_val_0051.jpg,val,Wilt,0,1,True,False,train_wilt_orig_train_5.jpg,train_wilt_aug_36.jpg
+train\Wilt\wilt_train_0044.jpg,train,Wilt,train\Wilt\wilt_train_0065.jpg,train,Wilt,0,1,False,False,train_wilt_aug_62.jpg,train_wilt_aug_222.jpg
+train\Wilt\wilt_train_0044.jpg,train,Wilt,train\Wilt\wilt_train_0107.jpg,train,Wilt,3,7,False,False,train_wilt_aug_62.jpg,train_wilt_aug_163.jpg
+train\Wilt\wilt_train_0045.jpg,train,Wilt,val\Wilt\wilt_val_0012.jpg,val,Wilt,0,1,True,False,train_wilt_aug_90.jpg,train_wilt_aug_61.jpg
+train\Wilt\wilt_train_0045.jpg,train,Wilt,val\Wilt\wilt_val_0030.jpg,val,Wilt,0,1,True,False,train_wilt_aug_90.jpg,train_wilt_aug_11.jpg
+train\Wilt\wilt_train_0045.jpg,train,Wilt,val\Wilt\wilt_val_0042.jpg,val,Wilt,0,2,True,False,train_wilt_aug_90.jpg,train_wilt_aug_246.jpg
+train\Wilt\wilt_train_0045.jpg,train,Wilt,test\Wilt\wilt_test_0041.jpg,test,Wilt,6,8,True,False,train_wilt_aug_90.jpg,train_wilt_aug_105.jpg
+train\Wilt\wilt_train_0046.jpg,train,Wilt,train\Wilt\wilt_train_0134.jpg,train,Wilt,0,0,False,False,train_wilt_aug_260.jpg;train_wilt_aug_125.jpg,train_wilt_aug_74.jpg
+train\Wilt\wilt_train_0046.jpg,train,Wilt,test\Wilt\wilt_test_0009.jpg,test,Wilt,0,0,True,False,train_wilt_aug_260.jpg;train_wilt_aug_125.jpg,train_wilt_aug_224.jpg
+train\Wilt\wilt_train_0048.jpg,train,Wilt,train\Wilt\wilt_train_0058.jpg,train,Wilt,0,0,False,False,train_wilt_aug_172.jpg,train_wilt_aug_189.jpg
+train\Wilt\wilt_train_0048.jpg,train,Wilt,train\Wilt\wilt_train_0158.jpg,train,Wilt,1,1,False,False,train_wilt_aug_172.jpg,train_wilt_aug_68.jpg
+train\Wilt\wilt_train_0048.jpg,train,Wilt,test\Wilt\wilt_test_0021.jpg,test,Wilt,0,0,True,False,train_wilt_aug_172.jpg,train_wilt_aug_184.jpg;train_wilt_aug_174.jpg
+train\Wilt\wilt_train_0050.jpg,train,Wilt,train\Wilt\wilt_train_0075.jpg,train,Wilt,0,0,False,False,train_wilt_aug_64.jpg,train_wilt_orig_train_9.jpg
+train\Wilt\wilt_train_0050.jpg,train,Wilt,train\Wilt\wilt_train_0106.jpg,train,Wilt,0,0,False,False,train_wilt_aug_64.jpg,train_wilt_aug_34.jpg
+train\Wilt\wilt_train_0050.jpg,train,Wilt,val\Wilt\wilt_val_0032.jpg,val,Wilt,0,0,True,False,train_wilt_aug_64.jpg,train_wilt_aug_99.jpg
+train\Wilt\wilt_train_0052.jpg,train,Wilt,train\Wilt\wilt_train_0114.jpg,train,Wilt,0,2,False,False,train_wilt_aug_123.jpg,train_wilt_aug_93.jpg
+train\Wilt\wilt_train_0052.jpg,train,Wilt,val\Wilt\wilt_val_0018.jpg,val,Wilt,0,0,True,False,train_wilt_aug_123.jpg,train_wilt_aug_259.jpg
+train\Wilt\wilt_train_0052.jpg,train,Wilt,val\Wilt\wilt_val_0037.jpg,val,Wilt,0,0,True,False,train_wilt_aug_123.jpg,train_wilt_aug_176.jpg
+train\Wilt\wilt_train_0052.jpg,train,Wilt,val\Wilt\wilt_val_0044.jpg,val,Wilt,0,0,True,False,train_wilt_aug_123.jpg,train_wilt_orig_train_8.jpg
+train\Wilt\wilt_train_0053.jpg,train,Wilt,val\Wilt\wilt_val_0007.jpg,val,Wilt,0,0,True,False,train_wilt_aug_2.jpg,train_wilt_orig_train_3.jpg
+train\Wilt\wilt_train_0053.jpg,train,Wilt,val\Wilt\wilt_val_0023.jpg,val,Wilt,0,0,True,False,train_wilt_aug_2.jpg,train_wilt_aug_5.jpg
+train\Wilt\wilt_train_0053.jpg,train,Wilt,test\Wilt\wilt_test_0013.jpg,test,Wilt,0,0,True,False,train_wilt_aug_2.jpg,train_wilt_aug_122.jpg
+train\Wilt\wilt_train_0055.jpg,train,Wilt,train\Wilt\wilt_train_0163.jpg,train,Wilt,0,1,False,False,train_wilt_aug_144.jpg,train_wilt_aug_251.jpg
+train\Wilt\wilt_train_0057.jpg,train,Wilt,train\Wilt\wilt_train_0127.jpg,train,Wilt,2,0,False,False,train_wilt_aug_49.jpg,train_wilt_aug_135.jpg
+train\Wilt\wilt_train_0058.jpg,train,Wilt,train\Wilt\wilt_train_0158.jpg,train,Wilt,1,1,False,False,train_wilt_aug_189.jpg,train_wilt_aug_68.jpg
+train\Wilt\wilt_train_0058.jpg,train,Wilt,test\Wilt\wilt_test_0021.jpg,test,Wilt,0,0,True,False,train_wilt_aug_189.jpg,train_wilt_aug_184.jpg;train_wilt_aug_174.jpg
+train\Wilt\wilt_train_0059.jpg,train,Wilt,train\Wilt\wilt_train_0067.jpg,train,Wilt,2,0,False,False,train_wilt_orig_train_10.jpg,train_wilt_aug_38.jpg
+train\Wilt\wilt_train_0059.jpg,train,Wilt,train\Wilt\wilt_train_0087.jpg,train,Wilt,4,3,False,False,train_wilt_orig_train_10.jpg,train_wilt_aug_149.jpg
+train\Wilt\wilt_train_0059.jpg,train,Wilt,train\Wilt\wilt_train_0169.jpg,train,Wilt,5,3,False,False,train_wilt_orig_train_10.jpg,train_wilt_aug_127.jpg
+train\Wilt\wilt_train_0059.jpg,train,Wilt,val\Wilt\wilt_val_0038.jpg,val,Wilt,2,1,True,False,train_wilt_orig_train_10.jpg,train_wilt_aug_18.jpg
+train\Wilt\wilt_train_0060.jpg,train,Wilt,train\Wilt\wilt_train_0110.jpg,train,Wilt,2,4,False,False,train_wilt_aug_216.jpg,train_wilt_aug_185.jpg
+train\Wilt\wilt_train_0063.jpg,train,Wilt,test\Wilt\wilt_test_0010.jpg,test,Wilt,2,5,True,False,train_wilt_aug_230.jpg,train_wilt_aug_111.jpg
+train\Wilt\wilt_train_0064.jpg,train,Wilt,val\Wilt\wilt_val_0048.jpg,val,Wilt,3,1,True,False,train_wilt_aug_97.jpg,train_wilt_aug_56.jpg
+train\Wilt\wilt_train_0065.jpg,train,Wilt,train\Wilt\wilt_train_0107.jpg,train,Wilt,3,6,False,False,train_wilt_aug_222.jpg,train_wilt_aug_163.jpg
+train\Wilt\wilt_train_0066.jpg,train,Wilt,val\Wilt\wilt_val_0041.jpg,val,Wilt,0,1,True,False,train_wilt_aug_19.jpg,train_wilt_aug_51.jpg
+train\Wilt\wilt_train_0066.jpg,train,Wilt,test\Wilt\wilt_test_0039.jpg,test,Wilt,0,1,True,False,train_wilt_aug_19.jpg,train_wilt_aug_52.jpg
+train\Wilt\wilt_train_0067.jpg,train,Wilt,train\Wilt\wilt_train_0087.jpg,train,Wilt,4,3,False,False,train_wilt_aug_38.jpg,train_wilt_aug_149.jpg
+train\Wilt\wilt_train_0067.jpg,train,Wilt,train\Wilt\wilt_train_0169.jpg,train,Wilt,5,3,False,False,train_wilt_aug_38.jpg,train_wilt_aug_127.jpg
+train\Wilt\wilt_train_0067.jpg,train,Wilt,val\Wilt\wilt_val_0038.jpg,val,Wilt,0,1,True,False,train_wilt_aug_38.jpg,train_wilt_aug_18.jpg
+train\Wilt\wilt_train_0068.jpg,train,Wilt,val\Wilt\wilt_val_0017.jpg,val,Wilt,0,0,True,False,train_wilt_aug_70.jpg,train_wilt_aug_98.jpg
+train\Wilt\wilt_train_0068.jpg,train,Wilt,val\Wilt\wilt_val_0045.jpg,val,Wilt,0,1,True,False,train_wilt_aug_70.jpg,train_wilt_aug_92.jpg
+train\Wilt\wilt_train_0070.jpg,train,Wilt,train\Wilt\wilt_train_0160.jpg,train,Wilt,0,0,False,False,train_wilt_aug_81.jpg,train_wilt_aug_39.jpg
+train\Wilt\wilt_train_0070.jpg,train,Wilt,val\Wilt\wilt_val_0033.jpg,val,Wilt,0,0,True,False,train_wilt_aug_81.jpg,train_wilt_aug_262.jpg
+train\Wilt\wilt_train_0071.jpg,train,Wilt,train\Wilt\wilt_train_0099.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_20.jpg,train_wilt_aug_10.jpg
+train\Wilt\wilt_train_0071.jpg,train,Wilt,train\Wilt\wilt_train_0155.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_20.jpg,train_wilt_aug_214.jpg
+train\Wilt\wilt_train_0071.jpg,train,Wilt,val\Wilt\wilt_val_0029.jpg,val,Wilt,0,1,True,False,train_wilt_orig_train_20.jpg,train_wilt_aug_238.jpg
+train\Wilt\wilt_train_0075.jpg,train,Wilt,train\Wilt\wilt_train_0106.jpg,train,Wilt,0,0,False,False,train_wilt_orig_train_9.jpg,train_wilt_aug_34.jpg
+train\Wilt\wilt_train_0075.jpg,train,Wilt,val\Wilt\wilt_val_0032.jpg,val,Wilt,0,0,True,False,train_wilt_orig_train_9.jpg,train_wilt_aug_99.jpg
+train\Wilt\wilt_train_0076.jpg,train,Wilt,train\Wilt\wilt_train_0139.jpg,train,Wilt,0,0,False,False,train_wilt_aug_140.jpg,train_wilt_aug_120.jpg
+train\Wilt\wilt_train_0076.jpg,train,Wilt,val\Wilt\wilt_val_0046.jpg,val,Wilt,0,0,True,False,train_wilt_aug_140.jpg,train_wilt_aug_117.jpg
+train\Wilt\wilt_train_0077.jpg,train,Wilt,train\Wilt\wilt_train_0111.jpg,train,Wilt,0,0,False,False,train_wilt_aug_95.jpg,train_wilt_aug_71.jpg;train_wilt_aug_31.jpg
+train\Wilt\wilt_train_0077.jpg,train,Wilt,train\Wilt\wilt_train_0131.jpg,train,Wilt,0,0,False,False,train_wilt_aug_95.jpg,train_wilt_aug_53.jpg
+train\Wilt\wilt_train_0077.jpg,train,Wilt,test\Wilt\wilt_test_0001.jpg,test,Wilt,2,0,True,False,train_wilt_aug_95.jpg,train_wilt_aug_23.jpg
+train\Wilt\wilt_train_0077.jpg,train,Wilt,test\Wilt\wilt_test_0027.jpg,test,Wilt,0,0,True,False,train_wilt_aug_95.jpg,train_wilt_orig_train_7.jpg
+train\Wilt\wilt_train_0080.jpg,train,Wilt,train\Wilt\wilt_train_0117.jpg,train,Wilt,0,0,False,False,train_wilt_aug_119.jpg,train_wilt_aug_164.jpg
+train\Wilt\wilt_train_0080.jpg,train,Wilt,test\Wilt\wilt_test_0016.jpg,test,Wilt,0,0,True,False,train_wilt_aug_119.jpg,train_wilt_aug_269.jpg
+train\Wilt\wilt_train_0080.jpg,train,Wilt,test\Wilt\wilt_test_0056.jpg,test,Wilt,0,0,True,False,train_wilt_aug_119.jpg,train_wilt_aug_104.jpg
+train\Wilt\wilt_train_0081.jpg,train,Wilt,train\Wilt\wilt_train_0091.jpg,train,Wilt,0,0,False,False,train_wilt_aug_27.jpg,train_wilt_aug_221.jpg;train_wilt_aug_79.jpg
+train\Wilt\wilt_train_0081.jpg,train,Wilt,val\Wilt\wilt_val_0052.jpg,val,Wilt,5,1,True,False,train_wilt_aug_27.jpg,train_wilt_aug_147.jpg
+train\Wilt\wilt_train_0081.jpg,train,Wilt,test\Wilt\wilt_test_0051.jpg,test,Wilt,3,2,True,False,train_wilt_aug_27.jpg,train_wilt_aug_141.jpg
+train\Wilt\wilt_train_0083.jpg,train,Wilt,train\Wilt\wilt_train_0086.jpg,train,Wilt,2,2,False,False,train_wilt_aug_245.jpg,train_wilt_aug_158.jpg
+train\Wilt\wilt_train_0084.jpg,train,Wilt,val\Wilt\wilt_val_0050.jpg,val,Wilt,2,4,True,False,train_wilt_aug_124.jpg,train_wilt_aug_161.jpg
+train\Wilt\wilt_train_0087.jpg,train,Wilt,val\Wilt\wilt_val_0038.jpg,val,Wilt,4,2,True,False,train_wilt_aug_149.jpg,train_wilt_aug_18.jpg
+train\Wilt\wilt_train_0089.jpg,train,Wilt,test\Wilt\wilt_test_0052.jpg,test,Wilt,0,1,True,False,train_wilt_aug_48.jpg,train_wilt_aug_159.jpg
+train\Wilt\wilt_train_0091.jpg,train,Wilt,val\Wilt\wilt_val_0052.jpg,val,Wilt,5,1,True,False,train_wilt_aug_221.jpg;train_wilt_aug_79.jpg,train_wilt_aug_147.jpg
+train\Wilt\wilt_train_0091.jpg,train,Wilt,test\Wilt\wilt_test_0051.jpg,test,Wilt,3,2,True,False,train_wilt_aug_221.jpg;train_wilt_aug_79.jpg,train_wilt_aug_141.jpg
+train\Wilt\wilt_train_0092.jpg,train,Wilt,val\Wilt\wilt_val_0024.jpg,val,Wilt,4,5,True,False,train_wilt_aug_266.jpg,train_wilt_aug_150.jpg
+train\Wilt\wilt_train_0094.jpg,train,Wilt,test\Wilt\wilt_test_0003.jpg,test,Wilt,0,1,True,False,train_wilt_aug_80.jpg,train_wilt_aug_58.jpg
+train\Wilt\wilt_train_0094.jpg,train,Wilt,test\Wilt\wilt_test_0012.jpg,test,Wilt,0,1,True,False,train_wilt_aug_80.jpg,train_wilt_aug_73.jpg
+train\Wilt\wilt_train_0094.jpg,train,Wilt,test\Wilt\wilt_test_0050.jpg,test,Wilt,0,0,True,False,train_wilt_aug_80.jpg,train_wilt_orig_train_6.jpg
+train\Wilt\wilt_train_0096.jpg,train,Wilt,val\Wilt\wilt_val_0013.jpg,val,Wilt,0,0,True,False,train_wilt_aug_102.jpg,train_wilt_aug_115.jpg;train_wilt_aug_106.jpg
+train\Wilt\wilt_train_0096.jpg,train,Wilt,test\Wilt\wilt_test_0014.jpg,test,Wilt,2,0,True,False,train_wilt_aug_102.jpg,train_wilt_aug_220.jpg
+train\Wilt\wilt_train_0096.jpg,train,Wilt,test\Wilt\wilt_test_0026.jpg,test,Wilt,0,0,True,False,train_wilt_aug_102.jpg,train_wilt_orig_train_2.jpg
+train\Wilt\wilt_train_0096.jpg,train,Wilt,test\Wilt\wilt_test_0053.jpg,test,Wilt,2,2,True,False,train_wilt_aug_102.jpg,train_wilt_aug_20.jpg
+train\Wilt\wilt_train_0097.jpg,train,Wilt,train\Wilt\wilt_train_0166.jpg,train,Wilt,6,3,False,False,train_wilt_aug_16.jpg,train_wilt_aug_151.jpg
+train\Wilt\wilt_train_0097.jpg,train,Wilt,val\Wilt\wilt_val_0016.jpg,val,Wilt,2,4,True,False,train_wilt_aug_16.jpg,train_wilt_aug_145.jpg
+train\Wilt\wilt_train_0098.jpg,train,Wilt,train\Wilt\wilt_train_0165.jpg,train,Wilt,0,0,False,False,train_wilt_aug_186.jpg,train_wilt_aug_226.jpg
+train\Wilt\wilt_train_0098.jpg,train,Wilt,test\Wilt\wilt_test_0022.jpg,test,Wilt,0,0,True,False,train_wilt_aug_186.jpg,train_wilt_orig_train_0.jpg
+train\Wilt\wilt_train_0099.jpg,train,Wilt,train\Wilt\wilt_train_0155.jpg,train,Wilt,0,2,False,False,train_wilt_aug_10.jpg,train_wilt_aug_214.jpg
+train\Wilt\wilt_train_0099.jpg,train,Wilt,val\Wilt\wilt_val_0029.jpg,val,Wilt,0,0,True,False,train_wilt_aug_10.jpg,train_wilt_aug_238.jpg
+train\Wilt\wilt_train_0101.jpg,train,Wilt,val\Wilt\wilt_val_0024.jpg,val,Wilt,5,5,True,False,train_wilt_aug_232.jpg,train_wilt_aug_150.jpg
+train\Wilt\wilt_train_0105.jpg,train,Wilt,train\Wilt\wilt_train_0149.jpg,train,Wilt,0,2,False,False,train_wilt_aug_35.jpg,train_wilt_aug_130.jpg
+train\Wilt\wilt_train_0105.jpg,train,Wilt,val\Wilt\wilt_val_0056.jpg,val,Wilt,0,1,True,False,train_wilt_aug_35.jpg,train_wilt_aug_263.jpg
+train\Wilt\wilt_train_0106.jpg,train,Wilt,val\Wilt\wilt_val_0032.jpg,val,Wilt,0,0,True,False,train_wilt_aug_34.jpg,train_wilt_aug_99.jpg
+train\Wilt\wilt_train_0108.jpg,train,Wilt,train\Wilt\wilt_train_0144.jpg,train,Wilt,0,0,False,False,train_wilt_aug_4.jpg,train_wilt_orig_train_18.jpg
+train\Wilt\wilt_train_0108.jpg,train,Wilt,test\Wilt\wilt_test_0055.jpg,test,Wilt,0,1,True,False,train_wilt_aug_4.jpg,train_wilt_aug_223.jpg
+train\Wilt\wilt_train_0111.jpg,train,Wilt,train\Wilt\wilt_train_0131.jpg,train,Wilt,0,0,False,False,train_wilt_aug_71.jpg;train_wilt_aug_31.jpg,train_wilt_aug_53.jpg
+train\Wilt\wilt_train_0111.jpg,train,Wilt,test\Wilt\wilt_test_0001.jpg,test,Wilt,2,0,True,False,train_wilt_aug_71.jpg;train_wilt_aug_31.jpg,train_wilt_aug_23.jpg
+train\Wilt\wilt_train_0111.jpg,train,Wilt,test\Wilt\wilt_test_0027.jpg,test,Wilt,0,0,True,False,train_wilt_aug_71.jpg;train_wilt_aug_31.jpg,train_wilt_orig_train_7.jpg
+train\Wilt\wilt_train_0112.jpg,train,Wilt,val\Wilt\wilt_val_0002.jpg,val,Wilt,0,0,True,False,train_wilt_aug_59.jpg,train_wilt_aug_250.jpg
+train\Wilt\wilt_train_0113.jpg,train,Wilt,val\Wilt\wilt_val_0003.jpg,val,Wilt,2,2,True,False,train_wilt_aug_26.jpg,train_wilt_aug_261.jpg
+train\Wilt\wilt_train_0113.jpg,train,Wilt,test\Wilt\wilt_test_0017.jpg,test,Wilt,6,8,True,False,train_wilt_aug_26.jpg,train_wilt_aug_103.jpg
+train\Wilt\wilt_train_0114.jpg,train,Wilt,val\Wilt\wilt_val_0018.jpg,val,Wilt,0,2,True,False,train_wilt_aug_93.jpg,train_wilt_aug_259.jpg
+train\Wilt\wilt_train_0114.jpg,train,Wilt,val\Wilt\wilt_val_0037.jpg,val,Wilt,0,2,True,False,train_wilt_aug_93.jpg,train_wilt_aug_176.jpg
+train\Wilt\wilt_train_0114.jpg,train,Wilt,val\Wilt\wilt_val_0044.jpg,val,Wilt,0,2,True,False,train_wilt_aug_93.jpg,train_wilt_orig_train_8.jpg
+train\Wilt\wilt_train_0116.jpg,train,Wilt,val\Wilt\wilt_val_0001.jpg,val,Wilt,0,1,True,False,train_wilt_aug_69.jpg,train_wilt_aug_211.jpg
+train\Wilt\wilt_train_0117.jpg,train,Wilt,test\Wilt\wilt_test_0016.jpg,test,Wilt,0,0,True,False,train_wilt_aug_164.jpg,train_wilt_aug_269.jpg
+train\Wilt\wilt_train_0117.jpg,train,Wilt,test\Wilt\wilt_test_0056.jpg,test,Wilt,0,0,True,False,train_wilt_aug_164.jpg,train_wilt_aug_104.jpg
+train\Wilt\wilt_train_0118.jpg,train,Wilt,train\Wilt\wilt_train_0171.jpg,train,Wilt,2,1,False,False,train_wilt_aug_88.jpg,train_wilt_aug_248.jpg
+train\Wilt\wilt_train_0119.jpg,train,Wilt,train\Wilt\wilt_train_0145.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_1.jpg,train_wilt_aug_32.jpg
+train\Wilt\wilt_train_0119.jpg,train,Wilt,train\Wilt\wilt_train_0157.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_1.jpg,train_wilt_aug_28.jpg
+train\Wilt\wilt_train_0120.jpg,train,Wilt,train\Wilt\wilt_train_0170.jpg,train,Wilt,0,0,False,False,train_wilt_aug_192.jpg,train_wilt_aug_83.jpg
+train\Wilt\wilt_train_0120.jpg,train,Wilt,test\Wilt\wilt_test_0033.jpg,test,Wilt,0,0,True,False,train_wilt_aug_192.jpg,train_wilt_orig_train_4.jpg
+train\Wilt\wilt_train_0120.jpg,train,Wilt,test\Wilt\wilt_test_0045.jpg,test,Wilt,0,0,True,False,train_wilt_aug_192.jpg,train_wilt_aug_137.jpg
+train\Wilt\wilt_train_0121.jpg,train,Wilt,val\Wilt\wilt_val_0004.jpg,val,Wilt,6,3,True,False,train_wilt_aug_129.jpg,train_wilt_aug_265.jpg;train_wilt_aug_77.jpg
+train\Wilt\wilt_train_0121.jpg,train,Wilt,test\Wilt\wilt_test_0037.jpg,test,Wilt,4,2,True,False,train_wilt_aug_129.jpg,train_wilt_aug_66.jpg
+train\Wilt\wilt_train_0124.jpg,train,Wilt,test\Wilt\wilt_test_0002.jpg,test,Wilt,0,0,True,False,train_wilt_orig_train_16.jpg,train_wilt_aug_196.jpg;train_wilt_aug_233.jpg;train_wilt_aug_178.jpg
+train\Wilt\wilt_train_0126.jpg,train,Wilt,val\Wilt\wilt_val_0005.jpg,val,Wilt,4,4,True,False,train_wilt_aug_29.jpg,train_wilt_aug_228.jpg
+train\Wilt\wilt_train_0126.jpg,train,Wilt,val\Wilt\wilt_val_0028.jpg,val,Wilt,0,0,True,False,train_wilt_aug_29.jpg,train_wilt_orig_train_14.jpg
+train\Wilt\wilt_train_0126.jpg,train,Wilt,test\Wilt\wilt_test_0030.jpg,test,Wilt,0,1,True,False,train_wilt_aug_29.jpg,train_wilt_aug_166.jpg
+train\Wilt\wilt_train_0126.jpg,train,Wilt,test\Wilt\wilt_test_0046.jpg,test,Wilt,4,4,True,False,train_wilt_aug_29.jpg,train_wilt_aug_107.jpg
+train\Wilt\wilt_train_0126.jpg,train,Wilt,test\Wilt\wilt_test_0047.jpg,test,Wilt,0,0,True,False,train_wilt_aug_29.jpg,train_wilt_aug_108.jpg
+train\Wilt\wilt_train_0128.jpg,train,Wilt,train\Wilt\wilt_train_0143.jpg,train,Wilt,3,3,False,False,train_wilt_aug_212.jpg,train_wilt_aug_219.jpg
+train\Wilt\wilt_train_0129.jpg,train,Wilt,val\Wilt\wilt_val_0053.jpg,val,Wilt,0,0,True,False,train_wilt_aug_30.jpg,train_wilt_aug_252.jpg
+train\Wilt\wilt_train_0129.jpg,train,Wilt,test\Wilt\wilt_test_0005.jpg,test,Wilt,0,0,True,False,train_wilt_aug_30.jpg,train_wilt_aug_241.jpg
+train\Wilt\wilt_train_0129.jpg,train,Wilt,test\Wilt\wilt_test_0042.jpg,test,Wilt,0,0,True,False,train_wilt_aug_30.jpg,train_wilt_aug_96.jpg
+train\Wilt\wilt_train_0131.jpg,train,Wilt,test\Wilt\wilt_test_0001.jpg,test,Wilt,2,0,True,False,train_wilt_aug_53.jpg,train_wilt_aug_23.jpg
+train\Wilt\wilt_train_0131.jpg,train,Wilt,test\Wilt\wilt_test_0027.jpg,test,Wilt,0,0,True,False,train_wilt_aug_53.jpg,train_wilt_orig_train_7.jpg
+train\Wilt\wilt_train_0133.jpg,train,Wilt,train\Wilt\wilt_train_0146.jpg,train,Wilt,0,2,False,False,train_wilt_orig_train_19.jpg,train_wilt_aug_183.jpg
+train\Wilt\wilt_train_0133.jpg,train,Wilt,train\Wilt\wilt_train_0147.jpg,train,Wilt,0,1,False,False,train_wilt_orig_train_19.jpg,train_wilt_aug_43.jpg
+train\Wilt\wilt_train_0133.jpg,train,Wilt,test\Wilt\wilt_test_0011.jpg,test,Wilt,0,0,True,False,train_wilt_orig_train_19.jpg,train_wilt_aug_181.jpg
+train\Wilt\wilt_train_0134.jpg,train,Wilt,test\Wilt\wilt_test_0009.jpg,test,Wilt,0,0,True,False,train_wilt_aug_74.jpg,train_wilt_aug_224.jpg
+train\Wilt\wilt_train_0139.jpg,train,Wilt,val\Wilt\wilt_val_0046.jpg,val,Wilt,0,0,True,False,train_wilt_aug_120.jpg,train_wilt_aug_117.jpg
+train\Wilt\wilt_train_0141.jpg,train,Wilt,train\Wilt\wilt_train_0151.jpg,train,Wilt,2,1,False,False,train_wilt_aug_75.jpg,train_wilt_aug_12.jpg
+train\Wilt\wilt_train_0141.jpg,train,Wilt,val\Wilt\wilt_val_0000.jpg,val,Wilt,2,0,True,False,train_wilt_aug_75.jpg,train_wilt_orig_train_15.jpg
+train\Wilt\wilt_train_0141.jpg,train,Wilt,test\Wilt\wilt_test_0029.jpg,test,Wilt,2,0,True,False,train_wilt_aug_75.jpg,train_wilt_aug_195.jpg;train_wilt_aug_242.jpg
+train\Wilt\wilt_train_0141.jpg,train,Wilt,test\Wilt\wilt_test_0032.jpg,test,Wilt,2,0,True,False,train_wilt_aug_75.jpg,train_wilt_aug_257.jpg
+train\Wilt\wilt_train_0144.jpg,train,Wilt,test\Wilt\wilt_test_0055.jpg,test,Wilt,0,1,True,False,train_wilt_orig_train_18.jpg,train_wilt_aug_223.jpg
+train\Wilt\wilt_train_0145.jpg,train,Wilt,train\Wilt\wilt_train_0157.jpg,train,Wilt,0,0,False,False,train_wilt_aug_32.jpg,train_wilt_aug_28.jpg
+train\Wilt\wilt_train_0146.jpg,train,Wilt,train\Wilt\wilt_train_0147.jpg,train,Wilt,0,1,False,False,train_wilt_aug_183.jpg,train_wilt_aug_43.jpg
+train\Wilt\wilt_train_0146.jpg,train,Wilt,test\Wilt\wilt_test_0011.jpg,test,Wilt,0,2,True,False,train_wilt_aug_183.jpg,train_wilt_aug_181.jpg
+train\Wilt\wilt_train_0147.jpg,train,Wilt,test\Wilt\wilt_test_0011.jpg,test,Wilt,0,1,True,False,train_wilt_aug_43.jpg,train_wilt_aug_181.jpg
+train\Wilt\wilt_train_0149.jpg,train,Wilt,val\Wilt\wilt_val_0056.jpg,val,Wilt,0,3,True,False,train_wilt_aug_130.jpg,train_wilt_aug_263.jpg
+train\Wilt\wilt_train_0151.jpg,train,Wilt,val\Wilt\wilt_val_0000.jpg,val,Wilt,0,1,True,False,train_wilt_aug_12.jpg,train_wilt_orig_train_15.jpg
+train\Wilt\wilt_train_0151.jpg,train,Wilt,test\Wilt\wilt_test_0029.jpg,test,Wilt,0,1,True,False,train_wilt_aug_12.jpg,train_wilt_aug_195.jpg;train_wilt_aug_242.jpg
+train\Wilt\wilt_train_0151.jpg,train,Wilt,test\Wilt\wilt_test_0032.jpg,test,Wilt,0,1,True,False,train_wilt_aug_12.jpg,train_wilt_aug_257.jpg
+train\Wilt\wilt_train_0155.jpg,train,Wilt,val\Wilt\wilt_val_0029.jpg,val,Wilt,0,2,True,False,train_wilt_aug_214.jpg,train_wilt_aug_238.jpg
+train\Wilt\wilt_train_0158.jpg,train,Wilt,test\Wilt\wilt_test_0021.jpg,test,Wilt,1,1,True,False,train_wilt_aug_68.jpg,train_wilt_aug_184.jpg;train_wilt_aug_174.jpg
+train\Wilt\wilt_train_0159.jpg,train,Wilt,val\Wilt\wilt_val_0021.jpg,val,Wilt,4,4,True,False,train_wilt_aug_264.jpg,train_wilt_aug_55.jpg
+train\Wilt\wilt_train_0159.jpg,train,Wilt,test\Wilt\wilt_test_0020.jpg,test,Wilt,4,5,True,False,train_wilt_aug_264.jpg,train_wilt_aug_237.jpg
+train\Wilt\wilt_train_0159.jpg,train,Wilt,test\Wilt\wilt_test_0028.jpg,test,Wilt,4,3,True,False,train_wilt_aug_264.jpg,train_wilt_aug_255.jpg
+train\Wilt\wilt_train_0160.jpg,train,Wilt,val\Wilt\wilt_val_0033.jpg,val,Wilt,0,0,True,False,train_wilt_aug_39.jpg,train_wilt_aug_262.jpg
+train\Wilt\wilt_train_0165.jpg,train,Wilt,test\Wilt\wilt_test_0022.jpg,test,Wilt,0,0,True,False,train_wilt_aug_226.jpg,train_wilt_orig_train_0.jpg
+train\Wilt\wilt_train_0167.jpg,train,Wilt,test\Wilt\wilt_test_0025.jpg,test,Wilt,2,4,True,False,train_wilt_aug_126.jpg,train_wilt_aug_182.jpg
+train\Wilt\wilt_train_0169.jpg,train,Wilt,val\Wilt\wilt_val_0038.jpg,val,Wilt,5,4,True,False,train_wilt_aug_127.jpg,train_wilt_aug_18.jpg
+train\Wilt\wilt_train_0169.jpg,train,Wilt,val\Wilt\wilt_val_0040.jpg,val,Wilt,3,1,True,False,train_wilt_aug_127.jpg,train_wilt_aug_179.jpg
+train\Wilt\wilt_train_0170.jpg,train,Wilt,test\Wilt\wilt_test_0033.jpg,test,Wilt,0,0,True,False,train_wilt_aug_83.jpg,train_wilt_orig_train_4.jpg
+train\Wilt\wilt_train_0170.jpg,train,Wilt,test\Wilt\wilt_test_0045.jpg,test,Wilt,0,0,True,False,train_wilt_aug_83.jpg,train_wilt_aug_137.jpg
+val\Healthy\healthy_val_0007.jpg,val,Healthy,test\Healthy\healthy_test_0051.jpg,test,Healthy,4,7,True,False,Healthy_0035.jpg;images (146).jpg,Healthy_aug_0092.jpg
+val\Healthy\healthy_val_0041.jpg,val,Healthy,test\Healthy\healthy_test_0011.jpg,test,Healthy,4,0,True,False,Healthy_aug_0009.jpg,Healthy_aug_0112.jpg
+val\Healthy\healthy_val_0056.jpg,val,Healthy,test\Healthy\healthy_test_0005.jpg,test,Healthy,0,0,True,False,Healthy_aug_0010.jpg,Healthy_0077.jpg;images (25).jpg
+val\Leaf_Spot\leaf_spot_val_0029.jpg,val,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0002.jpg,test,Leaf_Spot,6,3,True,False,Leaf_Spot_aug_0075.jpg,Leaf_Spot_aug_0001.jpg
+val\Leaf_Spot\leaf_spot_val_0032.jpg,val,Leaf_Spot,val\Sterilic_mosaic\sterilic_mosaic_val_0011.jpg,val,Sterilic_mosaic,2,2,False,True,Leaf_Spot_0066.jpg;images (35).jpg,images(184).jpg;Sterilic_mosaic_0103.jpg
+val\Leaf_Spot\leaf_spot_val_0038.jpg,val,Leaf_Spot,val\Leaf_Spot\leaf_spot_val_0071.jpg,val,Leaf_Spot,2,1,False,False,images (216).jpg;images(236).jpg,Leaf_Spot_0181.jpg;images (334).jpg
+val\Leaf_Spot\leaf_spot_val_0042.jpg,val,Leaf_Spot,val\Sterilic_mosaic\sterilic_mosaic_val_0067.jpg,val,Sterilic_mosaic,2,4,False,True,images (55).jpg;Leaf_Spot_0017.jpg,images(195).jpg;Sterilic_mosaic_0096.jpg
+val\Leaf_Spot\leaf_spot_val_0050.jpg,val,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0065.jpg,test,Leaf_Spot,6,5,True,False,Leaf_Spot_aug_0041.jpg,Leaf_Spot_0092.jpg;images (271).jpg
+val\Leaf_Spot\leaf_spot_val_0051.jpg,val,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0067.jpg,test,Leaf_Spot,6,5,True,False,images (14).jpg;Leaf_Spot_0149.jpg,Leaf_Spot_0128.jpg;images (67).jpg
+val\Leaf_webber\leaf_webber_val_0003.jpg,val,Leaf_webber,test\Leaf_webber\leaf_webber_test_0069.jpg,test,Leaf_webber,5,1,True,False,Leaf_webber_aug_0011.jpg,Leaf_webber_aug_0163.jpg
+val\Leaf_webber\leaf_webber_val_0009.jpg,val,Leaf_webber,val\Leaf_webber\leaf_webber_val_0058.jpg,val,Leaf_webber,2,2,False,False,Leaf_webber_aug_0193.jpg,images (148).jpg;Leaf_webber_0095.jpg
+val\Leaf_webber\leaf_webber_val_0024.jpg,val,Leaf_webber,val\Leaf_webber\leaf_webber_val_0045.jpg,val,Leaf_webber,0,2,False,False,Leaf_webber_aug_0094.jpg,Leaf_webber_0070.jpg;images (99).jpg
+val\Leaf_webber\leaf_webber_val_0064.jpg,val,Leaf_webber,test\Leaf_webber\leaf_webber_test_0005.jpg,test,Leaf_webber,2,0,True,False,Leaf_webber_aug_0001.jpg,images (17).jpg;Leaf_webber_0071.jpg
+val\Sterilic_mosaic\sterilic_mosaic_val_0076.jpg,val,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0044.jpg,test,Sterilic_mosaic,6,4,True,False,Sterilic_mosaic_aug_0112.jpg,Sterilic_mosaic_aug_0057.jpg
+val\Wilt\wilt_val_0000.jpg,val,Wilt,test\Wilt\wilt_test_0029.jpg,test,Wilt,0,0,True,False,train_wilt_orig_train_15.jpg,train_wilt_aug_195.jpg;train_wilt_aug_242.jpg
+val\Wilt\wilt_val_0000.jpg,val,Wilt,test\Wilt\wilt_test_0032.jpg,test,Wilt,0,0,True,False,train_wilt_orig_train_15.jpg,train_wilt_aug_257.jpg
+val\Wilt\wilt_val_0003.jpg,val,Wilt,test\Wilt\wilt_test_0017.jpg,test,Wilt,4,6,True,False,train_wilt_aug_261.jpg,train_wilt_aug_103.jpg
+val\Wilt\wilt_val_0004.jpg,val,Wilt,test\Wilt\wilt_test_0037.jpg,test,Wilt,2,1,True,False,train_wilt_aug_265.jpg;train_wilt_aug_77.jpg,train_wilt_aug_66.jpg
+val\Wilt\wilt_val_0005.jpg,val,Wilt,val\Wilt\wilt_val_0028.jpg,val,Wilt,4,4,False,False,train_wilt_aug_228.jpg,train_wilt_orig_train_14.jpg
+val\Wilt\wilt_val_0005.jpg,val,Wilt,test\Wilt\wilt_test_0030.jpg,test,Wilt,4,3,True,False,train_wilt_aug_228.jpg,train_wilt_aug_166.jpg
+val\Wilt\wilt_val_0005.jpg,val,Wilt,test\Wilt\wilt_test_0046.jpg,test,Wilt,0,0,True,False,train_wilt_aug_228.jpg,train_wilt_aug_107.jpg
+val\Wilt\wilt_val_0005.jpg,val,Wilt,test\Wilt\wilt_test_0047.jpg,test,Wilt,4,4,True,False,train_wilt_aug_228.jpg,train_wilt_aug_108.jpg
+val\Wilt\wilt_val_0006.jpg,val,Wilt,test\Wilt\wilt_test_0000.jpg,test,Wilt,0,1,True,False,train_wilt_aug_143.jpg,train_wilt_aug_139.jpg
+val\Wilt\wilt_val_0006.jpg,val,Wilt,test\Wilt\wilt_test_0048.jpg,test,Wilt,0,1,True,False,train_wilt_aug_143.jpg,train_wilt_aug_54.jpg
+val\Wilt\wilt_val_0007.jpg,val,Wilt,val\Wilt\wilt_val_0023.jpg,val,Wilt,0,0,False,False,train_wilt_orig_train_3.jpg,train_wilt_aug_5.jpg
+val\Wilt\wilt_val_0007.jpg,val,Wilt,test\Wilt\wilt_test_0013.jpg,test,Wilt,0,0,True,False,train_wilt_orig_train_3.jpg,train_wilt_aug_122.jpg
+val\Wilt\wilt_val_0011.jpg,val,Wilt,val\Wilt\wilt_val_0035.jpg,val,Wilt,4,6,False,False,train_wilt_aug_100.jpg,train_wilt_aug_254.jpg
+val\Wilt\wilt_val_0012.jpg,val,Wilt,val\Wilt\wilt_val_0030.jpg,val,Wilt,0,0,False,False,train_wilt_aug_61.jpg,train_wilt_aug_11.jpg
+val\Wilt\wilt_val_0012.jpg,val,Wilt,val\Wilt\wilt_val_0042.jpg,val,Wilt,0,1,False,False,train_wilt_aug_61.jpg,train_wilt_aug_246.jpg
+val\Wilt\wilt_val_0012.jpg,val,Wilt,test\Wilt\wilt_test_0041.jpg,test,Wilt,6,7,True,False,train_wilt_aug_61.jpg,train_wilt_aug_105.jpg
+val\Wilt\wilt_val_0013.jpg,val,Wilt,test\Wilt\wilt_test_0014.jpg,test,Wilt,2,0,True,False,train_wilt_aug_115.jpg;train_wilt_aug_106.jpg,train_wilt_aug_220.jpg
+val\Wilt\wilt_val_0013.jpg,val,Wilt,test\Wilt\wilt_test_0026.jpg,test,Wilt,0,0,True,False,train_wilt_aug_115.jpg;train_wilt_aug_106.jpg,train_wilt_orig_train_2.jpg
+val\Wilt\wilt_val_0013.jpg,val,Wilt,test\Wilt\wilt_test_0053.jpg,test,Wilt,2,2,True,False,train_wilt_aug_115.jpg;train_wilt_aug_106.jpg,train_wilt_aug_20.jpg
+val\Wilt\wilt_val_0015.jpg,val,Wilt,test\Wilt\wilt_test_0008.jpg,test,Wilt,5,8,True,False,train_wilt_aug_258.jpg,train_wilt_aug_162.jpg
+val\Wilt\wilt_val_0017.jpg,val,Wilt,val\Wilt\wilt_val_0045.jpg,val,Wilt,0,1,False,False,train_wilt_aug_98.jpg,train_wilt_aug_92.jpg
+val\Wilt\wilt_val_0018.jpg,val,Wilt,val\Wilt\wilt_val_0037.jpg,val,Wilt,0,0,False,False,train_wilt_aug_259.jpg,train_wilt_aug_176.jpg
+val\Wilt\wilt_val_0018.jpg,val,Wilt,val\Wilt\wilt_val_0044.jpg,val,Wilt,0,0,False,False,train_wilt_aug_259.jpg,train_wilt_orig_train_8.jpg
+val\Wilt\wilt_val_0019.jpg,val,Wilt,val\Wilt\wilt_val_0026.jpg,val,Wilt,0,0,False,False,train_wilt_aug_247.jpg,train_wilt_aug_22.jpg
+val\Wilt\wilt_val_0019.jpg,val,Wilt,test\Wilt\wilt_test_0044.jpg,test,Wilt,2,0,True,False,train_wilt_aug_247.jpg,train_wilt_aug_197.jpg
+val\Wilt\wilt_val_0021.jpg,val,Wilt,test\Wilt\wilt_test_0020.jpg,test,Wilt,0,1,True,False,train_wilt_aug_55.jpg,train_wilt_aug_237.jpg
+val\Wilt\wilt_val_0021.jpg,val,Wilt,test\Wilt\wilt_test_0028.jpg,test,Wilt,0,1,True,False,train_wilt_aug_55.jpg,train_wilt_aug_255.jpg
+val\Wilt\wilt_val_0022.jpg,val,Wilt,val\Wilt\wilt_val_0031.jpg,val,Wilt,5,5,False,False,train_wilt_aug_203.jpg,train_wilt_aug_249.jpg
+val\Wilt\wilt_val_0023.jpg,val,Wilt,test\Wilt\wilt_test_0013.jpg,test,Wilt,0,0,True,False,train_wilt_aug_5.jpg,train_wilt_aug_122.jpg
+val\Wilt\wilt_val_0026.jpg,val,Wilt,test\Wilt\wilt_test_0044.jpg,test,Wilt,2,0,True,False,train_wilt_aug_22.jpg,train_wilt_aug_197.jpg
+val\Wilt\wilt_val_0028.jpg,val,Wilt,test\Wilt\wilt_test_0030.jpg,test,Wilt,0,1,True,False,train_wilt_orig_train_14.jpg,train_wilt_aug_166.jpg
+val\Wilt\wilt_val_0028.jpg,val,Wilt,test\Wilt\wilt_test_0046.jpg,test,Wilt,4,4,True,False,train_wilt_orig_train_14.jpg,train_wilt_aug_107.jpg
+val\Wilt\wilt_val_0028.jpg,val,Wilt,test\Wilt\wilt_test_0047.jpg,test,Wilt,0,0,True,False,train_wilt_orig_train_14.jpg,train_wilt_aug_108.jpg
+val\Wilt\wilt_val_0030.jpg,val,Wilt,val\Wilt\wilt_val_0042.jpg,val,Wilt,0,1,False,False,train_wilt_aug_11.jpg,train_wilt_aug_246.jpg
+val\Wilt\wilt_val_0030.jpg,val,Wilt,test\Wilt\wilt_test_0041.jpg,test,Wilt,6,7,True,False,train_wilt_aug_11.jpg,train_wilt_aug_105.jpg
+val\Wilt\wilt_val_0034.jpg,val,Wilt,test\Wilt\wilt_test_0031.jpg,test,Wilt,0,0,True,False,train_wilt_aug_156.jpg;train_wilt_aug_239.jpg,train_wilt_orig_train_11.jpg
+val\Wilt\wilt_val_0037.jpg,val,Wilt,val\Wilt\wilt_val_0044.jpg,val,Wilt,0,0,False,False,train_wilt_aug_176.jpg,train_wilt_orig_train_8.jpg
+val\Wilt\wilt_val_0041.jpg,val,Wilt,test\Wilt\wilt_test_0039.jpg,test,Wilt,0,0,True,False,train_wilt_aug_51.jpg,train_wilt_aug_52.jpg
+val\Wilt\wilt_val_0042.jpg,val,Wilt,test\Wilt\wilt_test_0041.jpg,test,Wilt,6,8,True,False,train_wilt_aug_246.jpg,train_wilt_aug_105.jpg
+val\Wilt\wilt_val_0047.jpg,val,Wilt,test\Wilt\wilt_test_0024.jpg,test,Wilt,0,2,True,False,train_wilt_aug_148.jpg,train_wilt_aug_116.jpg
+val\Wilt\wilt_val_0050.jpg,val,Wilt,test\Wilt\wilt_test_0019.jpg,test,Wilt,3,8,True,False,train_wilt_aug_161.jpg,train_wilt_aug_155.jpg
+val\Wilt\wilt_val_0052.jpg,val,Wilt,test\Wilt\wilt_test_0051.jpg,test,Wilt,2,1,True,False,train_wilt_aug_147.jpg,train_wilt_aug_141.jpg
+val\Wilt\wilt_val_0053.jpg,val,Wilt,test\Wilt\wilt_test_0005.jpg,test,Wilt,0,0,True,False,train_wilt_aug_252.jpg,train_wilt_aug_241.jpg
+val\Wilt\wilt_val_0053.jpg,val,Wilt,test\Wilt\wilt_test_0042.jpg,test,Wilt,0,0,True,False,train_wilt_aug_252.jpg,train_wilt_aug_96.jpg
+test\Healthy\healthy_test_0017.jpg,test,Healthy,test\Healthy\healthy_test_0025.jpg,test,Healthy,5,5,False,False,Healthy_aug_0100.jpg,Healthy_aug_0040.jpg
+test\Leaf_Spot\leaf_spot_test_0013.jpg,test,Leaf_Spot,test\Leaf_Spot\leaf_spot_test_0030.jpg,test,Leaf_Spot,1,2,False,False,Leaf_Spot_aug_0063.jpg,Leaf_Spot_aug_0098.jpg
+test\Leaf_webber\leaf_webber_test_0021.jpg,test,Leaf_webber,test\Leaf_webber\leaf_webber_test_0024.jpg,test,Leaf_webber,6,2,False,False,Leaf_webber_0098.jpg;images (24).jpg,Leaf_webber_aug_0093.jpg
+test\Leaf_webber\leaf_webber_test_0025.jpg,test,Leaf_webber,test\Leaf_webber\leaf_webber_test_0048.jpg,test,Leaf_webber,3,3,False,False,Leaf_webber_aug_0137.jpg,Leaf_webber_0066.jpg;images (118).jpg
+test\Leaf_webber\leaf_webber_test_0031.jpg,test,Leaf_webber,test\Sterilic_mosaic\sterilic_mosaic_test_0005.jpg,test,Sterilic_mosaic,2,0,False,True,images (1).jpg;Leaf_webber_0017.jpg,images(198).jpg;Sterilic_mosaic_0142.jpg
+test\Sterilic_mosaic\sterilic_mosaic_test_0030.jpg,test,Sterilic_mosaic,test\Sterilic_mosaic\sterilic_mosaic_test_0036.jpg,test,Sterilic_mosaic,5,3,False,False,Sterilic_mosaic_aug_0045.jpg,Sterilic_mosaic_0025.jpg;images(264).jpg
+test\Wilt\wilt_test_0000.jpg,test,Wilt,test\Wilt\wilt_test_0048.jpg,test,Wilt,0,2,False,False,train_wilt_aug_139.jpg,train_wilt_aug_54.jpg
+test\Wilt\wilt_test_0001.jpg,test,Wilt,test\Wilt\wilt_test_0027.jpg,test,Wilt,2,0,False,False,train_wilt_aug_23.jpg,train_wilt_orig_train_7.jpg
+test\Wilt\wilt_test_0003.jpg,test,Wilt,test\Wilt\wilt_test_0012.jpg,test,Wilt,0,0,False,False,train_wilt_aug_58.jpg,train_wilt_aug_73.jpg
+test\Wilt\wilt_test_0003.jpg,test,Wilt,test\Wilt\wilt_test_0050.jpg,test,Wilt,0,1,False,False,train_wilt_aug_58.jpg,train_wilt_orig_train_6.jpg
+test\Wilt\wilt_test_0005.jpg,test,Wilt,test\Wilt\wilt_test_0042.jpg,test,Wilt,0,0,False,False,train_wilt_aug_241.jpg,train_wilt_aug_96.jpg
+test\Wilt\wilt_test_0006.jpg,test,Wilt,test\Wilt\wilt_test_0010.jpg,test,Wilt,5,5,False,False,train_wilt_aug_244.jpg,train_wilt_aug_111.jpg
+test\Wilt\wilt_test_0012.jpg,test,Wilt,test\Wilt\wilt_test_0050.jpg,test,Wilt,0,1,False,False,train_wilt_aug_73.jpg,train_wilt_orig_train_6.jpg
+test\Wilt\wilt_test_0014.jpg,test,Wilt,test\Wilt\wilt_test_0026.jpg,test,Wilt,2,0,False,False,train_wilt_aug_220.jpg,train_wilt_orig_train_2.jpg
+test\Wilt\wilt_test_0014.jpg,test,Wilt,test\Wilt\wilt_test_0053.jpg,test,Wilt,0,2,False,False,train_wilt_aug_220.jpg,train_wilt_aug_20.jpg
+test\Wilt\wilt_test_0016.jpg,test,Wilt,test\Wilt\wilt_test_0056.jpg,test,Wilt,0,0,False,False,train_wilt_aug_269.jpg,train_wilt_aug_104.jpg
+test\Wilt\wilt_test_0020.jpg,test,Wilt,test\Wilt\wilt_test_0028.jpg,test,Wilt,0,2,False,False,train_wilt_aug_237.jpg,train_wilt_aug_255.jpg
+test\Wilt\wilt_test_0026.jpg,test,Wilt,test\Wilt\wilt_test_0053.jpg,test,Wilt,2,2,False,False,train_wilt_orig_train_2.jpg,train_wilt_aug_20.jpg
+test\Wilt\wilt_test_0029.jpg,test,Wilt,test\Wilt\wilt_test_0032.jpg,test,Wilt,0,0,False,False,train_wilt_aug_195.jpg;train_wilt_aug_242.jpg,train_wilt_aug_257.jpg
+test\Wilt\wilt_test_0030.jpg,test,Wilt,test\Wilt\wilt_test_0046.jpg,test,Wilt,4,3,False,False,train_wilt_aug_166.jpg,train_wilt_aug_107.jpg
+test\Wilt\wilt_test_0030.jpg,test,Wilt,test\Wilt\wilt_test_0047.jpg,test,Wilt,0,1,False,False,train_wilt_aug_166.jpg,train_wilt_aug_108.jpg
+test\Wilt\wilt_test_0033.jpg,test,Wilt,test\Wilt\wilt_test_0045.jpg,test,Wilt,0,0,False,False,train_wilt_orig_train_4.jpg,train_wilt_aug_137.jpg
+test\Wilt\wilt_test_0036.jpg,test,Wilt,test\Wilt\wilt_test_0054.jpg,test,Wilt,0,2,False,False,train_wilt_aug_225.jpg,train_wilt_aug_21.jpg
+test\Wilt\wilt_test_0046.jpg,test,Wilt,test\Wilt\wilt_test_0047.jpg,test,Wilt,4,4,False,False,train_wilt_aug_107.jpg,train_wilt_aug_108.jpg

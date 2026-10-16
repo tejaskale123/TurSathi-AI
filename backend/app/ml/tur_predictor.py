@@ -381,6 +381,10 @@ class TurDiseasePredictor:
                 f"Prediction: {disease_name} "
                 f"confidence={confidence:.4f}"
             )
+            logger.info(
+                "[PREDICTOR_DIAGNOSTIC] raw_index=%d mapped_class=%s raw_softmax_conf=%.6f status=completed device=%s",
+                predicted_index, disease_name, confidence, str(DEVICE)
+            )
 
             return PredictionResult(
                 disease_name=disease_name,

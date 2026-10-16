@@ -37,7 +37,13 @@ from sqlalchemy.orm import Session
 from app.api.v1.auth import get_current_user
 from app.database.models.user import User
 from app.database.session import get_db
-from app.schemas.scan import ScanCreateResponse, ScanDetailResponse, VoiceReportCreateResponse
+from app.ml.tur_image_gate import get_tur_image_gate
+from app.schemas.scan import (
+    FrameValidationResponse,
+    ScanCreateResponse,
+    ScanDetailResponse,
+    VoiceReportCreateResponse,
+)
 from app.services.scan_service import create_scan_with_image, create_voice_report, get_scan_for_user
 
 logger = logging.getLogger("tursathi.api.scans")
@@ -214,3 +220,65 @@ async def upload_voice_report(
         language=voice_report.language,
         status="received",
     )
+
+
+# ── In-Memory Frame Validation (Stateless Camera Probe) ───────────────────────
+
+@router.post(
+    "/validate-frame",
+    response_model=FrameValidationResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Statelessly evaluate camera snapshot frame without persistence",
+)
+async def validate_camera_frame(
+    image: UploadFile = File(..., description="Camera snapshot frame (JPEG, PNG, WebP)"),
+    current_user: User = Depends(get_current_user),
+) -> FrameValidationResponse:
+    """
+    Statelessly evaluates an incoming camera snapshot in memory:
+    - Does NOT write files to disk.
+    - Does NOT create, update, or delete database records (no db Session used).
+    - Checks decode sanity, resolution floor (224x224), Laplacian sharpness, and TurImageValidator.
+    - Returns is_valid_tur, confidence, label, reason, and message.
+    """
+    if not image.filename and not image.size:
+        return FrameValidationResponse(
+            is_valid_tur=False,
+            label="Error",
+            confidence=0.0,
+            reason="empty_file",
+            message="No image file was provided.",
+        )
+
+    try:
+        file_bytes = await image.read(_MAX_IMAGE_READ_BYTES)
+    except Exception:
+        return FrameValidationResponse(
+            is_valid_tur=False,
+            label="Error",
+            confidence=0.0,
+            reason="read_error",
+            message="Failed to read the camera snapshot.",
+        )
+
+    if not file_bytes:
+        return FrameValidationResponse(
+            is_valid_tur=False,
+            label="Error",
+            confidence=0.0,
+            reason="empty_file",
+            message="No frame data provided.",
+        )
+
+    gate = get_tur_image_gate()
+    result = gate.validate_bytes(file_bytes, source_name="camera_probe_frame")
+
+    return FrameValidationResponse(
+        is_valid_tur=result.is_valid_tur,
+        label=result.label,
+        confidence=result.confidence,
+        reason=result.reason,
+        message=result.message,
+        message_mr=result.message_mr,
+    )
+

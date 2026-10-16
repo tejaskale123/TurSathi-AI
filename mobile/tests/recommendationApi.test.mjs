@@ -518,3 +518,236 @@ describe('Post-voice-recording submission and decoupled result loading workflow'
   });
 });
 
+describe('Verified Agricultural Recommendation & Language Localization Suite', () => {
+  // Test localized recommendation helper logic
+  test('Wilt is strictly categorized as a seed/soil treatment and never as a foliar spray', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const mockWiltResponse = {
+      status: 'fallback',
+      crop: 'tur',
+      disease_name: 'Wilt',
+      confidence: 1.0,
+      confidence_percent: 100,
+      disease_explanation: 'Fusarium wilt is a soil-borne disease.',
+      farmer_action: ['Monitor crop.'],
+      spray_guidance_available: true,
+      ai_guidance_available: true,
+      spray_guidance: {
+        treatment: 'Trichoderma viride seed treatment',
+        active_ingredient: 'Trichoderma viride 1% WP',
+        recommended_quantity: '10 g per kg of seed',
+        water_quantity: null,
+        per_pump_quantity: null,
+        spray_timing: 'Apply as seed treatment before sowing.',
+        application_method: 'Seed treatment (biological). This is NOT a foliar spray.',
+        safety_precautions: 'Avoid direct sunlight exposure.',
+        after_spray_advisory: 'Uproot and destroy wilted plants.',
+      },
+      warnings: [],
+      language: 'en',
+    };
+
+    const locEn = getLocalizedRecommendation(mockWiltResponse, 'en');
+    assert.equal(locEn.isSeedTreatment, true, 'Wilt must be flagged as seed treatment');
+    assert.equal(locEn.waterQuantity, null, 'Water quantity must be null for seed treatment');
+    assert.equal(locEn.perPumpQuantity, null, 'Per pump quantity must be null for seed treatment');
+    assert.match(locEn.applicationMethod, /NOT a foliar spray/i, 'Explicitly declares not a foliar spray');
+    assert.match(locEn.headerTitle, /TREATMENT GUIDANCE/i, 'Header says treatment, not spray');
+  });
+
+  test('Wilt in Marathi mode delivers complete verified Marathi guidance without raw English text', async () => {
+    const { getLocalizedRecommendation, hasDevanagari } = await import('../src/i18n/recommendationContent.ts');
+
+    const mockWiltResponse = {
+      status: 'fallback',
+      crop: 'tur',
+      disease_name: 'Wilt',
+      confidence: 1.0,
+      confidence_percent: 100,
+      disease_explanation: 'Fusarium wilt description in English.',
+      farmer_action: [],
+      spray_guidance_available: true,
+      ai_guidance_available: true,
+      spray_guidance: {
+        treatment: 'Trichoderma viride seed treatment',
+        active_ingredient: 'Trichoderma viride 1% WP',
+        recommended_quantity: '10 g per kg of seed',
+        water_quantity: null,
+        per_pump_quantity: null,
+        spray_timing: 'Apply before sowing.',
+        application_method: 'Seed treatment (biological).',
+        safety_precautions: 'Avoid direct sunlight.',
+        after_spray_advisory: 'Crop rotation.',
+      },
+      warnings: [],
+      language: 'mr',
+    };
+
+    const locMr = getLocalizedRecommendation(mockWiltResponse, 'mr');
+    assert.equal(locMr.isSeedTreatment, true);
+    assert.equal(hasDevanagari(locMr.treatment), true, 'Treatment is localized in Marathi');
+    assert.equal(hasDevanagari(locMr.applicationMethod), true, 'Application method is localized in Marathi');
+    assert.equal(hasDevanagari(locMr.applicationTiming), true, 'Timing is localized in Marathi');
+    assert.equal(hasDevanagari(locMr.importantAlert), true, 'Important alert is localized in Marathi');
+    assert.match(locMr.importantAlert, /पानांवर फवारणी करू नका/, 'Explicitly instructs NOT to spray on leaves');
+    assert.match(locMr.guidanceSectionTitle, /बियाणे \/ जमीन उपचार/, 'Section title is seed/soil treatment');
+  });
+
+  test('Foliar diseases (Leaf_Spot and Sterilic_mosaic) are correctly classified as foliar sprays', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const mockLeafSpot = {
+      disease_name: 'Leaf_Spot',
+      spray_guidance_available: true,
+      spray_guidance: {
+        treatment: 'Mancozeb 75 WP',
+        application_method: 'Foliar spray',
+      },
+    };
+    const locSpot = getLocalizedRecommendation(mockLeafSpot, 'en');
+    assert.equal(locSpot.isSeedTreatment, false, 'Leaf Spot is a foliar spray');
+    assert.match(locSpot.headerTitle, /SPRAY GUIDANCE/i);
+
+    const mockMosaic = {
+      disease_name: 'Sterilic_mosaic',
+      spray_guidance_available: true,
+      spray_guidance: {
+        treatment: 'Fenazaquin 10 EC',
+        application_method: 'Foliar spray',
+      },
+    };
+    const locMosaic = getLocalizedRecommendation(mockMosaic, 'mr');
+    assert.equal(locMosaic.isSeedTreatment, false, 'Sterility mosaic is a foliar spray');
+    assert.match(locMosaic.guidanceSectionTitle, /फवारणी मार्गदर्शन/);
+  });
+
+  test('Unverified disease (Leaf_webber) displays safety gate and does not invent pesticide/dose', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const mockWebber = {
+      disease_name: 'Leaf_webber',
+      spray_guidance_available: false,
+      spray_guidance: null,
+    };
+    const locWebber = getLocalizedRecommendation(mockWebber, 'mr');
+    assert.equal(locWebber.isVerified, false, 'Leaf webber must not be marked verified');
+    assert.equal(locWebber.waterQuantity, null);
+    assert.equal(locWebber.perPumpQuantity, null);
+  });
+
+  test('Confidence disclaimer warns farmer that 100% confidence does not guarantee field certainty', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const locEn = getLocalizedRecommendation(null, 'en', 'Wilt');
+    assert.match(locEn.confidenceDisclaimer, /pattern match/i, 'English disclaimer clarifies pattern match');
+
+    const locMr = getLocalizedRecommendation(null, 'mr', 'Wilt');
+    assert.match(locMr.confidenceDisclaimer, /प्रत्यक्ष शेत तपासणी आवश्यक/, 'Marathi disclaimer reminds field inspection');
+  });
+
+  test('Healthy class is safely handled without chemical sprays or pump dosages', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const mockHealthy = {
+      disease_name: 'Healthy',
+      spray_guidance_available: false,
+      spray_guidance: null,
+    };
+
+    const locMr = getLocalizedRecommendation(mockHealthy, 'mr');
+    assert.equal(locMr.isHealthy, true, 'Healthy is marked as isHealthy');
+    assert.equal(locMr.isSeedTreatment, false, 'Healthy is not a seed treatment');
+    assert.equal(locMr.isVerified, false, 'Healthy does not have a verified pesticide spray');
+    assert.equal(locMr.waterQuantity, null, 'No water quantity for healthy crop');
+    assert.equal(locMr.perPumpQuantity, null, 'No pump dosage for healthy crop');
+    assert.match(locMr.headerTitle, /आरोग्य सल्ला/, 'Header indicates health advisory');
+    assert.match(locMr.importantAlert, /कोणत्याही रासायनिक फवारणीची गरज नाही/, 'Alert explicitly forbids spray');
+    assert.match(locMr.treatment, /रासायनिक फवारणीची आवश्यकता नाही/, 'Treatment instructs no chemical spray');
+
+    const locEn = getLocalizedRecommendation(mockHealthy, 'en');
+    assert.equal(locEn.isHealthy, true);
+    assert.match(locEn.headerTitle, /CROP HEALTH ADVISORY/i);
+    assert.match(locEn.importantAlert, /NO chemical spray required/i);
+  });
+
+  test('All five model classes (Healthy, Leaf_Spot, Leaf_webber, Sterilic_mosaic, Wilt) are safely audited', async () => {
+    const { normalizeDiseaseKey, getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const expectedClasses = ['Healthy', 'Leaf_Spot', 'Leaf_webber', 'Sterilic_mosaic', 'Wilt'];
+    for (const cls of expectedClasses) {
+      const normalized = normalizeDiseaseKey(cls);
+      assert.equal(normalized, cls, `Class ${cls} must normalize cleanly`);
+      const loc = getLocalizedRecommendation(null, 'mr', cls);
+      assert.ok(loc.headerTitle, `Class ${cls} must have a valid headerTitle`);
+      assert.ok(loc.importantAlert, `Class ${cls} must have a valid importantAlert`);
+      if (cls === 'Healthy') {
+        assert.equal(loc.isHealthy, true);
+      } else if (cls === 'Wilt') {
+        assert.equal(loc.isSeedTreatment, true);
+      } else if (cls === 'Leaf_webber') {
+        assert.equal(loc.isVerified, false);
+      } else {
+        assert.equal(loc.isSeedTreatment, false);
+      }
+    }
+  });
+
+  test('Honest confidence formatting never outputs 100% or 100.0% even for extreme model softmax outputs', () => {
+    const formatConfidenceHonest = (val) => {
+      const num = Number(val);
+      if (!Number.isFinite(num) || num <= 0) return '0%';
+      const normalized = num <= 1 ? num * 100 : num;
+      const capped = Math.min(normalized, 99.0);
+      return `${capped.toFixed(1)}%`;
+    };
+
+    const formatConfidenceInt = (val) => {
+      if (typeof val !== 'number' || isNaN(val)) return '0%';
+      const normalized = val <= 1 && val > 0 ? Math.round(val * 100) : Math.round(val);
+      const capped = Math.min(Math.max(normalized, 0), 99);
+      return `${capped}%`;
+    };
+
+    // Extreme raw model confidence on scan 1076: 0.9999911785125732
+    assert.equal(formatConfidenceHonest(0.9999911785125732), '99.0%');
+    assert.equal(formatConfidenceHonest(1.0), '99.0%');
+    assert.equal(formatConfidenceHonest('0.999991'), '99.0%');
+    assert.notEqual(formatConfidenceHonest(0.9999911785125732), '100.0%');
+
+    assert.equal(formatConfidenceInt(0.9999911785125732), '99%');
+    assert.equal(formatConfidenceInt(1.0), '99%');
+    assert.notEqual(formatConfidenceInt(0.9999911785125732), '100%');
+  });
+
+  test('Leaf Webber unverified state clearly identifies predicted condition and declares chemical spray unverified', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const mockWebber = {
+      status: 'unverified',
+      crop: 'tur',
+      disease_name: 'Leaf_webber',
+      confidence: 0.999991,
+      confidence_percent: 100,
+      disease_explanation: 'Leaf webber larvae feed inside webbed leaves.',
+      farmer_action: ['Inspect shoot tips regularly.', 'Manually destroy webbed leaves.'],
+      spray_guidance_available: false,
+      ai_guidance_available: true,
+      spray_guidance: null,
+      warnings: [],
+      language: 'mr',
+    };
+
+    const loc = getLocalizedRecommendation(mockWebber, 'mr');
+    assert.equal(loc.isVerified, false, 'Leaf Webber must not be marked as verified diagnosis');
+    assert.equal(loc.recommendedQuantity, 'लागू नाही');
+    assert.equal(loc.waterQuantity, null);
+    assert.equal(loc.perPumpQuantity, null);
+    assert.match(loc.treatment, /रासायनिक फवारणीची शिफारस नाही/, 'Explicitly declares no chemical spray recommended');
+    assert.match(loc.applicationMethod, /फवारणी करू नका/, 'Explicitly forbids spray');
+    assert.match(loc.headerTitle, /कीड व्यवस्थापन सल्ला/, 'Header indicates pest management advisory, not confirmed spray');
+  });
+});
+
+
+

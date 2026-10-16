@@ -1,0 +1,42 @@
+{
+  "check_1_all_15_split/class_folders_exist": {
+    "status": "PASS",
+    "details": "All 3 splits x 5 classes present"
+  },
+  "check_2_filesystem_vs_manifest_count_reconciliation": {
+    "status": "PASS",
+    "details": "Manifest rows: 1676, Files on disk: 1676, Expected: 1676"
+  },
+  "check_3_image_decodability_and_mode_integrity": {
+    "status": "PASS",
+    "details": "Corrupt count: 0, Modes found: {'RGB'}, Formats: {'JPEG'}"
+  },
+  "check_4_zero_exact_duplicates_in_clean_dataset": {
+    "status": "PASS",
+    "details": "Total files: 1676, Unique SHA-256: 1676"
+  },
+  "check_5_provenance_and_hash_re-traceability_to_source": {
+    "status": "PASS",
+    "details": "Source mapping errors: 0 / 1676"
+  },
+  "check_6_original_dataset_100%_byte-identical_preservation": {
+    "status": "PASS",
+    "details": "Original dataset mutations: 0 / 1858"
+  },
+  "check_7_model_checkpoint_byte-identical_preservation": {
+    "status": "PASS",
+    "details": "Checkpoint SHA-256: 5baecdc3911502c4... (matches pre-build)"
+  },
+  "check_8_zero_wilt_source-family_leakage_across_splits": {
+    "status": "PASS",
+    "details": "Train fams: 20, Val fams: 5, Test fams: 5. Overlaps: tv=0, tt=0, vt=0"
+  },
+  "check_9_wilt_evaluation_splits_contain_zero_augmentations": {
+    "status": "PASS",
+    "details": "Wilt augmentations in val/test: 0. Val originals: 5, Test originals: 5"
+  },
+  "check_10_strict_crop_isolation_verified": {
+    "status": "PASS",
+    "details": "Unrelated crop records detected: 0 / 1676"
+  }
+}

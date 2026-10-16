@@ -68,6 +68,33 @@ HEALTHY_DATA: Dict[str, Dict[str, object]] = {
     }
 }
 
+LEAF_WEBBER_DATA: Dict[str, Dict[str, object]] = {
+    "en": {
+        "explanation": "Leaf webber (Grapholita critica Meyr.) is a pest of pigeonpea whose larvae web terminal leaves together and feed inside. Verified chemical spray guidance is currently unavailable for this pest. Do not use unapproved or banned chemicals.",
+        "actions": [
+            "Inspect terminal shoots and webbed leaf clusters regularly.",
+            "Manually collect and destroy folded leaves with larvae in early stages where feasible.",
+            "Please consult your local Krishi Vigyan Kendra (KVK) or agricultural officer for currently approved safe management practices."
+        ]
+    },
+    "mr": {
+        "explanation": "पाने गुंडाळणारी आळी (Leaf webber / Grapholita critica) ही तुरीवरील कीड असून अळ्या शेंड्याची पाने जाळ्याने एकत्र बांधून आतून खातात. या किडीसाठी प्रमाणित रासायनिक फवारणी मार्गदर्शन सध्या उपलब्ध नाही. अनधिकृत किंवा बंदी घातलेली कीटकनाशके वापरू नका.",
+        "actions": [
+            "शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांची नियमित पाहणी करा.",
+            "सुरुवातीच्या काळात जाळी झालेली पाने आळीसह तोडून नष्ट करा.",
+            "सध्याच्या अधिकृत व सुरक्षित कीड नियंत्रण उपायांसाठी स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी अधिकाऱ्यांचा सल्ला घ्या."
+        ]
+    },
+    "hi": {
+        "explanation": "लीफ वेबर (Grapholita critica) तूर की एक कीट है जिसकी इल्लियां शीर्ष पत्तियों को आपस में जाले से बांधकर अंदर खाती हैं। इस कीट के लिए सत्यापित रासायनिक छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है। अनधिकृत या प्रतिबंधित रसायनों का उपयोग न करें।",
+        "actions": [
+            "शीर्ष पत्तियों और जाले वाले गुच्छों का नियमित निरीक्षण करें।",
+            "शुरुआती अवस्था में जाले वाली पत्तियों को इल्ली सहित इकट्ठा कर नष्ट करें।",
+            "वर्तमान में स्वीकृत सुरक्षित प्रबंधन उपायों के लिए स्थानीय कृषि विज्ञान केंद्र (KVK) या कृषि अधिकारी से संपर्क करें।"
+        ]
+    }
+}
+
 
 def _get_lang_key(language: str) -> str:
     lang = (language or "en").strip().lower()
@@ -243,6 +270,29 @@ def generate_claude_guidance(
             ai_guidance_available=True,
             spray_guidance=None,
             warnings=[],
+            language=lang_key,
+        )
+
+    # 2b. Check Leaf Webber Safety — Pesticide guidance disabled (banned historical chemicals / no verified doses)
+    if "webber" in disease_clean.lower():
+        logger.info("[CLAUDE GUIDANCE] Scan #%d is Leaf Webber. Spray guidance disabled for safety.", scan.id)
+        logger.info(
+            "[GUIDANCE_SERVICE_DIAGNOSTIC] scan_id=%d disease=%s raw_confidence=%.6f guidance_status=%s spray_available=%s",
+            scan.id, disease_clean, scan.confidence or 0.0, "unverified", False
+        )
+        webber_data = LEAF_WEBBER_DATA[lang_key]
+        return ClaudeGuidanceResponse(
+            status="unverified",
+            crop="tur",
+            disease_name="Leaf_webber",
+            confidence=scan.confidence,
+            confidence_percent=conf_pct,
+            disease_explanation=str(webber_data["explanation"]),
+            farmer_action=list(webber_data["actions"]),
+            spray_guidance_available=False,
+            ai_guidance_available=True,
+            spray_guidance=None,
+            warnings=["Verified spray guidance is currently unavailable for Leaf Webber. Chemical recommendations disabled for safety."],
             language=lang_key,
         )
 

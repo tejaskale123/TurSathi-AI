@@ -21,6 +21,11 @@ def get_tur_spray_guidance_service(db: Session, disease_name: str) -> Optional[S
     if not clean_disease_name:
         return None
 
+    # Leaf Webber safety: no verified chemical spray exists; historical Dichlorvos is banned
+    if "webber" in clean_disease_name.lower():
+        logger.info("[RECOMMENDATION SERVICE] Spray guidance requested for Leaf Webber. Returning None (pesticide recommendations disabled for safety).")
+        return None
+
     query = select(TurDiseaseRecommendation).where(
         TurDiseaseRecommendation.crop == "tur",
         func.lower(TurDiseaseRecommendation.disease_name) == clean_disease_name.lower(),

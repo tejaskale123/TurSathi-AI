@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-10-14T15:17:17",
+  "input_directory": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\new_disease_images",
+  "production_checkpoint": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\best_pigeonpea_disease_final_efficientnet_b0.pth",
+  "experimental_checkpoint": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\experimental\\pigeonpea_clean_candidate_v1\\best_pigeonpea_clean_candidate_v1_efficientnet_b0.pth",
+  "evaluation_type": "Exploratory Out-of-Distribution Web Image Stress Test",
+  "counts": {
+    "total_files": 42,
+    "valid_decodable_images": 41,
+    "skipped_files": 1,
+    "exact_duplicate_files": 5,
+    "unique_decodable_images": 36
+  },
+  "all_decodable_results": {
+    "evaluated_images": 41,
+    "agreements": 40,
+    "disagreements": 1,
+    "agreement_rate": 0.9756,
+    "production_class_distribution": {
+      "Wilt": 39,
+      "Sterilic_mosaic": 2
+    },
+    "experimental_class_distribution": {
+      "Wilt": 40,
+      "Sterilic_mosaic": 1
+    }
+  },
+  "unique_decodable_results": {
+    "evaluated_images": 36,
+    "agreements": 35,
+    "disagreements": 1,
+    "agreement_rate": 0.9722,
+    "production_class_distribution": {
+      "Wilt": 34,
+      "Sterilic_mosaic": 2
+    },
+    "experimental_class_distribution": {
+      "Wilt": 35,
+      "Sterilic_mosaic": 1
+    },
+    "disagreement_breakdown": {
+      "Sterilic_mosaic (Prod) vs Wilt (Exp)": 1
+    }
+  },
+  "safety_and_limitations": [
+    "All inputs are uncurated web downloads, not real-field validation data.",
+    "Zero real-world accuracy claims are made (no ground-truth annotations exist).",
+    "Inter-model agreement does NOT indicate diagnostic correctness.",
+    "Zero pesticide or spray recommendations were generated."
+  ]
+}

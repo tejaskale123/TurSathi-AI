@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-10-14T12:37:00",
+  "source_dataset_root": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_final",
+  "dest_dataset_root": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1",
+  "checkpoint_path": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\best_pigeonpea_disease_final_efficientnet_b0.pth",
+  "checkpoint_sha256": "5baecdc3911502c4cb345101c6f2fd84824eb4cb025e300d66e00231a4834b99",
+  "total_source_images": 1858,
+  "excluded_exact_cross_class_duplicates": 111,
+  "excluded_wilt_eval_augmentations": 71,
+  "total_clean_candidate_images": 1676,
+  "per_class_counts": {
+    "Healthy": {
+      "train": 285,
+      "val": 28,
+      "test": 46,
+      "total": 359
+    },
+    "Leaf_Spot": {
+      "train": 278,
+      "val": 53,
+      "test": 54,
+      "total": 385
+    },
+    "Leaf_webber": {
+      "train": 285,
+      "val": 27,
+      "test": 32,
+      "total": 344
+    },
+    "Sterilic_mosaic": {
+      "train": 282,
+      "val": 38,
+      "test": 52,
+      "total": 372
+    },
+    "Wilt": {
+      "train": 206,
+      "val": 5,
+      "test": 5,
+      "total": 216
+    }
+  },
+  "elapsed_seconds": 19.67
+}

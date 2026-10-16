@@ -36,9 +36,52 @@ from app.services.scan_service import get_scan_for_user
 from app.services.claude_guidance_service import generate_claude_guidance
 
 logger = logging.getLogger("tursathi.api.predictions")
+router = APIRouter(prefix="/predictions", tags=["Predictions"])
 
-     )
 
+@router.post(
+    "/tur-leaf/{scan_id}",
+    response_model=PredictionResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Run Tur leaf disease prediction on a stored scan",
+)
+def predict_tur_leaf(
+    scan_id: int,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> PredictionResponse:
+    """
+    Runs the Tur leaf disease ML prediction on the scan image that was already
+    uploaded and stored during the initial scan upload (POST /api/v1/scans).
+
+    The mobile app should NOT re-upload the image — this endpoint uses the
+    server-side stored copy identified by scan_id.
+
+    Behaviour when ML model is not yet configured:
+        Returns HTTP 503 with:
+        {"status": "model_not_configured", "message": "..."}
+        The scan record and image are NOT deleted.
+
+    Behaviour when ML model is available:
+        Returns HTTP 200 with disease_name, confidence, severity.
+        Results are persisted to TurScan.disease_name / .confidence / .severity.
+    """
+    logger.info(
+        "[API/PREDICTIONS] Prediction requested: scan_id=%d user_id=%d",
+        scan_id, current_user.id,
+    )
+
+    # run_prediction raises HTTPException for model_not_configured (503) or errors
+    scan = run_prediction(db=db, scan_id=scan_id, user_id=current_user.id)
+
+    return PredictionResponse(
+        scan_id=scan.id,
+        crop=scan.crop,
+        status=scan.prediction_status,
+        disease_name=scan.disease_name,
+        confidence=scan.confidence,
+        severity=scan.severity,
+    )
 
 @router.post(
     "/tur-leaf/{scan_id}/ai-guidance",

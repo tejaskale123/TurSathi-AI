@@ -1,0 +1,6 @@
+class,train_count,train_unique_sha,val_count,val_unique_sha,test_count,test_unique_sha,total_count,total_unique_sha,duplicate_loss
+Healthy,215,215,71,71,73,73,359,359,0
+Leaf_Spot,263,263,87,87,89,89,439,439,0
+Leaf_webber,207,207,69,69,70,70,346,346,0
+Sterilic_mosaic,256,256,85,85,86,86,427,427,0
+Wilt,172,172,57,57,58,58,287,287,0

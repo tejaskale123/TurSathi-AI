@@ -60,3 +60,19 @@ class VoiceReportCreateResponse(BaseModel):
     status: str = "received"
 
     model_config = ConfigDict(from_attributes=True)
+
+
+# ── Frame validation (stateless camera probe) ──────────────────────────────────
+
+class FrameValidationResponse(BaseModel):
+    """
+    Returned by POST /api/v1/scans/validate-frame for in-memory camera snapshot evaluation.
+    No database records or stored files are created.
+    """
+    is_valid_tur: bool = Field(description="True if the snapshot meets resolution, clarity, and Tur confidence")
+    label: str = Field(description="'Tur' or rejection category")
+    confidence: float = Field(description="Confidence score between 0.0 and 1.0")
+    reason: str = Field(description="Machine-readable outcome or rejection reason")
+    message: Optional[str] = Field(default=None, description="Localized/user-facing explanation message")
+    message_mr: Optional[str] = Field(default=None, description="Clear Marathi user-facing explanation message")
+

@@ -1,0 +1,47 @@
+{
+  "total_records": 0,
+  "valid_syntax_records": 0,
+  "verified_records": 0,
+  "quarantined_records": 0,
+  "rejected_records": 0,
+  "counts_by_class": {},
+  "distinct_farms": [],
+  "distinct_plants_count": 0,
+  "verified_by_class": {},
+  "target_checks": {
+    "Tur_Pod": {
+      "target": 250,
+      "verified": 0,
+      "satisfied": false,
+      "deficit": 250
+    },
+    "Tur_WholePlant_or_Canopy": {
+      "target": 200,
+      "verified": 0,
+      "satisfied": false,
+      "deficit": 200
+    },
+    "Not_Tur_or_Unsupported": {
+      "target": 100,
+      "verified": 0,
+      "satisfied": false,
+      "deficit": 100
+    },
+    "Distinct_Farms": {
+      "target": 5,
+      "actual": 0,
+      "satisfied": false,
+      "deficit": 5
+    }
+  },
+  "leakage_detected": false,
+  "is_dataset_ready": false,
+  "blockers": [
+    "Manifest contains zero collection records (Collection has not started).",
+    "Tur_Pod deficit: 0/250 verified images.",
+    "Tur_WholePlant_or_Canopy deficit: 0/200 verified images.",
+    "Not_Tur_or_Unsupported deficit: 0/100 verified images.",
+    "Distinct farm deficit: 0/5 distinct farms."
+  ],
+  "issues": []
+}

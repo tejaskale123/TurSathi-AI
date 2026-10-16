@@ -1,0 +1,43 @@
+filename,size_bytes,dimensions,sha256,is_duplicate,duplicate_of,status,skipped_reason,production_class,production_confidence,experimental_class,experimental_confidence,agreement
+488313_0_En_25-1_Fig1_HTML.jpg,76999,685x433,2e3990008ef9c1f8a71ada5b7df998d4572a3c703a55b47ab32193215390f1be,False,,VALID,,Wilt,1.0,Wilt,0.998,True
+64c83c99-f128-4a18-b6d0-1fcfc8ed6e84.png,40653,400x533,5d0cb792c040ef8473767c3236452d7b09d68dd93ca0ca8954c0139baece2a7c,False,,VALID,,Wilt,1.0,Wilt,0.9885,True
+AAlternaria-blight-symptom-on-leaves-and-B-aerial-plant-parts-leaves-stem-buds-and.webp,43618,459x244,79f445348a73c8c8606a5dd355ea893d7bb020791549a49ed6760d57bbc943ea,False,,VALID,,Wilt,0.5299,Wilt,0.9712,True
+image copy 2.png,518805,447x447,0ca05000f69a15ba0293a0388ed05bbe9673dea20669e48e8a69359049e2c253,False,,VALID,,Wilt,1.0,Wilt,0.9992,True
+image copy.png,310702,335x597,1a5f3e36d518b3b272ebbba790725284a9506ef626b9452498b75b0aa94dddc3,False,,VALID,,Wilt,0.9724,Wilt,0.9417,True
+image.png,310702,335x597,1a5f3e36d518b3b272ebbba790725284a9506ef626b9452498b75b0aa94dddc3,True,image copy.png,VALID,,Wilt,0.9724,Wilt,0.9417,True
+images (1).jpg,44679,335x597,4cb507e9f395669c668774f475a279978d44e1f8e47df491136b1459557214f8,False,,VALID,,Wilt,1.0,Wilt,0.9977,True
+images (10).jpg,55914,335x597,3b19f02bc4918aa51937e20a0cd0c54e0a4b6c00bb84f69af617d001b7de02f0,False,,VALID,,Wilt,1.0,Wilt,0.9907,True
+images (11).jpg,38866,738x414,793bca4f249b61d8e88642efdd4a76c41bc8302c7c0542409d9d24d926d74c5b,False,,VALID,,Wilt,0.9977,Wilt,0.9778,True
+images (12).jpg,38201,387x516,ba7c64accfa5186932acd1fe2c5ced36cd72d53f766ad26b34a6a68305875a76,False,,VALID,,Wilt,1.0,Wilt,0.9971,True
+images (13).jpg,52883,335x597,51161a9ae0f1d3126408354cf4cc0df31f50daa6db206f161d05fdfbfda0c91a,False,,VALID,,Wilt,1.0,Wilt,0.9997,True
+images (14).jpg,49372,369x542,3ae99dbb7947f43df6acaf4f2350f9ea246a1f1fc87811e09051dde077c81248,False,,VALID,,Wilt,1.0,Wilt,0.9638,True
+images (15).jpg,65948,335x597,bf959994f6e23fa53f80767de9f010d199f5b296ea32a85224e16875067a300c,False,,VALID,,Wilt,1.0,Wilt,0.9665,True
+images (16).jpg,44950,335x597,def243a4e68869784a1908f7d9f931606292c227229572beba920479634a1900,False,,VALID,,Wilt,1.0,Wilt,0.9299,True
+images (17).jpg,65948,335x597,bf959994f6e23fa53f80767de9f010d199f5b296ea32a85224e16875067a300c,True,images (15).jpg,VALID,,Wilt,1.0,Wilt,0.9665,True
+images (18).jpg,56985,316x632,a0b9a1de175aeb1409066f6e381d9462f516129f794f78c8c79107efbc4dffef,False,,VALID,,Wilt,1.0,Wilt,0.9989,True
+images (19).jpg,49130,374x534,87e7f8f8c9611151a389c6dfc0df010e0cabadf635cdaffecf2ef4fb952cedc4,False,,VALID,,Wilt,1.0,Wilt,1.0,True
+images (2).jpg,20058,488x250,55d1c4c90321d62dc1d25d0f2e2a53b3248d86e28341a9acf743f7b5fe7b267e,False,,VALID,,Sterilic_mosaic,0.4877,Wilt,0.9799,False
+images (20).jpg,45037,335x597,ec35ab62e0345bf77174b36973c8714ec2b3267d4a8856576d87e0095cd5b3bf,False,,VALID,,Wilt,1.0,Wilt,0.9506,True
+images (21).jpg,57858,335x597,3a6cde0609149e9ab94520a92a60c507188e1f2acaff3cbaa935f9e55f57886e,False,,VALID,,Wilt,1.0,Wilt,0.8046,True
+images (22).jpg,35326,335x597,28bfc3058b9b67d990fee77bf41d7ca951465a7f315856a9671abd729d3ef571,False,,VALID,,Wilt,1.0,Wilt,0.9944,True
+images (23).jpg,56985,316x632,a0b9a1de175aeb1409066f6e381d9462f516129f794f78c8c79107efbc4dffef,True,images (18).jpg,VALID,,Wilt,1.0,Wilt,0.9989,True
+images (24).jpg,20430,281x209,e6df08e90cfec6fd1d7aa2fc57a8dfddf6e072d6084479d3f9198082d7bdbb73,False,,VALID,,Wilt,0.9999,Wilt,0.9412,True
+images (25).jpg,46321,516x387,e6fec364a265cfbf5641cbb56f6d957aa590eaf31a3cdf9b9faccc1ca8b3a62e,False,,VALID,,Wilt,1.0,Wilt,0.9974,True
+images (26).jpg,74647,447x447,7f3cdaf191b99460fbde6a4be2981280732a8e7f6ddb43bf6635ac03b2c4335c,False,,VALID,,Wilt,1.0,Wilt,0.9999,True
+images (27).jpg,71626,447x447,c5343f055a3ae8508f4b8651166d294b8b54af7dab8bc94df5e0570b41066ea0,False,,VALID,,Wilt,1.0,Wilt,0.9988,True
+images (28).jpg,57265,387x516,c5dd5f5308382db90c4c219680211c5e6c0183310d5306b9742cbe26e9be13ae,False,,VALID,,Wilt,1.0,Wilt,0.9985,True
+images (29).jpg,68484,447x447,32c68293688481716e6a850ce53e1216fb2b68e3a5b8fdf516997947251550f4,False,,VALID,,Wilt,1.0,Wilt,0.9983,True
+images (3).jpg,55914,335x597,3b19f02bc4918aa51937e20a0cd0c54e0a4b6c00bb84f69af617d001b7de02f0,True,images (10).jpg,VALID,,Wilt,1.0,Wilt,0.9907,True
+images (30).jpg,92203,480x640,79d5a753c12e6d7849e0fcfa7e5d66fcd989ec548d935b0af42dda289acee42b,False,,VALID,,Wilt,0.9992,Wilt,0.9945,True
+images (31).jpg,82199,480x640,ed471babf454075f2139c41b32a18e9803eb4f7d73c3660a0d3e2931f0bc209d,False,,VALID,,Wilt,1.0,Wilt,0.9988,True
+images (32).jpg,35764,447x447,fd91b802058b05b16e9c2c14c9faa944f2be91c2e626c606f474528b6e93d353,False,,VALID,,Wilt,1.0,Wilt,0.9996,True
+images (33).jpg,58558,452x678,bf202d5a83d734de123cb559a7d06e84250f64779ee76f44e62801d6f7f8a681,False,,VALID,,Wilt,0.9999,Wilt,0.9694,True
+images (4).jpg,39289,489x408,5b0d50d01ddc195920516781a8f3ccc906196daabd52466a0bb271afd366a234,False,,VALID,,Wilt,0.9999,Wilt,0.9982,True
+images (5).jpg,39920,489x408,9e5ed971573c9e36aa3d755a4beee12b0ff0c9dbd6c525eb0ff6a68e64a83ca7,False,,VALID,,Sterilic_mosaic,0.9996,Sterilic_mosaic,0.997,True
+images (6).jpg,43150,565x353,f4f00f801856dd38a114059fc77e4c10ca63b4643bad2256eb20181972496c4d,False,,VALID,,Wilt,1.0,Wilt,0.999,True
+images (7).jpg,20767,300x400,abad856b841eeb3578227ef9297656a483df2cdb51037920b12aacb245f68a5e,False,,VALID,,Wilt,1.0,Wilt,1.0,True
+images (8).jpg,56674,468x401,c4ae721645ecaa9fea283b7158cab85fb0c3587df7c165dcc49f4336f71f709f,False,,VALID,,Wilt,0.9991,Wilt,0.9759,True
+images (9).jpg,45037,335x597,ec35ab62e0345bf77174b36973c8714ec2b3267d4a8856576d87e0095cd5b3bf,True,images (20).jpg,VALID,,Wilt,1.0,Wilt,0.9506,True
+images.jpg,72211,505x396,33938b4fb3041963ef0725ab9255d4a408a79c3f8a71a81bfbcade1022b6b1c3,False,,VALID,,Wilt,0.9999,Wilt,0.9997,True
+new_disease_images,0,0x0,e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,False,,SKIPPED,Zero-byte empty file,,,,,
+"Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. © Maundu, 2021.jpg",28886,350x240,9d4cf0f804573406d4278c0bf298a9109bf52a3254096e057d64bfd8866dcdca,False,,VALID,,Wilt,0.9999,Wilt,0.9983,True

@@ -38,6 +38,9 @@ class Settings(BaseSettings):
     ANTHROPIC_API_KEY: Optional[str] = None
     ANTHROPIC_MODEL: str = "claude-sonnet-4-5-20250929"
 
+    # ML Feature Flags (Phase 5D)
+    ENABLE_ORGAN_VALIDATOR: bool = False
+
     @computed_field
     @property
     def DATABASE_URL(self) -> str:

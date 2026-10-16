@@ -1,0 +1,19 @@
+Clean Candidate v1 Test Confusion Matrix
+[[45,  1,  0,  0,  0],
+ [ 0, 52,  1,  1,  0],
+ [ 0,  1, 31,  0,  0],
+ [ 0,  4,  0, 48,  0],
+ [ 0,  0,  0,  0,  5]]
+
+Classification Report:
+                 precision    recall  f1-score   support
+
+        Healthy     1.0000    0.9783    0.9890        46
+      Leaf_Spot     0.8966    0.9630    0.9286        54
+    Leaf_webber     0.9688    0.9688    0.9688        32
+Sterilic_mosaic     0.9796    0.9231    0.9505        52
+           Wilt     1.0000    1.0000    1.0000         5
+
+       accuracy                         0.9577       189
+      macro avg     0.9690    0.9666    0.9674       189
+   weighted avg     0.9595    0.9577    0.9580       189

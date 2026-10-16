@@ -19,6 +19,7 @@ import {
   RecommendationApiError,
   ClaudeGuidanceResponse,
 } from '../config/recommendationApi';
+import { getLocalizedRecommendation } from '../i18n/recommendationContent';
 
 // Reusable SVG-like Glyph vectors (strictly no emojis, stickers, or AI graphics)
 function Glyph({
@@ -264,6 +265,16 @@ const UI_TEXT: Record<
   },
 };
 
+// Honest confidence formatter: deep learning softmax scores reflect visual pattern similarity,
+// not 100% infallible truth. Cap at 99.0% to prevent misleading farmers.
+const formatConfidenceHonest = (val: number | string | undefined | null): string => {
+  const num = Number(val);
+  if (!Number.isFinite(num) || num <= 0) return '0%';
+  const normalized = num <= 1 ? num * 100 : num;
+  const capped = Math.min(normalized, 99.0);
+  return `${capped.toFixed(1)}%`;
+};
+
 // Static practical fallback content matching exact specifications
 const DEFAULT_SPRAY_STEPS: Record<Language, string[]> = {
   en: [
@@ -430,6 +441,8 @@ export default function SprayGuidanceScreen() {
       }
       if ((err instanceof RecommendationApiError || err?.name === 'RecommendationApiError') && err.isNotFound) {
         setIsUnverified(true);
+      } else if (rawDiseaseName?.toLowerCase().includes('webber')) {
+        setIsUnverified(true);
       } else {
         console.warn('[SPRAY GUIDANCE] API Error:', err?.message || err);
         setHasError(true);
@@ -458,6 +471,13 @@ export default function SprayGuidanceScreen() {
     };
   }, []);
 
+  // Determine dynamic leaf condition badge text
+  const conditionStatus = data?.disease_name || rawDiseaseName || ui.statusNeedsTreatment;
+  const displayConditionName = tDisease(conditionStatus) || conditionStatus;
+
+  // Localized recommendation content matching verified ICAR/agricultural standards
+  const loc = getLocalizedRecommendation(data, language, rawDiseaseName);
+
   // Text-to-Speech handler
   const handleToggleVoice = useCallback(() => {
     if (isSpeaking) {
@@ -468,31 +488,36 @@ export default function SprayGuidanceScreen() {
       return;
     }
 
-    const getStepText = () => {
-        if (!data?.spray_guidance) return DEFAULT_SPRAY_STEPS[language] || DEFAULT_SPRAY_STEPS.en;
-        return [
-            data.spray_guidance.treatment,
-            data.spray_guidance.active_ingredient,
-            data.spray_guidance.recommended_quantity,
-            data.spray_guidance.water_quantity,
-            data.spray_guidance.per_pump_quantity,
-            data.spray_guidance.spray_timing,
-            data.spray_guidance.application_method
+    const steps = loc.isHealthy
+      ? loc.farmerAction
+      : [
+          loc.treatment,
+          loc.activeIngredient,
+          loc.recommendedQuantity,
+          loc.waterQuantity,
+          loc.applicationTiming,
+          loc.applicationMethod,
         ].filter(Boolean) as string[];
-    };
-    
-    const steps = getStepText();
-    const after = data?.spray_guidance?.after_spray_advisory ? [data.spray_guidance.after_spray_advisory] : DEFAULT_AFTER_SPRAYING[language] || DEFAULT_AFTER_SPRAYING.en;
-    const safety = data?.spray_guidance?.safety_precautions ? [data.spray_guidance.safety_precautions] : DEFAULT_SAFETY_PRECAUTIONS[language] || DEFAULT_SAFETY_PRECAUTIONS.en;
-    const farmerAct = data?.farmer_action?.join('. ') || ui.farmerActionMessage;
+
+    const speechHeader = loc.headerTitle;
+    const speechAlert = loc.importantAlert;
+    const speechGuidance = (loc.isHealthy
+      ? (loc.guidanceSectionTitle + ': ' + loc.guidanceSectionSubtitle + '. ')
+      : (loc.isSeedTreatment
+        ? (language === 'mr' ? 'बियाणे किंवा जमीन उपचार मार्गदर्शन: ' : language === 'hi' ? 'बीज या मृदा उपचार मार्गदर्शन: ' : 'Seed or soil treatment guidance: ')
+        : (ui.sprayGuidanceTitle + ': ' + ui.sprayGuidanceSubtitle + '. '))) + steps.join('. ');
+
+    const speechAfter = loc.afterSectionTitle + ': ' + loc.afterCareAdvisory.join('. ');
+    const speechSafety = ui.safetyTitle + ': ' + loc.safetyPrecautions.join('. ');
+    const speechFarmer = ui.farmerActionTitle + ': ' + loc.farmerAction.join('. ');
 
     const speechText = [
-      ui.headerTitle,
-      ui.importantTitle + ': ' + (data?.warnings?.[0] || ui.importantMessage),
-      ui.sprayGuidanceTitle + ': ' + ui.sprayGuidanceSubtitle + '. ' + steps.join('. '),
-      ui.afterSprayingTitle + ': ' + after.join('. '),
-      ui.safetyTitle + ': ' + safety.join('. '),
-      ui.farmerActionTitle + ': ' + farmerAct,
+      speechHeader,
+      ui.importantTitle + ': ' + speechAlert,
+      speechGuidance,
+      speechAfter,
+      speechSafety,
+      speechFarmer,
     ].join('\n\n');
 
     setIsSpeaking(true);
@@ -509,7 +534,7 @@ export default function SprayGuidanceScreen() {
     } catch {
       setIsSpeaking(false);
     }
-  }, [isSpeaking, data, language, ui]);
+  }, [isSpeaking, loc, language, ui]);
 
   // Navigation handlers
   const handleBack = () => {
@@ -545,10 +570,6 @@ export default function SprayGuidanceScreen() {
       },
     });
   };
-
-  // Determine dynamic leaf condition badge text
-  const conditionStatus = data?.disease_name || rawDiseaseName || ui.statusNeedsTreatment;
-  const displayConditionName = tDisease(conditionStatus) || conditionStatus;
 
   // Render Full-Screen Loading State only if no disease was forwarded and no data loaded yet
   const isInitialLoading = !rawDiseaseName && !data && isGuidanceLoading && !isLowConfidence && !hasError && !isUnverified;
@@ -656,29 +677,55 @@ export default function SprayGuidanceScreen() {
 
   // Render Unverified / Empty Recommendation State
   if (isUnverified) {
-    const confPct = (Number(params.confidence) * 100).toFixed(1);
-    
+    const confPct = formatConfidenceHonest(params.confidence);
+    const isWebber = rawDiseaseName?.toLowerCase().includes('webber') || Boolean(data?.disease_name && data.disease_name.toLowerCase().includes('webber'));
+
+    console.log(
+      `[SPRAY_GUIDANCE_DIAGNOSTIC] conditionStatus="${conditionStatus}" displayConditionName="${displayConditionName}" rawConfidence="${params.confidence}" formattedConf="${confPct}" isUnverified=${isUnverified} isWebber=${isWebber}`
+    );
+
     const unverifiedContent = {
       en: {
-        title: "Diagnosis detected successfully",
-        confLabel: "Confidence:",
+        title: isWebber ? "Potential Pest: Leaf Webber" : "AI Prediction: Verification Required",
+        diseaseLabel: "Predicted Condition:",
+        confLabel: "AI Visual Match:",
+        confNote: "(Visual pattern similarity; field inspection required)",
         availLabel: "Spray Guidance:",
-        availValue: "Not available in verified database",
-        message: "Verified spray guidance is currently unavailable for this disease.\n\nPlease consult a qualified agricultural expert before applying any pesticide."
+        availValue: isWebber ? "Chemical spray NOT recommended" : "Not available in verified database",
+        statusNote: isWebber 
+          ? "Unverified for chemical spraying (Safe cultural management only)" 
+          : "Unverified in ICAR / agricultural database",
+        message: isWebber
+          ? "The AI model identified patterns matching Leaf Webber (Grapholita critica).\n\n⚠️ IMPORTANT SAFETY ADVISORY:\n• Verified chemical spray guidance is NOT available for Leaf Webber.\n• Do NOT spray unverified or banned pesticides (such as Dichlorvos).\n\n🌿 SAFE FARMER PRACTICES:\n• Inspect shoot tips and webbed leaf clusters regularly.\n• Manually collect and destroy folded / webbed leaves containing larvae in early stages.\n• Consult your local Krishi Vigyan Kendra (KVK) or agricultural extension officer for safe, approved management."
+          : "The AI model produced a visual prediction, but verified agricultural spray guidance is currently unavailable for this condition.\n\nPlease consult a qualified agricultural expert or your local Krishi Vigyan Kendra (KVK) before applying any pesticide."
       },
       mr: {
-        title: "रोग यशस्वीरित्या ओळखला",
-        confLabel: "खात्री (Confidence):",
+        title: isWebber ? "संभाव्य कीड: पाने गुंडाळणारी आळी (Leaf Webber)" : "AI अंदाज: पडताळणी आवश्यक",
+        diseaseLabel: "अंदाजित स्थिती:",
+        confLabel: "AI दृश्य साम्य (Visual Match):",
+        confNote: "(पानातील लक्षणांचे साम्य; प्रत्यक्ष शेत तपासणी आवश्यक)",
         availLabel: "फवारणी मार्गदर्शन:",
-        availValue: "प्रमाणित डेटामध्ये उपलब्ध नाही",
-        message: "या आजारासाठी प्रमाणित फवारणी मार्गदर्शन सध्या उपलब्ध नाही.\n\nकोणतेही कीटकनाशक फवारण्यापूर्वी कृपया पात्र कृषी तज्ज्ञांचा सल्ला घ्या."
+        availValue: isWebber ? "रासायनिक फवारणी शिफारस नाही" : "प्रमाणित डेटामध्ये उपलब्ध नाही",
+        statusNote: isWebber 
+          ? "फवारणीसाठी अप्रमाणित (केवळ सुरक्षित एकात्मिक सल्ला)" 
+          : "प्रमाणित कृषी डेटामध्ये उपलब्ध नाही",
+        message: isWebber
+          ? "AI मॉडेलने या पानात पाने गुंडाळणाऱ्या आळीची (Leaf Webber) लक्षणे ओळखली आहेत.\n\n⚠️ महत्त्वाची सुरक्षा सूचना:\n• पाने गुंडाळणाऱ्या आळीसाठी प्रमाणित रासायनिक फवारणी उपलब्ध नाही.\n• कोणतेही अनधिकृत किंवा बंदी घातलेले कीटकनाशक (उदा. डायक्लोर्व्हॉस) फवारू नका.\n\n🌿 शेतकऱ्यांसाठी सुरक्षित उपाय:\n• शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांची नियमित पाहणी करा.\n• सुरुवातीच्या काळात जाळी झालेली पाने आळीसह तोडून नष्ट करा.\n• अधिकृत व सुरक्षित कीड व्यवस्थापनासाठी स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी अधिकाऱ्यांचा सल्ला घ्या."
+          : "AI मॉडेलने दृश्य लक्षणांवरून अंदाज दिला आहे, परंतु या आजारासाठी प्रमाणित फवारणी मार्गदर्शन सध्या उपलब्ध नाही.\n\nकोणतीही रासायनिक औषध फवारणी करण्यापूर्वी कृपया स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी तज्ज्ञांचा सल्ला घ्या."
       },
       hi: {
-        title: "रोग का सफलतापूर्वक पता चला",
-        confLabel: "निश्चितता (Confidence):",
+        title: isWebber ? "संभावित कीट: लीफ वेबर (Leaf Webber)" : "AI अनुमान: सत्यापन आवश्यक",
+        diseaseLabel: "अनुमानित स्थिति:",
+        confLabel: "AI दृश्य समानता (Visual Match):",
+        confNote: "(लक्षणों की दृश्य समानता; खेत में जांच आवश्यक)",
         availLabel: "छिड़काव मार्गदर्शन:",
-        availValue: "सत्यापित डेटाबेस में उपलब्ध नहीं है",
-        message: "इस बीमारी के लिए सत्यापित छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है।\n\nकिसी भी कीटनाशक का उपयोग करने से पहले कृपया एक योग्य कृषि विशेषज्ञ से परामर्श लें।"
+        availValue: isWebber ? "रासायनिक छिड़काव अनुशंसित नहीं" : "सत्यापित डेटाबेस में उपलब्ध नहीं है",
+        statusNote: isWebber 
+          ? "छिड़काव हेतु असत्यापित (केवल सुरक्षित जैविक/भौतिक सलाह)" 
+          : "प्रमाणित कृषि डेटाबेस में उपलब्ध नहीं",
+        message: isWebber
+          ? "AI मॉडल ने इस पत्ती में लीफ वेबर (Grapholita critica) कीट के लक्षणों की पहचान की है।\n\n⚠️ महत्वपूर्ण सुरक्षा सलाह:\n• लीफ वेबर कीट के लिए कोई रासायनिक छिड़काव सत्यापित नहीं है।\n• कोई भी अनधिकृत या प्रतिबंधित कीटनाशक (जैसे डाइक्लोरवोस) न छिड़कें।\n\n🌿 किसानों के लिए सुरक्षित उपाय:\n• शीर्ष पत्तियों और जाले वाले गुच्छों का नियमित निरीक्षण करें।\n• शुरुआती अवस्था में जाले वाली पत्तियों को इल्ली सहित इकट्ठा कर नष्ट करें।\n• सुरक्षित प्रबंधन हेतु स्थानीय कृषि विज्ञान केंद्र (KVK) या कृषि अधिकारी से संपर्क करें।"
+          : "AI मॉडल ने दृश्य लक्षणों के आधार पर अनुमान लगाया है, लेकिन इस स्थिति के लिए सत्यापित छिड़काव मार्गदर्शन उपलब्ध नहीं है।\n\nकिसी भी कीटनाशक का उपयोग करने से पहले कृपया एक योग्य कृषि विशेषज्ञ से परामर्श लें।"
       }
     };
     
@@ -692,15 +739,25 @@ export default function SprayGuidanceScreen() {
             <Glyph color="#8B6822" name="info" size={28} />
             <Text style={styles.stateTitle}>{localeStr.title}</Text>
 
-            <View style={{ marginTop: 16, width: '100%', backgroundColor: '#F9F5EC', padding: 12, borderRadius: 8 }}>
-              <Text style={{ fontSize: 13, color: '#476355', marginBottom: 4 }}>
-                <Text style={{ fontWeight: '700' }}>{localeStr.confLabel} </Text>
-                <Text style={{ fontWeight: '700', color: '#1A4D33' }}>{confPct}%</Text>
-              </Text>
-              <Text style={{ fontSize: 13, color: '#476355' }}>
-                <Text style={{ fontWeight: '700' }}>{localeStr.availLabel} </Text>
-                <Text style={{ color: '#8B6822', fontWeight: '600' }}>{localeStr.availValue}</Text>
-              </Text>
+            <View style={{ marginTop: 16, width: '100%', backgroundColor: '#F9F5EC', padding: 14, borderRadius: 8, borderWidth: 1, borderColor: '#E8DEC4' }}>
+              <View style={{ marginBottom: 8 }}>
+                <Text style={{ fontSize: 12, color: '#6A7D71', fontWeight: '600' }}>{localeStr.diseaseLabel}</Text>
+                <Text style={{ fontSize: 15, fontWeight: '700', color: '#1A4D33', marginTop: 2 }}>{displayConditionName}</Text>
+              </View>
+
+              <View style={{ marginBottom: 8, borderTopWidth: 1, borderTopColor: '#EFE7D2', paddingTop: 8 }}>
+                <Text style={{ fontSize: 12, color: '#6A7D71', fontWeight: '600' }}>{localeStr.confLabel}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'baseline', marginTop: 2, flexWrap: 'wrap' }}>
+                  <Text style={{ fontSize: 15, fontWeight: '700', color: '#8B6822' }}>{confPct}</Text>
+                  <Text style={{ fontSize: 11, color: '#8B6822', marginLeft: 6, fontStyle: 'italic' }}>{localeStr.confNote}</Text>
+                </View>
+              </View>
+
+              <View style={{ borderTopWidth: 1, borderTopColor: '#EFE7D2', paddingTop: 8 }}>
+                <Text style={{ fontSize: 12, color: '#6A7D71', fontWeight: '600' }}>{localeStr.availLabel}</Text>
+                <Text style={{ fontSize: 14, fontWeight: '700', color: isWebber ? '#A34E36' : '#8B6822', marginTop: 2 }}>{localeStr.availValue}</Text>
+                <Text style={{ fontSize: 11, color: '#6A7D71', marginTop: 2 }}>{localeStr.statusNote}</Text>
+              </View>
             </View>
 
             <Text style={[styles.cardBodyText, { marginTop: 16 }]}>
@@ -725,12 +782,18 @@ export default function SprayGuidanceScreen() {
   }
 
   // Dynamic arrays from backend data or localized default fallback steps
-  // Detect if this recommendation is a seed treatment (not a foliar spray)
-  const isSeedTreatment = Boolean(
-    data?.spray_guidance?.application_method &&
-    (data.spray_guidance.application_method.toLowerCase().includes('seed treatment') ||
-     data.spray_guidance.application_method.toLowerCase().includes('seed treat'))
-  );
+  const isSeedTreatment = loc.isSeedTreatment;
+  const headerTitleText = loc.headerTitle;
+  const headerSubtitleText = loc.isHealthy
+    ? (language === 'mr' ? 'निरोगी पिकाची काळजी आणि शेतातील नियमित निरीक्षणासाठी मार्गदर्शक सूचना.' : language === 'hi' ? 'स्वस्थ फसल की देखभाल और नियमित खेत निरीक्षण के लिए मार्गदर्शन।' : 'Guidance for maintaining healthy crops and regular field inspection.')
+    : isSeedTreatment
+      ? (language === 'mr' ? 'शिफारस केलेले बियाणे/जमीन उपचार सुरक्षितपणे वापरण्यासाठी प्रत्यक्ष मार्गदर्शन.' : language === 'hi' ? 'अनुशंसित बीज/मृदा उपचार को सुरक्षित रूप से लागू करने के लिए व्यावहारिक मार्गदर्शन।' : 'Practical guidance for applying the recommended seed/soil treatment safely.')
+      : ui.headerSubtitle;
+
+  const importantAlertText = loc.importantAlert;
+  const guidanceTitleText = loc.guidanceSectionTitle;
+  const guidanceSubtitleText = loc.guidanceSectionSubtitle;
+  const afterSprayingTitleText = loc.afterSectionTitle;
 
   const fieldLabels: Record<string, Record<Language, string>> = {
     treatment: { en: 'Treatment', mr: 'उपचार', hi: 'उपचार' },
@@ -738,12 +801,8 @@ export default function SprayGuidanceScreen() {
     recommended_quantity: { en: 'Recommended Qty', mr: 'शिफारस केलेले प्रमाण', hi: 'अनुशंसित मात्रा' },
     water_quantity: { en: 'Water Qty', mr: 'पाण्याचे प्रमाण', hi: 'पानी की मात्रा' },
     per_pump_quantity: { en: 'Per Pump Qty', mr: 'प्रति पंप प्रमाण', hi: 'प्रति पंप मात्रा' },
-    spray_timing: isSeedTreatment
-      ? { en: 'Application Timing', mr: 'वापराची वेळ', hi: 'उपयोग का समय' }
-      : { en: 'Spray Timing', mr: 'फवारणीची वेळ', hi: 'छिड़काव का समय' },
-    application_method: isSeedTreatment
-      ? { en: 'Application Method', mr: 'वापर पद्धत', hi: 'उपयोग विधि' }
-      : { en: 'Application Method', mr: 'फवारणी पद्धत', hi: 'छिड़काव विधि' },
+    spray_timing: { en: loc.timingLabel, mr: loc.timingLabel, hi: loc.timingLabel },
+    application_method: { en: loc.methodLabel, mr: loc.methodLabel, hi: loc.methodLabel },
   };
 
   const PUMP_TITLE: Record<Language, string> = {
@@ -759,25 +818,39 @@ export default function SprayGuidanceScreen() {
   };
 
   const getStepsList = () => {
-      if (!data?.spray_guidance) {
-          return (DEFAULT_SPRAY_STEPS[language] || DEFAULT_SPRAY_STEPS.en).map(text => ({ id: '', label: '', value: text }));
+      if (loc.isHealthy) {
+          return [
+              { id: '1', label: '', value: language === 'mr' ? '01 नियमित शेत निरीक्षण करा' : language === 'hi' ? '01 नियमित खेत निरीक्षण करें' : '01 Continue regular field inspection' },
+              { id: '2', label: '', value: language === 'mr' ? '02 संतुलित पाणी व खत व्यवस्थापन ठेवा' : language === 'hi' ? '02 संतुलित पानी और उर्वरक प्रबंधन रखें' : '02 Maintain balanced irrigation and nutrition' },
+              { id: '3', label: '', value: language === 'mr' ? '03 शेत तणमुक्त व स्वच्छ ठेवा' : language === 'hi' ? '03 खेत को खरपतवार मुक्त व साफ रखें' : '03 Keep field clean and weed-free' },
+              { id: '4', label: '', value: language === 'mr' ? '04 अनावश्यक रासायनिक फवारणी टाळा' : language === 'hi' ? '04 अनावश्यक रासायनिक छिड़काव से बचें' : '04 Avoid unnecessary chemical sprays' },
+          ];
       }
-      const sg = data.spray_guidance;
+      if (!data?.spray_guidance && !loc.isVerified) {
+          if (loc.farmerAction && loc.farmerAction.length > 0) {
+              return loc.farmerAction.map((action, idx) => ({ id: String(idx + 1), label: '', value: action }));
+          }
+          return [
+              { id: '1', label: '', value: language === 'mr' ? '01 प्रमाणित फवारणी मार्गदर्शन उपलब्ध नाही' : language === 'hi' ? '01 सत्यापित छिड़काव मार्गदर्शन उपलब्ध नहीं है' : '01 Verified spray guidance unavailable' },
+              { id: '2', label: '', value: language === 'mr' ? '02 कोणतेही अनधिकृत कीटकनाशक फवारू नका' : language === 'hi' ? '02 किसी अनधिकृत कीटनाशक का छिड़काव न करें' : '02 Do not apply unverified chemical sprays' },
+              { id: '3', label: '', value: language === 'mr' ? '03 स्थानिक कृषी विज्ञान केंद्र (KVK) चा सल्ला घ्या' : language === 'hi' ? '03 स्थानीय कृषि विज्ञान केंद्र (KVK) से परामर्श लें' : '03 Consult your local Krishi Vigyan Kendra (KVK)' },
+          ];
+      }
       const fields = [
-          { key: 'treatment', value: sg.treatment },
-          { key: 'active_ingredient', value: sg.active_ingredient },
-          { key: 'recommended_quantity', value: sg.recommended_quantity },
-          sg.water_quantity ? { key: 'water_quantity', value: sg.water_quantity } : null,
-          { key: 'spray_timing', value: sg.spray_timing },
-          { key: 'application_method', value: sg.application_method },
-      ].filter(f => f && f.value) as { key: string; value: string }[];
-      return fields.map(f => ({ id: f.key, label: fieldLabels[f.key][language], value: f.value }));
+          { key: 'treatment', label: fieldLabels.treatment[language], value: loc.treatment },
+          { key: 'active_ingredient', label: fieldLabels.active_ingredient[language], value: loc.activeIngredient },
+          { key: 'recommended_quantity', label: fieldLabels.recommended_quantity[language], value: loc.recommendedQuantity },
+          loc.waterQuantity ? { key: 'water_quantity', label: fieldLabels.water_quantity[language], value: loc.waterQuantity } : null,
+          { key: 'spray_timing', label: loc.timingLabel, value: loc.applicationTiming },
+          { key: 'application_method', label: loc.methodLabel, value: loc.applicationMethod },
+      ].filter(f => f && f.value) as { key: string; label: string; value: string }[];
+      return fields.map(f => ({ id: f.key, label: f.label, value: f.value }));
   };
 
   const stepsList = getStepsList();
-  const afterList = data?.spray_guidance?.after_spray_advisory ? [data.spray_guidance.after_spray_advisory] : DEFAULT_AFTER_SPRAYING[language] || DEFAULT_AFTER_SPRAYING.en;
-  const safetyList = data?.spray_guidance?.safety_precautions ? [data.spray_guidance.safety_precautions] : DEFAULT_SAFETY_PRECAUTIONS[language] || DEFAULT_SAFETY_PRECAUTIONS.en;
-  const farmerAct = data?.farmer_action?.length ? data.farmer_action.join('\n\n') : ui.farmerActionMessage;
+  const afterList = loc.afterCareAdvisory;
+  const safetyList = loc.safetyPrecautions;
+  const farmerAct = loc.farmerAction.join('\n\n');
 
   return (
     <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
@@ -801,8 +874,8 @@ export default function SprayGuidanceScreen() {
 
             <View style={styles.headerCopy}>
               <Text style={styles.brand}>{ui.brand}</Text>
-              <Text style={styles.headerTitle}>{ui.headerTitle}</Text>
-              <Text style={styles.headerSubtitle}>{ui.headerSubtitle}</Text>
+              <Text style={styles.headerTitle}>{headerTitleText}</Text>
+              <Text style={styles.headerSubtitle}>{headerSubtitleText}</Text>
             </View>
 
             <View style={styles.headerSpacer} />
@@ -817,7 +890,7 @@ export default function SprayGuidanceScreen() {
             <View style={styles.alertCopy}>
               <Text style={styles.alertTitle}>{ui.importantTitle}</Text>
               <Text style={styles.alertMessage}>
-                {data?.important_alert || ui.importantMessage}
+                {importantAlertText}
               </Text>
             </View>
           </View>
@@ -832,31 +905,36 @@ export default function SprayGuidanceScreen() {
             </View>
 
             {hasValidConfidence && (
-              <Text style={styles.confidenceSubText}>
-                {language === 'mr'
-                  ? `AI खात्री (Confidence): ${(parsedConfidence * 100).toFixed(1)}%`
-                  : language === 'hi'
-                    ? `AI निश्चितता (Confidence): ${(parsedConfidence * 100).toFixed(1)}%`
-                    : `AI Confidence: ${(parsedConfidence * 100).toFixed(1)}%`}
-              </Text>
+              <View style={{ marginTop: 6 }}>
+                <Text style={styles.confidenceSubText}>
+                  {language === 'mr'
+                    ? `AI खात्री (Confidence): ${(parsedConfidence * 100).toFixed(1)}%`
+                    : language === 'hi'
+                      ? `AI निश्चितता (Confidence): ${(parsedConfidence * 100).toFixed(1)}%`
+                      : `AI Confidence: ${(parsedConfidence * 100).toFixed(1)}%`}
+                </Text>
+                <Text style={styles.confidenceDisclaimer}>
+                  {loc.confidenceDisclaimer}
+                </Text>
+              </View>
             )}
 
-            {isGuidanceLoading && !data?.disease_explanation && (
+            {isGuidanceLoading && !loc.diseaseExplanation && (
               <View style={styles.inlineAiStatusWrap}>
                 <ActivityIndicator color="#1A4D33" size="small" />
                 <Text style={styles.inlineAiStatusText}>
                   {language === 'mr'
-                    ? 'तज्ज्ञ AI विश्लेषण आणि फवारणी मार्गदर्शन तयार होत आहे...'
+                    ? 'तज्ज्ञ AI विश्लेषण आणि उपचार मार्गदर्शन तयार होत आहे...'
                     : language === 'hi'
-                    ? 'विशेषज्ञ AI विश्लेषण और छिड़काव मार्गदर्शन तैयार हो रहा है...'
+                    ? 'विशेषज्ञ AI विश्लेषण और उपचार मार्गदर्शन तैयार हो रहा है...'
                     : 'Generating expert AI explanation & tailored dosage...'}
                 </Text>
               </View>
             )}
 
-            {Boolean(data?.disease_explanation) && (
+            {Boolean(loc.diseaseExplanation) && (
               <Text style={[styles.cardBodyText, { marginTop: 12 }]}>
-                {data!.disease_explanation}
+                {loc.diseaseExplanation}
               </Text>
             )}
           </View>
@@ -864,8 +942,8 @@ export default function SprayGuidanceScreen() {
           {/* SECTION C: SPRAY GUIDANCE */}
           <View style={styles.card}>
             <View style={styles.sectionHeaderRow}>
-              <Text style={styles.cardTitle}>{ui.sprayGuidanceTitle}</Text>
-              <Text style={styles.cardSubtitle}>{ui.sprayGuidanceSubtitle}</Text>
+              <Text style={styles.cardTitle}>{guidanceTitleText}</Text>
+              <Text style={styles.cardSubtitle}>{guidanceSubtitleText}</Text>
             </View>
 
             {isGuidanceLoading && !data?.spray_guidance && (
@@ -955,7 +1033,7 @@ export default function SprayGuidanceScreen() {
 
           {/* SECTION D: AFTER SPRAYING */}
           <View style={styles.card}>
-            <Text style={styles.cardTitle}>{ui.afterSprayingTitle}</Text>
+            <Text style={styles.cardTitle}>{afterSprayingTitleText}</Text>
             <View style={styles.checklistGroup}>
               {afterList.map((item: string, idx: number) => (
                 <View key={idx} style={styles.checkRow}>
@@ -1298,6 +1376,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#EAD7A6',
+    maxWidth: '65%',
+    flexShrink: 1,
   },
   conditionBadgeText: {
     fontSize: 13,
@@ -1308,7 +1388,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     color: '#8B6822',
-    marginTop: 6,
+  },
+  confidenceDisclaimer: {
+    fontSize: 11,
+    color: '#6E8074',
+    marginTop: 2,
+    lineHeight: 15,
   },
   inlineAiStatusWrap: {
     flexDirection: 'row',

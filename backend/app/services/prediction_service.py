@@ -82,7 +82,9 @@ def run_prediction(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail={
                 "status": "validation_failed",
-                "message": gate_result.message or "This image does not appear to be a valid Tur (Pigeonpea) leaf."
+                "reason": gate_result.reason,
+                "message": gate_result.message or "This image does not appear to be a valid Tur (Pigeonpea) leaf.",
+                "message_mr": getattr(gate_result, "message_mr", None) or "तूर पानाचा फोटो पुरेसा स्पष्ट नाही. कृपया चांगल्या प्रकाशात फोटो पुन्हा घ्या.",
             }
         )
 
@@ -109,7 +111,9 @@ def run_prediction(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                 detail={
                     "status": "unsupported_disease",
-                    "message": "Unsupported Tur disease. This disease is not included in the current model. Please upload an image of one of the supported conditions."
+                    "reason": "low_confidence_unsupported",
+                    "message": "Unsupported Tur disease. This disease is not included in the current model. Please upload an image of one of the supported conditions.",
+                    "message_mr": "निदानाची खात्री पुरेशी नाही किंवा हा रोग समर्थित वर्गात नाही. कृपया चांगल्या प्रकाशात स्पष्ट तूर पानाचा फोटो पुन्हा घ्या.",
                 }
             )
 
@@ -125,6 +129,10 @@ def run_prediction(
         logger.info(
             "[PREDICTION_SERVICE] Scan #%d prediction completed: disease=%s confidence=%.3f",
             scan_id, result.disease_name, result.confidence,
+        )
+        logger.info(
+            "[PREDICTION_SERVICE_DIAGNOSTIC] scan_id=%d mapped_class=%s confidence=%.6f prediction_status=%s status=%s",
+            scan.id, result.disease_name, result.confidence, scan.prediction_status, scan.status,
         )
         return scan
 

@@ -612,11 +612,41 @@ export default function ScanScreen() {
       if (err instanceof ScanUploadError) {
         const canRetry = err.isRetryable;
         if (err.httpStatus === 422) {
-          const errMsg = language === 'mr' 
-            ? 'कृपया तूर पिकाच्या पानाचा स्पष्ट फोटो अपलोड करा.' 
-            : language === 'hi'
-            ? 'कृपया तूर पत्ती का स्पष्ट फोटो अपलोड करें।'
-            : 'Please upload a clear image of a Tur/Pigeon Pea leaf.';
+          setIsPhotoReady(false);
+          let errMsg: string;
+          if (language === 'mr') {
+            if (err.messageMr) {
+              errMsg = err.messageMr;
+            } else if (err.reason === 'image_too_blurry') {
+              errMsg = 'फोटो अस्पष्ट (blurry) दिसत आहे. कृपया फोन स्थिर धरून चांगल्या प्रकाशात तूर पानाचा फोटो पुन्हा घ्या.';
+            } else if (err.reason === 'image_too_dark') {
+              errMsg = 'फोटोमध्ये प्रकाश खूप कमी (अंधुक) आहे. कृपया चांगल्या सूर्यप्रकाशात किंवा उजेडात तूर पानाचा फोटो पुन्हा घ्या.';
+            } else if (err.reason === 'image_too_bright') {
+              errMsg = 'फोटोमध्ये प्रकाश खूप जास्त (ओव्हरएक्सपोज्ड) आहे. कृपया योग्य प्रकाशात तूर पानाचा फोटो पुन्हा घ्या.';
+            } else if (err.reason === 'image_too_small') {
+              errMsg = 'फोटोचा आकार खूप लहान आहे. कृपया जवळून तूर पानाचा स्पष्ट फोटो पुन्हा घ्या.';
+            } else if (err.reason === 'low_confidence_unsupported') {
+              errMsg = 'निदानाची खात्री पुरेशी नाही किंवा हा रोग समर्थित नाही. कृपया चांगल्या प्रकाशात स्पष्ट तूर पानाचा फोटो पुन्हा घ्या.';
+            } else {
+              errMsg = 'तूर पानाचा फोटो पुरेसा स्पष्ट नाही. कृपया चांगल्या प्रकाशात एका स्पष्ट तूर पानाचा फोटो पुन्हा घ्या.';
+            }
+          } else if (language === 'hi') {
+            if (err.reason === 'image_too_blurry') {
+              errMsg = 'फोटो धुंधला (blurry) दिख रहा है। कृपया कैमरा स्थिर रखकर अच्छी रोशनी में तूर पत्ती का फोटो दोबारा लें।';
+            } else if (err.reason === 'image_too_dark') {
+              errMsg = 'फोटो में रोशनी बहुत कम (अंधेरा) है। कृपया अच्छी धूप या रोशनी में तूर पत्ती का फोटो दोबारा लें।';
+            } else if (err.reason === 'image_too_bright') {
+              errMsg = 'फोटो में रोशनी बहुत अधिक (ओवरएक्सपोज्ड) है। कृपया उपयुक्त रोशनी में तूर पत्ती का फोटो दोबारा लें।';
+            } else if (err.reason === 'image_too_small') {
+              errMsg = 'फोटो का आकार बहुत छोटा है। कृपया पास से तूर पत्ती का स्पष्ट फोटो दोबारा लें।';
+            } else if (err.reason === 'low_confidence_unsupported') {
+              errMsg = 'निदान की पुष्टि पर्याप्त नहीं है। कृपया अच्छी रोशनी में स्पष्ट तूर पत्ती का फोटो दोबारा लें।';
+            } else {
+              errMsg = 'तूर पत्ती का फोटो स्पष्ट नहीं है। कृपया अच्छी रोशनी में एक साफ पत्ती का फोटो दोबारा लें।';
+            }
+          } else {
+            errMsg = err.message || 'Image quality is insufficient. Please retake a clear photo of a Tur leaf in good daylight.';
+          }
           setUploadError(errMsg);
         } else {
           setUploadError(
@@ -628,6 +658,7 @@ export default function ScanScreen() {
         setUploadError('Upload failed. Please check your connection and try again.');
         console.error('[SCAN] Unexpected upload error:', err);
       }
+
     }
   };
 
