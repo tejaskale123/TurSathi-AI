@@ -1,0 +1,66 @@
+# ============================================================
+# TurSathi AI — Production Deployment .dockerignore
+# ============================================================
+
+# Git and Documentation
+.git
+.gitignore
+*.md
+!README.md
+reports/
+autocapture_contradictions.md
+DATASETS_INVENTORY.md
+PROJECT_FULL_AUDIT_REPORT.md
+
+# Heavy Raw Datasets & Archives (Excludes ~2.6 GB from Docker context)
+Tur_Disease_Dataset.zip
+project_extraction.txt
+datasets/
+archive/
+PPLD_extracted/
+PPLD_processed/
+tur_dataset_source/
+uploads_smoke/
+A novel pigeonpea leaf dataset for detection and classification of pigeonpea leaf diseases/
+
+# Research, Tests, Scripts, and Scratch Directories
+.pytest_cache/
+tests/
+backend/tests/
+frontend/tests/
+mobile/tests/
+scratch/
+scripts/
+ml/
+backups/
+backend/backups/
+*.dump
+
+# Python Artifacts & Environments
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.tox/
+.cache/
+.mypy_cache/
+
+# Node & Frontend Build Artifacts
+node_modules/
+mobile/
+frontend/node_modules/
+frontend/dist/
+
+# Local Secrets & Uploads
+.env
+.env.*
+!*.env.example
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Experimental ML Checkpoints (Production only needs best_pigeonpea...pth & validator_v3.pth)
+models/experimental/
+models/experimental_*.pth

@@ -1,0 +1,2949 @@
+{
+  "timestamp": "2026-10-22T16:48:58",
+  "checkpoint_evaluated": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\best_pigeonpea_disease_final_efficientnet_b0.pth",
+  "checkpoint_sha256_before": "5baecdc3911502c4cb345101c6f2fd84824eb4cb025e300d66e00231a4834b99",
+  "checkpoint_sha256_after": "5baecdc3911502c4cb345101c6f2fd84824eb4cb025e300d66e00231a4834b99",
+  "checkpoint_unmodified": true,
+  "test_directory": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test",
+  "device": "cuda",
+  "total_images_discovered": 189,
+  "evaluated_count": 189,
+  "failed_count": 0,
+  "failed_images": [],
+  "skipped_count": 0,
+  "skipped_images": [],
+  "overall_accuracy": 0.9470899470899471,
+  "classes": [
+    "Healthy",
+    "Leaf_Spot",
+    "Leaf_webber",
+    "Sterilic_mosaic",
+    "Wilt"
+  ],
+  "confusion_matrix": [
+    [
+      45,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      51,
+      0,
+      3,
+      0
+    ],
+    [
+      0,
+      1,
+      31,
+      0,
+      0
+    ],
+    [
+      0,
+      5,
+      0,
+      47,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      5
+    ]
+  ],
+  "classification_report": {
+    "Healthy": {
+      "precision": 1.0,
+      "recall": 0.9782608695652174,
+      "f1-score": 0.989010989010989,
+      "support": 46.0
+    },
+    "Leaf_Spot": {
+      "precision": 0.8793103448275862,
+      "recall": 0.9444444444444444,
+      "f1-score": 0.9107142857142857,
+      "support": 54.0
+    },
+    "Leaf_webber": {
+      "precision": 1.0,
+      "recall": 0.96875,
+      "f1-score": 0.9841269841269841,
+      "support": 32.0
+    },
+    "Sterilic_mosaic": {
+      "precision": 0.94,
+      "recall": 0.9038461538461539,
+      "f1-score": 0.9215686274509803,
+      "support": 52.0
+    },
+    "Wilt": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 5.0
+    },
+    "accuracy": 0.9470899470899471,
+    "macro avg": {
+      "precision": 0.9638620689655173,
+      "recall": 0.9590602935711632,
+      "f1-score": 0.9610841772606478,
+      "support": 189.0
+    },
+    "weighted avg": {
+      "precision": 0.9490093048713738,
+      "recall": 0.9470899470899471,
+      "f1-score": 0.9475487250930762,
+      "support": 189.0
+    }
+  },
+  "leaf_spot_vs_sterilic_mosaic_confusion": {
+    "true_leaf_spot_predicted_as_sterilic_mosaic": 3,
+    "true_leaf_spot_total": 54,
+    "true_sterilic_mosaic_predicted_as_leaf_spot": 5,
+    "true_sterilic_mosaic_total": 52
+  },
+  "evaluation_duration_seconds": 9.263622045516968,
+  "per_sample_predictions": [
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0000.jpg",
+      "filename": "healthy_test_0000.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9999423027038574,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9999423027038574,
+        "Leaf_Spot": 1.5187091584323298e-09,
+        "Leaf_webber": 5.7523797295289114e-05,
+        "Sterilic_mosaic": 1.0577162612435131e-07,
+        "Wilt": 5.0505516435706e-10
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0001.jpg",
+      "filename": "healthy_test_0001.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9989405274391174,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9989405274391174,
+        "Leaf_Spot": 1.3978679191950505e-07,
+        "Leaf_webber": 0.0010587028227746487,
+        "Sterilic_mosaic": 6.423371701202996e-07,
+        "Wilt": 4.9322295581077924e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0002.jpg",
+      "filename": "healthy_test_0002.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9999157190322876,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9999157190322876,
+        "Leaf_Spot": 3.8585082506870094e-07,
+        "Leaf_webber": 8.232945401687175e-05,
+        "Sterilic_mosaic": 1.5411338836202049e-06,
+        "Wilt": 5.407441250326883e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0003.jpg",
+      "filename": "healthy_test_0003.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998788833618164,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998788833618164,
+        "Leaf_Spot": 5.380986323189063e-08,
+        "Leaf_webber": 0.00012024513853248209,
+        "Sterilic_mosaic": 7.576088023597549e-07,
+        "Wilt": 2.2154608814162202e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0004.jpg",
+      "filename": "healthy_test_0004.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9994435906410217,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9994435906410217,
+        "Leaf_Spot": 2.710577246034518e-05,
+        "Leaf_webber": 0.00016637156659271568,
+        "Sterilic_mosaic": 0.00036147236824035645,
+        "Wilt": 1.5153822232605307e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0005.jpg",
+      "filename": "healthy_test_0005.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9997245669364929,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9997245669364929,
+        "Leaf_Spot": 7.274838509374604e-08,
+        "Leaf_webber": 0.00027464580489322543,
+        "Sterilic_mosaic": 6.181607545840961e-07,
+        "Wilt": 4.3331393584367106e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0009.jpg",
+      "filename": "healthy_test_0009.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9993488192558289,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9993488192558289,
+        "Leaf_Spot": 1.009536390483845e-05,
+        "Leaf_webber": 0.0005798773490823805,
+        "Sterilic_mosaic": 5.7624907640274614e-05,
+        "Wilt": 3.589945436033304e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0012.jpg",
+      "filename": "healthy_test_0012.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9997691512107849,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9997691512107849,
+        "Leaf_Spot": 1.0694261618482415e-06,
+        "Leaf_webber": 0.00022406571952160448,
+        "Sterilic_mosaic": 5.451626748254057e-06,
+        "Wilt": 2.7410422376306087e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0013.jpg",
+      "filename": "healthy_test_0013.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.996250569820404,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.996250569820404,
+        "Leaf_Spot": 1.8487000943423482e-06,
+        "Leaf_webber": 0.003729787655174732,
+        "Sterilic_mosaic": 1.595790672581643e-05,
+        "Wilt": 1.901292762340745e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0014.jpg",
+      "filename": "healthy_test_0014.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9986273050308228,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9986273050308228,
+        "Leaf_Spot": 9.021379128171247e-07,
+        "Leaf_webber": 0.001367575372569263,
+        "Sterilic_mosaic": 3.820714027824579e-06,
+        "Wilt": 3.367691476796608e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0015.jpg",
+      "filename": "healthy_test_0015.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998188614845276,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998188614845276,
+        "Leaf_Spot": 1.0257419944537105e-06,
+        "Leaf_webber": 0.00017681668396107852,
+        "Sterilic_mosaic": 2.9071711651340593e-06,
+        "Wilt": 3.8713514527444204e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0016.jpg",
+      "filename": "healthy_test_0016.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.99937504529953,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.99937504529953,
+        "Leaf_Spot": 6.521047453134088e-07,
+        "Leaf_webber": 0.0006109654204919934,
+        "Sterilic_mosaic": 1.3158307410776615e-05,
+        "Wilt": 2.782400940759544e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0018.jpg",
+      "filename": "healthy_test_0018.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9972323775291443,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9972323775291443,
+        "Leaf_Spot": 1.549640182929579e-05,
+        "Leaf_webber": 0.0027296883054077625,
+        "Sterilic_mosaic": 1.940719084814191e-05,
+        "Wilt": 2.9240070489322534e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0019.jpg",
+      "filename": "healthy_test_0019.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9981125593185425,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9981125593185425,
+        "Leaf_Spot": 8.857974535203539e-06,
+        "Leaf_webber": 0.0017894265474751592,
+        "Sterilic_mosaic": 7.855462172301486e-05,
+        "Wilt": 1.0560626833466813e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0021.jpg",
+      "filename": "healthy_test_0021.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9999204874038696,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9999204874038696,
+        "Leaf_Spot": 4.637733752588247e-08,
+        "Leaf_webber": 7.89193800301291e-05,
+        "Sterilic_mosaic": 5.122423658576736e-07,
+        "Wilt": 3.3333997784268377e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0022.jpg",
+      "filename": "healthy_test_0022.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9993925094604492,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9993925094604492,
+        "Leaf_Spot": 2.854304739230429e-07,
+        "Leaf_webber": 0.0006058076396584511,
+        "Sterilic_mosaic": 1.2902902426503715e-06,
+        "Wilt": 7.252392464351942e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0023.jpg",
+      "filename": "healthy_test_0023.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9989006519317627,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9989006519317627,
+        "Leaf_Spot": 4.2809013393707573e-05,
+        "Leaf_webber": 0.0009851709473878145,
+        "Sterilic_mosaic": 6.465601472882554e-05,
+        "Wilt": 6.762041721231071e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0026.jpg",
+      "filename": "healthy_test_0026.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998779296875,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998779296875,
+        "Leaf_Spot": 1.0589278787165313e-07,
+        "Leaf_webber": 0.00012111209071008489,
+        "Sterilic_mosaic": 8.361536174561479e-07,
+        "Wilt": 5.3615053730027284e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0027.jpg",
+      "filename": "healthy_test_0027.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998953342437744,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998953342437744,
+        "Leaf_Spot": 2.6619952109285805e-07,
+        "Leaf_webber": 0.00010203917190665379,
+        "Sterilic_mosaic": 2.31529634220351e-06,
+        "Wilt": 1.9863380273932307e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0029.jpg",
+      "filename": "healthy_test_0029.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9992151260375977,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9992151260375977,
+        "Leaf_Spot": 7.078319413267309e-06,
+        "Leaf_webber": 0.0007083184900693595,
+        "Sterilic_mosaic": 6.787326856283471e-05,
+        "Wilt": 1.6614154674243764e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0030.jpg",
+      "filename": "healthy_test_0030.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.995995283126831,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.995995283126831,
+        "Leaf_Spot": 3.716129867825657e-05,
+        "Leaf_webber": 0.003839109092950821,
+        "Sterilic_mosaic": 0.0001104921757359989,
+        "Wilt": 1.7883045074995607e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0031.jpg",
+      "filename": "healthy_test_0031.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9996826648712158,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9996826648712158,
+        "Leaf_Spot": 2.4251371542050038e-06,
+        "Leaf_webber": 0.00029118804377503693,
+        "Sterilic_mosaic": 2.3345050067291595e-05,
+        "Wilt": 5.228346822150343e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0032.jpg",
+      "filename": "healthy_test_0032.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9986581802368164,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9986581802368164,
+        "Leaf_Spot": 5.030375632486539e-06,
+        "Leaf_webber": 0.0013184902491047978,
+        "Sterilic_mosaic": 1.5737976355012506e-05,
+        "Wilt": 2.57556439464679e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0035.jpg",
+      "filename": "healthy_test_0035.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9994200468063354,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9994200468063354,
+        "Leaf_Spot": 1.543781763757579e-06,
+        "Leaf_webber": 0.0005713995196856558,
+        "Sterilic_mosaic": 6.865025170554873e-06,
+        "Wilt": 1.5030356337319972e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0036.jpg",
+      "filename": "healthy_test_0036.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9974134564399719,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9974134564399719,
+        "Leaf_Spot": 2.0070151549589355e-06,
+        "Leaf_webber": 0.002565359929576516,
+        "Sterilic_mosaic": 1.804640305635985e-05,
+        "Wilt": 1.1238789738854393e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0037.jpg",
+      "filename": "healthy_test_0037.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998824596405029,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998824596405029,
+        "Leaf_Spot": 2.053108616451027e-08,
+        "Leaf_webber": 0.00011721088230842724,
+        "Sterilic_mosaic": 3.9660000084040803e-07,
+        "Wilt": 4.035461298457221e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0039.jpg",
+      "filename": "healthy_test_0039.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998801946640015,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998801946640015,
+        "Leaf_Spot": 1.1857290473926696e-06,
+        "Leaf_webber": 0.00011299760080873966,
+        "Sterilic_mosaic": 5.407047865446657e-06,
+        "Wilt": 2.8706961074931314e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0041.jpg",
+      "filename": "healthy_test_0041.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9979920387268066,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9979920387268066,
+        "Leaf_Spot": 2.6447532945894636e-05,
+        "Leaf_webber": 0.0019418086158111691,
+        "Sterilic_mosaic": 3.6367611755849794e-05,
+        "Wilt": 3.3100382097472902e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0042.jpg",
+      "filename": "healthy_test_0042.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9999065399169922,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9999065399169922,
+        "Leaf_Spot": 1.7633176696563169e-07,
+        "Leaf_webber": 9.170050179818645e-05,
+        "Sterilic_mosaic": 1.612955429663998e-06,
+        "Wilt": 8.5556060014369e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0043.jpg",
+      "filename": "healthy_test_0043.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9989055395126343,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9989055395126343,
+        "Leaf_Spot": 6.548111286974745e-06,
+        "Leaf_webber": 0.0010183060076087713,
+        "Sterilic_mosaic": 6.737958028679714e-05,
+        "Wilt": 2.0866641534666996e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0046.jpg",
+      "filename": "healthy_test_0046.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9996269941329956,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9996269941329956,
+        "Leaf_Spot": 6.808926627854817e-06,
+        "Leaf_webber": 0.00034717662492766976,
+        "Sterilic_mosaic": 1.8200409613200463e-05,
+        "Wilt": 8.430587854491023e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0050.jpg",
+      "filename": "healthy_test_0050.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.999290943145752,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.999290943145752,
+        "Leaf_Spot": 5.036511083744699e-06,
+        "Leaf_webber": 0.0006831418140791357,
+        "Sterilic_mosaic": 1.9900875486200675e-05,
+        "Wilt": 9.283907616008946e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0052.jpg",
+      "filename": "healthy_test_0052.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9994646906852722,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9994646906852722,
+        "Leaf_Spot": 1.2370833246677648e-06,
+        "Leaf_webber": 0.0005306423408910632,
+        "Sterilic_mosaic": 3.1572292300552363e-06,
+        "Wilt": 2.2181163217283029e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0055.jpg",
+      "filename": "healthy_test_0055.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9991297125816345,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9991297125816345,
+        "Leaf_Spot": 3.935492287610032e-08,
+        "Leaf_webber": 0.0008698218734934926,
+        "Sterilic_mosaic": 4.5004887283539574e-07,
+        "Wilt": 1.605824451189619e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0056.jpg",
+      "filename": "healthy_test_0056.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9994605183601379,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9994605183601379,
+        "Leaf_Spot": 1.5718462975655711e-07,
+        "Leaf_webber": 0.0005358534399420023,
+        "Sterilic_mosaic": 3.38482186634792e-06,
+        "Wilt": 7.421923697847888e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0057.jpg",
+      "filename": "healthy_test_0057.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.999903678894043,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.999903678894043,
+        "Leaf_Spot": 1.8340936946970032e-07,
+        "Leaf_webber": 9.391720232088119e-05,
+        "Sterilic_mosaic": 2.141028971891501e-06,
+        "Wilt": 3.629869738119851e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0058.jpg",
+      "filename": "healthy_test_0058.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9983446598052979,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9983446598052979,
+        "Leaf_Spot": 3.065310374950059e-05,
+        "Leaf_webber": 0.0015110219828784466,
+        "Sterilic_mosaic": 9.00657832971774e-05,
+        "Wilt": 2.365764885325916e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0059.jpg",
+      "filename": "healthy_test_0059.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998255372047424,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998255372047424,
+        "Leaf_Spot": 8.419308414886473e-07,
+        "Leaf_webber": 0.00016959011554718018,
+        "Sterilic_mosaic": 4.010717475466663e-06,
+        "Wilt": 5.430134919492957e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0062.jpg",
+      "filename": "healthy_test_0062.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998804330825806,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998804330825806,
+        "Leaf_Spot": 4.644197986181098e-07,
+        "Leaf_webber": 0.00011560736311366782,
+        "Sterilic_mosaic": 3.2788377666292945e-06,
+        "Wilt": 1.8798897372107604e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0065.jpg",
+      "filename": "healthy_test_0065.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7094345688819885,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.054619066417217255,
+        "Leaf_Spot": 0.7094345688819885,
+        "Leaf_webber": 0.011939065530896187,
+        "Sterilic_mosaic": 0.22381694614887238,
+        "Wilt": 0.00019032566342502832
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0066.jpg",
+      "filename": "healthy_test_0066.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9997255206108093,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9997255206108093,
+        "Leaf_Spot": 5.642768030611478e-09,
+        "Leaf_webber": 0.00027431754278950393,
+        "Sterilic_mosaic": 7.332545948202096e-08,
+        "Wilt": 2.0352417529068134e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0067.jpg",
+      "filename": "healthy_test_0067.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9992642998695374,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9992642998695374,
+        "Leaf_Spot": 1.574568841533619e-06,
+        "Leaf_webber": 0.0007279386627487838,
+        "Sterilic_mosaic": 5.775864792667562e-06,
+        "Wilt": 3.8485404729726724e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0068.jpg",
+      "filename": "healthy_test_0068.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9998612403869629,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9998612403869629,
+        "Leaf_Spot": 2.98027771350462e-08,
+        "Leaf_webber": 0.0001382058981107548,
+        "Sterilic_mosaic": 3.927872853637382e-07,
+        "Wilt": 9.779649978725047e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0069.jpg",
+      "filename": "healthy_test_0069.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9984155893325806,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9984155893325806,
+        "Leaf_Spot": 3.629727132192784e-07,
+        "Leaf_webber": 0.0015829546609893441,
+        "Sterilic_mosaic": 7.66894117987249e-07,
+        "Wilt": 3.256475906709966e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0070.jpg",
+      "filename": "healthy_test_0070.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.9999662637710571,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.9999662637710571,
+        "Leaf_Spot": 7.677296309793746e-08,
+        "Leaf_webber": 3.2394811569247395e-05,
+        "Sterilic_mosaic": 1.2038713066431228e-06,
+        "Wilt": 4.611182102820521e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Healthy\\healthy_test_0071.jpg",
+      "filename": "healthy_test_0071.jpg",
+      "true_label": "Healthy",
+      "pred_label": "Healthy",
+      "confidence": 0.999653697013855,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.999653697013855,
+        "Leaf_Spot": 4.7483243292845145e-07,
+        "Leaf_webber": 0.0003441080916672945,
+        "Sterilic_mosaic": 1.3742615010414738e-06,
+        "Wilt": 1.8827678616162302e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0001.jpg",
+      "filename": "leaf_spot_test_0001.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9173641204833984,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.235000237277745e-09,
+        "Leaf_Spot": 0.9173641204833984,
+        "Leaf_webber": 3.914774879376637e-06,
+        "Sterilic_mosaic": 0.08263193070888519,
+        "Wilt": 1.7496853743637075e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0003.jpg",
+      "filename": "leaf_spot_test_0003.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7015766501426697,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00013596810458693653,
+        "Leaf_Spot": 0.7015766501426697,
+        "Leaf_webber": 0.00237718946300447,
+        "Sterilic_mosaic": 0.2959003746509552,
+        "Wilt": 9.871736438071821e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0004.jpg",
+      "filename": "leaf_spot_test_0004.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7886769771575928,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.698531706206268e-06,
+        "Leaf_Spot": 0.7886769771575928,
+        "Leaf_webber": 0.0003527855733409524,
+        "Sterilic_mosaic": 0.2109614908695221,
+        "Wilt": 2.063317651845864e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0005.jpg",
+      "filename": "leaf_spot_test_0005.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9132802486419678,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.18952765812719e-07,
+        "Leaf_Spot": 0.9132802486419678,
+        "Leaf_webber": 4.897850885754451e-06,
+        "Sterilic_mosaic": 0.08671413362026215,
+        "Wilt": 1.9314354915422882e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0006.jpg",
+      "filename": "leaf_spot_test_0006.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.930953323841095,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.497540473380468e-08,
+        "Leaf_Spot": 0.930953323841095,
+        "Leaf_webber": 1.8730586816673167e-05,
+        "Sterilic_mosaic": 0.06902771443128586,
+        "Wilt": 1.947964420878634e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0007.jpg",
+      "filename": "leaf_spot_test_0007.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.6523984670639038,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.914026456186548e-05,
+        "Leaf_Spot": 0.6523984670639038,
+        "Leaf_webber": 0.0007507255068048835,
+        "Sterilic_mosaic": 0.34679704904556274,
+        "Wilt": 1.4575646673620213e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0009.jpg",
+      "filename": "leaf_spot_test_0009.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9896374940872192,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.983428200626804e-07,
+        "Leaf_Spot": 0.9896374940872192,
+        "Leaf_webber": 9.878872515400872e-05,
+        "Sterilic_mosaic": 0.010260879062116146,
+        "Wilt": 2.430959284538403e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0010.jpg",
+      "filename": "leaf_spot_test_0010.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.5566641092300415,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.3119885706109926e-05,
+        "Leaf_Spot": 0.5566641092300415,
+        "Leaf_webber": 0.002745087491348386,
+        "Sterilic_mosaic": 0.4405091106891632,
+        "Wilt": 2.8580920115928166e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0011.jpg",
+      "filename": "leaf_spot_test_0011.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9886572957038879,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.805986127896176e-07,
+        "Leaf_Spot": 0.9886572957038879,
+        "Leaf_webber": 7.761461347399745e-06,
+        "Sterilic_mosaic": 0.011333790607750416,
+        "Wilt": 8.056366027631157e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0015.jpg",
+      "filename": "leaf_spot_test_0015.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9957755208015442,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.696422178402827e-08,
+        "Leaf_Spot": 0.9957755208015442,
+        "Leaf_webber": 1.1599208846746478e-05,
+        "Sterilic_mosaic": 0.004212552215903997,
+        "Wilt": 3.282387979197665e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0016.jpg",
+      "filename": "leaf_spot_test_0016.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.49945229291915894,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.00029025221010670066,
+        "Leaf_Spot": 0.49618667364120483,
+        "Leaf_webber": 0.004027958028018475,
+        "Sterilic_mosaic": 0.49945229291915894,
+        "Wilt": 4.277357584214769e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0018.jpg",
+      "filename": "leaf_spot_test_0018.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7497767210006714,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0012364834547042847,
+        "Leaf_Spot": 0.7497767210006714,
+        "Leaf_webber": 0.0027069090865552425,
+        "Sterilic_mosaic": 0.24624039232730865,
+        "Wilt": 3.945194112020545e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0019.jpg",
+      "filename": "leaf_spot_test_0019.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.919182538986206,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.544342325767502e-05,
+        "Leaf_Spot": 0.919182538986206,
+        "Leaf_webber": 0.0006877222331240773,
+        "Sterilic_mosaic": 0.08005980402231216,
+        "Wilt": 3.446382106631063e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0021.jpg",
+      "filename": "leaf_spot_test_0021.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9769021272659302,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.7708254063109052e-07,
+        "Leaf_Spot": 0.9769021272659302,
+        "Leaf_webber": 7.76185879658442e-06,
+        "Sterilic_mosaic": 0.02308977209031582,
+        "Wilt": 7.9068819047734e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0023.jpg",
+      "filename": "leaf_spot_test_0023.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.6523721218109131,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.689683530363254e-05,
+        "Leaf_Spot": 0.6523721218109131,
+        "Leaf_webber": 0.0038516169879585505,
+        "Sterilic_mosaic": 0.34370186924934387,
+        "Wilt": 1.7500580725027248e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0026.jpg",
+      "filename": "leaf_spot_test_0026.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.5605363845825195,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0013163815019652247,
+        "Leaf_Spot": 0.5605363845825195,
+        "Leaf_webber": 0.012163808569312096,
+        "Sterilic_mosaic": 0.42585742473602295,
+        "Wilt": 0.0001260003336938098
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0027.jpg",
+      "filename": "leaf_spot_test_0027.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9318714737892151,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.087624792096904e-09,
+        "Leaf_Spot": 0.9318714737892151,
+        "Leaf_webber": 2.0387073163874447e-05,
+        "Sterilic_mosaic": 0.06810808181762695,
+        "Wilt": 3.3837366686384485e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0028.jpg",
+      "filename": "leaf_spot_test_0028.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.39314717054367065,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.0016325541073456407,
+        "Leaf_Spot": 0.3501436114311218,
+        "Leaf_webber": 0.25402745604515076,
+        "Sterilic_mosaic": 0.39314717054367065,
+        "Wilt": 0.0010491861030459404
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0029.jpg",
+      "filename": "leaf_spot_test_0029.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8709767460823059,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 9.45191303003412e-08,
+        "Leaf_Spot": 0.8709767460823059,
+        "Leaf_webber": 2.853268597391434e-06,
+        "Sterilic_mosaic": 0.12902016937732697,
+        "Wilt": 1.8540598389904517e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0031.jpg",
+      "filename": "leaf_spot_test_0031.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8801356554031372,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0016592075116932392,
+        "Leaf_Spot": 0.8801356554031372,
+        "Leaf_webber": 0.0015333384508267045,
+        "Sterilic_mosaic": 0.11633694916963577,
+        "Wilt": 0.0003348901809658855
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0032.jpg",
+      "filename": "leaf_spot_test_0032.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9963510036468506,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.1207044536831745e-07,
+        "Leaf_Spot": 0.9963510036468506,
+        "Leaf_webber": 9.09368900465779e-05,
+        "Sterilic_mosaic": 0.003557131625711918,
+        "Wilt": 8.041723162932612e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0033.jpg",
+      "filename": "leaf_spot_test_0033.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8663966059684753,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.1020469514733122e-07,
+        "Leaf_Spot": 0.8663966059684753,
+        "Leaf_webber": 2.2503229047288187e-05,
+        "Sterilic_mosaic": 0.13357964158058167,
+        "Wilt": 1.1582095567064243e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0034.jpg",
+      "filename": "leaf_spot_test_0034.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7741327881813049,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0007499070488847792,
+        "Leaf_Spot": 0.7741327881813049,
+        "Leaf_webber": 0.03249944746494293,
+        "Sterilic_mosaic": 0.1921403408050537,
+        "Wilt": 0.00047755648847669363
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0035.jpg",
+      "filename": "leaf_spot_test_0035.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7904205918312073,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.345215868146624e-06,
+        "Leaf_Spot": 0.7904205918312073,
+        "Leaf_webber": 0.0001637033565202728,
+        "Sterilic_mosaic": 0.20940950512886047,
+        "Wilt": 8.490484901813034e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0037.jpg",
+      "filename": "leaf_spot_test_0037.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.964805543422699,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.4033237622234083e-08,
+        "Leaf_Spot": 0.964805543422699,
+        "Leaf_webber": 1.0921245348072262e-06,
+        "Sterilic_mosaic": 0.03519333153963089,
+        "Wilt": 1.523243220447057e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0038.jpg",
+      "filename": "leaf_spot_test_0038.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9902113080024719,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.5923864893352402e-08,
+        "Leaf_Spot": 0.9902113080024719,
+        "Leaf_webber": 8.820110451779328e-06,
+        "Sterilic_mosaic": 0.009779686108231544,
+        "Wilt": 1.6682871262219123e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0039.jpg",
+      "filename": "leaf_spot_test_0039.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.5561039447784424,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0006534726126119494,
+        "Leaf_Spot": 0.5561039447784424,
+        "Leaf_webber": 0.004308931529521942,
+        "Sterilic_mosaic": 0.43871262669563293,
+        "Wilt": 0.0002211196260759607
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0040.jpg",
+      "filename": "leaf_spot_test_0040.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9850471019744873,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.834590659034802e-08,
+        "Leaf_Spot": 0.9850471019744873,
+        "Leaf_webber": 1.6207823136937805e-05,
+        "Sterilic_mosaic": 0.014935954473912716,
+        "Wilt": 6.689914471280645e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0043.jpg",
+      "filename": "leaf_spot_test_0043.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9530792236328125,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.8006174684614962e-07,
+        "Leaf_Spot": 0.9530792236328125,
+        "Leaf_webber": 1.2768009582941886e-05,
+        "Sterilic_mosaic": 0.046907391399145126,
+        "Wilt": 4.215659998862975e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0045.jpg",
+      "filename": "leaf_spot_test_0045.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9587607383728027,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.935024773862096e-07,
+        "Leaf_Spot": 0.9587607383728027,
+        "Leaf_webber": 2.1880116037209518e-05,
+        "Sterilic_mosaic": 0.04121576249599457,
+        "Wilt": 1.0824911669260473e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0048.jpg",
+      "filename": "leaf_spot_test_0048.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9355053305625916,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.649598511401564e-05,
+        "Leaf_Spot": 0.9355053305625916,
+        "Leaf_webber": 2.36481791944243e-05,
+        "Sterilic_mosaic": 0.06443147361278534,
+        "Wilt": 3.0338044325617375e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0051.jpg",
+      "filename": "leaf_spot_test_0051.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.5240476131439209,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.0011753650614991784,
+        "Leaf_Spot": 0.35392236709594727,
+        "Leaf_webber": 0.12054453790187836,
+        "Sterilic_mosaic": 0.5240476131439209,
+        "Wilt": 0.0003101169422734529
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0053.jpg",
+      "filename": "leaf_spot_test_0053.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9741328954696655,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.4036142437798844e-07,
+        "Leaf_Spot": 0.9741328954696655,
+        "Leaf_webber": 1.1488651580293663e-05,
+        "Sterilic_mosaic": 0.025855183601379395,
+        "Wilt": 8.651355187794252e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0054.jpg",
+      "filename": "leaf_spot_test_0054.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.5388249754905701,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00046501270844601095,
+        "Leaf_Spot": 0.5388249754905701,
+        "Leaf_webber": 0.004490850493311882,
+        "Sterilic_mosaic": 0.45603349804878235,
+        "Wilt": 0.0001856556918937713
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0056.jpg",
+      "filename": "leaf_spot_test_0056.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.748715877532959,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00016914750449359417,
+        "Leaf_Spot": 0.748715877532959,
+        "Leaf_webber": 0.007906582206487656,
+        "Sterilic_mosaic": 0.2431504726409912,
+        "Wilt": 5.7979224948212504e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0057.jpg",
+      "filename": "leaf_spot_test_0057.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9886758327484131,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.938223424095668e-08,
+        "Leaf_Spot": 0.9886758327484131,
+        "Leaf_webber": 9.597924872650765e-06,
+        "Sterilic_mosaic": 0.011314303614199162,
+        "Wilt": 1.9664646799810725e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0058.jpg",
+      "filename": "leaf_spot_test_0058.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.5112679600715637,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.607492767012445e-06,
+        "Leaf_Spot": 0.5112679600715637,
+        "Leaf_webber": 0.0001594355417182669,
+        "Sterilic_mosaic": 0.4885525107383728,
+        "Wilt": 1.4447568901232444e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0062.jpg",
+      "filename": "leaf_spot_test_0062.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.6121147871017456,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0003068221849389374,
+        "Leaf_Spot": 0.6121147871017456,
+        "Leaf_webber": 0.005171917378902435,
+        "Sterilic_mosaic": 0.3823641538619995,
+        "Wilt": 4.2287323594791815e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0063.jpg",
+      "filename": "leaf_spot_test_0063.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9868671894073486,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.599618475571333e-07,
+        "Leaf_Spot": 0.9868671894073486,
+        "Leaf_webber": 0.0001643046853132546,
+        "Sterilic_mosaic": 0.01296501886099577,
+        "Wilt": 2.91446372102655e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0065.jpg",
+      "filename": "leaf_spot_test_0065.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9756637811660767,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 7.390030418719107e-07,
+        "Leaf_Spot": 0.9756637811660767,
+        "Leaf_webber": 3.389516132301651e-05,
+        "Sterilic_mosaic": 0.024299612268805504,
+        "Wilt": 2.0501781818893505e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0067.jpg",
+      "filename": "leaf_spot_test_0067.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7411786913871765,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0014802835648879409,
+        "Leaf_Spot": 0.7411786913871765,
+        "Leaf_webber": 0.009726275689899921,
+        "Sterilic_mosaic": 0.24750274419784546,
+        "Wilt": 0.00011203882604604587
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0068.jpg",
+      "filename": "leaf_spot_test_0068.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9655050039291382,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.2219458060135366e-06,
+        "Leaf_Spot": 0.9655050039291382,
+        "Leaf_webber": 1.37983570311917e-05,
+        "Sterilic_mosaic": 0.03447848930954933,
+        "Wilt": 3.9623787984055525e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0069.jpg",
+      "filename": "leaf_spot_test_0069.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9953961968421936,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.6807144564978671e-09,
+        "Leaf_Spot": 0.9953961968421936,
+        "Leaf_webber": 3.2313957376572944e-07,
+        "Sterilic_mosaic": 0.00460343062877655,
+        "Wilt": 1.1672659283590292e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0070.jpg",
+      "filename": "leaf_spot_test_0070.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9882440567016602,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.213249778535101e-07,
+        "Leaf_Spot": 0.9882440567016602,
+        "Leaf_webber": 8.9345949163544e-06,
+        "Sterilic_mosaic": 0.011743099428713322,
+        "Wilt": 3.3450771752541186e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0071.jpg",
+      "filename": "leaf_spot_test_0071.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8782197833061218,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 7.430089112858695e-07,
+        "Leaf_Spot": 0.8782197833061218,
+        "Leaf_webber": 0.0017204910982400179,
+        "Sterilic_mosaic": 0.12005669623613358,
+        "Wilt": 2.3303450689127203e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0072.jpg",
+      "filename": "leaf_spot_test_0072.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.6329189538955688,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00015293496835511178,
+        "Leaf_Spot": 0.6329189538955688,
+        "Leaf_webber": 0.003567210864275694,
+        "Sterilic_mosaic": 0.36326637864112854,
+        "Wilt": 9.4524075393565e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0073.jpg",
+      "filename": "leaf_spot_test_0073.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9904753565788269,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.4480264987071223e-08,
+        "Leaf_Spot": 0.9904753565788269,
+        "Leaf_webber": 2.624063654366182e-06,
+        "Sterilic_mosaic": 0.00952181126922369,
+        "Wilt": 1.5493489513573877e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0075.jpg",
+      "filename": "leaf_spot_test_0075.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9824209809303284,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 9.456800285079225e-07,
+        "Leaf_Spot": 0.9824209809303284,
+        "Leaf_webber": 1.7322412531939335e-05,
+        "Sterilic_mosaic": 0.01756010763347149,
+        "Wilt": 5.554151698561327e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0082.jpg",
+      "filename": "leaf_spot_test_0082.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9578183889389038,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.543932300293818e-05,
+        "Leaf_Spot": 0.9578183889389038,
+        "Leaf_webber": 0.0001924610260175541,
+        "Sterilic_mosaic": 0.041871920228004456,
+        "Wilt": 7.17246875865385e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0083.jpg",
+      "filename": "leaf_spot_test_0083.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9825130701065063,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.5968772661144612e-06,
+        "Leaf_Spot": 0.9825130701065063,
+        "Leaf_webber": 1.698429332464002e-05,
+        "Sterilic_mosaic": 0.01744796708226204,
+        "Wilt": 1.9387942302273586e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0084.jpg",
+      "filename": "leaf_spot_test_0084.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8303727507591248,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0006830266793258488,
+        "Leaf_Spot": 0.8303727507591248,
+        "Leaf_webber": 0.0012563358759507537,
+        "Sterilic_mosaic": 0.16696065664291382,
+        "Wilt": 0.0007272320799529552
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0085.jpg",
+      "filename": "leaf_spot_test_0085.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9747502207756042,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.263778219382175e-10,
+        "Leaf_Spot": 0.9747502207756042,
+        "Leaf_webber": 5.8899145187751856e-06,
+        "Sterilic_mosaic": 0.025243842974305153,
+        "Wilt": 2.2762898232997486e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0086.jpg",
+      "filename": "leaf_spot_test_0086.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.890417754650116,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.350404080672888e-06,
+        "Leaf_Spot": 0.890417754650116,
+        "Leaf_webber": 0.00019702361896634102,
+        "Sterilic_mosaic": 0.10936543345451355,
+        "Wilt": 1.4397553968592547e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_Spot\\leaf_spot_test_0087.jpg",
+      "filename": "leaf_spot_test_0087.jpg",
+      "true_label": "Leaf_Spot",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8745774030685425,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.223511157557368e-05,
+        "Leaf_Spot": 0.8745774030685425,
+        "Leaf_webber": 0.00026099078240804374,
+        "Sterilic_mosaic": 0.12512032687664032,
+        "Wilt": 8.980653547041584e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0001.jpg",
+      "filename": "leaf_webber_test_0001.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999977350234985,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.089147521175619e-07,
+        "Leaf_Spot": 1.9384698290991764e-08,
+        "Leaf_webber": 0.9999977350234985,
+        "Sterilic_mosaic": 7.254279665858121e-08,
+        "Wilt": 1.6548260646231938e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0002.jpg",
+      "filename": "leaf_webber_test_0002.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999496936798096,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.374205309432e-05,
+        "Leaf_Spot": 4.3757841012848075e-06,
+        "Leaf_webber": 0.9999496936798096,
+        "Sterilic_mosaic": 2.0281513570807874e-06,
+        "Wilt": 1.0411806528054512e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0005.jpg",
+      "filename": "leaf_webber_test_0005.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9577354788780212,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.04099646210670471,
+        "Leaf_Spot": 0.00047819639439694583,
+        "Leaf_webber": 0.9577354788780212,
+        "Sterilic_mosaic": 0.00031114992452785373,
+        "Wilt": 0.0004786332428921014
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0013.jpg",
+      "filename": "leaf_webber_test_0013.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.324201717866629e-10,
+        "Leaf_Spot": 9.828853703153229e-11,
+        "Leaf_webber": 1.0,
+        "Sterilic_mosaic": 3.814527360646025e-09,
+        "Wilt": 3.40200334569829e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0014.jpg",
+      "filename": "leaf_webber_test_0014.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9981189370155334,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0016482947394251823,
+        "Leaf_Spot": 7.914541492937133e-05,
+        "Leaf_webber": 0.9981189370155334,
+        "Sterilic_mosaic": 9.45035062613897e-05,
+        "Wilt": 5.915204019402154e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0015.jpg",
+      "filename": "leaf_webber_test_0015.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999200105667114,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 7.814657874405384e-05,
+        "Leaf_Spot": 7.975279991967454e-09,
+        "Leaf_webber": 0.9999200105667114,
+        "Sterilic_mosaic": 2.006648429642155e-07,
+        "Wilt": 1.6072006019385299e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0017.jpg",
+      "filename": "leaf_webber_test_0017.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999977350234985,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.366542942894739e-07,
+        "Leaf_Spot": 6.78703173662143e-08,
+        "Leaf_webber": 0.9999977350234985,
+        "Sterilic_mosaic": 2.376341967647022e-07,
+        "Wilt": 1.0240838719255407e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0019.jpg",
+      "filename": "leaf_webber_test_0019.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9992967844009399,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0006464305333793163,
+        "Leaf_Spot": 3.188502523698844e-05,
+        "Leaf_webber": 0.9992967844009399,
+        "Sterilic_mosaic": 2.4055116227827966e-05,
+        "Wilt": 8.225110832427163e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0021.jpg",
+      "filename": "leaf_webber_test_0021.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9995336532592773,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0004655458324123174,
+        "Leaf_Spot": 7.541798652255238e-08,
+        "Leaf_webber": 0.9995336532592773,
+        "Sterilic_mosaic": 4.6796239416835306e-07,
+        "Wilt": 2.2843148883566755e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0022.jpg",
+      "filename": "leaf_webber_test_0022.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9951855540275574,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0012524037156254053,
+        "Leaf_Spot": 0.002843889407813549,
+        "Leaf_webber": 0.9951855540275574,
+        "Sterilic_mosaic": 0.0005774478195235133,
+        "Wilt": 0.0001406939554726705
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0026.jpg",
+      "filename": "leaf_webber_test_0026.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9998687505722046,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00011877538781845942,
+        "Leaf_Spot": 6.851092138049353e-08,
+        "Leaf_webber": 0.9998687505722046,
+        "Sterilic_mosaic": 7.408514193230076e-07,
+        "Wilt": 1.1660215022857301e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0027.jpg",
+      "filename": "leaf_webber_test_0027.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999997615814209,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.293891358500332e-07,
+        "Leaf_Spot": 9.023479741188112e-09,
+        "Leaf_webber": 0.9999997615814209,
+        "Sterilic_mosaic": 8.47555057248428e-08,
+        "Wilt": 3.4736782339450656e-08
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0030.jpg",
+      "filename": "leaf_webber_test_0030.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999343156814575,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.286998955649324e-05,
+        "Leaf_Spot": 3.1574479635310126e-06,
+        "Leaf_webber": 0.9999343156814575,
+        "Sterilic_mosaic": 1.707136289041955e-05,
+        "Wilt": 2.498973572073737e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0031.jpg",
+      "filename": "leaf_webber_test_0031.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7508590221405029,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.0005582405719906092,
+        "Leaf_Spot": 0.7508590221405029,
+        "Leaf_webber": 0.009832041338086128,
+        "Sterilic_mosaic": 0.23864011466503143,
+        "Wilt": 0.00011057339725084603
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0035.jpg",
+      "filename": "leaf_webber_test_0035.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999960660934448,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.105133252276573e-07,
+        "Leaf_Spot": 1.8761325826233133e-09,
+        "Leaf_webber": 0.9999960660934448,
+        "Sterilic_mosaic": 3.298333240309148e-06,
+        "Wilt": 5.608419950675625e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0036.jpg",
+      "filename": "leaf_webber_test_0036.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999901056289673,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.1159872782591265e-06,
+        "Leaf_Spot": 2.2569470274902415e-06,
+        "Leaf_webber": 0.9999901056289673,
+        "Sterilic_mosaic": 1.9371670987311518e-06,
+        "Wilt": 6.413786763914686e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0041.jpg",
+      "filename": "leaf_webber_test_0041.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9997475743293762,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00018650491256266832,
+        "Leaf_Spot": 5.112023063702509e-05,
+        "Leaf_webber": 0.9997475743293762,
+        "Sterilic_mosaic": 8.25443203211762e-06,
+        "Wilt": 6.597710125788581e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0042.jpg",
+      "filename": "leaf_webber_test_0042.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9997757077217102,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0002200831368099898,
+        "Leaf_Spot": 2.3033014713291777e-06,
+        "Leaf_webber": 0.9997757077217102,
+        "Sterilic_mosaic": 7.371340871031862e-07,
+        "Wilt": 1.1161057500430616e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0044.jpg",
+      "filename": "leaf_webber_test_0044.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.7534101605415344,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.06021750718355179,
+        "Leaf_Spot": 0.009480498731136322,
+        "Leaf_webber": 0.7534101605415344,
+        "Sterilic_mosaic": 0.15805549919605255,
+        "Wilt": 0.018836304545402527
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0045.jpg",
+      "filename": "leaf_webber_test_0045.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9923812747001648,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.003393333638086915,
+        "Leaf_Spot": 0.0028007125947624445,
+        "Leaf_webber": 0.9923812747001648,
+        "Sterilic_mosaic": 0.0011000246740877628,
+        "Wilt": 0.0003245921107009053
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0048.jpg",
+      "filename": "leaf_webber_test_0048.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9983835220336914,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.001136450795456767,
+        "Leaf_Spot": 0.00015463412273675203,
+        "Leaf_webber": 0.9983835220336914,
+        "Sterilic_mosaic": 0.00029693616670556366,
+        "Wilt": 2.848118128895294e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0050.jpg",
+      "filename": "leaf_webber_test_0050.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 7.820053049556464e-09,
+        "Leaf_Spot": 7.875136098789426e-09,
+        "Leaf_webber": 1.0,
+        "Sterilic_mosaic": 1.448036446305423e-08,
+        "Wilt": 1.7494184989530481e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0053.jpg",
+      "filename": "leaf_webber_test_0053.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9989838004112244,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0009295892086811364,
+        "Leaf_Spot": 6.049585863365792e-07,
+        "Leaf_webber": 0.9989838004112244,
+        "Sterilic_mosaic": 1.2520930795290042e-05,
+        "Wilt": 7.354917033808306e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0054.jpg",
+      "filename": "leaf_webber_test_0054.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9978637099266052,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0019068941473960876,
+        "Leaf_Spot": 8.504158176947385e-05,
+        "Leaf_webber": 0.9978637099266052,
+        "Sterilic_mosaic": 2.8649397791014053e-05,
+        "Wilt": 0.00011569647176656872
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0056.jpg",
+      "filename": "leaf_webber_test_0056.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999998807907104,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.6623165066675938e-09,
+        "Leaf_Spot": 1.5965591071420704e-09,
+        "Leaf_webber": 0.9999998807907104,
+        "Sterilic_mosaic": 1.0393200255975898e-07,
+        "Wilt": 9.4261776162341e-10
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0057.jpg",
+      "filename": "leaf_webber_test_0057.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9884480834007263,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.011516433209180832,
+        "Leaf_Spot": 1.97322947315115e-06,
+        "Leaf_webber": 0.9884480834007263,
+        "Sterilic_mosaic": 1.8991035176441073e-05,
+        "Wilt": 1.4523126992571633e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0060.jpg",
+      "filename": "leaf_webber_test_0060.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999547004699707,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.4023458536248654e-05,
+        "Leaf_Spot": 3.010225100297248e-06,
+        "Leaf_webber": 0.9999547004699707,
+        "Sterilic_mosaic": 6.769468200218398e-06,
+        "Wilt": 1.1524447472766042e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0063.jpg",
+      "filename": "leaf_webber_test_0063.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999998807907104,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.844593727235889e-10,
+        "Leaf_Spot": 3.7557843057811624e-08,
+        "Leaf_webber": 0.9999998807907104,
+        "Sterilic_mosaic": 2.6698668165181516e-08,
+        "Wilt": 8.237417969958472e-10
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0064.jpg",
+      "filename": "leaf_webber_test_0064.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9998362064361572,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.367673581233248e-05,
+        "Leaf_Spot": 6.309962827799609e-06,
+        "Leaf_webber": 0.9998362064361572,
+        "Sterilic_mosaic": 2.4182978449971415e-05,
+        "Wilt": 4.959863144904375e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0065.jpg",
+      "filename": "leaf_webber_test_0065.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999936819076538,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.146341936461795e-09,
+        "Leaf_Spot": 1.6006825376280176e-07,
+        "Leaf_webber": 0.9999936819076538,
+        "Sterilic_mosaic": 9.540426049170492e-08,
+        "Wilt": 6.099394795455737e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0066.jpg",
+      "filename": "leaf_webber_test_0066.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.6323620495059e-09,
+        "Leaf_Spot": 6.080884684678267e-09,
+        "Leaf_webber": 1.0,
+        "Sterilic_mosaic": 9.790843691348527e-09,
+        "Wilt": 3.1577376269353863e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Leaf_webber\\leaf_webber_test_0067.jpg",
+      "filename": "leaf_webber_test_0067.jpg",
+      "true_label": "Leaf_webber",
+      "pred_label": "Leaf_webber",
+      "confidence": 0.9999997615814209,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.8069157192712737e-07,
+        "Leaf_Spot": 1.2758969436532652e-09,
+        "Leaf_webber": 0.9999997615814209,
+        "Sterilic_mosaic": 5.182087292610049e-08,
+        "Wilt": 7.0596146706236595e-09
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0001.jpg",
+      "filename": "sterilic_mosaic_test_0001.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.7450880408287048,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0007093279273249209,
+        "Leaf_Spot": 0.2348349392414093,
+        "Leaf_webber": 0.019352883100509644,
+        "Sterilic_mosaic": 0.7450880408287048,
+        "Wilt": 1.482921652495861e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0003.jpg",
+      "filename": "sterilic_mosaic_test_0003.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9998158812522888,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 7.658548639710716e-08,
+        "Leaf_Spot": 0.00016252369096037,
+        "Leaf_webber": 2.1220819689915515e-05,
+        "Sterilic_mosaic": 0.9998158812522888,
+        "Wilt": 3.0051103294681525e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0004.jpg",
+      "filename": "sterilic_mosaic_test_0004.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9993391633033752,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.475305566600582e-06,
+        "Leaf_Spot": 0.0006142093916423619,
+        "Leaf_webber": 4.403439015732147e-05,
+        "Sterilic_mosaic": 0.9993391633033752,
+        "Wilt": 1.098934376386751e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0005.jpg",
+      "filename": "sterilic_mosaic_test_0005.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7523941993713379,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.0008814954780973494,
+        "Leaf_Spot": 0.7523941993713379,
+        "Leaf_webber": 0.015034819953143597,
+        "Sterilic_mosaic": 0.23150207102298737,
+        "Wilt": 0.0001874247973319143
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0006.jpg",
+      "filename": "sterilic_mosaic_test_0006.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9993501305580139,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.3731165299523127e-07,
+        "Leaf_Spot": 0.0006019413121975958,
+        "Leaf_webber": 2.120448334608227e-05,
+        "Sterilic_mosaic": 0.9993501305580139,
+        "Wilt": 2.63970869127661e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0007.jpg",
+      "filename": "sterilic_mosaic_test_0007.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.5291333198547363,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.0015907399356365204,
+        "Leaf_Spot": 0.5291333198547363,
+        "Leaf_webber": 0.0023558202665299177,
+        "Sterilic_mosaic": 0.46685248613357544,
+        "Wilt": 6.760711403330788e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0008.jpg",
+      "filename": "sterilic_mosaic_test_0008.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9995761513710022,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.4511469714761915e-07,
+        "Leaf_Spot": 9.058921023097355e-06,
+        "Leaf_webber": 7.290721987374127e-05,
+        "Sterilic_mosaic": 0.9995761513710022,
+        "Wilt": 0.0003417467523831874
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0011.jpg",
+      "filename": "sterilic_mosaic_test_0011.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9508131742477417,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0001957106142072007,
+        "Leaf_Spot": 0.041541483253240585,
+        "Leaf_webber": 0.006619987543672323,
+        "Sterilic_mosaic": 0.9508131742477417,
+        "Wilt": 0.0008296679588966072
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0014.jpg",
+      "filename": "sterilic_mosaic_test_0014.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.8667301535606384,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 2.242073605884798e-06,
+        "Leaf_Spot": 0.8667301535606384,
+        "Leaf_webber": 0.00037339236587285995,
+        "Sterilic_mosaic": 0.13288971781730652,
+        "Wilt": 4.460508080228465e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0015.jpg",
+      "filename": "sterilic_mosaic_test_0015.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9992094039916992,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.179734787612688e-06,
+        "Leaf_Spot": 0.00045517622493207455,
+        "Leaf_webber": 0.00021062896121293306,
+        "Sterilic_mosaic": 0.9992094039916992,
+        "Wilt": 0.00012062562018400058
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0016.jpg",
+      "filename": "sterilic_mosaic_test_0016.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9990028738975525,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.0844922952819616e-05,
+        "Leaf_Spot": 0.0006313620251603425,
+        "Leaf_webber": 0.00022213486954569817,
+        "Sterilic_mosaic": 0.9990028738975525,
+        "Wilt": 9.271906310459599e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0017.jpg",
+      "filename": "sterilic_mosaic_test_0017.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.999923586845398,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.960947539549124e-09,
+        "Leaf_Spot": 1.84504606295377e-05,
+        "Leaf_webber": 1.4966252820158843e-05,
+        "Sterilic_mosaic": 0.999923586845398,
+        "Wilt": 4.297206032788381e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0018.jpg",
+      "filename": "sterilic_mosaic_test_0018.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9999539852142334,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.9011690000070303e-08,
+        "Leaf_Spot": 2.585946276667528e-05,
+        "Leaf_webber": 6.710617071803426e-06,
+        "Sterilic_mosaic": 0.9999539852142334,
+        "Wilt": 1.3385576494329143e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0020.jpg",
+      "filename": "sterilic_mosaic_test_0020.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.7598196268081665,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.1105772500741296e-05,
+        "Leaf_Spot": 0.2392074316740036,
+        "Leaf_webber": 0.0009577656164765358,
+        "Sterilic_mosaic": 0.7598196268081665,
+        "Wilt": 4.022520442958921e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0021.jpg",
+      "filename": "sterilic_mosaic_test_0021.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9988700747489929,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.923898930224823e-06,
+        "Leaf_Spot": 0.0011069666361436248,
+        "Leaf_webber": 1.4311011000245344e-05,
+        "Sterilic_mosaic": 0.9988700747489929,
+        "Wilt": 4.691117737820605e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0022.jpg",
+      "filename": "sterilic_mosaic_test_0022.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9947394728660583,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.003669333178550005,
+        "Leaf_Spot": 0.0010230479529127479,
+        "Leaf_webber": 0.0002918904065154493,
+        "Sterilic_mosaic": 0.9947394728660583,
+        "Wilt": 0.0002762514050118625
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0025.jpg",
+      "filename": "sterilic_mosaic_test_0025.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.7740344405174255,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 0.0002732894499786198,
+        "Leaf_Spot": 0.7740344405174255,
+        "Leaf_webber": 0.0051835342310369015,
+        "Sterilic_mosaic": 0.22046518325805664,
+        "Wilt": 4.362592881079763e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0028.jpg",
+      "filename": "sterilic_mosaic_test_0028.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.999554455280304,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.2212255569465924e-05,
+        "Leaf_Spot": 0.00037748372415080667,
+        "Leaf_webber": 3.110056059085764e-05,
+        "Sterilic_mosaic": 0.999554455280304,
+        "Wilt": 2.4776265490800142e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0029.jpg",
+      "filename": "sterilic_mosaic_test_0029.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9996761083602905,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.084627735461254e-07,
+        "Leaf_Spot": 0.00027088081697002053,
+        "Leaf_webber": 3.924532575183548e-05,
+        "Sterilic_mosaic": 0.9996761083602905,
+        "Wilt": 1.349755530100083e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0031.jpg",
+      "filename": "sterilic_mosaic_test_0031.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9903920888900757,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0009928635554388165,
+        "Leaf_Spot": 0.002690424444153905,
+        "Leaf_webber": 0.005334312561899424,
+        "Sterilic_mosaic": 0.9903920888900757,
+        "Wilt": 0.00059034168953076
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0032.jpg",
+      "filename": "sterilic_mosaic_test_0032.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9858776330947876,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.006782418116927147,
+        "Leaf_Spot": 0.006035800091922283,
+        "Leaf_webber": 0.000887239002622664,
+        "Sterilic_mosaic": 0.9858776330947876,
+        "Wilt": 0.00041688643977977335
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0033.jpg",
+      "filename": "sterilic_mosaic_test_0033.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Leaf_Spot",
+      "confidence": 0.9805514812469482,
+      "correct": false,
+      "probabilities": {
+        "Healthy": 5.453664471133379e-06,
+        "Leaf_Spot": 0.9805514812469482,
+        "Leaf_webber": 1.1783982699853368e-05,
+        "Sterilic_mosaic": 0.019426818937063217,
+        "Wilt": 4.502717729337746e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0035.jpg",
+      "filename": "sterilic_mosaic_test_0035.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9538804888725281,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.953890988370404e-05,
+        "Leaf_Spot": 0.0457458458840847,
+        "Leaf_webber": 0.000293638528091833,
+        "Sterilic_mosaic": 0.9538804888725281,
+        "Wilt": 1.0487347026355565e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0036.jpg",
+      "filename": "sterilic_mosaic_test_0036.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9997015595436096,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.315607947726676e-08,
+        "Leaf_Spot": 0.00013565928384196013,
+        "Leaf_webber": 1.866868115030229e-05,
+        "Sterilic_mosaic": 0.9997015595436096,
+        "Wilt": 0.0001440455816918984
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0038.jpg",
+      "filename": "sterilic_mosaic_test_0038.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.999174177646637,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.804159066727152e-06,
+        "Leaf_Spot": 0.0004885925445705652,
+        "Leaf_webber": 0.00014381507935468107,
+        "Sterilic_mosaic": 0.999174177646637,
+        "Wilt": 0.00019057144527323544
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0041.jpg",
+      "filename": "sterilic_mosaic_test_0041.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9998101592063904,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.1522221399218324e-07,
+        "Leaf_Spot": 7.1744043452781625e-06,
+        "Leaf_webber": 7.251028000609949e-05,
+        "Sterilic_mosaic": 0.9998101592063904,
+        "Wilt": 0.0001101264642784372
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0042.jpg",
+      "filename": "sterilic_mosaic_test_0042.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9997434020042419,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 8.277190772787435e-07,
+        "Leaf_Spot": 0.00016412080731242895,
+        "Leaf_webber": 6.055052290321328e-05,
+        "Sterilic_mosaic": 0.9997434020042419,
+        "Wilt": 3.1090810807654634e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0045.jpg",
+      "filename": "sterilic_mosaic_test_0045.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.999313473701477,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.00020489956659730524,
+        "Leaf_Spot": 9.37778313527815e-05,
+        "Leaf_webber": 0.00020023727847728878,
+        "Sterilic_mosaic": 0.999313473701477,
+        "Wilt": 0.00018766973516903818
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0050.jpg",
+      "filename": "sterilic_mosaic_test_0050.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.5185456871986389,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0006729034939780831,
+        "Leaf_Spot": 0.43304064869880676,
+        "Leaf_webber": 0.047526758164167404,
+        "Sterilic_mosaic": 0.5185456871986389,
+        "Wilt": 0.00021398036915343255
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0051.jpg",
+      "filename": "sterilic_mosaic_test_0051.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.5550312995910645,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0001344732299912721,
+        "Leaf_Spot": 0.4407448470592499,
+        "Leaf_webber": 0.004086245317012072,
+        "Sterilic_mosaic": 0.5550312995910645,
+        "Wilt": 3.1752845188748324e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0052.jpg",
+      "filename": "sterilic_mosaic_test_0052.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9990718364715576,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.1703464881284162e-05,
+        "Leaf_Spot": 0.0003831042267847806,
+        "Leaf_webber": 0.00023613535449840128,
+        "Sterilic_mosaic": 0.9990718364715576,
+        "Wilt": 0.0002871560282073915
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0053.jpg",
+      "filename": "sterilic_mosaic_test_0053.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9992807507514954,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.962371531291865e-05,
+        "Leaf_Spot": 6.892337114550173e-05,
+        "Leaf_webber": 0.00022725644521415234,
+        "Sterilic_mosaic": 0.9992807507514954,
+        "Wilt": 0.00037342082941904664
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0054.jpg",
+      "filename": "sterilic_mosaic_test_0054.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.996246874332428,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.430989300388319e-06,
+        "Leaf_Spot": 0.003726419759914279,
+        "Leaf_webber": 2.4293234673677944e-05,
+        "Sterilic_mosaic": 0.996246874332428,
+        "Wilt": 9.996214203056297e-07
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0055.jpg",
+      "filename": "sterilic_mosaic_test_0055.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9997802376747131,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.1800899569798275e-08,
+        "Leaf_Spot": 3.7859823351027444e-05,
+        "Leaf_webber": 0.00017378588381689042,
+        "Sterilic_mosaic": 0.9997802376747131,
+        "Wilt": 8.016174433578271e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0059.jpg",
+      "filename": "sterilic_mosaic_test_0059.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9838601350784302,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.3071708053757902e-06,
+        "Leaf_Spot": 0.01609659567475319,
+        "Leaf_webber": 3.479433507891372e-05,
+        "Sterilic_mosaic": 0.9838601350784302,
+        "Wilt": 7.211874617496505e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0060.jpg",
+      "filename": "sterilic_mosaic_test_0060.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.993959903717041,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.29443558055209e-05,
+        "Leaf_Spot": 0.0038059318903833628,
+        "Leaf_webber": 0.0015332004986703396,
+        "Sterilic_mosaic": 0.993959903717041,
+        "Wilt": 0.0006781177944503725
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0061.jpg",
+      "filename": "sterilic_mosaic_test_0061.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9999157190322876,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.0571737618647603e-07,
+        "Leaf_Spot": 9.925935955834575e-06,
+        "Leaf_webber": 1.6093847079901025e-05,
+        "Sterilic_mosaic": 0.9999157190322876,
+        "Wilt": 5.812698873342015e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0062.jpg",
+      "filename": "sterilic_mosaic_test_0062.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9999212026596069,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 9.545686197043324e-08,
+        "Leaf_Spot": 3.7679681554436684e-05,
+        "Leaf_webber": 1.5314908523578197e-05,
+        "Sterilic_mosaic": 0.9999212026596069,
+        "Wilt": 2.5765171812963672e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0065.jpg",
+      "filename": "sterilic_mosaic_test_0065.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.99969482421875,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.96595350291318e-07,
+        "Leaf_Spot": 0.00019774520478677005,
+        "Leaf_webber": 9.15014898055233e-05,
+        "Sterilic_mosaic": 0.99969482421875,
+        "Wilt": 1.5323039406212047e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0068.jpg",
+      "filename": "sterilic_mosaic_test_0068.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9999744892120361,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.9156138897358232e-09,
+        "Leaf_Spot": 1.2475818948587403e-05,
+        "Leaf_webber": 7.858936442062259e-06,
+        "Sterilic_mosaic": 0.9999744892120361,
+        "Wilt": 5.1721458476094995e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0069.jpg",
+      "filename": "sterilic_mosaic_test_0069.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9999384880065918,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.6381244683525438e-09,
+        "Leaf_Spot": 2.1289781670930097e-06,
+        "Leaf_webber": 5.424733899417333e-06,
+        "Sterilic_mosaic": 0.9999384880065918,
+        "Wilt": 5.388077624957077e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0070.jpg",
+      "filename": "sterilic_mosaic_test_0070.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9945639371871948,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 3.3614789572311565e-05,
+        "Leaf_Spot": 6.4541318351984955e-06,
+        "Leaf_webber": 2.228055200248491e-05,
+        "Sterilic_mosaic": 0.9945639371871948,
+        "Wilt": 0.005373713560402393
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0072.jpg",
+      "filename": "sterilic_mosaic_test_0072.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9956543445587158,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0028345610480755568,
+        "Leaf_Spot": 9.935020352713764e-05,
+        "Leaf_webber": 0.00102243444416672,
+        "Sterilic_mosaic": 0.9956543445587158,
+        "Wilt": 0.0003893193497788161
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0073.jpg",
+      "filename": "sterilic_mosaic_test_0073.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.558880627155304,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0017943725688382983,
+        "Leaf_Spot": 0.3916657567024231,
+        "Leaf_webber": 0.04730783775448799,
+        "Sterilic_mosaic": 0.558880627155304,
+        "Wilt": 0.0003513222327455878
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0076.jpg",
+      "filename": "sterilic_mosaic_test_0076.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9994511008262634,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 9.175414015771821e-05,
+        "Leaf_Spot": 0.00022912946587894112,
+        "Leaf_webber": 3.8243859307840466e-05,
+        "Sterilic_mosaic": 0.9994511008262634,
+        "Wilt": 0.00018973393889609724
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0077.jpg",
+      "filename": "sterilic_mosaic_test_0077.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9981881976127625,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.572182660922408e-05,
+        "Leaf_Spot": 0.0013281140709295869,
+        "Leaf_webber": 0.00034590132418088615,
+        "Sterilic_mosaic": 0.9981881976127625,
+        "Wilt": 9.203100489685312e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0078.jpg",
+      "filename": "sterilic_mosaic_test_0078.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9998705387115479,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.183586959996319e-06,
+        "Leaf_Spot": 7.608354644617066e-05,
+        "Leaf_webber": 2.363197381782811e-05,
+        "Sterilic_mosaic": 0.9998705387115479,
+        "Wilt": 2.860093445633538e-05
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0079.jpg",
+      "filename": "sterilic_mosaic_test_0079.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.972501814365387,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0022508609108626842,
+        "Leaf_Spot": 0.0014789118431508541,
+        "Leaf_webber": 0.019913149997591972,
+        "Sterilic_mosaic": 0.972501814365387,
+        "Wilt": 0.0038552647456526756
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0080.jpg",
+      "filename": "sterilic_mosaic_test_0080.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.997944176197052,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.741257230809424e-05,
+        "Leaf_Spot": 0.0018722465028986335,
+        "Leaf_webber": 0.0001476346078561619,
+        "Sterilic_mosaic": 0.997944176197052,
+        "Wilt": 8.516039997630287e-06
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0081.jpg",
+      "filename": "sterilic_mosaic_test_0081.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.5751298666000366,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 0.0002438707451801747,
+        "Leaf_Spot": 0.41057392954826355,
+        "Leaf_webber": 0.01392397191375494,
+        "Sterilic_mosaic": 0.5751298666000366,
+        "Wilt": 0.00012836178939323872
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0082.jpg",
+      "filename": "sterilic_mosaic_test_0082.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9991534948348999,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.0443114863155643e-06,
+        "Leaf_Spot": 0.00040094213909469545,
+        "Leaf_webber": 3.421245492063463e-05,
+        "Sterilic_mosaic": 0.9991534948348999,
+        "Wilt": 0.0004093185707461089
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Sterilic_mosaic\\sterilic_mosaic_test_0083.jpg",
+      "filename": "sterilic_mosaic_test_0083.jpg",
+      "true_label": "Sterilic_mosaic",
+      "pred_label": "Sterilic_mosaic",
+      "confidence": 0.9984846711158752,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 5.325143865775317e-05,
+        "Leaf_Spot": 0.00015435450768563896,
+        "Leaf_webber": 0.0005291419220156968,
+        "Sterilic_mosaic": 0.9984846711158752,
+        "Wilt": 0.0007785548223182559
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Wilt\\wilt_train_0072.jpg",
+      "filename": "wilt_train_0072.jpg",
+      "true_label": "Wilt",
+      "pred_label": "Wilt",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 1.480569139511445e-13,
+        "Leaf_Spot": 7.136363440289617e-13,
+        "Leaf_webber": 7.932753846168206e-13,
+        "Sterilic_mosaic": 1.3400386486214777e-14,
+        "Wilt": 1.0
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Wilt\\wilt_train_0075.jpg",
+      "filename": "wilt_train_0075.jpg",
+      "true_label": "Wilt",
+      "pred_label": "Wilt",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.250097496360134e-16,
+        "Leaf_Spot": 2.1214058748596568e-15,
+        "Leaf_webber": 1.0178295310064945e-17,
+        "Sterilic_mosaic": 8.731971332504956e-17,
+        "Wilt": 1.0
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Wilt\\wilt_train_0078.jpg",
+      "filename": "wilt_train_0078.jpg",
+      "true_label": "Wilt",
+      "pred_label": "Wilt",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 2.1727684096362054e-09,
+        "Leaf_Spot": 4.752426785437081e-10,
+        "Leaf_webber": 2.310055063903249e-10,
+        "Sterilic_mosaic": 2.7353530551721406e-10,
+        "Wilt": 1.0
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Wilt\\wilt_train_0104.jpg",
+      "filename": "wilt_train_0104.jpg",
+      "true_label": "Wilt",
+      "pred_label": "Wilt",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 4.605816054069345e-13,
+        "Leaf_Spot": 1.8072838147906167e-12,
+        "Leaf_webber": 4.769718691191582e-13,
+        "Sterilic_mosaic": 2.585422043013645e-14,
+        "Wilt": 1.0
+      }
+    },
+    {
+      "path": "c:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets\\pigeonpea_disease_clean_candidate_v1\\test\\Wilt\\wilt_train_0152.jpg",
+      "filename": "wilt_train_0152.jpg",
+      "true_label": "Wilt",
+      "pred_label": "Wilt",
+      "confidence": 1.0,
+      "correct": true,
+      "probabilities": {
+        "Healthy": 6.796567648958973e-12,
+        "Leaf_Spot": 7.784989558383415e-13,
+        "Leaf_webber": 3.318398954601544e-14,
+        "Sterilic_mosaic": 1.121209570499604e-12,
+        "Wilt": 1.0
+      }
+    }
+  ]
+}

@@ -44,6 +44,9 @@ secrets.json
 # ----- Database -----
 *.sqlite
 *.db
+*.dump
+backups/
+backend/backups/
 
 # ----- Uploads -----
 backend/uploads/*
@@ -86,3 +89,13 @@ desktop.ini
 # ----- Logs -----
 *.log
 logs/
+
+# ----- Archives & Data Dumps -----
+*.zip
+*.tar.gz
+*.tgz
+project_extraction.txt
+
+# ----- Experimental Weights (Keep production weights tracked) -----
+models/experimental_*.pth
+

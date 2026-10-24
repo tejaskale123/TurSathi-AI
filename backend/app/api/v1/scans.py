@@ -31,7 +31,7 @@ Rate-limiting is expected to be handled at the infra level (nginx / API gateway)
 import logging
 from typing import Optional
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, UploadFile, status
 from sqlalchemy.orm import Session
 
 from app.api.v1.auth import get_current_user
@@ -42,9 +42,15 @@ from app.schemas.scan import (
     FrameValidationResponse,
     ScanCreateResponse,
     ScanDetailResponse,
+    ScanListResponse,
     VoiceReportCreateResponse,
 )
-from app.services.scan_service import create_scan_with_image, create_voice_report, get_scan_for_user
+from app.services.scan_service import (
+    create_scan_with_image,
+    create_voice_report,
+    get_scan_for_user,
+    list_scans_for_user,
+)
 
 logger = logging.getLogger("tursathi.api.scans")
 
@@ -114,6 +120,75 @@ async def upload_scan(
         scan_id=scan.id,
         crop=scan.crop,
         status=scan.status,
+    )
+
+
+@router.get(
+    "",
+    response_model=ScanListResponse,
+    status_code=status.HTTP_200_OK,
+    summary="List paginated scan records for the authenticated user",
+)
+@router.get(
+    "/",
+    response_model=ScanListResponse,
+    status_code=status.HTTP_200_OK,
+    include_in_schema=False,
+)
+def list_scans(
+    skip: int = Query(default=0, ge=0, description="Number of records to skip"),
+    limit: int = Query(default=20, ge=1, le=100, description="Maximum number of records to return"),
+    page: Optional[int] = Query(default=None, ge=1, description="Optional 1-based page number (overrides skip if provided)"),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ScanListResponse:
+    """
+    Returns a paginated list of TurScan records owned by the authenticated user.
+    - Strictly scoped to current_user.id (cross-user access prevented).
+    - Ordered newest-first (created_at DESC, id DESC).
+    - Supports both skip/limit and page/limit pagination.
+    """
+    if page is not None:
+        effective_skip = (page - 1) * limit
+        current_page = page
+    else:
+        effective_skip = skip
+        current_page = (skip // limit) + 1
+
+    items, total = list_scans_for_user(
+        db=db,
+        user_id=current_user.id,
+        skip=effective_skip,
+        limit=limit,
+    )
+
+    total_pages = max(1, (total + limit - 1) // limit) if total > 0 else 1
+
+    item_responses = [
+        ScanDetailResponse(
+            scan_id=scan.id,
+            user_id=scan.user_id,
+            crop=scan.crop,
+            status=scan.status,
+            image_filename=scan.image_filename,
+            image_content_type=scan.image_content_type,
+            image_size=scan.image_size,
+            disease_name=scan.disease_name,
+            confidence=scan.confidence,
+            severity=scan.severity,
+            prediction_status=scan.prediction_status,
+            created_at=scan.created_at,
+            updated_at=scan.updated_at,
+        )
+        for scan in items
+    ]
+
+    return ScanListResponse(
+        total=total,
+        page=current_page,
+        limit=limit,
+        total_pages=total_pages,
+        items=item_responses,
     )
 
 

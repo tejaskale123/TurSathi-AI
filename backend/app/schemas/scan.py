@@ -48,6 +48,19 @@ class ScanDetailResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class ScanListResponse(BaseModel):
+    """
+    Paginated list of scan records for the authenticated user.
+    """
+    total: int = Field(description="Total count of scans owned by this user")
+    page: int = Field(description="Current 1-based page number")
+    limit: int = Field(description="Page size limit")
+    total_pages: int = Field(description="Total number of pages")
+    items: list[ScanDetailResponse] = Field(default_factory=list, description="List of scan records")
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 # ── Voice report ───────────────────────────────────────────────────────────────
 
 class VoiceReportCreateResponse(BaseModel):

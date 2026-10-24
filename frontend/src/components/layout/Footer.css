@@ -1,0 +1,66 @@
+.tursathi-footer {
+  margin-top: auto;
+  background: #f7f3e8;
+  border-top: 1px solid rgba(16, 89, 54, 0.12);
+  padding: 2rem 1.25rem 1.5rem;
+  color: #3b5042;
+  font-size: 0.85rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-disclaimer {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(18, 106, 64, 0.15);
+  border-radius: 0.85rem;
+  padding: 1rem 1.25rem;
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #0d5638;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.shield-icon {
+  color: #1a874f;
+  flex-shrink: 0;
+}
+
+.footer-disclaimer p {
+  margin: 0;
+  line-height: 1.5;
+  color: #4b6352;
+  font-size: 0.8rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(16, 89, 54, 0.08);
+  font-size: 0.8rem;
+  color: #5c7564;
+}
+
+.footer-brand {
+  font-weight: 700;
+  color: #126a40;
+}
+
+.footer-brand em {
+  font-weight: 400;
+  color: #8c7333;
+}

@@ -114,6 +114,29 @@ def get_scan_for_user(
     return scan
 
 
+def list_scans_for_user(
+    db: Session,
+    user_id: int,
+    skip: int = 0,
+    limit: int = 20,
+) -> tuple[list[TurScan], int]:
+    """
+    Retrieves a paginated list of scans strictly filtered by user ownership.
+    Ordered by newest first (created_at desc, id desc).
+    Returns (items, total_count).
+    """
+    base_query = db.query(TurScan).filter(TurScan.user_id == user_id)
+    total = base_query.count()
+    items = (
+        base_query
+        .order_by(TurScan.created_at.desc(), TurScan.id.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    return items, total
+
+
 # ── Voice report creation ─────────────────────────────────────────────────────
 
 def create_voice_report(

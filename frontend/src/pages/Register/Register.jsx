@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ArrowRight, Check, Eye, EyeOff, Globe2, Lock, Mail, UserRound, ShieldCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { authService } from '../../services/authService';
 import './Register.css';
 
 const translations = {
@@ -23,11 +24,13 @@ const translations = {
     language: 'Language',
     requiredName: 'Please enter your full name.',
     requiredMobile: 'Please enter your mobile number.',
+    invalidMobile: 'Please enter a valid 10-digit mobile number.',
     requiredPassword: 'Password is required.',
+    passwordMinLength: 'Password must be at least 8 characters.',
     mismatch: 'Passwords do not match.',
     requiredTerms: 'Please accept the Terms & Conditions.',
     googleInfo: 'Google sign-in is not configured yet.',
-    success: 'Demo registration successful. Redirecting...',
+    success: 'Registration successful! Redirecting to login...',
   },
   hi: {
     brand: 'TurSathi AI',
@@ -48,11 +51,13 @@ const translations = {
     language: 'भाषा',
     requiredName: 'कृपया अपना पूरा नाम दर्ज करें।',
     requiredMobile: 'कृपया अपना मोबाइल नंबर दर्ज करें।',
+    invalidMobile: 'कृपया एक मान्य 10-अंकों का मोबाइल नंबर दर्ज करें।',
     requiredPassword: 'पासवर्ड आवश्यक है।',
+    passwordMinLength: 'पासवर्ड कम से कम 8 वर्णों का होना चाहिए।',
     mismatch: 'पासवर्ड मेल नहीं खाते।',
     requiredTerms: 'कृपया नियमों और गोपनीयता नीति से सहमत हों।',
     googleInfo: 'Google साइन-इन अभी कॉन्फ़िगर नहीं है।',
-    success: 'डेमो रजिस्ट्रेशन सफल। रीडायरेक्ट हो रहा है...',
+    success: 'पंजीकरण सफल! लॉगिन पर रीडायरेक्ट हो रहा है...',
   },
   mr: {
     brand: 'TurSathi AI',
@@ -73,11 +78,13 @@ const translations = {
     language: 'भाषा',
     requiredName: 'कृपया आपले पूर्ण नाव भरा.',
     requiredMobile: 'कृपया आपला मोबाइल नंबर भरा.',
+    invalidMobile: 'कृपया वैध 10-अंकी मोबाइल नंबर प्रविष्ट करा.',
     requiredPassword: 'पासवर्ड आवश्यक आहे.',
+    passwordMinLength: 'पासवर्ड किमान 8 अक्षरांचा असणे आवश्यक आहे.',
     mismatch: 'पासवर्ड जुळत नाहीत.',
     requiredTerms: 'कृपया नियम व गोपनीयता धोरणाशी सहमत व्हा.',
     googleInfo: 'Google साइन-इन अद्याप कॉन्फिगर केलेले नाही.',
-    success: 'डेमो नोंदणी यशस्वी. रीडायरेक्ट होत आहे...',
+    success: 'नोंदणी यशस्वी! लॉगिनवर रीडायरेक्ट होत आहे...',
   },
 };
 
@@ -97,6 +104,7 @@ function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [notice, setNotice] = useState('');
+  const [noticeType, setNoticeType] = useState('info');
 
   const text = useMemo(() => translations[language], [language]);
 
@@ -117,14 +125,21 @@ function Register() {
 
     if (!form.name.trim()) {
       validationErrors.name = text.requiredName;
+    } else if (form.name.trim().length < 2) {
+      validationErrors.name = text.requiredName;
     }
 
+    const normalizedMobile = authService.normalizeMobileNumber(form.mobile);
     if (!form.mobile.trim()) {
       validationErrors.mobile = text.requiredMobile;
+    } else if (!/^[6-9]\d{9}$/.test(normalizedMobile)) {
+      validationErrors.mobile = text.invalidMobile;
     }
 
     if (!form.password.trim()) {
       validationErrors.password = text.requiredPassword;
+    } else if (form.password.length < 8) {
+      validationErrors.password = text.passwordMinLength;
     }
 
     if (!form.confirmPassword.trim()) {
@@ -141,9 +156,10 @@ function Register() {
     return Object.keys(validationErrors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setNotice('');
+    setNoticeType('info');
 
     if (!validateForm()) {
       return;
@@ -151,15 +167,36 @@ function Register() {
 
     setIsSubmitting(true);
 
-    window.setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await authService.register({
+        fullName: form.name.trim(),
+        mobileNumber: form.mobile.trim(),
+        email: form.email.trim() || null,
+        password: form.password,
+        confirmPassword: form.confirmPassword,
+      });
+
       setNotice(text.success);
-      navigate('/login');
-    }, 900);
+      setNoticeType('info');
+
+      window.setTimeout(() => {
+        navigate('/login', {
+          state: {
+            message: 'Registration successful! Please login with your password.',
+          },
+        });
+      }, 700);
+    } catch (err) {
+      setNotice(err.detail || err.message || 'Registration failed.');
+      setNoticeType('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleGoogle = () => {
     setNotice(text.googleInfo);
+    setNoticeType('warning');
   };
 
   return (
@@ -296,7 +333,7 @@ function Register() {
             {errors.terms && <span className="field-error">{errors.terms}</span>}
 
             {notice && (
-              <div className={`status-message ${notice.includes('not configured') ? 'warning' : 'info'}`}>
+              <div className={`status-message ${noticeType || 'info'}`} role="alert">
                 {notice}
               </div>
             )}

@@ -1,26 +1,36 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { tokenService } from '../../services/tokenService.js';
 import './Splash.css';
 
 function Splash() {
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(12);
+
+  const proceed = () => {
+    const destination = tokenService.isAuthenticated() ? '/home' : '/login';
+    navigate(destination, { replace: true });
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((current) => {
         if (current >= 100) {
+          clearInterval(timer);
+          setTimeout(proceed, 200);
           return 100;
         }
 
-        return Math.min(current + 2, 100);
+        return Math.min(current + 4, 100);
       });
-    }, 90);
+    }, 60);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="splash-screen">
-      <div className="splash-scene" aria-label="TurSathi AI splash screen">
+      <div className="splash-scene" aria-label="TurSathi AI splash screen" onClick={proceed} style={{ cursor: 'pointer' }}>
         <div className="status-bar">
           <span className="time">9:41</span>
           <div className="status-icons" aria-hidden="true">

@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight, Check, Eye, EyeOff, Globe2, Lock, Mail, ShieldCheck } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { authService } from '../../services/authService';
 import './Login.css';
 
 const translations = {
@@ -77,14 +78,23 @@ const translations = {
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [language, setLanguage] = useState('en');
   const [form, setForm] = useState({ email: '', password: '', remember: true });
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
   const [notice, setNotice] = useState('');
+  const [noticeType, setNoticeType] = useState('info');
 
   const text = useMemo(() => translations[language], [language]);
+
+  useEffect(() => {
+    if (location.state?.message) {
+      setNotice(location.state.message);
+      setNoticeType('info');
+    }
+  }, [location.state]);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -113,9 +123,10 @@ function Login() {
     return Object.keys(validationErrors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setNotice('');
+    setNoticeType('info');
 
     if (!validateForm()) {
       return;
@@ -123,19 +134,31 @@ function Login() {
 
     setIsSubmitting(true);
 
-    window.setTimeout(() => {
+    try {
+      await authService.login({
+        identifier: form.email.trim(),
+        password: form.password,
+      });
+      setNotice(text.successMessage);
+      setNoticeType('info');
+      const destination = location.state?.from?.pathname || '/home';
+      navigate(destination);
+    } catch (err) {
+      setNotice(err.detail || err.message || 'Login failed. Please check your credentials.');
+      setNoticeType('error');
+    } finally {
       setIsSubmitting(false);
-      setNotice(text.submitSuccess);
-      navigate('/register');
-    }, 900);
+    }
   };
 
   const handleGoogle = () => {
     setNotice(text.googleInfo);
+    setNoticeType('warning');
   };
 
   const handleForgot = () => {
     setNotice(text.forgotInfo);
+    setNoticeType('warning');
   };
 
   return (
@@ -223,7 +246,7 @@ function Login() {
             </div>
 
             {notice && (
-              <div className={`status-message ${notice.includes('not configured') ? 'warning' : 'info'}`}>
+              <div className={`status-message ${noticeType || 'info'}`} role="alert">
                 {notice}
               </div>
             )}
