@@ -99,21 +99,22 @@ def run_prediction(
     try:
         result = predictor.predict(image_abs_path)
 
-        if result.confidence < 0.65:
+        if not result.is_supported_class or result.confidence < 0.65:
             scan.status = "rejected"
             scan.prediction_status = "rejected"
             db.commit()
+            rejection_reason = result.rejection_reason or "low_confidence_unsupported"
             logger.warning(
-                "[PREDICTION_SERVICE] Scan #%d rejected due to low confidence: %.3f. Possibly an unsupported disease.",
-                scan_id, result.confidence
+                "[PREDICTION_SERVICE] Scan #%d rejected: reason=%s, conf=%.3f, cos_dist=%s. Class outside current database.",
+                scan_id, rejection_reason, result.confidence, str(result.cosine_distance)
             )
             raise HTTPException(
                 status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
                 detail={
                     "status": "unsupported_disease",
-                    "reason": "low_confidence_unsupported",
-                    "message": "Unsupported Tur disease. This disease is not included in the current model. Please upload an image of one of the supported conditions.",
-                    "message_mr": "निदानाची खात्री पुरेशी नाही किंवा हा रोग समर्थित वर्गात नाही. कृपया चांगल्या प्रकाशात स्पष्ट तूर पानाचा फोटो पुन्हा घ्या.",
+                    "reason": rejection_reason,
+                    "message": "This specific class does not exist in the current database. The system strictly supports only verified pigeon pea classes: Healthy, Leaf Spot, Leaf Webber, Sterility Mosaic, and Wilt.",
+                    "message_mr": "हा विशिष्ट रोग सध्याच्या डेटाबेसमध्ये उपलब्ध नाही. तूर साथी केवळ अधिकृत ५ रोगांचे (निरोगी, पानांवरील ठिपके, पाने गुंडाळणारी अळी, वांझ रोग, आणि मर रोग) अचूक निदान करते.",
                 }
             )
 

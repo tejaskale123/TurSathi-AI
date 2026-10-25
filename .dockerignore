@@ -12,7 +12,13 @@ autocapture_contradictions.md
 DATASETS_INVENTORY.md
 PROJECT_FULL_AUDIT_REPORT.md
 
-# Heavy Raw Datasets & Archives (Excludes ~2.6 GB from Docker context)
+# Large Compressed Files & PDFs
+*.zip
+*.pdf
+*.dump
+*.tar.gz
+
+# Heavy Raw Datasets & Archives (Excludes multi-gigabyte data from build context)
 Tur_Disease_Dataset.zip
 project_extraction.txt
 datasets/
@@ -34,7 +40,6 @@ scripts/
 ml/
 backups/
 backend/backups/
-*.dump
 
 # Python Artifacts & Environments
 __pycache__/
@@ -48,11 +53,10 @@ env/
 .cache/
 .mypy_cache/
 
-# Node & Frontend Build Artifacts
+# Node & Frontend Build Artifacts (Mobile is built separately as APK)
 node_modules/
 mobile/
-frontend/node_modules/
-frontend/dist/
+frontend/
 
 # Local Secrets & Uploads
 .env
@@ -61,6 +65,8 @@ frontend/dist/
 backend/uploads/*
 !backend/uploads/.gitkeep
 
-# Experimental ML Checkpoints (Production only needs best_pigeonpea...pth & validator_v3.pth)
+# Experimental ML Checkpoints (Production only copies the 3 required active files)
 models/experimental/
 models/experimental_*.pth
+models/pigeonpea_disease_final_training_results.json
+models/pigeonpea_disease_final_confusion_matrix.txt

@@ -20,11 +20,13 @@ Supported classes:
     Wilt
 """
 
+import json
 import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Dict, Optional
 
+import numpy as np
 import torch
 import torch.nn as nn
 from PIL import Image
@@ -52,6 +54,12 @@ MODEL_PATH = (
     / "best_pigeonpea_disease_final_efficientnet_b0.pth"
 )
 
+OOD_PROFILE_PATH = (
+    PROJECT_ROOT
+    / "models"
+    / "ood_feature_profile.json"
+)
+
 
 # ============================================================
 # DEVICE
@@ -70,19 +78,53 @@ MODEL_AVAILABLE: bool = MODEL_PATH.exists()
 
 
 # ============================================================
+# ARCHITECTURE DEFINITION
+# ============================================================
+
+class TurEfficientNetB0(nn.Module):
+    """
+    EfficientNet-B0 with dedicated penultimate feature extraction tapping.
+    Used for 1280-D dense latent vector extraction and strict OOD boundary checks.
+    """
+    def __init__(self, num_classes: int = 5):
+        super().__init__()
+        base_model = models.efficientnet_b0(weights=None)
+        self.features = base_model.features
+        self.avgpool = base_model.avgpool
+        in_features = base_model.classifier[1].in_features
+        self.dropout = nn.Dropout(p=0.2, inplace=True)
+        self.classifier = nn.Linear(in_features, num_classes)
+
+    def extract_features(self, x: torch.Tensor) -> torch.Tensor:
+        feat = self.features(x)
+        feat = self.avgpool(feat)
+        feat = torch.flatten(feat, 1)
+        return feat
+
+    def forward(self, x: torch.Tensor):
+        feat = self.extract_features(x)
+        out = self.dropout(feat)
+        logits = self.classifier(out)
+        return logits, feat
+
+
+# ============================================================
 # RESULT
 # ============================================================
 
 @dataclass
 class PredictionResult:
     """
-    Structured result from the Tur disease ML model.
+    Structured result from the Tur disease ML model with strict OOD enforcement.
     """
 
     disease_name: str
     confidence: float
     severity: str
     prediction_status: str = "completed"
+    is_supported_class: bool = True
+    rejection_reason: Optional[str] = None
+    cosine_distance: Optional[float] = None
 
 
 # ============================================================
@@ -103,7 +145,8 @@ class ModelNotConfiguredError(Exception):
 
 class TurDiseasePredictor:
     """
-    EfficientNet-B0 based Tur leaf disease predictor.
+    EfficientNet-B0 based Tur leaf disease predictor with strict closed-set
+    1280-D latent manifold validation.
     """
 
     def __init__(self) -> None:
@@ -111,6 +154,14 @@ class TurDiseasePredictor:
         self._model = None
 
         self._classes: list[str] = []
+        self._norm_centroids: Dict[str, np.ndarray] = {}
+        self._class_thresholds: Dict[str, float] = {
+            "Healthy": 0.46,
+            "Leaf_Spot": 0.54,
+            "Leaf_webber": 0.48,
+            "Sterilic_mosaic": 0.58,
+            "Wilt": 0.40,
+        }
 
         self._transform = transforms.Compose([
             transforms.Resize((224, 224)),
@@ -188,35 +239,42 @@ class TurDiseasePredictor:
             # -----------------------------------------------
             # Create EfficientNet-B0 architecture
             # -----------------------------------------------
+            model = TurEfficientNetB0(num_classes=num_classes)
 
-            model = models.efficientnet_b0(
-                weights=None
-            )
+            # Load trained weights (support both classifier.weight and classifier.1.weight)
+            sd = checkpoint["model_state_dict"]
+            new_sd = {}
+            for k, v in sd.items():
+                if k == "classifier.1.weight":
+                    new_sd["classifier.weight"] = v
+                elif k == "classifier.1.bias":
+                    new_sd["classifier.bias"] = v
+                else:
+                    new_sd[k] = v
 
-            in_features = (
-                model.classifier[1].in_features
-            )
-
-            model.classifier[1] = nn.Linear(
-                in_features,
-                num_classes,
-            )
-
-            # -----------------------------------------------
-            # Load trained weights
-            # -----------------------------------------------
-
-            model.load_state_dict(
-                checkpoint["model_state_dict"]
-            )
-
-            model = model.to(
-                DEVICE
-            )
-
+            model.load_state_dict(new_sd)
+            model = model.to(DEVICE)
             model.eval()
-
             self._model = model
+
+            # -----------------------------------------------
+            # Load OOD Latent Feature Profile
+            # -----------------------------------------------
+            if OOD_PROFILE_PATH.exists():
+                try:
+                    with open(OOD_PROFILE_PATH, "r") as f:
+                        profile_data = json.load(f)
+                    cents = profile_data.get("centroids", {})
+                    self._norm_centroids = {}
+                    for c_name, c_vec in cents.items():
+                        arr = np.array(c_vec, dtype=np.float32)
+                        self._norm_centroids[c_name] = arr / (np.linalg.norm(arr) + 1e-8)
+                    logger.info(
+                        "[TurDiseasePredictor] Loaded OOD feature centroids for %d classes",
+                        len(self._norm_centroids)
+                    )
+                except Exception as ood_err:
+                    logger.warning("[TurDiseasePredictor] Could not parse OOD profile: %s", ood_err)
 
             logger.info(
                 "[TurDiseasePredictor] "
@@ -305,7 +363,8 @@ class TurDiseasePredictor:
         image_path: Path,
     ) -> PredictionResult:
         """
-        Run EfficientNet-B0 inference on a stored scan image.
+        Run EfficientNet-B0 inference on a stored scan image with strict
+        multi-layer closed-set OOD validation.
         """
 
         if not self.is_available():
@@ -344,17 +403,17 @@ class TurDiseasePredictor:
             )
 
             # -----------------------------------------------
-            # Inference
+            # Inference & Feature Extraction
             # -----------------------------------------------
 
             with torch.no_grad():
 
-                output = self._model(
+                logits, feat = self._model(
                     input_tensor
                 )
 
                 probabilities = torch.softmax(
-                    output,
+                    logits,
                     dim=1,
                 )[0]
 
@@ -376,21 +435,61 @@ class TurDiseasePredictor:
                 confidence
             )
 
+            # -----------------------------------------------
+            # Strict Closed-Set OOD Manifold Validation
+            # -----------------------------------------------
+            feat_vec = feat[0].cpu().numpy()
+            norm_feat = feat_vec / (np.linalg.norm(feat_vec) + 1e-8)
+            target_cent = self._norm_centroids.get(disease_name)
+
+            if target_cent is not None:
+                cos_dist = float(1.0 - np.dot(norm_feat, target_cent))
+            else:
+                cos_dist = 0.0
+
+            sorted_probs = torch.sort(probabilities, descending=True).values
+            prob_margin = float(sorted_probs[0] - sorted_probs[1]) if len(sorted_probs) > 1 else 1.0
+
+            # Per-class calibrated boundary to prevent Wilt Sinkhole
+            class_threshold = self._class_thresholds.get(disease_name, 0.45)
+            is_rejected = (cos_dist > class_threshold) or (confidence < 0.70) or (prob_margin < 0.20)
+
+            if is_rejected:
+                logger.warning(
+                    "[TurDiseasePredictor] STRICT OOD REJECTION: predicted=%s, "
+                    "cos_dist=%.4f (threshold=%.4f), confidence=%.4f, margin=%.4f",
+                    disease_name,
+                    cos_dist,
+                    class_threshold,
+                    confidence,
+                    prob_margin,
+                )
+                return PredictionResult(
+                    disease_name="Unsupported_Disease",
+                    confidence=confidence,
+                    severity="low_confidence",
+                    prediction_status="rejected",
+                    is_supported_class=False,
+                    rejection_reason="class_not_in_database",
+                    cosine_distance=cos_dist,
+                )
+
             logger.info(
-                "[TurDiseasePredictor] "
-                f"Prediction: {disease_name} "
-                f"confidence={confidence:.4f}"
-            )
-            logger.info(
-                "[PREDICTOR_DIAGNOSTIC] raw_index=%d mapped_class=%s raw_softmax_conf=%.6f status=completed device=%s",
-                predicted_index, disease_name, confidence, str(DEVICE)
+                "[TurDiseasePredictor] Validated In-Distribution: %s "
+                "(conf=%.4f, cos_dist=%.4f, margin=%.4f)",
+                disease_name,
+                confidence,
+                cos_dist,
+                prob_margin,
             )
 
             return PredictionResult(
                 disease_name=disease_name,
                 confidence=confidence,
-                severity=confidence_level,  # API compatibility
+                severity=confidence_level,
                 prediction_status="completed",
+                is_supported_class=True,
+                cosine_distance=cos_dist,
             )
 
         except FileNotFoundError:
