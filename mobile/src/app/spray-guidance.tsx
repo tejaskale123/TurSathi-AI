@@ -429,7 +429,11 @@ export default function SprayGuidanceScreen() {
 
       if (res.status === 'low_confidence') {
         setIsLowConfidence(true);
-      } else if (res.spray_guidance_available === false && res.disease_name?.toLowerCase() !== 'healthy') {
+      } else if (
+        res.spray_guidance_available === false &&
+        res.disease_name?.toLowerCase() !== 'healthy' &&
+        !res.disease_name?.toLowerCase().includes('webber')
+      ) {
         setIsUnverified(true);
       }
 
@@ -440,9 +444,9 @@ export default function SprayGuidanceScreen() {
         return;
       }
       if ((err instanceof RecommendationApiError || err?.name === 'RecommendationApiError') && err.isNotFound) {
-        setIsUnverified(true);
-      } else if (rawDiseaseName?.toLowerCase().includes('webber')) {
-        setIsUnverified(true);
+        if (!rawDiseaseName?.toLowerCase().includes('webber') && !rawDiseaseName?.toLowerCase().includes('healthy')) {
+          setIsUnverified(true);
+        }
       } else {
         console.warn('[SPRAY GUIDANCE] API Error:', err?.message || err);
         setHasError(true);
@@ -488,8 +492,20 @@ export default function SprayGuidanceScreen() {
       return;
     }
 
-    const steps = loc.isHealthy
-      ? loc.farmerAction
+    const steps = (loc.isHealthy || loc.isWebber)
+      ? (loc.isHealthy
+          ? [
+              language === 'mr' ? 'नियमित शेत निरीक्षण करा' : language === 'hi' ? 'नियमित खेत निरीक्षण करें' : 'Continue regular field inspection',
+              language === 'mr' ? 'संतुलित पाणी व खत व्यवस्थापन ठेवा' : language === 'hi' ? 'संतुलित पानी और उर्वरक प्रबंधन रखें' : 'Maintain balanced irrigation and nutrition',
+              language === 'mr' ? 'शेत तणमुक्त व स्वच्छ ठेवा' : language === 'hi' ? 'खेत को खरपतवार मुक्त व साफ रखें' : 'Keep field clean and weed-free',
+              language === 'mr' ? 'अनावश्यक रासायनिक फवारणी टाळा' : language === 'hi' ? 'अनावश्यक रासायनिक छिड़काव से बचें' : 'Avoid unnecessary chemical sprays',
+            ]
+          : [
+              language === 'mr' ? 'शेतात शेंड्याकडील पाने व जाळी प्रत्यक्ष तपासा' : language === 'hi' ? 'खेत में शीर्ष पत्तियों व जालों की प्रत्यक्ष जांच करें' : 'Inspect shoot tips and webbed leaves in the field',
+              language === 'mr' ? 'प्रत्यक्ष पाहणीवरून प्रादुर्भावाचे प्रमाण ठरवा' : language === 'hi' ? 'प्रत्यक्ष जांच से प्रकोप की गंभीरता का आकलन करें' : 'Assess infestation severity based on field observation',
+              language === 'mr' ? 'सुरुवातीची जाळी झालेली पाने अळीसह तोडून नष्ट करा' : language === 'hi' ? 'शुरुआती जाले वाली पत्तियां इल्ली सहित तोड़कर नष्ट करें' : 'Manually collect and destroy webbed leaves with larvae',
+              language === 'mr' ? 'रासायनिक फवारणी टाळा व KVK चा सल्ला घ्या' : language === 'hi' ? 'रासायनिक छिड़काव से बचें और KVK से सलाह लें' : 'Avoid unauthorized chemical sprays and consult local KVK',
+            ])
       : [
           loc.treatment,
           loc.activeIngredient,
@@ -501,7 +517,7 @@ export default function SprayGuidanceScreen() {
 
     const speechHeader = loc.headerTitle;
     const speechAlert = loc.importantAlert;
-    const speechGuidance = (loc.isHealthy
+    const speechGuidance = (loc.isHealthy || loc.isWebber
       ? (loc.guidanceSectionTitle + ': ' + loc.guidanceSectionSubtitle + '. ')
       : (loc.isSeedTreatment
         ? (language === 'mr' ? 'बियाणे किंवा जमीन उपचार मार्गदर्शन: ' : language === 'hi' ? 'बीज या मृदा उपचार मार्गदर्शन: ' : 'Seed or soil treatment guidance: ')
@@ -700,7 +716,7 @@ export default function SprayGuidanceScreen() {
           : "The AI model produced a visual prediction, but verified agricultural spray guidance is currently unavailable for this condition.\n\nPlease consult a qualified agricultural expert or your local Krishi Vigyan Kendra (KVK) before applying any pesticide."
       },
       mr: {
-        title: isWebber ? "संभाव्य कीड: पाने गुंडाळणारी आळी (Leaf Webber)" : "AI अंदाज: पडताळणी आवश्यक",
+        title: isWebber ? "Leaf Webber — पाने गुंडाळणारी अळी" : "AI अंदाज: पडताळणी आवश्यक",
         diseaseLabel: "अंदाजित स्थिती:",
         confLabel: "AI दृश्य साम्य (Visual Match):",
         confNote: "(पानातील लक्षणांचे साम्य; प्रत्यक्ष शेत तपासणी आवश्यक)",
@@ -710,7 +726,7 @@ export default function SprayGuidanceScreen() {
           ? "फवारणीसाठी अप्रमाणित (केवळ सुरक्षित एकात्मिक सल्ला)" 
           : "प्रमाणित कृषी डेटामध्ये उपलब्ध नाही",
         message: isWebber
-          ? "AI मॉडेलने या पानात पाने गुंडाळणाऱ्या आळीची (Leaf Webber) लक्षणे ओळखली आहेत.\n\n⚠️ महत्त्वाची सुरक्षा सूचना:\n• पाने गुंडाळणाऱ्या आळीसाठी प्रमाणित रासायनिक फवारणी उपलब्ध नाही.\n• कोणतेही अनधिकृत किंवा बंदी घातलेले कीटकनाशक (उदा. डायक्लोर्व्हॉस) फवारू नका.\n\n🌿 शेतकऱ्यांसाठी सुरक्षित उपाय:\n• शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांची नियमित पाहणी करा.\n• सुरुवातीच्या काळात जाळी झालेली पाने आळीसह तोडून नष्ट करा.\n• अधिकृत व सुरक्षित कीड व्यवस्थापनासाठी स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी अधिकाऱ्यांचा सल्ला घ्या."
+          ? "AI मॉडेलने या पानात पाने गुंडाळणाऱ्या अळीची (Leaf Webber) लक्षणे ओळखली आहेत.\n\nमहत्त्वाची सुरक्षा सूचना:\n• पाने गुंडाळणाऱ्या अळीसाठी प्रमाणित रासायनिक फवारणी उपलब्ध नाही.\n• कोणतेही अनधिकृत किंवा बंदी घातलेले कीटकनाशक (उदा. डायक्लोर्व्हॉस) फवारू नका.\n\nशेतकऱ्यांसाठी सुरक्षित उपाय:\n• शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांची नियमित पाहणी करा.\n• सुरुवातीच्या काळात जाळी झालेली पाने अळीसह तोडून नष्ट करा.\n• अधिकृत व सुरक्षित कीड व्यवस्थापनासाठी स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी अधिकाऱ्यांचा सल्ला घ्या."
           : "AI मॉडेलने दृश्य लक्षणांवरून अंदाज दिला आहे, परंतु या आजारासाठी प्रमाणित फवारणी मार्गदर्शन सध्या उपलब्ध नाही.\n\nकोणतीही रासायनिक औषध फवारणी करण्यापूर्वी कृपया स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी तज्ज्ञांचा सल्ला घ्या."
       },
       hi: {
@@ -788,7 +804,9 @@ export default function SprayGuidanceScreen() {
     ? (language === 'mr' ? 'निरोगी पिकाची काळजी आणि शेतातील नियमित निरीक्षणासाठी मार्गदर्शक सूचना.' : language === 'hi' ? 'स्वस्थ फसल की देखभाल और नियमित खेत निरीक्षण के लिए मार्गदर्शन।' : 'Guidance for maintaining healthy crops and regular field inspection.')
     : isSeedTreatment
       ? (language === 'mr' ? 'शिफारस केलेले बियाणे/जमीन उपचार सुरक्षितपणे वापरण्यासाठी प्रत्यक्ष मार्गदर्शन.' : language === 'hi' ? 'अनुशंसित बीज/मृदा उपचार को सुरक्षित रूप से लागू करने के लिए व्यावहारिक मार्गदर्शन।' : 'Practical guidance for applying the recommended seed/soil treatment safely.')
-      : ui.headerSubtitle;
+      : loc.isWebber
+        ? (language === 'mr' ? 'पाने गुंडाळणाऱ्या अळीसाठी सुरक्षित एकात्मिक व्यवस्थापन व शेत निरीक्षण सूचना.' : language === 'hi' ? 'लीफ वेबर कीट के लिए सुरक्षित एकीकृत प्रबंधन और खेत निरीक्षण मार्गदर्शन।' : 'Practical guidance for safe integrated management and regular field monitoring of Leaf Webber.')
+        : ui.headerSubtitle;
 
   const importantAlertText = loc.importantAlert;
   const guidanceTitleText = loc.guidanceSectionTitle;
@@ -824,6 +842,14 @@ export default function SprayGuidanceScreen() {
               { id: '2', label: '', value: language === 'mr' ? '02 संतुलित पाणी व खत व्यवस्थापन ठेवा' : language === 'hi' ? '02 संतुलित पानी और उर्वरक प्रबंधन रखें' : '02 Maintain balanced irrigation and nutrition' },
               { id: '3', label: '', value: language === 'mr' ? '03 शेत तणमुक्त व स्वच्छ ठेवा' : language === 'hi' ? '03 खेत को खरपतवार मुक्त व साफ रखें' : '03 Keep field clean and weed-free' },
               { id: '4', label: '', value: language === 'mr' ? '04 अनावश्यक रासायनिक फवारणी टाळा' : language === 'hi' ? '04 अनावश्यक रासायनिक छिड़काव से बचें' : '04 Avoid unnecessary chemical sprays' },
+          ];
+      }
+      if (loc.isWebber) {
+          return [
+              { id: '1', label: '', value: language === 'mr' ? '01 शेतात शेंड्याकडील पाने व जाळी प्रत्यक्ष तपासा' : language === 'hi' ? '01 खेत में शीर्ष पत्तियों व जालों की प्रत्यक्ष जांच करें' : '01 Inspect shoot tips and webbed leaves in the field' },
+              { id: '2', label: '', value: language === 'mr' ? '02 प्रत्यक्ष पाहणीवरून प्रादुर्भावाचे प्रमाण ठरवा' : language === 'hi' ? '02 प्रत्यक्ष जांच से प्रकोप की गंभीरता का आकलन करें' : '02 Assess infestation severity based on field observation' },
+              { id: '3', label: '', value: language === 'mr' ? '03 सुरुवातीची जाळी झालेली पाने अळीसह तोडून नष्ट करा' : language === 'hi' ? '03 शुरुआती जाले वाली पत्तियां इल्ली सहित तोड़कर नष्ट करें' : '03 Manually collect and destroy webbed leaves with larvae' },
+              { id: '4', label: '', value: language === 'mr' ? '04 रासायनिक फवारणी टाळा व KVK चा सल्ला घ्या' : language === 'hi' ? '04 रासायनिक छिड़काव से बचें और KVK से सलाह लें' : '04 Avoid unauthorized chemical sprays & consult local KVK' },
           ];
       }
       if (!data?.spray_guidance && !loc.isVerified) {

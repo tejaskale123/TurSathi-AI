@@ -740,12 +740,66 @@ describe('Verified Agricultural Recommendation & Language Localization Suite', (
 
     const loc = getLocalizedRecommendation(mockWebber, 'mr');
     assert.equal(loc.isVerified, false, 'Leaf Webber must not be marked as verified diagnosis');
+    assert.equal(loc.isWebber, true, 'Leaf Webber has isWebber set to true');
     assert.equal(loc.recommendedQuantity, 'लागू नाही');
     assert.equal(loc.waterQuantity, null);
     assert.equal(loc.perPumpQuantity, null);
     assert.match(loc.treatment, /रासायनिक फवारणीची शिफारस नाही/, 'Explicitly declares no chemical spray recommended');
     assert.match(loc.applicationMethod, /फवारणी करू नका/, 'Explicitly forbids spray');
     assert.match(loc.headerTitle, /कीड व्यवस्थापन सल्ला/, 'Header indicates pest management advisory, not confirmed spray');
+    assert.match(loc.importantAlert, /प्रमाणित रासायनिक फवारणी उपलब्ध नाही/, 'Alert explicitly declares chemical spray unverified');
+  });
+
+  test('Leaf Webber Marathi name translation matches exact required standard', async () => {
+    const { KNOWN_DISEASES, translateDiseaseName } = await import('../src/i18n/translations.ts');
+
+    assert.equal(
+      KNOWN_DISEASES['Leaf_webber']?.mr,
+      'Leaf Webber — पाने गुंडाळणारी अळी',
+      'KNOWN_DISEASES must contain exact Marathi name with Devanagari alii'
+    );
+    assert.equal(
+      translateDiseaseName('Leaf_webber', 'mr'),
+      'Leaf Webber — पाने गुंडाळणारी अळी',
+      'translateDiseaseName must return exact Marathi name'
+    );
+    assert.equal(
+      translateDiseaseName('Leaf Webber', 'mr'),
+      'Leaf Webber — पाने गुंडाळणारी अळी',
+      'translateDiseaseName with space must return exact Marathi name'
+    );
+  });
+
+  test('Healthy and Wilt behavior remains completely unchanged and invariant', async () => {
+    const { getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const locHealthy = getLocalizedRecommendation(null, 'mr', 'Healthy');
+    assert.equal(locHealthy.isHealthy, true, 'Healthy remains marked as isHealthy');
+    assert.equal(locHealthy.isSeedTreatment, false, 'Healthy is not seed treatment');
+    assert.equal(locHealthy.isVerified, false, 'Healthy has no chemical pesticide recommendation');
+    assert.match(locHealthy.headerTitle, /पीक आरोग्य सल्ला/, 'Healthy header title remains unchanged');
+    assert.match(locHealthy.guidanceSectionTitle, /पीक निगा व व्यवस्थापन/, 'Healthy section title remains unchanged');
+
+    const locWilt = getLocalizedRecommendation(null, 'mr', 'Wilt');
+    assert.equal(locWilt.isHealthy, false, 'Wilt is not healthy');
+    assert.equal(locWilt.isSeedTreatment, true, 'Wilt remains seed/soil treatment');
+    assert.match(locWilt.headerTitle, /स्मार्ट उपचार मार्गदर्शन/, 'Wilt header title remains unchanged');
+    assert.match(locWilt.guidanceSectionTitle, /बियाणे \/ जमीन उपचार मार्गदर्शन/, 'Wilt section title remains unchanged');
+  });
+
+  test('Unsupported disease classes safely trigger fallback without crashing or inventing guidance', async () => {
+    const { normalizeDiseaseKey, getLocalizedRecommendation } = await import('../src/i18n/recommendationContent.ts');
+
+    const unsupportedCls = 'Alternaria_Blight';
+    const normalized = normalizeDiseaseKey(unsupportedCls);
+    assert.equal(normalized, null, 'Unsupported disease must not normalize to supported classes');
+
+    const loc = getLocalizedRecommendation(null, 'mr', unsupportedCls);
+    assert.equal(loc.isVerified, false, 'Unsupported disease must never be marked verified');
+    assert.equal(loc.isHealthy, false);
+    assert.equal(loc.isSeedTreatment, false);
+    assert.equal(loc.waterQuantity, null);
+    assert.equal(loc.perPumpQuantity, null);
   });
 });
 

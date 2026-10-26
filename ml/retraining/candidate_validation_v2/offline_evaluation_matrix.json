@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-10-26T14:05:36.483627",
+  "simulation_matrix": {
+    "Policy_A_Raw_Predictor": {
+      "in_distribution_test": {
+        "total": 261,
+        "correct_accepted": 253,
+        "overall_accuracy_rate": 0.9693,
+        "false_rejection_count": 0,
+        "false_rejection_rate": 0.0
+      },
+      "external_diagnostic_ood": {
+        "total": 41,
+        "blocked_correctly": 0,
+        "rejection_rate": 0.0,
+        "false_accepted_total": 41,
+        "false_accepted_as_wilt": 40,
+        "false_acceptance_rate": 1.0
+      }
+    },
+    "Policy_B_Active_Gate": {
+      "in_distribution_test": {
+        "total": 261,
+        "correct_accepted": 253,
+        "overall_accuracy_rate": 0.9693,
+        "false_rejection_count": 0,
+        "false_rejection_rate": 0.0
+      },
+      "external_diagnostic_ood": {
+        "total": 41,
+        "blocked_correctly": 0,
+        "rejection_rate": 0.0,
+        "false_accepted_total": 41,
+        "false_accepted_as_wilt": 40,
+        "false_acceptance_rate": 1.0
+      }
+    },
+    "Policy_D_Calibrated_Gate": {
+      "in_distribution_test": {
+        "total": 261,
+        "correct_accepted": 222,
+        "overall_accuracy_rate": 0.8506,
+        "false_rejection_count": 35,
+        "false_rejection_rate": 0.1341
+      },
+      "external_diagnostic_ood": {
+        "total": 41,
+        "blocked_correctly": 36,
+        "rejection_rate": 0.878,
+        "false_accepted_total": 5,
+        "false_accepted_as_wilt": 4,
+        "false_acceptance_rate": 0.122
+      }
+    }
+  }
+}

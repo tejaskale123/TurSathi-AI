@@ -1,0 +1,464 @@
+{
+  "experiment_id": "20261026_072810",
+  "timestamp": "2026-10-26T13:44:45.126803",
+  "checkpoint_evaluated": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\candidates\\tursathi_efficientnet_b0_candidate_20261026_072810 (1).pth",
+  "ood_profile_evaluated": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\models\\candidates\\ood_feature_profile_20261026_072810 (1).json",
+  "dataset_provenance": {
+    "clean_zip_path": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\ml\\retraining\\TurSathi_Pigeonpea_Clean_Dataset.zip",
+    "manifest_path": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\ml\\retraining\\clean_dataset_manifest.json",
+    "val_sample_count": 263,
+    "test_sample_count": 261,
+    "external_ood_file_count": 41,
+    "external_ood_unique_count": 36,
+    "cross_split_hash_overlap": 0,
+    "manifest_overlap_with_ood": 0
+  },
+  "validation_metrics": {
+    "accuracy": 0.9695817490494296,
+    "classification_report": {
+      "Healthy": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 54.0
+      },
+      "Leaf_Spot": {
+        "precision": 0.9322033898305084,
+        "recall": 0.9482758620689655,
+        "f1-score": 0.9401709401709402,
+        "support": 58.0
+      },
+      "Leaf_webber": {
+        "precision": 0.9629629629629629,
+        "recall": 1.0,
+        "f1-score": 0.9811320754716981,
+        "support": 52.0
+      },
+      "Sterilic_mosaic": {
+        "precision": 0.9622641509433962,
+        "recall": 0.9107142857142857,
+        "f1-score": 0.9357798165137615,
+        "support": 56.0
+      },
+      "Wilt": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 43.0
+      },
+      "accuracy": 0.9695817490494296,
+      "macro avg": {
+        "precision": 0.9714861007473736,
+        "recall": 0.9717980295566502,
+        "f1-score": 0.9714165664312799,
+        "support": 263.0
+      },
+      "weighted avg": {
+        "precision": 0.9696907343614971,
+        "recall": 0.9695817490494296,
+        "f1-score": 0.969400958856325,
+        "support": 263.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        54,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        55,
+        1,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        52,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        1,
+        51,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        43
+      ]
+    ],
+    "distance_distributions": {
+      "Healthy": {
+        "count": 54,
+        "min": 0.17609179019927979,
+        "p25": 0.24659286439418793,
+        "p50": 0.26442086696624756,
+        "p75": 0.2858821451663971,
+        "p90": 0.3199251413345337,
+        "p95": 0.3470858871936797,
+        "p97_5": 0.36278919577598573,
+        "p99": 0.3983701366186141,
+        "max": 0.4370270371437073
+      },
+      "Leaf_Spot": {
+        "count": 58,
+        "min": 0.19375604391098022,
+        "p25": 0.28428368270397186,
+        "p50": 0.3352409899234772,
+        "p75": 0.4051675647497177,
+        "p90": 0.5080398559570313,
+        "p95": 0.6037971526384353,
+        "p97_5": 0.7042929306626317,
+        "p99": 0.843772969841957,
+        "max": 0.9822522401809692
+      },
+      "Leaf_webber": {
+        "count": 52,
+        "min": 0.16001009941101074,
+        "p25": 0.2275295853614807,
+        "p50": 0.26221829652786255,
+        "p75": 0.3186800479888916,
+        "p90": 0.34742891192436215,
+        "p95": 0.37498029768466945,
+        "p97_5": 0.38292764127254486,
+        "p99": 0.5331379860639578,
+        "max": 0.6894474625587463
+      },
+      "Sterilic_mosaic": {
+        "count": 56,
+        "min": 0.17062973976135254,
+        "p25": 0.2474765181541443,
+        "p50": 0.31510230898857117,
+        "p75": 0.4274093955755234,
+        "p90": 0.592142641544342,
+        "p95": 0.7711390554904938,
+        "p97_5": 0.8020463362336159,
+        "p99": 0.8237032473087311,
+        "max": 0.8294524550437927
+      },
+      "Wilt": {
+        "count": 43,
+        "min": 0.21529239416122437,
+        "p25": 0.3083779811859131,
+        "p50": 0.3394924998283386,
+        "p75": 0.3726825416088104,
+        "p90": 0.39872393608093265,
+        "p95": 0.4120437502861023,
+        "p97_5": 0.4152256578207016,
+        "p99": 0.4209865725040436,
+        "max": 0.4250527620315552
+      }
+    }
+  },
+  "wilt_threshold_sweep": [
+    {
+      "threshold": 0.3,
+      "genuine_wilt_val_retained": 8,
+      "genuine_wilt_val_rejected": 35,
+      "genuine_wilt_val_acceptance_rate": 0.186,
+      "external_diagnostic_rejected": 41,
+      "external_diagnostic_rejection_rate": 1.0,
+      "external_diagnostic_false_accept": 0,
+      "external_diagnostic_false_accept_rate": 0.0
+    },
+    {
+      "threshold": 0.31,
+      "genuine_wilt_val_retained": 13,
+      "genuine_wilt_val_rejected": 30,
+      "genuine_wilt_val_acceptance_rate": 0.3023,
+      "external_diagnostic_rejected": 41,
+      "external_diagnostic_rejection_rate": 1.0,
+      "external_diagnostic_false_accept": 0,
+      "external_diagnostic_false_accept_rate": 0.0
+    },
+    {
+      "threshold": 0.32,
+      "genuine_wilt_val_retained": 16,
+      "genuine_wilt_val_rejected": 27,
+      "genuine_wilt_val_acceptance_rate": 0.3721,
+      "external_diagnostic_rejected": 41,
+      "external_diagnostic_rejection_rate": 1.0,
+      "external_diagnostic_false_accept": 0,
+      "external_diagnostic_false_accept_rate": 0.0
+    },
+    {
+      "threshold": 0.33,
+      "genuine_wilt_val_retained": 19,
+      "genuine_wilt_val_rejected": 24,
+      "genuine_wilt_val_acceptance_rate": 0.4419,
+      "external_diagnostic_rejected": 41,
+      "external_diagnostic_rejection_rate": 1.0,
+      "external_diagnostic_false_accept": 0,
+      "external_diagnostic_false_accept_rate": 0.0
+    },
+    {
+      "threshold": 0.34,
+      "genuine_wilt_val_retained": 22,
+      "genuine_wilt_val_rejected": 21,
+      "genuine_wilt_val_acceptance_rate": 0.5116,
+      "external_diagnostic_rejected": 39,
+      "external_diagnostic_rejection_rate": 0.9512,
+      "external_diagnostic_false_accept": 2,
+      "external_diagnostic_false_accept_rate": 0.0488
+    },
+    {
+      "threshold": 0.35,
+      "genuine_wilt_val_retained": 23,
+      "genuine_wilt_val_rejected": 20,
+      "genuine_wilt_val_acceptance_rate": 0.5349,
+      "external_diagnostic_rejected": 37,
+      "external_diagnostic_rejection_rate": 0.9024,
+      "external_diagnostic_false_accept": 4,
+      "external_diagnostic_false_accept_rate": 0.0976
+    },
+    {
+      "threshold": 0.36,
+      "genuine_wilt_val_retained": 30,
+      "genuine_wilt_val_rejected": 13,
+      "genuine_wilt_val_acceptance_rate": 0.6977,
+      "external_diagnostic_rejected": 31,
+      "external_diagnostic_rejection_rate": 0.7561,
+      "external_diagnostic_false_accept": 10,
+      "external_diagnostic_false_accept_rate": 0.2439
+    },
+    {
+      "threshold": 0.37,
+      "genuine_wilt_val_retained": 32,
+      "genuine_wilt_val_rejected": 11,
+      "genuine_wilt_val_acceptance_rate": 0.7442,
+      "external_diagnostic_rejected": 27,
+      "external_diagnostic_rejection_rate": 0.6585,
+      "external_diagnostic_false_accept": 14,
+      "external_diagnostic_false_accept_rate": 0.3415
+    },
+    {
+      "threshold": 0.38,
+      "genuine_wilt_val_retained": 34,
+      "genuine_wilt_val_rejected": 9,
+      "genuine_wilt_val_acceptance_rate": 0.7907,
+      "external_diagnostic_rejected": 25,
+      "external_diagnostic_rejection_rate": 0.6098,
+      "external_diagnostic_false_accept": 16,
+      "external_diagnostic_false_accept_rate": 0.3902
+    },
+    {
+      "threshold": 0.39,
+      "genuine_wilt_val_retained": 36,
+      "genuine_wilt_val_rejected": 7,
+      "genuine_wilt_val_acceptance_rate": 0.8372,
+      "external_diagnostic_rejected": 22,
+      "external_diagnostic_rejection_rate": 0.5366,
+      "external_diagnostic_false_accept": 19,
+      "external_diagnostic_false_accept_rate": 0.4634
+    },
+    {
+      "threshold": 0.4,
+      "genuine_wilt_val_retained": 39,
+      "genuine_wilt_val_rejected": 4,
+      "genuine_wilt_val_acceptance_rate": 0.907,
+      "external_diagnostic_rejected": 18,
+      "external_diagnostic_rejection_rate": 0.439,
+      "external_diagnostic_false_accept": 23,
+      "external_diagnostic_false_accept_rate": 0.561
+    },
+    {
+      "threshold": 0.42,
+      "genuine_wilt_val_retained": 42,
+      "genuine_wilt_val_rejected": 1,
+      "genuine_wilt_val_acceptance_rate": 0.9767,
+      "external_diagnostic_rejected": 16,
+      "external_diagnostic_rejection_rate": 0.3902,
+      "external_diagnostic_false_accept": 25,
+      "external_diagnostic_false_accept_rate": 0.6098
+    }
+  ],
+  "proposed_calibrated_thresholds": {
+    "Healthy": 0.3628,
+    "Leaf_Spot": 0.7043,
+    "Leaf_webber": 0.3829,
+    "Sterilic_mosaic": 0.802,
+    "Wilt": 0.35
+  },
+  "original_candidate_thresholds": {
+    "Healthy": 0.3628,
+    "Leaf_Spot": 0.7043,
+    "Leaf_webber": 0.3829,
+    "Sterilic_mosaic": 0.802,
+    "Wilt": 0.4
+  },
+  "untouched_test_metrics": {
+    "raw_accuracy": 0.9693486590038314,
+    "classification_report": {
+      "Healthy": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 54.0
+      },
+      "Leaf_Spot": {
+        "precision": 0.9180327868852459,
+        "recall": 0.9824561403508771,
+        "f1-score": 0.9491525423728814,
+        "support": 57.0
+      },
+      "Leaf_webber": {
+        "precision": 0.9615384615384616,
+        "recall": 0.9803921568627451,
+        "f1-score": 0.970873786407767,
+        "support": 51.0
+      },
+      "Sterilic_mosaic": {
+        "precision": 0.9803921568627451,
+        "recall": 0.8928571428571429,
+        "f1-score": 0.9345794392523364,
+        "support": 56.0
+      },
+      "Wilt": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 43.0
+      },
+      "accuracy": 0.9693486590038314,
+      "macro avg": {
+        "precision": 0.9719926810572905,
+        "recall": 0.971141088014153,
+        "f1-score": 0.970921153606597,
+        "support": 261.0
+      },
+      "weighted avg": {
+        "precision": 0.9703765945411276,
+        "recall": 0.9693486590038314,
+        "f1-score": 0.9691674583148704,
+        "support": 261.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        54,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        56,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        50,
+        0,
+        0
+      ],
+      [
+        0,
+        4,
+        2,
+        50,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        43
+      ]
+    ],
+    "gate_retention": {
+      "Healthy": {
+        "total": 54,
+        "accepted": 53,
+        "rejected_ood": 1,
+        "rejected_conf": 0,
+        "rejected_margin": 0
+      },
+      "Leaf_Spot": {
+        "total": 57,
+        "accepted": 50,
+        "rejected_ood": 0,
+        "rejected_conf": 7,
+        "rejected_margin": 2
+      },
+      "Leaf_webber": {
+        "total": 51,
+        "accepted": 43,
+        "rejected_ood": 7,
+        "rejected_conf": 3,
+        "rejected_margin": 0
+      },
+      "Sterilic_mosaic": {
+        "total": 56,
+        "accepted": 51,
+        "rejected_ood": 3,
+        "rejected_conf": 5,
+        "rejected_margin": 2
+      },
+      "Wilt": {
+        "total": 43,
+        "accepted": 29,
+        "rejected_ood": 14,
+        "rejected_conf": 0,
+        "rejected_margin": 0
+      }
+    }
+  },
+  "external_ood_diagnostic_metrics": {
+    "total_files": 41,
+    "unique_hashes": 36,
+    "raw_predictions": {
+      "Wilt": 40,
+      "Sterilic_mosaic": 1
+    },
+    "wilt_distance_stats": {
+      "min": 0.33282899856567383,
+      "mean": 0.42629136690279334,
+      "median": 0.3943646550178528,
+      "max": 0.7057125568389893
+    },
+    "at_candidate_threshold_0_40": {
+      "rejected": 18,
+      "rejection_rate": 0.43902439024390244,
+      "false_accepted": 23,
+      "false_acceptance_rate": 0.5609756097560976
+    },
+    "at_proposed_threshold_0_35": {
+      "rejected": 37,
+      "rejection_rate": 0.9024390243902439,
+      "false_accepted": 4,
+      "false_acceptance_rate": 0.0975609756097561
+    },
+    "at_strict_threshold_0_33": {
+      "rejected": 41,
+      "rejection_rate": 1.0,
+      "false_accepted": 0,
+      "false_acceptance_rate": 0.0,
+      "genuine_wilt_validation_loss": "24 of 43 genuine Wilt rejected (55.8% loss)"
+    }
+  },
+  "recommendations": {
+    "verdict": "KEEP CANDIDATE IN SHADOW TEST; DO NOT REPLACE PRODUCTION YET",
+    "justification": "The candidate model improves overall test accuracy to 96.93% (up from 92.02%) and cleanly separates Healthy, Leaf Spot, and Leaf Webber. However, the candidate still has an inductive bias towards Wilt for non-pigeonpea images (97.6% of external images are raw-predicted as Wilt). Setting Wilt threshold to 0.40 retains 90.7% genuine Wilt, but leaks 56.1% of external images. Calibrating the Wilt threshold to 0.35 reduces external leakage from 56.1% down to 9.8%, but rejects 46.5% of genuine Wilt validation images and 32.6% of test images. Tightening further to 0.33 eliminates all 41 external samples but sacrifices 55.8% of genuine Wilt validation images. Therefore, the model cannot be made 100% leak-proof via thresholds alone without crippling genuine Wilt recall. The upstream Leaf Validator must serve as the primary filter.",
+    "next_steps": [
+      "1. Maintain production models and code completely untouched.",
+      "2. Keep the candidate checkpoint for isolated shadow-testing with calibrated Wilt threshold 0.35.",
+      "3. Strengthen the upstream Leaf Validator model (tur_image_validator) to reject non-pigeonpea foliar images BEFORE reaching the 5-class disease classifier.",
+      "4. Collect 50-100 additional field Wilt images and 100 diverse non-target leaf images to safely delineate the Wilt decision boundary during the next retraining cycle."
+    ]
+  }
+}

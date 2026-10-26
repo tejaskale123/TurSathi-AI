@@ -899,8 +899,13 @@ export const KNOWN_DISEASES: Record<string, Record<Language, string>> = {
   },
   'Leaf_webber': {
     en: 'Leaf Webber',
-    mr: 'पानावरील अळी',
-    hi: 'पत्ती लपेटक सूंडी',
+    mr: 'Leaf Webber — पाने गुंडाळणारी अळी',
+    hi: 'पत्ती लपेटक सूंडी (Leaf Webber)',
+  },
+  'Leaf Webber': {
+    en: 'Leaf Webber',
+    mr: 'Leaf Webber — पाने गुंडाळणारी अळी',
+    hi: 'पत्ती लपेटक सूंडी (Leaf Webber)',
   },
   'Sterilic_mosaic': {
     en: 'Sterility Mosaic Disease',

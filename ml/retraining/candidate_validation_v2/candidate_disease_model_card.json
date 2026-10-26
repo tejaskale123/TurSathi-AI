@@ -1,0 +1,88 @@
+{
+  "model_details": {
+    "model_name": "TurSathi-EfficientNet-B0-Candidate-5Class",
+    "experiment_id": "20261026_072810",
+    "version": "1.0.0-candidate",
+    "architecture": "EfficientNet-B0 (timm / torchvision backbone)",
+    "input_resolution": [224, 224, 3],
+    "input_normalization": {
+      "mean": [0.485, 0.456, 0.406],
+      "std": [0.229, 0.224, 0.225]
+    },
+    "feature_latent_dimension": 1280,
+    "classifier_head": "Linear(in_features=1280, out_features=5, bias=True)",
+    "classes": [
+      "Healthy",
+      "Leaf_Spot",
+      "Leaf_webber",
+      "Sterilic_mosaic",
+      "Wilt"
+    ],
+    "class_indices": {
+      "Healthy": 0,
+      "Leaf_Spot": 1,
+      "Leaf_webber": 2,
+      "Sterilic_mosaic": 3,
+      "Wilt": 4
+    },
+    "training_platform": "Google Colab (Tesla T4 GPU)",
+    "created_at": "2026-10-26T07:28:10.615553",
+    "checkpoint_path": "models/candidates/tursathi_efficientnet_b0_candidate_20261026_072810 (1).pth",
+    "ood_profile_path": "models/candidates/ood_feature_profile_20261026_072810 (1).json"
+  },
+  "dataset_provenance": {
+    "clean_dataset_manifest": "ml/retraining/clean_dataset_manifest.json",
+    "clean_dataset_zip": "ml/retraining/TurSathi_Pigeonpea_Clean_Dataset.zip",
+    "total_clean_unique_images": 1747,
+    "splits": {
+      "train": 1223,
+      "val": 263,
+      "test": 261
+    },
+    "cross_split_hash_leakage": 0,
+    "per_class_test_support": {
+      "Healthy": 54,
+      "Leaf_Spot": 57,
+      "Leaf_webber": 51,
+      "Sterilic_mosaic": 56,
+      "Wilt": 43
+    }
+  },
+  "quantitative_metrics": {
+    "validation_accuracy": 0.96958,
+    "untouched_test_accuracy": 0.96935,
+    "macro_f1": 0.9709,
+    "per_class_test_f1": {
+      "Healthy": 1.0000,
+      "Leaf_Spot": 0.9492,
+      "Leaf_webber": 0.9709,
+      "Sterilic_mosaic": 0.9346,
+      "Wilt": 1.0000
+    },
+    "baseline_comparison": {
+      "baseline_accuracy": 0.9202,
+      "accuracy_gain_percentage": "+4.91%"
+    }
+  },
+  "calibrated_decision_parameters": {
+    "min_confidence_floor": 0.70,
+    "min_margin_floor": 0.20,
+    "class_cosine_thresholds": {
+      "Healthy": 0.3628,
+      "Leaf_Spot": 0.7043,
+      "Leaf_webber": 0.3829,
+      "Sterilic_mosaic": 0.8020,
+      "Wilt": 0.3500
+    }
+  },
+  "known_risks_and_limitations": {
+    "wilt_sinkhole_on_unsupported_inputs": "97.6% (40/41) of external non-pigeonpea leaf images are raw-predicted as Wilt by the closed-set linear head.",
+    "threshold_precision_recall_tradeoff": "At Wilt threshold 0.35, 90.2% of external images are rejected, but 46.5% of genuine Wilt validation images are falsely rejected. At 0.40, genuine Wilt recall is 90.7%, but 56.1% of external images leak past the filter.",
+    "upstream_dependency": "This model cannot reliably distinguish non-pigeonpea foliage on its own; it requires a functioning upstream Tur Leaf Validator."
+  },
+  "production_readiness_verdict": {
+    "status": "APPROVED_FOR_OFFLINE_SHADOW_ONLY",
+    "is_production_ready": false,
+    "justification": "Model demonstrates superior in-distribution precision (96.93%), but requires upstream leaf organ validation to prevent false Wilt diagnoses."
+  }
+}

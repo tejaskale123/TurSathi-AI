@@ -1,0 +1,55 @@
+{
+  "audit_timestamp": "2026-10-26",
+  "source_dataset": "datasets\\pigeonpea_disease_final",
+  "classes": [
+    "Healthy",
+    "Leaf_Spot",
+    "Leaf_webber",
+    "Sterilic_mosaic",
+    "Wilt"
+  ],
+  "total_files_audited": 1858,
+  "unique_hashes": 1802,
+  "duplicate_groups_count": 55,
+  "conflicting_label_groups_count": 55,
+  "conflicting_files_count": 111,
+  "conflict_combinations": {
+    "Leaf_Spot & Sterilic_mosaic": 53,
+    "Leaf_Spot & Leaf_webber & Sterilic_mosaic": 1,
+    "Leaf_webber & Sterilic_mosaic": 1
+  },
+  "quarantined_count": 111,
+  "clean_dataset_size": 1747,
+  "clean_split_summary": {
+    "train": 1223,
+    "val": 263,
+    "test": 261,
+    "by_class": {
+      "Healthy": {
+        "train": 251,
+        "val": 54,
+        "test": 54
+      },
+      "Leaf_Spot": {
+        "train": 270,
+        "val": 58,
+        "test": 57
+      },
+      "Leaf_webber": {
+        "train": 241,
+        "val": 52,
+        "test": 51
+      },
+      "Sterilic_mosaic": {
+        "train": 260,
+        "val": 56,
+        "test": 56
+      },
+      "Wilt": {
+        "train": 201,
+        "val": 43,
+        "test": 43
+      }
+    }
+  }
+}

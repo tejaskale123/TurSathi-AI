@@ -4,6 +4,7 @@ export interface LocalizedRecommendation {
   isSeedTreatment: boolean;
   isHealthy: boolean;
   isVerified: boolean;
+  isWebber?: boolean;
   diseaseExplanation: string;
   treatment: string;
   activeIngredient: string;
@@ -498,30 +499,30 @@ const VERIFIED_DISEASE_DATA: Record<string, DiseaseTranslationEntry> = {
     },
     afterCareAdvisory: {
       en: [
-        'Inspect shoot tips and webbed leaf clusters regularly.',
+        'Inspect shoot tips and webbed leaf clusters regularly in the field.',
         'Manually collect and destroy folded/webbed leaves containing larvae in early infestation.',
         'Observe the crop closely and consult KVK if pest infestation spreads.',
       ],
       mr: [
-        'शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांचे नियमित निरीक्षण करा.',
-        'सुरुवातीच्या काळात जाळी झालेली पाने आळीसह गोळा करून नष्ट करा.',
+        'शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांचे शेतात नियमित निरीक्षण करा.',
+        'सुरुवातीच्या काळात जाळी झालेली पाने अळीसह गोळा करून नष्ट करा.',
         'पिकाचे बारीक निरीक्षण करा आणि प्रादुर्भाव वाढल्यास कृषी विज्ञान केंद्राचा (KVK) सल्ला घ्या.',
       ],
       hi: [
-        'शीर्ष पत्तियों और जाले वाले गुच्छों का नियमित निरीक्षण करें।',
+        'शीर्ष पत्तियों और जाले वाले गुच्छों का खेत में नियमित निरीक्षण करें।',
         'शुरुआती अवस्था में जाले वाली पत्तियों को इल्ली सहित इकट्ठा कर नष्ट करें।',
         'फसल की नियमित निगरानी करें और प्रसार होने पर केवीके (KVK) से परामर्श लें।',
       ],
     },
     diseaseExplanation: {
       en: 'Leaf Webber (Grapholita critica) is a lepidopteran pest of pigeonpea where larvae web top leaves together and feed inside. Verified chemical spray guidance is currently unavailable for Leaf Webber. Do not apply unauthorized or banned chemicals.',
-      mr: 'पाने गुंडाळणारी आळी (Leaf webber / Grapholita critica) ही तुरीवरील कीड असून अळ्या शेंड्याची पाने जाळ्याने एकत्र बांधून आतून खातात. या किडीसाठी प्रमाणित रासायनिक फवारणी मार्गदर्शन सध्या उपलब्ध नाही. अनधिकृत किंवा बंदी घातलेली कीटकनाशके वापरू नका.',
+      mr: 'पाने गुंडाळणारी अळी (Leaf webber / Grapholita critica) ही तुरीवरील कीड असून अळ्या शेंड्याची पाने जाळ्याने एकत्र बांधून आतून खातात. या किडीसाठी प्रमाणित रासायनिक फवारणी मार्गदर्शन सध्या उपलब्ध नाही. अनधिकृत किंवा बंदी घातलेली कीटकनाशके वापरू नका.',
       hi: 'लीफ वेबर (Grapholita critica) तूर की एक कीट है जिसकी इल्लियां शीर्ष पत्तियों को आपस में जाले से बांधकर अंदर खाती हैं। इस कीट के लिए सत्यापित रासायनिक छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है। अनधिकृत या प्रतिबंधित रसायनों का उपयोग न करें।',
     },
     importantAlert: {
-      en: 'SAFE ADVISORY ONLY — NO verified chemical spray recommended. Do NOT apply unverified or banned pesticides.',
-      mr: 'केवळ सुरक्षित कृषी सल्ला — कोणतीही प्रमाणित रासायनिक फवारणी उपलब्ध नाही. अनधिकृत किंवा बंदी घातलेली कीटकनाशके फवारू नका.',
-      hi: 'केवल सुरक्षित कृषि सलाह — कोई सत्यापित रासायनिक छिड़काव अनुशंसित नहीं है। अनधिकृत या प्रतिबंधित कीटनाशकों का छिड़काव न करें।',
+      en: 'SAFE ADVISORY ONLY — Chemical spray guidance is UNVERIFIED for Leaf Webber. Do NOT apply unverified or banned pesticides.',
+      mr: 'महत्त्वाची सूचना: पाने गुंडाळणाऱ्या अळीसाठी कोणतीही प्रमाणित रासायनिक फवारणी उपलब्ध नाही. कोणतेही अनधिकृत किंवा बंदी घातलेले कीटकनाशक (उदा. डायक्लोर्व्हॉस) फवारू नका.',
+      hi: 'महत्वपूर्ण सूचना: लीफ वेबर कीट के लिए कोई रासायनिक छिड़काव सत्यापित नहीं है। कोई अनधिकृत या प्रतिबंधित कीटनाशक न छिड़कें।',
     },
     farmerAction: {
       en: [
@@ -531,7 +532,7 @@ const VERIFIED_DISEASE_DATA: Record<string, DiseaseTranslationEntry> = {
       ],
       mr: [
         'शेंड्याकडील पाने आणि जाळी बांधलेल्या पानांची नियमित पाहणी करा.',
-        'सुरुवातीच्या काळात जाळी झालेली पाने आळीसह तोडून नष्ट करा.',
+        'सुरुवातीच्या काळात जाळी झालेली पाने अळीसह तोडून नष्ट करा.',
         'सध्याच्या अधिकृत व सुरक्षित कीड नियंत्रण उपायांसाठी स्थानिक कृषी विज्ञान केंद्र (KVK) किंवा कृषी अधिकाऱ्यांचा सल्ला घ्या.',
       ],
       hi: [
@@ -615,7 +616,7 @@ export function getLocalizedRecommendation(
   const guidanceSectionSubtitle = isHealthy
     ? (language === 'mr' ? 'निरोगी पिकासाठी शिफारसी (फवारणीची गरज नाही)' : language === 'hi' ? 'स्वस्थ फसल हेतु अनुशंसाएं (छिड़काव की आवश्यकता नहीं)' : 'Care recommendations for healthy crop (No spraying needed)')
     : isWebber
-      ? (language === 'mr' ? 'पाने गुंडाळणाऱ्या आळीसाठी सुरक्षित उपाय (रासायनिक फवारणी नाही)' : language === 'hi' ? 'लीफ वेबर के लिए सुरक्षित उपाय (रासायनिक छिड़काव नहीं)' : 'Safe measures for Leaf Webber (No chemical spray)')
+      ? (language === 'mr' ? 'पाने गुंडाळणाऱ्या अळीसाठी सुरक्षित उपाय (रासायनिक फवारणी नाही)' : language === 'hi' ? 'लीफ वेबर के लिए सुरक्षित उपाय (रासायनिक छिड़काव नहीं)' : 'Safe measures for Leaf Webber (No chemical spray)')
       : isSeedTreatment
         ? (language === 'mr' ? 'पेरणीपूर्वी किंवा जमिनीत वापरताना काय करावे (पानांवर फवारणी करू नका)' : language === 'hi' ? 'बुवाई पूर्व या मिट्टी में उपयोग के समय क्या करें (पत्तियों पर छिड़काव न करें)' : 'Application before sowing or in soil (Do NOT spray on leaves)')
         : (language === 'mr' ? 'फवारणी करताना काय करावे' : language === 'hi' ? 'छिड़काव करते समय क्या करें' : 'What to do while spraying');
@@ -789,6 +790,7 @@ export function getLocalizedRecommendation(
   return {
     isSeedTreatment,
     isHealthy,
+    isWebber,
     isVerified,
     diseaseExplanation,
     treatment,

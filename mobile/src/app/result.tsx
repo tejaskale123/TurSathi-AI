@@ -165,12 +165,89 @@ export default function ResultScreen() {
   const passedConf = Number(Array.isArray(confidence) ? confidence[0] : confidence);
   const passedSeverity = (Array.isArray(severity) ? severity[0] : severity) || demoResult.severity;
 
+  const normKey = passedDisease.toLowerCase();
+  let dynamicSigns = demoResult.observedSigns;
+  let dynamicDesc = demoResult.description;
+
+  if (normKey.includes('webber')) {
+    dynamicSigns = language === 'mr'
+      ? [
+          'शेंड्यावरील पाने जाळ्याने एकत्र गुंडाळलेली असण्याची शक्यता (तपासा)',
+          'पानांच्या आत अळीने कुरतडल्याची किंवा विष्ठेची संभाव्य लक्षणे',
+          'शेंड्यावर बारीक रेशमी जाळे असण्याची संभाव्य खूण',
+        ]
+      : language === 'hi'
+        ? [
+            'शीर्ष पत्तियों का आपस में जाले से बंधे होने की संभावना (खेत में जांचें)',
+            'पत्तियों के गुच्छों के अंदर इल्ली द्वारा खुरचने के संभावित लक्षण',
+            'शीर्ष भाग पर रेशमी जाले की संभावित उपस्थिति',
+          ]
+        : [
+            'Possible shoot tip or terminal leaf webbing (inspect in field)',
+            'Possible folded leaves webbed together with silk threads',
+            'Potential caterpillar feeding or scraping inside leaf clusters',
+          ];
+    dynamicDesc = language === 'mr'
+      ? 'पाने गुंडाळणारी अळी शेंड्याची पाने जाळ्याने एकत्र बांधून आतून खाण्याची शक्यता असते. प्रादुर्भावाची खात्री व तीव्रता ठरवण्यासाठी शेतात प्रत्यक्ष पाहणी करणे आवश्यक आहे. या किडीसाठी रासायनिक फवारणी प्रमाणित नाही; जाळी झालेली पाने गोळा करून नष्ट करा व KVK चा सल्ला घ्या.'
+      : language === 'hi'
+        ? 'लीफ वेबर की इल्लियां शीर्ष पत्तियों को आपस में जाले से बांधकर अंदर खाती हैं। प्रकोप व गंभीरता की पुष्टि के लिए खेत में प्रत्यक्ष जांच आवश्यक है। रासायनिक छिड़काव प्रमाणित नहीं है; जाले वाली पत्तियां नष्ट करें और केवीके से सलाह लें।'
+        : 'Leaf Webber larvae web terminal shoots together and feed within. Field inspection of live shoots is required to verify infestation and assess severity. Chemical spray guidance is unverified; manual collection and KVK consultation are recommended.';
+  } else if (normKey.includes('healthy')) {
+    dynamicSigns = language === 'mr'
+      ? [
+          'कोणतेही ठिपके किंवा विकृती नसलेला एकसमान हिरवा पृष्ठभाग',
+          'पानाची सामान्य वाढ व अखंड कडा',
+          'कोणतीही बुरशी किंवा जाळ्यांचा प्रादुर्भाव नाही',
+        ]
+      : language === 'hi'
+        ? [
+            'समान हरी पत्ती की सतह, कोई धब्बा नहीं',
+            'सामान्य पत्ती बनावट और संरचना',
+            'कोई कवक धब्बा या जाला नहीं',
+          ]
+        : [
+            'Uniform green leaf surface without active lesions',
+            'Intact leaf margin and natural leaf texture',
+            'No visible fungal spots or insect webbing',
+          ];
+    dynamicDesc = language === 'mr'
+      ? 'स्कॅन केलेले पान निरोगी दिसत असून रंग व रचना सामान्य आहे. पिकाची नियमित निगा व शेताचे निरीक्षण सुरू ठेवा.'
+      : language === 'hi'
+        ? 'स्कैन की गई पत्ती स्वस्थ दिख रही है। फसल की नियमित निगरानी जारी रखें।'
+        : 'The scanned leaf appears healthy with normal color and structure. Continue regular crop monitoring and good agronomic practices.';
+  } else if (normKey.includes('wilt')) {
+    dynamicSigns = language === 'mr'
+      ? [
+          'पाने मलूल, सुकलेली किंवा कोमेजल्यासारखी दिसणे',
+          'पानांमधील टवटवीतपणा कमी होणे',
+          'खोड उभे चिरल्यास आतील वाहिन्या काळपट/तपकिरी दिसणे (शेत तपासणी)',
+        ]
+      : language === 'hi'
+        ? [
+            'पत्तियों का मुरझाना या लटकना',
+            'पत्तियों की ताजगी में कमी',
+            'तने को चीरने पर संवहनी ऊतकों का भूरापन (खेत में जांच)',
+          ]
+        : [
+            'Dull, drooped, or withered foliage appearance',
+            'Loss of turgidity in leaves without external spotting',
+            'Vascular discoloration upon stem splitting (field check)',
+          ];
+    dynamicDesc = language === 'mr'
+      ? 'तूर मर रोग हा जमिनीतून पसरणारा बुरशीजन्य रोग आहे. पानांवर फवारणीचा उपयोग होत नाही; केवळ बियाणे प्रक्रिया व जमीन व्यवस्थापन प्रभावी ठरते.'
+      : language === 'hi'
+        ? 'उकठा (विल्ट) एक मृदा जनित संवहनी कवक रोग है। पत्तियों पर छिड़काव अप्रभावी है; केवल बीज व मृदा प्रबंधन काम करता है।'
+        : 'Fusarium Wilt is a soil-borne vascular fungal disease. Foliar leaf sprays are ineffective; management relies on seed treatment and soil sanitation.';
+  }
+
   // Dynamic Disease Result Data (ready to accept ML model API response)
   const resultData: DiseaseResultData = {
     ...demoResult,
     diseaseName: passedDisease,
     confidence: Number.isFinite(passedConf) ? passedConf : demoResult.confidence,
     severity: passedSeverity,
+    observedSigns: dynamicSigns,
+    description: dynamicDesc,
   };
 
   useEffect(() => {

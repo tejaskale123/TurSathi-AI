@@ -1,0 +1,299 @@
+{
+  "created_at": "2026-10-26T14:00:18.071733",
+  "class_conflicts_quarantined": [],
+  "external_unverified_items": [
+    {
+      "filename": "488313_0_En_25-1_Fig1_HTML.jpg",
+      "sha256": "2e3990008ef9c1f8a71ada5b7df998d4572a3c703a55b47ab32193215390f1be",
+      "size_bytes": 76999,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "64c83c99-f128-4a18-b6d0-1fcfc8ed6e84.png",
+      "sha256": "5d0cb792c040ef8473767c3236452d7b09d68dd93ca0ca8954c0139baece2a7c",
+      "size_bytes": 40653,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "AAlternaria-blight-symptom-on-leaves-and-B-aerial-plant-parts-leaves-stem-buds-and.webp",
+      "sha256": "79f445348a73c8c8606a5dd355ea893d7bb020791549a49ed6760d57bbc943ea",
+      "size_bytes": 43618,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "image copy 2.png",
+      "sha256": "0ca05000f69a15ba0293a0388ed05bbe9673dea20669e48e8a69359049e2c253",
+      "size_bytes": 518805,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "image copy.png",
+      "sha256": "1a5f3e36d518b3b272ebbba790725284a9506ef626b9452498b75b0aa94dddc3",
+      "size_bytes": 310702,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "image.png",
+      "sha256": "1a5f3e36d518b3b272ebbba790725284a9506ef626b9452498b75b0aa94dddc3",
+      "size_bytes": 310702,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (1).jpg",
+      "sha256": "4cb507e9f395669c668774f475a279978d44e1f8e47df491136b1459557214f8",
+      "size_bytes": 44679,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (10).jpg",
+      "sha256": "3b19f02bc4918aa51937e20a0cd0c54e0a4b6c00bb84f69af617d001b7de02f0",
+      "size_bytes": 55914,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (11).jpg",
+      "sha256": "793bca4f249b61d8e88642efdd4a76c41bc8302c7c0542409d9d24d926d74c5b",
+      "size_bytes": 38866,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (12).jpg",
+      "sha256": "ba7c64accfa5186932acd1fe2c5ced36cd72d53f766ad26b34a6a68305875a76",
+      "size_bytes": 38201,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (13).jpg",
+      "sha256": "51161a9ae0f1d3126408354cf4cc0df31f50daa6db206f161d05fdfbfda0c91a",
+      "size_bytes": 52883,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (14).jpg",
+      "sha256": "3ae99dbb7947f43df6acaf4f2350f9ea246a1f1fc87811e09051dde077c81248",
+      "size_bytes": 49372,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (15).jpg",
+      "sha256": "bf959994f6e23fa53f80767de9f010d199f5b296ea32a85224e16875067a300c",
+      "size_bytes": 65948,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (16).jpg",
+      "sha256": "def243a4e68869784a1908f7d9f931606292c227229572beba920479634a1900",
+      "size_bytes": 44950,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (17).jpg",
+      "sha256": "bf959994f6e23fa53f80767de9f010d199f5b296ea32a85224e16875067a300c",
+      "size_bytes": 65948,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (18).jpg",
+      "sha256": "a0b9a1de175aeb1409066f6e381d9462f516129f794f78c8c79107efbc4dffef",
+      "size_bytes": 56985,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (19).jpg",
+      "sha256": "87e7f8f8c9611151a389c6dfc0df010e0cabadf635cdaffecf2ef4fb952cedc4",
+      "size_bytes": 49130,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (2).jpg",
+      "sha256": "55d1c4c90321d62dc1d25d0f2e2a53b3248d86e28341a9acf743f7b5fe7b267e",
+      "size_bytes": 20058,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (20).jpg",
+      "sha256": "ec35ab62e0345bf77174b36973c8714ec2b3267d4a8856576d87e0095cd5b3bf",
+      "size_bytes": 45037,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (21).jpg",
+      "sha256": "3a6cde0609149e9ab94520a92a60c507188e1f2acaff3cbaa935f9e55f57886e",
+      "size_bytes": 57858,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (22).jpg",
+      "sha256": "28bfc3058b9b67d990fee77bf41d7ca951465a7f315856a9671abd729d3ef571",
+      "size_bytes": 35326,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (23).jpg",
+      "sha256": "a0b9a1de175aeb1409066f6e381d9462f516129f794f78c8c79107efbc4dffef",
+      "size_bytes": 56985,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (24).jpg",
+      "sha256": "e6df08e90cfec6fd1d7aa2fc57a8dfddf6e072d6084479d3f9198082d7bdbb73",
+      "size_bytes": 20430,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (25).jpg",
+      "sha256": "e6fec364a265cfbf5641cbb56f6d957aa590eaf31a3cdf9b9faccc1ca8b3a62e",
+      "size_bytes": 46321,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (26).jpg",
+      "sha256": "7f3cdaf191b99460fbde6a4be2981280732a8e7f6ddb43bf6635ac03b2c4335c",
+      "size_bytes": 74647,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (27).jpg",
+      "sha256": "c5343f055a3ae8508f4b8651166d294b8b54af7dab8bc94df5e0570b41066ea0",
+      "size_bytes": 71626,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (28).jpg",
+      "sha256": "c5dd5f5308382db90c4c219680211c5e6c0183310d5306b9742cbe26e9be13ae",
+      "size_bytes": 57265,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (29).jpg",
+      "sha256": "32c68293688481716e6a850ce53e1216fb2b68e3a5b8fdf516997947251550f4",
+      "size_bytes": 68484,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (3).jpg",
+      "sha256": "3b19f02bc4918aa51937e20a0cd0c54e0a4b6c00bb84f69af617d001b7de02f0",
+      "size_bytes": 55914,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (30).jpg",
+      "sha256": "79d5a753c12e6d7849e0fcfa7e5d66fcd989ec548d935b0af42dda289acee42b",
+      "size_bytes": 92203,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (31).jpg",
+      "sha256": "ed471babf454075f2139c41b32a18e9803eb4f7d73c3660a0d3e2931f0bc209d",
+      "size_bytes": 82199,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (32).jpg",
+      "sha256": "fd91b802058b05b16e9c2c14c9faa944f2be91c2e626c606f474528b6e93d353",
+      "size_bytes": 35764,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (33).jpg",
+      "sha256": "bf202d5a83d734de123cb559a7d06e84250f64779ee76f44e62801d6f7f8a681",
+      "size_bytes": 58558,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (4).jpg",
+      "sha256": "5b0d50d01ddc195920516781a8f3ccc906196daabd52466a0bb271afd366a234",
+      "size_bytes": 39289,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (5).jpg",
+      "sha256": "9e5ed971573c9e36aa3d755a4beee12b0ff0c9dbd6c525eb0ff6a68e64a83ca7",
+      "size_bytes": 39920,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (6).jpg",
+      "sha256": "f4f00f801856dd38a114059fc77e4c10ca63b4643bad2256eb20181972496c4d",
+      "size_bytes": 43150,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (7).jpg",
+      "sha256": "abad856b841eeb3578227ef9297656a483df2cdb51037920b12aacb245f68a5e",
+      "size_bytes": 20767,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (8).jpg",
+      "sha256": "c4ae721645ecaa9fea283b7158cab85fb0c3587df7c165dcc49f4336f71f709f",
+      "size_bytes": 56674,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images (9).jpg",
+      "sha256": "ec35ab62e0345bf77174b36973c8714ec2b3267d4a8856576d87e0095cd5b3bf",
+      "size_bytes": 45037,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "images.jpg",
+      "sha256": "33938b4fb3041963ef0725ab9255d4a408a79c3f8a71a81bfbcade1022b6b1c3",
+      "size_bytes": 72211,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    },
+    {
+      "filename": "Pigeon pea plant in fruit, Kitui, Kenya. In this form, the pods have striations. \u00a9 Maundu, 2021.jpg",
+      "sha256": "9d4cf0f804573406d4278c0bf298a9109bf52a3254096e057d64bfd8866dcdca",
+      "size_bytes": 28886,
+      "status": "UNLABELED_UNVERIFIED",
+      "reason": "Web-scraped collection with 5 internal duplicate pairs. Contains genuine pigeonpea pod plant ('Pigeon pea plant in fruit, Kitui, Kenya') and Alternaria blight; cannot be classified as pure negative."
+    }
+  ],
+  "missing_hard_negatives": [
+    "Weeds (Parthenium, Commelina, Celosia)",
+    "Legume lookalikes (Chickpea / Chana, Cowpea / Chavli, Green Gram / Moong, Urad)",
+    "Pigeonpea seed pods, dry stems, roots",
+    "Non-agricultural clutter (farmer hands, soil, footwear, bags)"
+  ]
+}
