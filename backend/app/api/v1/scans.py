@@ -294,6 +294,7 @@ async def upload_voice_report(
         scan_id=voice_report.scan_id,
         language=voice_report.language,
         status="received",
+        transcription=voice_report.transcription,
     )
 
 

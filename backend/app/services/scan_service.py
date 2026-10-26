@@ -23,6 +23,7 @@ from app.services.storage_service import (
     validate_audio_upload,
     validate_image_upload,
 )
+from app.services.sarvam_stt_service import transcribe_audio_bytes
 
 logger = logging.getLogger("tursathi.scan_service")
 
@@ -181,7 +182,15 @@ def create_voice_report(
             detail="Voice recording could not be stored. Please try again.",
         )
 
-    # 4. Create database record
+    # 4. Transcribe audio using Sarvam AI (graceful fallback on failure)
+    transcription = transcribe_audio_bytes(
+        file_bytes=file_bytes,
+        original_filename=original_filename,
+        content_type=content_type,
+        language=language,
+    )
+
+    # 5. Create database record
     voice_report = TurVoiceReport(
         scan_id=scan.id,
         user_id=user_id,
@@ -191,14 +200,14 @@ def create_voice_report(
         audio_size=len(file_bytes),
         language=language,
         duration=duration,
-        transcription=None,  # Reserved for future speech-to-text integration
+        transcription=transcription,
     )
     db.add(voice_report)
     db.commit()
     db.refresh(voice_report)
 
     logger.info(
-        "[SCAN_SERVICE] TurVoiceReport #%d created for scan_id=%d user_id=%d language=%s",
-        voice_report.id, scan_id, user_id, language,
+        "[SCAN_SERVICE] TurVoiceReport #%d created for scan_id=%d user_id=%d language=%s transcribed=%s",
+        voice_report.id, scan_id, user_id, language, bool(transcription),
     )
     return voice_report

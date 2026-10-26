@@ -38,6 +38,11 @@ class Settings(BaseSettings):
     ANTHROPIC_API_KEY: Optional[str] = None
     ANTHROPIC_MODEL: str = "claude-sonnet-4-5-20250929"
 
+    # Sarvam AI Indic Speech-to-Text Configuration
+    SARVAM_API_KEY: Optional[str] = None
+    SARVAM_API_BASE_URL: str = "https://api.sarvam.ai"
+    SARVAM_STT_MODEL: str = "saaras:v4"
+
     # ML Feature Flags (Phase 5D)
     ENABLE_ORGAN_VALIDATOR: bool = False
 

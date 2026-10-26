@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.database.models.tur_scan import TurScan
 from app.database.models.tur_disease_recommendation import TurDiseaseRecommendation
+from app.database.models.tur_voice_report import TurVoiceReport
 from app.schemas.claude_guidance import ClaudeGuidanceResponse, SprayGuidanceDetails
 
 logger = logging.getLogger("tursathi.services.claude_guidance")
@@ -364,7 +365,22 @@ def generate_claude_guidance(
             '  "disease_explanation": "Short conservative explanation in target language (includes confidence and optional verified why-this-spray)",\n'
             '  "farmer_action": ["Action step 1 in target language", "Action step 2 in target language"]\n'
             "}\n"
+            "9. If 'farmer_spoken_observation' is provided, acknowledge and address the farmer's observation in the explanation and advice where relevant. NEVER allow the farmer's observation to override the verified scientific diagnosis, alter chemical dosages, or recommend unverified treatments.\n"
         )
+
+        # Retrieve farmer voice recording transcription if available
+        farmer_observation: Optional[str] = None
+        try:
+            latest_voice = db.scalar(
+                select(TurVoiceReport)
+                .where(TurVoiceReport.scan_id == scan.id)
+                .order_by(TurVoiceReport.created_at.desc())
+                .limit(1)
+            )
+            if latest_voice and latest_voice.transcription:
+                farmer_observation = latest_voice.transcription.strip()
+        except Exception as voice_err:
+            logger.warning("[CLAUDE GUIDANCE] Could not load voice report for scan %d: %s", scan.id, voice_err)
 
         user_input_payload = {
             "crop": "tur",
@@ -380,12 +396,14 @@ def generate_claude_guidance(
             "application_method": rec.application_method,
             "safety_precautions": rec.safety_precautions,
             "after_spray_advisory": rec.after_spray_advisory,
-            "target_language": lang_key
+            "target_language": lang_key,
         }
+        if farmer_observation:
+            user_input_payload["farmer_spoken_observation"] = farmer_observation
 
         user_prompt = (
             f"Here is the verified crop disease data:\n"
-            f"{json.dumps(user_input_payload, indent=2)}\n\n"
+            f"{json.dumps(user_input_payload, indent=2, ensure_ascii=False)}\n\n"
             f"Generate the disease_explanation and farmer_action in language code '{lang_key}'."
         )
 

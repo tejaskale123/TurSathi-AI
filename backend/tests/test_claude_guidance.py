@@ -331,3 +331,44 @@ def test_leaf_webber_recommendation_endpoint_returns_404():
     finally:
         app.dependency_overrides.clear()
 
+
+def test_claude_guidance_with_farmer_voice_transcription():
+    """Verify that farmer voice transcription is retrieved from TurVoiceReport and passed into Claude prompt."""
+    import json
+    from app.database.models.tur_voice_report import TurVoiceReport
+
+    db = MagicMock()
+    scan = mock_scan(scan_id=42, disease_name="Leaf_Spot", confidence=0.82)
+    rec = mock_rec(disease_name="Leaf_Spot")
+
+    mock_voice = MagicMock(spec=TurVoiceReport)
+    mock_voice.transcription = "पानांवर काळे डाग पडले आहेत आणि झाड सुकत चालले आहे"
+
+    # db.scalar returns rec on first call, mock_voice on second call
+    db.scalar.side_effect = [rec, mock_voice]
+
+    mock_anthropic = MagicMock()
+    mock_response = MagicMock()
+    mock_block = MagicMock()
+    mock_block.text = json.dumps({
+        "disease_explanation": "तुरीच्या पानांवर ठिपके रोग आढळला असून शेतकऱ्याने सांगितल्याप्रमाणे काळे डाग दिसत आहेत.",
+        "farmer_action": [
+            "Mancozeb 75 WP ची फवारणी करा.",
+            "एकापेक्षा जास्त औषधे एकत्र मिसळण्यापूर्वी उत्पादनाच्या label वरील सूचना किंवा अधिकृत कृषी शिफारस तपासा."
+        ]
+    })
+    mock_response.content = [mock_block]
+    mock_anthropic.messages.create.return_value = mock_response
+
+    with patch.object(settings, "ANTHROPIC_API_KEY", "test_key"), \
+         patch("anthropic.Anthropic", return_value=mock_anthropic):
+        res = generate_claude_guidance(db, scan, language="mr")
+        assert res.status == "success"
+        assert "काळे डाग" in res.disease_explanation
+
+        # Verify Claude messages.create received farmer observation
+        call_kwargs = mock_anthropic.messages.create.call_args[1]
+        user_message_content = call_kwargs["messages"][0]["content"]
+        assert "farmer_spoken_observation" in user_message_content
+        assert "पानांवर काळे डाग पडले आहेत" in user_message_content
+

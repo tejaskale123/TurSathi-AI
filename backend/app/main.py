@@ -75,3 +75,9 @@ def health_check():
         "status": "healthy",
         "database": "connected"
     }
+
+
+@app.get("/test-voice", include_in_schema=False)
+def test_voice_shortcut():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url=f"{settings.API_V1_STR}/test/ui")

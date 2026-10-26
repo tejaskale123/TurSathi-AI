@@ -1,0 +1,1981 @@
+{
+  "datasets_path": "C:\\Users\\admin\\OneDrive\\Documents\\Desktop\\TurSathi AI\\datasets",
+  "total_top_folders": 11,
+  "standalone_files": [
+    {
+      "name": "new_disease_images_preview.jpg",
+      "path": "datasets\\new_disease_images_preview.jpg",
+      "size_bytes": 532498,
+      "sha256": "148a589a4aeb7477ce2dd73d2a757239e73ddd18e55d94b4387d0b5f3bfdb8cd"
+    },
+    {
+      "name": "validate_tur_dataset.py",
+      "path": "datasets\\validate_tur_dataset.py",
+      "size_bytes": 6834,
+      "sha256": "0cf2a2a9eba613cbdf563b2501547641f17e5cf1d67987ddacd194b51a4b60de"
+    }
+  ],
+  "folder_summary": {
+    "_temp_wilt_staging": {
+      "total_files": 300,
+      "image_files": 300,
+      "non_image_files": 0,
+      "total_bytes": 65346200,
+      "total_mb": 62.32,
+      "unique_hashes": 287,
+      "subdirs": [],
+      "splits": {
+        "_flat_": {
+          "_root_": 300
+        }
+      },
+      "classes": {}
+    },
+    "archive": {
+      "total_files": 1,
+      "image_files": 0,
+      "non_image_files": 1,
+      "total_bytes": 12264708,
+      "total_mb": 11.7,
+      "unique_hashes": 1,
+      "subdirs": [],
+      "splits": {},
+      "classes": {}
+    },
+    "new_disease_images": {
+      "total_files": 42,
+      "image_files": 41,
+      "non_image_files": 1,
+      "total_bytes": 3088964,
+      "total_mb": 2.95,
+      "unique_hashes": 37,
+      "subdirs": [],
+      "splits": {
+        "_flat_": {
+          "_root_": 41
+        }
+      },
+      "classes": {}
+    },
+    "pigeonpea_disease_clean_candidate_v1": {
+      "total_files": 1676,
+      "image_files": 1676,
+      "non_image_files": 0,
+      "total_bytes": 73302960,
+      "total_mb": 69.91,
+      "unique_hashes": 1676,
+      "subdirs": [
+        "test",
+        "test/Healthy",
+        "test/Leaf_Spot",
+        "test/Leaf_webber",
+        "test/Sterilic_mosaic",
+        "test/Wilt",
+        "train",
+        "train/Healthy",
+        "train/Leaf_Spot",
+        "train/Leaf_webber",
+        "train/Sterilic_mosaic",
+        "train/Wilt",
+        "val",
+        "val/Healthy",
+        "val/Leaf_Spot",
+        "val/Leaf_webber",
+        "val/Sterilic_mosaic",
+        "val/Wilt"
+      ],
+      "splits": {
+        "test": {
+          "Healthy": 46,
+          "Leaf_Spot": 54,
+          "Leaf_webber": 32,
+          "Sterilic_mosaic": 52,
+          "Wilt": 5
+        },
+        "train": {
+          "Healthy": 285,
+          "Leaf_Spot": 278,
+          "Leaf_webber": 285,
+          "Sterilic_mosaic": 282,
+          "Wilt": 206
+        },
+        "val": {
+          "Healthy": 28,
+          "Leaf_Spot": 53,
+          "Leaf_webber": 27,
+          "Sterilic_mosaic": 38,
+          "Wilt": 5
+        }
+      },
+      "classes": {
+        "Healthy": 359,
+        "Leaf_Spot": 385,
+        "Leaf_webber": 344,
+        "Sterilic_mosaic": 372,
+        "Wilt": 216
+      }
+    },
+    "pigeonpea_disease_final": {
+      "total_files": 1858,
+      "image_files": 1858,
+      "non_image_files": 0,
+      "total_bytes": 91600288,
+      "total_mb": 87.36,
+      "unique_hashes": 1802,
+      "subdirs": [
+        "test",
+        "test/Healthy",
+        "test/Leaf_Spot",
+        "test/Leaf_webber",
+        "test/Sterilic_mosaic",
+        "test/Wilt",
+        "train",
+        "train/Healthy",
+        "train/Leaf_Spot",
+        "train/Leaf_webber",
+        "train/Sterilic_mosaic",
+        "train/Wilt",
+        "val",
+        "val/Healthy",
+        "val/Leaf_Spot",
+        "val/Leaf_webber",
+        "val/Sterilic_mosaic",
+        "val/Wilt"
+      ],
+      "splits": {
+        "test": {
+          "Healthy": 73,
+          "Leaf_Spot": 89,
+          "Leaf_webber": 70,
+          "Sterilic_mosaic": 86,
+          "Wilt": 58
+        },
+        "train": {
+          "Healthy": 215,
+          "Leaf_Spot": 263,
+          "Leaf_webber": 207,
+          "Sterilic_mosaic": 256,
+          "Wilt": 172
+        },
+        "val": {
+          "Healthy": 71,
+          "Leaf_Spot": 87,
+          "Leaf_webber": 69,
+          "Sterilic_mosaic": 85,
+          "Wilt": 57
+        }
+      },
+      "classes": {
+        "Healthy": 359,
+        "Leaf_Spot": 439,
+        "Leaf_webber": 346,
+        "Sterilic_mosaic": 427,
+        "Wilt": 287
+      }
+    },
+    "pigeonpea_field_collection": {
+      "total_files": 1,
+      "image_files": 0,
+      "non_image_files": 1,
+      "total_bytes": 856,
+      "total_mb": 0.0,
+      "unique_hashes": 1,
+      "subdirs": [
+        "images"
+      ],
+      "splits": {},
+      "classes": {}
+    },
+    "tur": {
+      "total_files": 0,
+      "image_files": 0,
+      "non_image_files": 0,
+      "total_bytes": 0,
+      "total_mb": 0.0,
+      "unique_hashes": 0,
+      "subdirs": [
+        "Dry_Root_Rot",
+        "Healthy",
+        "Phytophthora_Blight",
+        "SMD",
+        "Wilt"
+      ],
+      "splits": {},
+      "classes": {}
+    },
+    "tur_image_validator": {
+      "total_files": 2940,
+      "image_files": 2940,
+      "non_image_files": 0,
+      "total_bytes": 762880634,
+      "total_mb": 727.54,
+      "unique_hashes": 2934,
+      "subdirs": [
+        "real_world_test",
+        "real_world_test/Not_Tur",
+        "real_world_test/Tur",
+        "test",
+        "test/Not_Tur",
+        "test/Tur",
+        "train",
+        "train/Not_Tur",
+        "train/Tur",
+        "val",
+        "val/Not_Tur",
+        "val/Tur"
+      ],
+      "splits": {
+        "real_world_test": {
+          "Not_Tur": 9,
+          "Tur": 11
+        },
+        "test": {
+          "Not_Tur": 133,
+          "Tur": 133
+        },
+        "train": {
+          "Not_Tur": 1200,
+          "Tur": 1200
+        },
+        "val": {
+          "Not_Tur": 127,
+          "Tur": 127
+        }
+      },
+      "classes": {
+        "Not_Tur": 1469,
+        "Tur": 1471
+      }
+    },
+    "tur_image_validator_v2": {
+      "total_files": 3440,
+      "image_files": 3440,
+      "non_image_files": 0,
+      "total_bytes": 802402049,
+      "total_mb": 765.23,
+      "unique_hashes": 3180,
+      "subdirs": [
+        "duplicates_Not_Tur",
+        "test",
+        "test/Not_Tur",
+        "test/Tur",
+        "train",
+        "train/Not_Tur",
+        "train/Tur",
+        "val",
+        "val/Not_Tur",
+        "val/Tur"
+      ],
+      "splits": {
+        "test": {
+          "Not_Tur": 133,
+          "Tur": 133
+        },
+        "train": {
+          "Not_Tur": 1460,
+          "Tur": 1460
+        },
+        "val": {
+          "Not_Tur": 127,
+          "Tur": 127
+        }
+      },
+      "classes": {
+        "Not_Tur": 1720,
+        "Tur": 1720
+      }
+    },
+    "tur_image_validator_v3": {
+      "total_files": 3561,
+      "image_files": 3561,
+      "non_image_files": 0,
+      "total_bytes": 814066174,
+      "total_mb": 776.35,
+      "unique_hashes": 3301,
+      "subdirs": [
+        "test",
+        "test/Not_Tur",
+        "test/Tur",
+        "train",
+        "train/Not_Tur",
+        "train/Tur",
+        "val",
+        "val/Not_Tur",
+        "val/Tur"
+      ],
+      "splits": {
+        "test": {
+          "Not_Tur": 133,
+          "Tur": 133
+        },
+        "train": {
+          "Not_Tur": 1460,
+          "Tur": 1581
+        },
+        "val": {
+          "Not_Tur": 127,
+          "Tur": 127
+        }
+      },
+      "classes": {
+        "Not_Tur": 1720,
+        "Tur": 1841
+      }
+    },
+    "tur_varieties": {
+      "total_files": 15,
+      "image_files": 0,
+      "non_image_files": 15,
+      "total_bytes": 5057,
+      "total_mb": 0.0,
+      "unique_hashes": 15,
+      "subdirs": [
+        "BDN_2",
+        "BDN_2/raw",
+        "BDN_2/verified",
+        "BDN_2013_02",
+        "BDN_2013_02/raw",
+        "BDN_2013_02/verified",
+        "BDN_2013_41",
+        "BDN_2013_41/raw",
+        "BDN_2013_41/verified",
+        "BDN_708",
+        "BDN_711",
+        "BDN_716",
+        "BSMR_736",
+        "BSMR_736/raw",
+        "BSMR_736/verified",
+        "BSMR_853",
+        "IPA_15_6",
+        "PKV_Tara",
+        "Phule_Rajeshwari",
+        "Phule_Trupti",
+        "Unknown_Other_Tur",
+        "_reference_pigeonpea"
+      ],
+      "splits": {},
+      "classes": {}
+    }
+  },
+  "overlap_matrix": {
+    "_temp_wilt_staging": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 287,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 216,
+        "pct_of_f1": 75.26,
+        "pct_of_f2": 12.89
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 287,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 15.93
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 40,
+        "pct_of_f1": 13.94,
+        "pct_of_f2": 1.21
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "archive": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 1,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "new_disease_images": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 37,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 10,
+        "pct_of_f1": 27.03,
+        "pct_of_f2": 0.34
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 26,
+        "pct_of_f1": 70.27,
+        "pct_of_f2": 0.79
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "pigeonpea_disease_clean_candidate_v1": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 216,
+        "pct_of_f1": 12.89,
+        "pct_of_f2": 75.26
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 1676,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 1676,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 93.01
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 87.11,
+        "pct_of_f2": 49.76
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 87.11,
+        "pct_of_f2": 45.91
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 1490,
+        "pct_of_f1": 88.9,
+        "pct_of_f2": 45.14
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "pigeonpea_disease_final": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 287,
+        "pct_of_f1": 15.93,
+        "pct_of_f2": 100.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 1676,
+        "pct_of_f1": 93.01,
+        "pct_of_f2": 100.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 1802,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 81.02,
+        "pct_of_f2": 49.76
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 81.02,
+        "pct_of_f2": 45.91
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 1555,
+        "pct_of_f1": 86.29,
+        "pct_of_f2": 47.11
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "pigeonpea_field_collection": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 1,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "tur": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "tur_image_validator": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 10,
+        "pct_of_f1": 0.34,
+        "pct_of_f2": 27.03
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 49.76,
+        "pct_of_f2": 87.11
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 49.76,
+        "pct_of_f2": 81.02
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 2934,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 2920,
+        "pct_of_f1": 99.52,
+        "pct_of_f2": 91.82
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 2920,
+        "pct_of_f1": 99.52,
+        "pct_of_f2": 88.46
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "tur_image_validator_v2": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 45.91,
+        "pct_of_f2": 87.11
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 1460,
+        "pct_of_f1": 45.91,
+        "pct_of_f2": 81.02
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 2920,
+        "pct_of_f1": 91.82,
+        "pct_of_f2": 99.52
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 3180,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 3180,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 96.33
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "tur_image_validator_v3": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 40,
+        "pct_of_f1": 1.21,
+        "pct_of_f2": 13.94
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 26,
+        "pct_of_f1": 0.79,
+        "pct_of_f2": 70.27
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 1490,
+        "pct_of_f1": 45.14,
+        "pct_of_f2": 88.9
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 1555,
+        "pct_of_f1": 47.11,
+        "pct_of_f2": 86.29
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 2920,
+        "pct_of_f1": 88.46,
+        "pct_of_f2": 99.52
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 3180,
+        "pct_of_f1": 96.33,
+        "pct_of_f2": 100.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 3301,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      },
+      "tur_varieties": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      }
+    },
+    "tur_varieties": {
+      "_temp_wilt_staging": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "archive": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "new_disease_images": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_clean_candidate_v1": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_disease_final": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "pigeonpea_field_collection": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0
+      },
+      "tur_image_validator": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v2": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_image_validator_v3": {
+        "shared_hashes": 0,
+        "pct_of_f1": 0.0,
+        "pct_of_f2": 0.0
+      },
+      "tur_varieties": {
+        "shared_hashes": 15,
+        "pct_of_f1": 100.0,
+        "pct_of_f2": 100.0
+      }
+    }
+  },
+  "total_duplicate_hashes": 3558,
+  "total_label_conflicts": 1838,
+  "label_conflicts_sample": [
+    {
+      "sha256": "a92373c60da679703ac90a9a2dc8ff2cfe6191d9a0c1be4c4df66c6aa94760f0",
+      "classes": [
+        "test_wilt_orig_test_0.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "test_wilt_orig_test_0.jpg",
+          "path": "datasets/_temp_wilt_staging/test_wilt_orig_test_0.jpg",
+          "filename": "test_wilt_orig_test_0.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0130.jpg",
+          "filename": "wilt_train_0130.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0130.jpg",
+          "filename": "wilt_train_0130.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "d5510d2f53976d88889554e828d60fe5639c9916e9d492aaf3a308721c00024b",
+      "classes": [
+        "Wilt",
+        "test_wilt_orig_test_1.jpg"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "test_wilt_orig_test_1.jpg",
+          "path": "datasets/_temp_wilt_staging/test_wilt_orig_test_1.jpg",
+          "filename": "test_wilt_orig_test_1.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0028.jpg",
+          "filename": "wilt_train_0028.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0028.jpg",
+          "filename": "wilt_train_0028.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "53b02aa336ab1e7ec174b2ea6ae65941d68d9aec2b4ba5c77014393de8a9e958",
+      "classes": [
+        "test_wilt_orig_test_2.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "test_wilt_orig_test_2.jpg",
+          "path": "datasets/_temp_wilt_staging/test_wilt_orig_test_2.jpg",
+          "filename": "test_wilt_orig_test_2.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0140.jpg",
+          "filename": "wilt_train_0140.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0140.jpg",
+          "filename": "wilt_train_0140.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "93b4f3aec3e3ca7efa27bce48a9ca6eb15676cbeeca2c2cc117bc26918b303fd",
+      "classes": [
+        "Wilt",
+        "test_wilt_orig_test_3.jpg"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "test_wilt_orig_test_3.jpg",
+          "path": "datasets/_temp_wilt_staging/test_wilt_orig_test_3.jpg",
+          "filename": "test_wilt_orig_test_3.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_test_0035.jpg",
+          "filename": "wilt_test_0035.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "test",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/test/Wilt/wilt_test_0035.jpg",
+          "filename": "wilt_test_0035.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "583e8098ff5ef84bd20c85cfdd67c33a23986edcdf8c3587eaafbb696e1dfee0",
+      "classes": [
+        "Wilt",
+        "test_wilt_orig_test_4.jpg"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "test_wilt_orig_test_4.jpg",
+          "path": "datasets/_temp_wilt_staging/test_wilt_orig_test_4.jpg",
+          "filename": "test_wilt_orig_test_4.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0062.jpg",
+          "filename": "wilt_train_0062.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0062.jpg",
+          "filename": "wilt_train_0062.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "f966236c68bf002f10e2f19041cde2f0961f7b683568c0add97795c0f57b3d93",
+      "classes": [
+        "train_wilt_aug_0.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_0.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_0.jpg",
+          "filename": "train_wilt_aug_0.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0005.jpg",
+          "filename": "wilt_train_0005.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "d9fc3cca88f4bca1acf82c05dfcddeae4c6b66363a2fb9ba67eeb19b1e27ad8a",
+      "classes": [
+        "train_wilt_aug_1.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_1.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_1.jpg",
+          "filename": "train_wilt_aug_1.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0037.jpg",
+          "filename": "wilt_train_0037.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0037.jpg",
+          "filename": "wilt_train_0037.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "491ad3d0c29cd7c3c1ff82dd12aa8e0632dba4a97ba2e4adf30cfc7c3f2555c0",
+      "classes": [
+        "train_wilt_aug_10.jpg",
+        "Wilt",
+        "Tur"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_10.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_10.jpg",
+          "filename": "train_wilt_aug_10.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0099.jpg",
+          "filename": "wilt_train_0099.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0099.jpg",
+          "filename": "wilt_train_0099.jpg"
+        },
+        {
+          "folder": "tur_image_validator_v3",
+          "split": "train",
+          "class": "Tur",
+          "path": "datasets/tur_image_validator_v3/train/Tur/rw_fb4a5d93_wilt_train_0099.jpg",
+          "filename": "rw_fb4a5d93_wilt_train_0099.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "e6f2f720378a2371d72f087019ea7e15163e763e8069456b850040f166e743ba",
+      "classes": [
+        "Wilt",
+        "train_wilt_aug_100.jpg"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_100.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_100.jpg",
+          "filename": "train_wilt_aug_100.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_val_0011.jpg",
+          "filename": "wilt_val_0011.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "val",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/val/Wilt/wilt_val_0011.jpg",
+          "filename": "wilt_val_0011.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "4cbbfc64e86d7b0ae65e6ccb1e209d7a9c1ec5691ad5ad30d3359aa80b7c76d4",
+      "classes": [
+        "train_wilt_aug_101.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_101.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_101.jpg",
+          "filename": "train_wilt_aug_101.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0007.jpg",
+          "filename": "wilt_train_0007.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0007.jpg",
+          "filename": "wilt_train_0007.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "d694bc695bcdb4f3661bb36f0270425e06c402fe9100f484a4bf0db9024218c1",
+      "classes": [
+        "train_wilt_aug_102.jpg",
+        "Tur",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_102.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_102.jpg",
+          "filename": "train_wilt_aug_102.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0096.jpg",
+          "filename": "wilt_train_0096.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0096.jpg",
+          "filename": "wilt_train_0096.jpg"
+        },
+        {
+          "folder": "tur_image_validator_v3",
+          "split": "train",
+          "class": "Tur",
+          "path": "datasets/tur_image_validator_v3/train/Tur/rw_01fd0fe1_wilt_train_0096.jpg",
+          "filename": "rw_01fd0fe1_wilt_train_0096.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "a5ba1dfb960fd98e29fa4faa57269a7404084369d7e4029632618492ce71f1a5",
+      "classes": [
+        "train_wilt_aug_103.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_103.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_103.jpg",
+          "filename": "train_wilt_aug_103.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_test_0017.jpg",
+          "filename": "wilt_test_0017.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "test",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/test/Wilt/wilt_test_0017.jpg",
+          "filename": "wilt_test_0017.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "ab812898fd1993b2e078c32df7933338f0d3d1f9d5852e2cd3dbdf4d4c7c4cbc",
+      "classes": [
+        "train_wilt_aug_104.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_104.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_104.jpg",
+          "filename": "train_wilt_aug_104.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_test_0056.jpg",
+          "filename": "wilt_test_0056.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "test",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/test/Wilt/wilt_test_0056.jpg",
+          "filename": "wilt_test_0056.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "1a7e5ad0e4b71d01d8fefe90ea0c88c90feaccc14ff00cdf9191bc4e79d77a90",
+      "classes": [
+        "train_wilt_aug_105.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_105.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_105.jpg",
+          "filename": "train_wilt_aug_105.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "test",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/test/Wilt/wilt_test_0041.jpg",
+          "filename": "wilt_test_0041.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "cea9d7bbe8174b77b7217ddbc7c1d468218fa19c81cbff4566b8a487242d854c",
+      "classes": [
+        "train_wilt_aug_106.jpg",
+        "train_wilt_aug_115.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_106.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_106.jpg",
+          "filename": "train_wilt_aug_106.jpg"
+        },
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_115.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_115.jpg",
+          "filename": "train_wilt_aug_115.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_val_0013.jpg",
+          "filename": "wilt_val_0013.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "val",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/val/Wilt/wilt_val_0013.jpg",
+          "filename": "wilt_val_0013.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "0d6188663af17e74e6f2ab7da65828c89e9fee0c91c78b8d14ab508c9d66b45c",
+      "classes": [
+        "train_wilt_aug_107.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_107.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_107.jpg",
+          "filename": "train_wilt_aug_107.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_test_0046.jpg",
+          "filename": "wilt_test_0046.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "test",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/test/Wilt/wilt_test_0046.jpg",
+          "filename": "wilt_test_0046.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "0e0f4b95dc98d5fad7737a9ff7aa7874054eb9380af25506f6c252d80bfb6c73",
+      "classes": [
+        "Wilt",
+        "train_wilt_aug_108.jpg"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_108.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_108.jpg",
+          "filename": "train_wilt_aug_108.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_test_0047.jpg",
+          "filename": "wilt_test_0047.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "test",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/test/Wilt/wilt_test_0047.jpg",
+          "filename": "wilt_test_0047.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "3844570840269112566a24792ea5d5ad56a28e9f6ec12a2c3187bd5df756e38e",
+      "classes": [
+        "Wilt",
+        "train_wilt_aug_109.jpg"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_109.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_109.jpg",
+          "filename": "train_wilt_aug_109.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "val",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/val/Wilt/wilt_val_0055.jpg",
+          "filename": "wilt_val_0055.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "3d35f8567887e5828537db582dea94ce3fb7e094a1c30fb21cf238b6b75d6e78",
+      "classes": [
+        "train_wilt_aug_11.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_11.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_11.jpg",
+          "filename": "train_wilt_aug_11.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "val",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/val/Wilt/wilt_val_0030.jpg",
+          "filename": "wilt_val_0030.jpg"
+        }
+      ]
+    },
+    {
+      "sha256": "9494da15a89f55ea28da5bcc83597f67e776a9e67af80514126be65693db8e63",
+      "classes": [
+        "train_wilt_aug_110.jpg",
+        "Wilt"
+      ],
+      "occurrences": [
+        {
+          "folder": "_temp_wilt_staging",
+          "split": "NONE",
+          "class": "train_wilt_aug_110.jpg",
+          "path": "datasets/_temp_wilt_staging/train_wilt_aug_110.jpg",
+          "filename": "train_wilt_aug_110.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_clean_candidate_v1",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_clean_candidate_v1/train/Wilt/wilt_train_0115.jpg",
+          "filename": "wilt_train_0115.jpg"
+        },
+        {
+          "folder": "pigeonpea_disease_final",
+          "split": "train",
+          "class": "Wilt",
+          "path": "datasets/pigeonpea_disease_final/train/Wilt/wilt_train_0115.jpg",
+          "filename": "wilt_train_0115.jpg"
+        }
+      ]
+    }
+  ],
+  "top_duplicates_sample": [
+    {
+      "sha256": "b2a7e889daa3dbde68dd5235bd9d90a482c66b254bfb93f1f692a1dfad2ff3ec",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0000.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0000.jpg",
+        "datasets/tur_image_validator/val/Tur/Healthy_0001.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0045.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Healthy_0001.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0045.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Healthy_0001.jpg"
+      ]
+    },
+    {
+      "sha256": "3fd587975eeaea2db58730b536d258f9160df05306ff07c21d992141063f878f",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0004.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0004.jpg",
+        "datasets/tur_image_validator/test/Tur/Healthy_0025.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Healthy_0025.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0026.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Healthy_0025.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0026.jpg"
+      ]
+    },
+    {
+      "sha256": "dc908e8b32ba66acf6f9be2f6188bbc6b9f3d711e74f29d7624d62c927937604",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0009.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0009.jpg",
+        "datasets/tur_image_validator/test/Tur/Healthy_0028.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Healthy_0028.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0012.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Healthy_0028.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0012.jpg"
+      ]
+    },
+    {
+      "sha256": "b56e1d24e445060311d30915c1fa28047bf6e504bba8b6be7b2d53cedaba728c",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0015.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0015.jpg",
+        "datasets/tur_image_validator/test/Tur/Healthy_0014.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Healthy_0014.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0003.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Healthy_0014.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0003.jpg"
+      ]
+    },
+    {
+      "sha256": "ae559a83a813db459bd986d6870c15a700d7c28ccadcdbf48bdcfba17d2a8c5c",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0029.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0029.jpg",
+        "datasets/tur_image_validator/val/Tur/Healthy_0003.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0017.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Healthy_0003.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0017.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Healthy_0003.jpg"
+      ]
+    },
+    {
+      "sha256": "7ed6e7c5f7acec3afb6ade4e9f94a53ad9e54a924a1080f76011283ac44d8a3d",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0036.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0036.jpg",
+        "datasets/tur_image_validator/test/Tur/Healthy_0016.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Healthy_0016.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0037.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Healthy_0016.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0037.jpg"
+      ]
+    },
+    {
+      "sha256": "1bbd5f7bbee6bd3d157b08d8734841870b4a95245e70570fd119340dad7a0e3c",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0039.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0039.jpg",
+        "datasets/tur_image_validator/val/Tur/Healthy_0026.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0016.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Healthy_0026.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0016.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Healthy_0026.jpg"
+      ]
+    },
+    {
+      "sha256": "eda94b97c73734b8445dba1ae40fb2a4234d05f2ace1ca53dc268877ea49b8d2",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0041.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0041.jpg",
+        "datasets/tur_image_validator/val/Tur/Healthy_0013.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0025.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Healthy_0013.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0025.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Healthy_0013.jpg"
+      ]
+    },
+    {
+      "sha256": "eaf427badf89fc218b6bab46bb2e92eaef384060b60f2418cf47c18451121aa7",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0062.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0062.jpg",
+        "datasets/tur_image_validator/val/Tur/Healthy_0002.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0006.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Healthy_0002.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0006.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Healthy_0002.jpg"
+      ]
+    },
+    {
+      "sha256": "2028dccb9ab76448f5c4939d70b9f1c0d7bd168468fd336fcfb6cb9cae10f2cd",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0065.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0065.jpg",
+        "datasets/tur_image_validator/val/Tur/Healthy_0009.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0013.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Healthy_0009.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0013.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Healthy_0009.jpg"
+      ]
+    },
+    {
+      "sha256": "d24d4f70fcb8e4056892ba0e9bb7a924e3d54d407a435af737ae077ed81fb8ca",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Healthy/healthy_test_0066.jpg",
+        "datasets/pigeonpea_disease_final/test/Healthy/healthy_test_0066.jpg",
+        "datasets/tur_image_validator/test/Tur/Healthy_0012.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Healthy_0012.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0019.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Healthy_0012.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0019.jpg"
+      ]
+    },
+    {
+      "sha256": "a640b4a81c8e8e4ab912c760ed8cb4fd9af346bc4dc6a20e1fc4ed21688e2255",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0005.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0005.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0026.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0026.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0097.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0026.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0097.jpg"
+      ]
+    },
+    {
+      "sha256": "48e448ab72243a0d0c4dacd18603f877ed5135a39d81664f2fe2b37c940fe5f4",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0018.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0018.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0032.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0032.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0119.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0032.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0119.jpg"
+      ]
+    },
+    {
+      "sha256": "bbafed58b3ccb4ddcf4b8fb0f4bb666b4bab130b1c2fdbbb5462627e6f426658",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0026.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0026.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0004.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0076.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0004.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0076.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0004.jpg"
+      ]
+    },
+    {
+      "sha256": "5fd363d078ec43d5c7c87c77b0516db0d50666591d8a48e0fadd5f0112c59723",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0033.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0033.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0026.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0092.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0026.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0092.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0026.jpg"
+      ]
+    },
+    {
+      "sha256": "c937f5a7d8c17d71fe6fb13b47c35e5e406faecc77d025c8f49badc4253f5aa1",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0034.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0034.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0023.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0118.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0023.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0118.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0023.jpg"
+      ]
+    },
+    {
+      "sha256": "a42a51620ce204098a4ae8b808b16c89977ef0f891819224347bfe4228d04903",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0035.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0035.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0000.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0066.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0000.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0066.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0000.jpg"
+      ]
+    },
+    {
+      "sha256": "afa4be6ce0ba8f9cdcaca75d4bf0fc7ed48d2470bab6419cf6e84207d9c0b0ae",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0037.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0037.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0014.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0087.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0014.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0087.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0014.jpg"
+      ]
+    },
+    {
+      "sha256": "a08e00c2d1edde4d1add7490158e21b4ea0815e78e8c50a5e6f8b54510c7ed2c",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0040.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0040.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0006.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0006.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0102.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0006.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0102.jpg"
+      ]
+    },
+    {
+      "sha256": "dabd6b0eb3e080525a9f81c02441db34ea8157778b93a8e5813525c0447751d7",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0045.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0045.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0004.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0004.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0107.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0004.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0107.jpg"
+      ]
+    },
+    {
+      "sha256": "e514e2e4d53c86cc5186025b12ac4d725bf95051e65002ba348fa625d933d178",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0048.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0048.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0040.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0040.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0086.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0040.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0086.jpg"
+      ]
+    },
+    {
+      "sha256": "d122cf7abb33f340bd1ab3ed631d4e8576ef080ebae2bfaa72969fca87a28283",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0054.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0054.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0003.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0003.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0072.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0003.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0072.jpg"
+      ]
+    },
+    {
+      "sha256": "48f96025ebae671b302e3fd536dfc3a0b2c783b8a7424bd0cf812930b4022fe0",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0057.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0057.jpg",
+        "datasets/tur_image_validator/test/Tur/Leaf_Spot_0035.jpg",
+        "datasets/tur_image_validator_v2/test/Tur/Leaf_Spot_0035.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0089.jpg",
+        "datasets/tur_image_validator_v3/test/Tur/Leaf_Spot_0035.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0089.jpg"
+      ]
+    },
+    {
+      "sha256": "9d6eff9970056009efa600efe9b56aaeca4be5bcdb4f0592179faaa855f5181b",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0058.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0058.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0020.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0112.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0020.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0112.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0020.jpg"
+      ]
+    },
+    {
+      "sha256": "5484c58689cae280544949099d57a70a4e31c39ae180f0b1485784b912a833e7",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_Spot/leaf_spot_test_0062.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_Spot/leaf_spot_test_0062.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_Spot_0012.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0069.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_Spot_0012.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0069.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_Spot_0012.jpg"
+      ]
+    },
+    {
+      "sha256": "80c4ba79ee7288ea8b3ae331c782511cabe6af70a62a9e6f672852527da26259",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_webber/leaf_webber_test_0001.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_webber/leaf_webber_test_0001.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_webber_0012.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0173.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_webber_0012.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0173.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_webber_0012.jpg"
+      ]
+    },
+    {
+      "sha256": "f24d1d5df4ea190cc0052460e61945868023e7b71756fe5bb7761c352a2178a3",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_webber/leaf_webber_test_0019.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_webber/leaf_webber_test_0019.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_webber_0006.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0181.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_webber_0006.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0181.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_webber_0006.jpg"
+      ]
+    },
+    {
+      "sha256": "6ab0dd6ff13efc576fdc690d0a69365bd7765191a97bb582383c465b9de45786",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_webber/leaf_webber_test_0031.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_webber/leaf_webber_test_0031.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_webber_0017.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0145.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_webber_0017.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0145.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_webber_0017.jpg"
+      ]
+    },
+    {
+      "sha256": "e659e51be1fdc23b1ba4b684caddd2abfc239d5478a0064387e6b4f5a5c37031",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_webber/leaf_webber_test_0036.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_webber/leaf_webber_test_0036.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_webber_0002.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0165.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_webber_0002.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0165.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_webber_0002.jpg"
+      ]
+    },
+    {
+      "sha256": "58809bd14156d9e384ef50879b964b9d9a57814e238048ae90a10c55ac033854",
+      "count": 7,
+      "paths": [
+        "datasets/pigeonpea_disease_clean_candidate_v1/test/Leaf_webber/leaf_webber_test_0045.jpg",
+        "datasets/pigeonpea_disease_final/test/Leaf_webber/leaf_webber_test_0045.jpg",
+        "datasets/tur_image_validator/val/Tur/Leaf_webber_0003.jpg",
+        "datasets/tur_image_validator_v2/train/Tur/new_tur_0156.jpg",
+        "datasets/tur_image_validator_v2/val/Tur/Leaf_webber_0003.jpg",
+        "datasets/tur_image_validator_v3/train/Tur/new_tur_0156.jpg",
+        "datasets/tur_image_validator_v3/val/Tur/Leaf_webber_0003.jpg"
+      ]
+    }
+  ]
+}
