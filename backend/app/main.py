@@ -1,7 +1,9 @@
 import time
 import logging
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.api.v1 import api_router
 from app.core.config import settings
 
@@ -28,6 +30,29 @@ app = FastAPI(
     docs_url=f"{settings.API_V1_STR}/docs" if docs_enabled else None,
     redoc_url=f"{settings.API_V1_STR}/redoc" if docs_enabled else None,
 )
+
+@app.exception_handler(Exception)
+async def generic_exception_handler(_request: Request, exc: Exception):
+    """
+    Masks unhandled internal server exceptions to prevent leaking VPS paths,
+    tracebacks, or database schema internals to the public internet.
+    """
+    if isinstance(exc, (HTTPException, StarletteHTTPException)):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"detail": exc.detail},
+            headers=getattr(exc, "headers", None),
+        )
+    logger.error("Internal unhandled error: %s", exc, exc_info=True)
+    if settings.ENVIRONMENT == "production" and not settings.DEBUG:
+        return JSONResponse(
+            status_code=500,
+            content={"detail": "An internal server error occurred. Please contact support."},
+        )
+    return JSONResponse(
+        status_code=500,
+        content={"detail": f"Internal Server Error: {str(exc)}"},
+    )
 
 @app.middleware("http")
 async def log_incoming_requests(request: Request, call_next):

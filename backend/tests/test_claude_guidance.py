@@ -372,3 +372,235 @@ def test_claude_guidance_with_farmer_voice_transcription():
         assert "farmer_spoken_observation" in user_message_content
         assert "पानांवर काळे डाग पडले आहेत" in user_message_content
 
+
+# ── Phase B: Multimodal Image + Transcript Focused Tests ─────────────────────
+
+def test_claude_multimodal_image_and_transcript_same_request(tmp_path):
+    """Verify that original plant image block and farmer voice transcript appear together in the same Claude user message."""
+    import json
+    from app.database.models.tur_voice_report import TurVoiceReport
+    import app.services.storage_service as storage_service
+
+    # Create dummy image in a temporary test upload dir
+    test_image_dir = tmp_path / "scans"
+    test_image_dir.mkdir(parents=True, exist_ok=True)
+    dummy_img = test_image_dir / "test_leaf.jpg"
+    dummy_img.write_bytes(b"\xff\xd8\xff\xe0\x00\x10JFIF" + b"fake_jpeg_leaf_data")
+
+    db = MagicMock()
+    scan = mock_scan(scan_id=99, disease_name="Leaf_Spot", confidence=0.85)
+    scan.image_path = "scans/test_leaf.jpg"
+    scan.image_content_type = "image/jpeg"
+    rec = mock_rec(disease_name="Leaf_Spot")
+
+    mock_voice = MagicMock(spec=TurVoiceReport)
+    mock_voice.transcription = "पानांवर पिवळे डाग पडले आहेत आणि पाने गळत आहेत"
+
+    db.scalar.side_effect = [rec, mock_voice]
+
+    mock_anthropic = MagicMock()
+    mock_response = MagicMock()
+    mock_block = MagicMock()
+    mock_block.text = json.dumps({
+        "disease_explanation": "पानांवरील ठिपके आणि शेतकऱ्याच्या वर्णनानुसार पिवळे डाग स्पष्ट दिसत आहेत.",
+        "farmer_action": [
+            "Mancozeb 75 WP फवारणी करा.",
+            "एकापेक्षा जास्त औषधे एकत्र मिसळण्यापूर्वी उत्पादनाच्या label वरील सूचना किंवा अधिकृत कृषी शिफारस तपासा."
+        ]
+    })
+    mock_response.content = [mock_block]
+    mock_anthropic.messages.create.return_value = mock_response
+
+    with patch.object(storage_service, "UPLOAD_DIR", tmp_path), \
+         patch.object(settings, "ANTHROPIC_API_KEY", "test_key"), \
+         patch("anthropic.Anthropic", return_value=mock_anthropic):
+        
+        res = generate_claude_guidance(db, scan, language="mr")
+        
+        assert res.status == "success"
+        assert res.spray_guidance_available is True
+        assert res.ai_guidance_available is True
+
+        # 1. Exactly one Claude request must occur
+        assert mock_anthropic.messages.create.call_count == 1
+
+        # 2. Extract call arguments
+        call_kwargs = mock_anthropic.messages.create.call_args[1]
+        user_content = call_kwargs["messages"][0]["content"]
+
+        # 3. Must be a multimodal list with both image and text blocks
+        assert isinstance(user_content, list)
+        assert len(user_content) == 2
+
+        image_block = user_content[0]
+        text_block = user_content[1]
+
+        assert image_block["type"] == "image"
+        assert image_block["source"]["type"] == "base64"
+        assert image_block["source"]["media_type"] == "image/jpeg"
+        assert len(image_block["source"]["data"]) > 0
+
+        assert text_block["type"] == "text"
+        assert "farmer_spoken_observation" in text_block["text"]
+        assert "पानांवर पिवळे डाग पडले आहेत" in text_block["text"]
+        assert "Leaf_Spot" in text_block["text"]
+
+
+def test_claude_image_only_workflow_without_transcript(tmp_path):
+    """Verify that when farmer skips voice recording, the image block is still sent with disease data."""
+    import json
+    import app.services.storage_service as storage_service
+
+    test_image_dir = tmp_path / "scans"
+    test_image_dir.mkdir(parents=True, exist_ok=True)
+    dummy_img = test_image_dir / "skipped_voice_leaf.png"
+    dummy_img.write_bytes(b"\x89PNG\r\n\x1a\n" + b"fake_png_data")
+
+    db = MagicMock()
+    scan = mock_scan(scan_id=101, disease_name="Leaf_Spot", confidence=0.88)
+    scan.image_path = "scans/skipped_voice_leaf.png"
+    scan.image_content_type = "image/png"
+    rec = mock_rec(disease_name="Leaf_Spot")
+
+    # Second db.scalar returns None (no voice report for this scan)
+    db.scalar.side_effect = [rec, None]
+
+    mock_anthropic = MagicMock()
+    mock_response = MagicMock()
+    mock_block = MagicMock()
+    mock_block.text = json.dumps({
+        "disease_explanation": "Detected Leaf Spot on the leaf photo.",
+        "farmer_action": [
+            "Apply Mancozeb 75 WP.",
+            "Before mixing more than one product, check the product label or verified agricultural recommendation."
+        ]
+    })
+    mock_response.content = [mock_block]
+    mock_anthropic.messages.create.return_value = mock_response
+
+    with patch.object(storage_service, "UPLOAD_DIR", tmp_path), \
+         patch.object(settings, "ANTHROPIC_API_KEY", "test_key"), \
+         patch("anthropic.Anthropic", return_value=mock_anthropic):
+        
+        res = generate_claude_guidance(db, scan, language="en")
+        assert res.status == "success"
+
+        call_kwargs = mock_anthropic.messages.create.call_args[1]
+        user_content = call_kwargs["messages"][0]["content"]
+
+        assert isinstance(user_content, list)
+        assert len(user_content) == 2
+        assert user_content[0]["type"] == "image"
+        assert user_content[0]["source"]["media_type"] == "image/png"
+        assert "farmer_spoken_observation" not in user_content[1]["text"]
+
+
+def test_claude_missing_image_file_fails_safely():
+    """Verify that if the image file is missing on disk, guidance falls back safely without crashing."""
+    import json
+    db = MagicMock()
+    scan = mock_scan(scan_id=102, disease_name="Leaf_Spot", confidence=0.78)
+    scan.image_path = "scans/deleted_or_missing.jpg"
+    rec = mock_rec(disease_name="Leaf_Spot")
+    db.scalar.side_effect = [rec, None]
+
+    mock_anthropic = MagicMock()
+    mock_response = MagicMock()
+    mock_block = MagicMock()
+    mock_block.text = json.dumps({
+        "disease_explanation": "Text only analysis of Leaf Spot.",
+        "farmer_action": [
+            "Action 1",
+            "Before mixing more than one product, check the product label or verified agricultural recommendation."
+        ]
+    })
+    mock_response.content = [mock_block]
+    mock_anthropic.messages.create.return_value = mock_response
+
+    with patch.object(settings, "ANTHROPIC_API_KEY", "test_key"), \
+         patch("anthropic.Anthropic", return_value=mock_anthropic):
+        
+        res = generate_claude_guidance(db, scan, language="en")
+        assert res.status == "success"
+        # Warning should be noted in response
+        assert any("Scan image file was not found on server disk" in w for w in res.warnings)
+
+        # Call content falls back to text string
+        call_kwargs = mock_anthropic.messages.create.call_args[1]
+        user_content = call_kwargs["messages"][0]["content"]
+        assert isinstance(user_content, str)
+
+
+def test_claude_unsupported_image_format_rejected(tmp_path):
+    """Verify that unsupported image formats (e.g. BMP/TIFF) are rejected and fall back safely."""
+    import json
+    import app.services.storage_service as storage_service
+
+    test_image_dir = tmp_path / "scans"
+    test_image_dir.mkdir(parents=True, exist_ok=True)
+    dummy_img = test_image_dir / "unsupported_leaf.bmp"
+    dummy_img.write_bytes(b"BM" + b"fake_bmp_data")
+
+    db = MagicMock()
+    scan = mock_scan(scan_id=103, disease_name="Leaf_Spot", confidence=0.79)
+    scan.image_path = "scans/unsupported_leaf.bmp"
+    scan.image_content_type = "image/bmp"
+    rec = mock_rec(disease_name="Leaf_Spot")
+    db.scalar.side_effect = [rec, None]
+
+    mock_anthropic = MagicMock()
+    mock_response = MagicMock()
+    mock_block = MagicMock()
+    mock_block.text = json.dumps({
+        "disease_explanation": "Leaf Spot analysis without unsupported image format.",
+        "farmer_action": [
+            "Action 1",
+            "Before mixing more than one product, check the product label or verified agricultural recommendation."
+        ]
+    })
+    mock_response.content = [mock_block]
+    mock_anthropic.messages.create.return_value = mock_response
+
+    with patch.object(storage_service, "UPLOAD_DIR", tmp_path), \
+         patch.object(settings, "ANTHROPIC_API_KEY", "test_key"), \
+         patch("anthropic.Anthropic", return_value=mock_anthropic):
+        
+        res = generate_claude_guidance(db, scan, language="en")
+        assert res.status == "success"
+        assert any("is not supported for cloud multimodal analysis" in w for w in res.warnings)
+
+        call_kwargs = mock_anthropic.messages.create.call_args[1]
+        user_content = call_kwargs["messages"][0]["content"]
+        assert isinstance(user_content, str)
+
+
+def test_claude_path_traversal_image_path_rejected():
+    """Verify that attempted path traversal in image_path is safely rejected."""
+    import json
+    db = MagicMock()
+    scan = mock_scan(scan_id=104, disease_name="Leaf_Spot", confidence=0.80)
+    scan.image_path = "../../../etc/shadow"
+    rec = mock_rec(disease_name="Leaf_Spot")
+    db.scalar.side_effect = [rec, None]
+
+    mock_anthropic = MagicMock()
+    mock_response = MagicMock()
+    mock_block = MagicMock()
+    mock_block.text = json.dumps({
+        "disease_explanation": "Safe analysis.",
+        "farmer_action": [
+            "Action 1",
+            "Before mixing more than one product, check the product label or verified agricultural recommendation."
+        ]
+    })
+    mock_response.content = [mock_block]
+    mock_anthropic.messages.create.return_value = mock_response
+
+    with patch.object(settings, "ANTHROPIC_API_KEY", "test_key"), \
+         patch("anthropic.Anthropic", return_value=mock_anthropic):
+        
+        res = generate_claude_guidance(db, scan, language="en")
+        assert res.status == "success"
+        assert any("rejected by security guard" in w for w in res.warnings)
+
+

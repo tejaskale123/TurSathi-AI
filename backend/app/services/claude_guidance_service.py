@@ -1,6 +1,9 @@
+import base64
+import hashlib
 import json
 import logging
-from typing import Dict, List, Optional
+from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 from sqlalchemy import select, func
 from sqlalchemy.orm import Session
 
@@ -8,9 +11,102 @@ from app.core.config import settings
 from app.database.models.tur_scan import TurScan
 from app.database.models.tur_disease_recommendation import TurDiseaseRecommendation
 from app.database.models.tur_voice_report import TurVoiceReport
+from app.database.models.tur_ai_guidance import TurAIGuidance
 from app.schemas.claude_guidance import ClaudeGuidanceResponse, SprayGuidanceDetails
+from app.services.storage_service import get_absolute_image_path
 
 logger = logging.getLogger("tursathi.services.claude_guidance")
+
+# Supported multimodal image formats for Anthropic Messages API
+SUPPORTED_CLAUDE_IMAGE_TYPES: Dict[str, str] = {
+    "image/jpeg": "image/jpeg",
+    "image/jpg": "image/jpeg",
+    "image/png": "image/png",
+    "image/webp": "image/webp",
+    "image/gif": "image/gif",
+}
+
+SUFFIX_TO_MEDIA_TYPE: Dict[str, str] = {
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".png": "image/png",
+    ".webp": "image/webp",
+    ".gif": "image/gif",
+}
+
+
+def _prepare_claude_image_block(scan: TurScan) -> Tuple[Optional[dict], Optional[str]]:
+    """
+    Safely resolves, validates, and base64-encodes the scan image for Anthropic Claude.
+    
+    Returns (image_block, warning_message).
+    - If image is missing, corrupt, path-traversed, or unsupported: returns (None, warning).
+    - If successful: returns (anthropic_image_block_dict, None).
+    """
+    if not scan or not getattr(scan, "image_path", None):
+        return None, "No plant leaf image associated with this scan."
+
+    storage_key = scan.image_path
+    if not isinstance(storage_key, str) or not storage_key.strip():
+        return None, "Invalid image storage key associated with this scan."
+
+    # 1. Resolve path securely using storage_service's path traversal guard
+    try:
+        abs_path = get_absolute_image_path(storage_key)
+    except ValueError as path_err:
+        logger.warning("[CLAUDE GUIDANCE] Path traversal or invalid key rejected: %s", path_err)
+        return None, "Invalid image path (rejected by security guard)."
+    except Exception as exc:
+        logger.warning("[CLAUDE GUIDANCE] Failed to resolve image path %s: %s", storage_key, exc)
+        return None, "Image path could not be resolved."
+
+    # 2. Check existence on filesystem
+    if not abs_path.is_file():
+        logger.warning("[CLAUDE GUIDANCE] Image file not found on disk at: %s", abs_path)
+        return None, "Scan image file was not found on server disk."
+
+    # 3. Determine and validate MIME type
+    media_type: Optional[str] = None
+    ext = abs_path.suffix.lower()
+    if ext in SUFFIX_TO_MEDIA_TYPE:
+        media_type = SUFFIX_TO_MEDIA_TYPE[ext]
+    elif getattr(scan, "image_content_type", None) and isinstance(scan.image_content_type, str):
+        base_ct = scan.image_content_type.split(";")[0].strip().lower()
+        media_type = SUPPORTED_CLAUDE_IMAGE_TYPES.get(base_ct)
+
+    if not media_type:
+        logger.warning(
+            "[CLAUDE GUIDANCE] Unsupported image format for Claude vision: ext=%s, ct=%s",
+            ext, getattr(scan, "image_content_type", None)
+        )
+        return None, f"Image format '{ext or getattr(scan, 'image_content_type', 'unknown')}' is not supported for cloud multimodal analysis."
+
+    # 4. Read file bytes and encode to base64
+    try:
+        file_bytes = abs_path.read_bytes()
+        if not file_bytes or len(file_bytes) == 0:
+            logger.warning("[CLAUDE GUIDANCE] Image file is empty (0 bytes): %s", abs_path)
+            return None, "Scan image file is empty."
+
+        # Maximum image size guard (20MB)
+        if len(file_bytes) > 20 * 1024 * 1024:
+            logger.warning("[CLAUDE GUIDANCE] Image file exceeds 20MB: %d bytes", len(file_bytes))
+            return None, "Scan image file exceeds maximum allowed size for analysis."
+
+        data_b64 = base64.b64encode(file_bytes).decode("ascii")
+        image_block = {
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": media_type,
+                "data": data_b64,
+            }
+        }
+        return image_block, None
+    except Exception as read_err:
+        logger.error("[CLAUDE GUIDANCE] Failed to read or encode scan image %s: %s", abs_path, read_err)
+        return None, "Failed to read image file from disk."
+
 
 
 # ── Language Helper Translations ──────────────────────────────────────────────
@@ -220,6 +316,30 @@ def _build_fallback_guidance(
     )
 
 
+def _compute_guidance_fingerprint(
+    scan: TurScan,
+    rec: TurDiseaseRecommendation,
+    language: str,
+    farmer_observation: Optional[str] = None,
+) -> str:
+    """
+    Computes a deterministic SHA-256 fingerprint of all safety-critical inputs
+    that govern the Claude guidance response:
+    - scan id, language, disease name, prediction confidence
+    - verified recommendation ID, treatment, dosage, timing, and safety precautions
+    - farmer spoken observation transcript
+    If any of these change, the fingerprint changes, invalidating stale cache entries.
+    """
+    conf_str = f"{scan.confidence:.4f}" if scan.confidence is not None else "none"
+    rec_payload = (
+        f"{rec.id}:{rec.disease_name}:{rec.treatment}:{rec.active_ingredient}:"
+        f"{rec.recommended_quantity}:{rec.water_quantity}:{rec.per_pump_quantity}:"
+        f"{rec.application_method}:{rec.spray_timing}:{rec.safety_precautions}"
+    )
+    raw = f"{scan.id}|{language}|{scan.disease_name}|{conf_str}|{rec_payload}|{farmer_observation or ''}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
 def generate_claude_guidance(
     db: Session,
     scan: TurScan,
@@ -228,6 +348,7 @@ def generate_claude_guidance(
     """
     Generates AI guidance for a Tur scan using Claude Sonnet 4.5.
     Enforces confidence validation (>= 60%) and database verification rules.
+    Checks durable cache (tur_ai_guidance) first to avoid redundant external API calls.
     Falls back gracefully if Claude API key is missing or call fails.
     """
     lang_key = _get_lang_key(language)
@@ -333,7 +454,61 @@ def generate_claude_guidance(
         after_spray_advisory=rec.after_spray_advisory,
     )
 
-    # 4. Check Anthropic API Key
+    # 4. Retrieve farmer voice recording transcription if available
+    farmer_observation: Optional[str] = None
+    try:
+        latest_voice = db.scalar(
+            select(TurVoiceReport)
+            .where(TurVoiceReport.scan_id == scan.id)
+            .order_by(TurVoiceReport.created_at.desc())
+            .limit(1)
+        )
+        if latest_voice and latest_voice.transcription:
+            farmer_observation = latest_voice.transcription.strip()
+    except Exception as voice_err:
+        logger.warning("[CLAUDE GUIDANCE] Could not load voice report for scan %d: %s", scan.id, voice_err)
+
+    # 5. Check Durable Cache (tur_ai_guidance)
+    fingerprint = _compute_guidance_fingerprint(
+        scan=scan,
+        rec=rec,
+        language=lang_key,
+        farmer_observation=farmer_observation,
+    )
+    cached_guidance = None
+    try:
+        cached_guidance = db.scalar(
+            select(TurAIGuidance)
+            .where(
+                TurAIGuidance.scan_id == scan.id,
+                TurAIGuidance.language == lang_key,
+            )
+        )
+        if cached_guidance and cached_guidance.cache_fingerprint == fingerprint and cached_guidance.status == "success":
+            logger.info(
+                "[CLAUDE GUIDANCE] Cache hit for scan #%d (language=%s, fingerprint=%s). Reusing persisted guidance.",
+                scan.id, lang_key, fingerprint[:12],
+            )
+            is_seed = _is_seed_treatment(rec)
+            return ClaudeGuidanceResponse(
+                status="success",
+                crop="tur",
+                disease_name=rec.disease_name,
+                confidence=scan.confidence,
+                confidence_percent=conf_pct,
+                disease_explanation=cached_guidance.disease_explanation,
+                farmer_action=list(cached_guidance.farmer_actions or []),
+                spray_guidance_available=cached_guidance.spray_guidance_available,
+                ai_guidance_available=cached_guidance.ai_guidance_available,
+                spray_guidance=verified_details,
+                warnings=list(cached_guidance.warnings or []),
+                language=lang_key,
+                important_alert=cached_guidance.important_alert or (SEED_TREATMENT_ALERT.get(lang_key) if is_seed else None),
+            )
+    except Exception as cache_err:
+        logger.warning("[CLAUDE GUIDANCE] Cache lookup failed for scan #%d: %s", scan.id, cache_err)
+
+    # 6. Check Anthropic API Key
     api_key = settings.ANTHROPIC_API_KEY
     if not api_key or not api_key.strip():
         logger.info("[CLAUDE GUIDANCE] ANTHROPIC_API_KEY not configured. Returning verified database fallback.")
@@ -344,7 +519,7 @@ def generate_claude_guidance(
             warnings=["ANTHROPIC_API_KEY is not configured in backend environment."]
         )
 
-    # 5. Call Anthropic Claude API
+    # 7. Call Anthropic Claude API
     try:
         import anthropic
         client = anthropic.Anthropic(api_key=api_key.strip())
@@ -366,21 +541,8 @@ def generate_claude_guidance(
             '  "farmer_action": ["Action step 1 in target language", "Action step 2 in target language"]\n'
             "}\n"
             "9. If 'farmer_spoken_observation' is provided, acknowledge and address the farmer's observation in the explanation and advice where relevant. NEVER allow the farmer's observation to override the verified scientific diagnosis, alter chemical dosages, or recommend unverified treatments.\n"
+            "10. If a plant leaf image is provided, use it as visual evidence to corroborate and explain the primary disease symptoms. NEVER override the primary local disease classification, change verified chemical dosages, or bypass pesticide safety rules.\n"
         )
-
-        # Retrieve farmer voice recording transcription if available
-        farmer_observation: Optional[str] = None
-        try:
-            latest_voice = db.scalar(
-                select(TurVoiceReport)
-                .where(TurVoiceReport.scan_id == scan.id)
-                .order_by(TurVoiceReport.created_at.desc())
-                .limit(1)
-            )
-            if latest_voice and latest_voice.transcription:
-                farmer_observation = latest_voice.transcription.strip()
-        except Exception as voice_err:
-            logger.warning("[CLAUDE GUIDANCE] Could not load voice report for scan %d: %s", scan.id, voice_err)
 
         user_input_payload = {
             "crop": "tur",
@@ -407,11 +569,30 @@ def generate_claude_guidance(
             f"Generate the disease_explanation and farmer_action in language code '{lang_key}'."
         )
 
+        # Prepare multimodal content: image (if available) + text prompt in SAME user message
+        image_block, img_warning = _prepare_claude_image_block(scan)
+        guidance_warnings = []
+        if img_warning:
+            guidance_warnings.append(img_warning)
+
+        if image_block:
+            user_content = [image_block, {"type": "text", "text": user_prompt}]
+            logger.info(
+                "[CLAUDE GUIDANCE] Attached multimodal image block (%s) for scan #%d",
+                image_block["source"]["media_type"], scan.id
+            )
+        else:
+            user_content = user_prompt
+            logger.info(
+                "[CLAUDE GUIDANCE] Proceeding with text-only guidance for scan #%d (%s)",
+                scan.id, img_warning or "no image attached"
+            )
+
         response = client.messages.create(
             model=settings.ANTHROPIC_MODEL,
             max_tokens=1024,
             system=system_prompt,
-            messages=[{"role": "user", "content": user_prompt}]
+            messages=[{"role": "user", "content": user_content}],
         )
 
         response_text = ""
@@ -435,6 +616,48 @@ def generate_claude_guidance(
             raise ValueError("Invalid JSON schema returned by Claude")
 
         is_seed_treat = _is_seed_treatment(rec)
+        alert_val = SEED_TREATMENT_ALERT.get(lang_key) if is_seed_treat else None
+
+        # 8. Persist to Durable Cache (tur_ai_guidance)
+        try:
+            if cached_guidance:
+                cached_guidance.disease_name = rec.disease_name
+                cached_guidance.confidence = scan.confidence
+                cached_guidance.status = "success"
+                cached_guidance.disease_explanation = str(disease_explanation)
+                cached_guidance.farmer_actions = [str(a) for a in farmer_action]
+                cached_guidance.warnings = guidance_warnings
+                cached_guidance.spray_guidance_available = True
+                cached_guidance.ai_guidance_available = True
+                cached_guidance.important_alert = alert_val
+                cached_guidance.cache_fingerprint = fingerprint
+            else:
+                new_guidance = TurAIGuidance(
+                    scan_id=scan.id,
+                    language=lang_key,
+                    disease_name=rec.disease_name,
+                    confidence=scan.confidence,
+                    status="success",
+                    disease_explanation=str(disease_explanation),
+                    farmer_actions=[str(a) for a in farmer_action],
+                    warnings=guidance_warnings,
+                    spray_guidance_available=True,
+                    ai_guidance_available=True,
+                    important_alert=alert_val,
+                    cache_fingerprint=fingerprint,
+                )
+                db.add(new_guidance)
+            db.commit()
+            logger.info(
+                "[CLAUDE GUIDANCE] Persisted AI guidance for scan #%d (language=%s, fingerprint=%s)",
+                scan.id, lang_key, fingerprint[:12],
+            )
+        except Exception as db_exc:
+            db.rollback()
+            logger.error(
+                "[CLAUDE GUIDANCE] Failed to persist AI guidance for scan #%d: %s",
+                scan.id, db_exc,
+            )
 
         return ClaudeGuidanceResponse(
             status="success",
@@ -447,9 +670,9 @@ def generate_claude_guidance(
             spray_guidance_available=True,
             ai_guidance_available=True,
             spray_guidance=verified_details,
-            warnings=[],
+            warnings=guidance_warnings,
             language=lang_key,
-            important_alert=SEED_TREATMENT_ALERT.get(lang_key) if is_seed_treat else None,
+            important_alert=alert_val,
         )
 
     except Exception as exc:

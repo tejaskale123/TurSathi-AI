@@ -94,6 +94,14 @@ class TurScan(Base):
         lazy="select",
     )
 
+    # Back-reference to persisted AI guidance records linked to this scan
+    ai_guidance_records: Mapped[list["TurAIGuidance"]] = relationship(  # noqa: F821
+        "TurAIGuidance",
+        back_populates="scan",
+        cascade="all, delete-orphan",
+        lazy="select",
+    )
+
     def __repr__(self) -> str:
         return (
             f"<TurScan id={self.id} user_id={self.user_id} "

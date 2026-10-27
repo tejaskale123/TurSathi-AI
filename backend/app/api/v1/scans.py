@@ -35,6 +35,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, Upload
 from sqlalchemy.orm import Session
 
 from app.api.v1.auth import get_current_user
+from app.database.models.tur_scan import TurScan
 from app.database.models.user import User
 from app.database.session import get_db
 from app.ml.tur_image_gate import get_tur_image_gate
@@ -44,6 +45,7 @@ from app.schemas.scan import (
     ScanDetailResponse,
     ScanListResponse,
     VoiceReportCreateResponse,
+    VoiceReportSummary,
 )
 from app.services.scan_service import (
     create_scan_with_image,
@@ -123,6 +125,56 @@ async def upload_scan(
     )
 
 
+def _build_scan_detail_response(scan: TurScan) -> ScanDetailResponse:
+    """
+    Constructs a backward-compatible ScanDetailResponse.
+    Safely includes the latest voice transcript and safe metadata without exposing internal file paths.
+    """
+    voice_reports_sorted = (
+        sorted(scan.voice_reports, key=lambda vr: vr.created_at, reverse=True)
+        if getattr(scan, "voice_reports", None) else []
+    )
+    latest_transcript = (
+        voice_reports_sorted[0].transcription
+        if voice_reports_sorted and voice_reports_sorted[0].transcription
+        else None
+    )
+    latest_language = (
+        voice_reports_sorted[0].language
+        if voice_reports_sorted
+        else None
+    )
+    safe_voice_reports = [
+        VoiceReportSummary(
+            id=vr.id,
+            language=vr.language,
+            duration=vr.duration,
+            transcription=vr.transcription,
+            created_at=vr.created_at,
+        )
+        for vr in voice_reports_sorted
+    ]
+
+    return ScanDetailResponse(
+        scan_id=scan.id,
+        user_id=scan.user_id,
+        crop=scan.crop,
+        status=scan.status,
+        image_filename=scan.image_filename,
+        image_content_type=scan.image_content_type,
+        image_size=scan.image_size,
+        disease_name=scan.disease_name,
+        confidence=scan.confidence,
+        severity=scan.severity,
+        prediction_status=scan.prediction_status,
+        created_at=scan.created_at,
+        updated_at=scan.updated_at,
+        transcription=latest_transcript,
+        voice_language=latest_language,
+        voice_reports=safe_voice_reports,
+    )
+
+
 @router.get(
     "",
     response_model=ScanListResponse,
@@ -147,6 +199,7 @@ def list_scans(
     - Strictly scoped to current_user.id (cross-user access prevented).
     - Ordered newest-first (created_at DESC, id DESC).
     - Supports both skip/limit and page/limit pagination.
+    - Includes voice transcript history safely.
     """
     if page is not None:
         effective_skip = (page - 1) * limit
@@ -164,24 +217,7 @@ def list_scans(
 
     total_pages = max(1, (total + limit - 1) // limit) if total > 0 else 1
 
-    item_responses = [
-        ScanDetailResponse(
-            scan_id=scan.id,
-            user_id=scan.user_id,
-            crop=scan.crop,
-            status=scan.status,
-            image_filename=scan.image_filename,
-            image_content_type=scan.image_content_type,
-            image_size=scan.image_size,
-            disease_name=scan.disease_name,
-            confidence=scan.confidence,
-            severity=scan.severity,
-            prediction_status=scan.prediction_status,
-            created_at=scan.created_at,
-            updated_at=scan.updated_at,
-        )
-        for scan in items
-    ]
+    item_responses = [_build_scan_detail_response(scan) for scan in items]
 
     return ScanListResponse(
         total=total,
@@ -206,24 +242,10 @@ def get_scan(
     """
     Returns the full TurScan record for the given scan_id.
     Enforces ownership — only the owner can retrieve their scan.
+    Safely includes voice transcript and metadata without internal paths.
     """
     scan = get_scan_for_user(db=db, scan_id=scan_id, user_id=current_user.id)
-
-    return ScanDetailResponse(
-        scan_id=scan.id,
-        user_id=scan.user_id,
-        crop=scan.crop,
-        status=scan.status,
-        image_filename=scan.image_filename,
-        image_content_type=scan.image_content_type,
-        image_size=scan.image_size,
-        disease_name=scan.disease_name,
-        confidence=scan.confidence,
-        severity=scan.severity,
-        prediction_status=scan.prediction_status,
-        created_at=scan.created_at,
-        updated_at=scan.updated_at,
-    )
+    return _build_scan_detail_response(scan)
 
 
 @router.post(

@@ -27,9 +27,23 @@ class ScanCreateResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
+class VoiceReportSummary(BaseModel):
+    """
+    Safe public summary of a farmer voice report.
+    Never exposes internal filesystem paths or storage keys.
+    """
+    id: int
+    language: Optional[str] = None
+    duration: Optional[float] = None
+    transcription: Optional[str] = None
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class ScanDetailResponse(BaseModel):
     """
-    Full scan detail including prediction fields (nullable until model runs).
+    Full scan detail including prediction fields and optional voice transcript history.
     """
     scan_id: int
     user_id: int
@@ -44,6 +58,10 @@ class ScanDetailResponse(BaseModel):
     prediction_status: str
     created_at: datetime
     updated_at: datetime
+    # Phase G2 additions: safe voice transcript & metadata
+    transcription: Optional[str] = None
+    voice_language: Optional[str] = None
+    voice_reports: list[VoiceReportSummary] = Field(default_factory=list)
 
     model_config = ConfigDict(from_attributes=True)
 

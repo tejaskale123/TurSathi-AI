@@ -42,6 +42,21 @@ export const getBaseUrl = (): string => {
 
 export const API_BASE_URL = getBaseUrl();
 
+export const getApiKey = (): string | undefined => {
+  return process.env.EXPO_PUBLIC_API_KEY;
+};
+
+export const getHeaders = (customHeaders?: Record<string, string>): Record<string, string> => {
+  const headers: Record<string, string> = {
+    ...customHeaders,
+  };
+  const apiKey = getApiKey();
+  if (apiKey) {
+    headers['X-API-Key'] = apiKey;
+  }
+  return headers;
+};
+
 export interface UserResponse {
   id: string;
   full_name: string;

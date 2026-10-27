@@ -13,13 +13,13 @@ import logging
 from typing import Optional
 
 from fastapi import HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.database.models.tur_scan import TurScan
 from app.database.models.tur_voice_report import TurVoiceReport
 from app.services.storage_service import (
+    get_absolute_image_path,
     save_scan_image,
-    save_voice_report,
     validate_audio_upload,
     validate_image_upload,
 )
@@ -43,6 +43,7 @@ def create_scan_with_image(
 
     Raises HTTPException for all validation and storage errors.
     The scan record is created with status="received" and prediction_status="pending".
+    If database commit fails, rolls back the session and cleans up the newly written image.
     """
     # 1. Validate file (raises ValueError on failure)
     try:
@@ -78,9 +79,32 @@ def create_scan_with_image(
         status="received",
         prediction_status="pending",
     )
-    db.add(scan)
-    db.commit()
-    db.refresh(scan)
+
+    try:
+        db.add(scan)
+        db.commit()
+        db.refresh(scan)
+    except Exception as exc:
+        db.rollback()
+        logger.error(
+            "[SCAN_SERVICE] Database commit failed for TurScan creation (user_id=%d): %s",
+            user_id, exc,
+        )
+        # Clean up only the exact newly created image file belonging to this failed operation
+        try:
+            abs_image_path = get_absolute_image_path(storage_key)
+            if abs_image_path.is_file():
+                abs_image_path.unlink()
+                logger.info("[SCAN_SERVICE] Cleaned up orphaned scan image: %s", abs_image_path)
+        except Exception as cleanup_exc:
+            logger.error(
+                "[SCAN_SERVICE] Failed to clean up orphaned scan image %s after DB failure: %s",
+                storage_key, cleanup_exc,
+            )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Scan record could not be saved. Please try again.",
+        )
 
     logger.info(
         "[SCAN_SERVICE] TurScan #%d created for user_id=%d crop=%s size=%d",
@@ -130,6 +154,7 @@ def list_scans_for_user(
     total = base_query.count()
     items = (
         base_query
+        .options(joinedload(TurScan.voice_reports))
         .order_by(TurScan.created_at.desc(), TurScan.id.desc())
         .offset(skip)
         .limit(limit)
@@ -151,10 +176,15 @@ def create_voice_report(
     duration: Optional[float] = None,
 ) -> TurVoiceReport:
     """
-    Validates, stores the voice recording, and creates a TurVoiceReport record.
+    Validates the voice recording, transcribes audio in-memory via Sarvam AI,
+    and creates a TurVoiceReport record with zero raw audio disk retention.
 
-    Verifies scan ownership before linking the voice report.
-    Raises HTTPException for validation and storage errors.
+    - Verifies scan ownership before linking the voice report.
+    - Validates audio file type and size.
+    - Transcribes audio directly from in-memory bytes.
+    - Persists transcript and metadata to PostgreSQL with audio_path=None
+      (privacy protection & VPS disk preservation).
+    - Handles database transaction errors safely with rollback.
     """
     # 1. Verify scan exists and belongs to this user
     scan = get_scan_for_user(db=db, scan_id=scan_id, user_id=user_id)
@@ -168,21 +198,8 @@ def create_voice_report(
             detail=str(exc),
         )
 
-    # 3. Persist to filesystem
-    try:
-        storage_key, stored_filename = save_voice_report(
-            file_bytes=file_bytes,
-            content_type=content_type,
-            original_filename=original_filename,
-        )
-    except Exception as exc:
-        logger.error("[SCAN_SERVICE] Failed to store voice report: %s", exc)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Voice recording could not be stored. Please try again.",
-        )
-
-    # 4. Transcribe audio using Sarvam AI (graceful fallback on failure)
+    # 3. Transcribe audio in-memory using Sarvam AI (graceful fallback on failure)
+    # Operates directly on file_bytes; raw audio is NEVER written to disk
     transcription = transcribe_audio_bytes(
         file_bytes=file_bytes,
         original_filename=original_filename,
@@ -190,11 +207,11 @@ def create_voice_report(
         language=language,
     )
 
-    # 5. Create database record
+    # 4. Create database record with audio_path=None (Zero-Retention)
     voice_report = TurVoiceReport(
         scan_id=scan.id,
         user_id=user_id,
-        audio_path=storage_key,
+        audio_path=None,  # Zero-Retention: Raw audio is not retained on disk
         audio_filename=original_filename,
         audio_content_type=content_type,
         audio_size=len(file_bytes),
@@ -202,12 +219,25 @@ def create_voice_report(
         duration=duration,
         transcription=transcription,
     )
-    db.add(voice_report)
-    db.commit()
-    db.refresh(voice_report)
+
+    try:
+        db.add(voice_report)
+        db.commit()
+        db.refresh(voice_report)
+    except Exception as exc:
+        db.rollback()
+        logger.error(
+            "[SCAN_SERVICE] Database commit failed for voice report (scan_id=%d, user_id=%d): %s",
+            scan_id, user_id, exc,
+        )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Voice report record could not be saved. Please try again.",
+        )
 
     logger.info(
-        "[SCAN_SERVICE] TurVoiceReport #%d created for scan_id=%d user_id=%d language=%s transcribed=%s",
+        "[SCAN_SERVICE] TurVoiceReport #%d created (zero-retention) for scan_id=%d user_id=%d language=%s transcribed=%s",
         voice_report.id, scan_id, user_id, language, bool(transcription),
     )
     return voice_report
+

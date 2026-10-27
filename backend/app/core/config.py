@@ -13,6 +13,7 @@ class Settings(BaseSettings):
 
     # Security & JWT Configuration
     SECRET_KEY: str = "default_unsafe_secret"
+    API_KEY: Optional[str] = None
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
 

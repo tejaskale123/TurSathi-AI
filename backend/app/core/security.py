@@ -65,3 +65,33 @@ def decode_access_token(token: str) -> Optional[dict[str, Any]]:
         return payload
     except Exception:
         return None
+
+
+import secrets
+from fastapi import HTTPException, Security, status
+from fastapi.security import APIKeyHeader
+
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+
+def verify_api_key(api_key: Optional[str] = Security(api_key_header)) -> bool:
+    """
+    Constant-time API key verification using secrets.compare_digest.
+    If API_KEY is not configured in settings/env, allows open access (e.g. dev/test mode).
+    If API_KEY is configured, enforces valid X-API-Key header.
+    """
+    configured_key = (settings.API_KEY or "").strip()
+    if not configured_key:
+        return True  # If API_KEY not configured, allow access
+    if not api_key:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Missing required authentication header: X-API-Key",
+            headers={"WWW-Authenticate": "ApiKey"},
+        )
+    if not secrets.compare_digest(api_key, configured_key):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Invalid API key provided",
+        )
+    return True
