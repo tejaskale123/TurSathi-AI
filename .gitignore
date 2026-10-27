@@ -140,7 +140,7 @@ tursathi_db_backup*
 *.cr2
 *.nef
 
-# Heavy Training & Raw Dataset Directories
+# Heavy Training & Raw Dataset Directories & Archives
 /datasets/
 /datasets/**
 /PPLD_extracted/
@@ -151,6 +151,16 @@ tursathi_db_backup*
 /tur_dataset_source/**
 /A novel pigeonpea leaf dataset*/
 /A novel pigeonpea leaf dataset*/**
+/archive/
+/archive/**
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.dump
+tursathi_clean_project.zip
+
 
 # User Uploads, Smoke Tests & Test Gate Images
 backend/uploads/*
