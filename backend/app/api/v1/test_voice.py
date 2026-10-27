@@ -1,6 +1,6 @@
 import logging
 from typing import Optional
-from fastapi import APIRouter, File, Form, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 from fastapi.responses import HTMLResponse
 
 from app.core.config import settings
@@ -11,7 +11,18 @@ from app.services.sarvam_stt_service import (
 
 logger = logging.getLogger("tursathi.test_voice")
 
-router = APIRouter(prefix="/test", tags=["Voice Testing"])
+def require_test_endpoints_enabled():
+    if settings.ENVIRONMENT == "production" and not settings.ENABLE_TEST_ENDPOINTS:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Test endpoints are disabled in production environment.",
+        )
+
+router = APIRouter(
+    prefix="/test",
+    tags=["Voice Testing"],
+    dependencies=[Depends(require_test_endpoints_enabled)],
+)
 
 _MAX_TEST_AUDIO_BYTES = 10 * 1024 * 1024  # 10 MB
 

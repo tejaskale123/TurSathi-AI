@@ -9,12 +9,18 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "TurSathi AI Backend"
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = "development"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     # Security & JWT Configuration
     SECRET_KEY: str = "default_unsafe_secret"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+
+    # Test & Diagnostic Endpoints (Disabled in production by default)
+    ENABLE_TEST_ENDPOINTS: bool = False
+
+    # CPU / RAM Tuning for PyTorch on 4-Core VPS
+    TORCH_NUM_THREADS: int = 2
 
     # CORS Configuration
     FRONTEND_CORS_ORIGINS: str = "http://localhost:8081,http://127.0.0.1:8081,http://localhost:8000,http://127.0.0.1:8000"

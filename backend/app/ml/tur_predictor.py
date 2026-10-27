@@ -69,6 +69,14 @@ DEVICE = torch.device(
     "cuda" if torch.cuda.is_available() else "cpu"
 )
 
+if DEVICE.type == "cpu":
+    # Bound intra-op threads to 2 so PyTorch does not monopolize all 4 cores on the VPS
+    try:
+        torch.set_num_threads(2)
+        torch.set_num_interop_threads(1)
+    except Exception:
+        pass
+
 
 # ============================================================
 # MODEL FEATURE FLAG

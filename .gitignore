@@ -32,7 +32,13 @@ dmypy.json
 # ----- Environment / Secrets -----
 .env
 .env.*
+*.env
+**/.env
+**/.env.*
+!*.env.example
+!*.env.docker.example
 !.env.example
+!.env.docker.example
 *.pem
 *.key
 *.p12

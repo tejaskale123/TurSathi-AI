@@ -13,17 +13,23 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-TurSathi@2026DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Error: Set POSTGRES_PASSWORD in .env}
       POSTGRES_DB: ${POSTGRES_DB:-tursathi_db}
     volumes:
       - tursathi_pgdata:/var/lib/postgresql/data
+    # Bind strictly to localhost so PostgreSQL is never exposed to public internet scanners
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-tursathi_db}"]
       interval: 5s
       timeout: 5s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 768M
     networks:
       - tursathi_net
 
@@ -38,23 +44,37 @@ services:
       db:
         condition: service_healthy
     environment:
-      - ENVIRONMENT=production
-      - DEBUG=False
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - DEBUG=${DEBUG:-False}
+      - WEB_CONCURRENCY=${WEB_CONCURRENCY:-2}
+      - TORCH_NUM_THREADS=${TORCH_NUM_THREADS:-2}
+      - OMP_NUM_THREADS=2
+      - MKL_NUM_THREADS=2
       - POSTGRES_SERVER=db
       - POSTGRES_PORT=5432
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-TurSathi@2026DB}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Error: Set POSTGRES_PASSWORD in .env}
       - POSTGRES_DB=${POSTGRES_DB:-tursathi_db}
-      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-TurSathi@2026DB}@db:5432/${POSTGRES_DB:-tursathi_db}
-      - SQLALCHEMY_DATABASE_URI=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-TurSathi@2026DB}@db:5432/${POSTGRES_DB:-tursathi_db}
-      - SECRET_KEY=${SECRET_KEY:-tursathi_ai_super_secret_jwt_key_2026_production_ready}
-      - FRONTEND_CORS_ORIGINS=*
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-tursathi_db}
+      - SQLALCHEMY_DATABASE_URI=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-tursathi_db}
+      - SECRET_KEY=${SECRET_KEY:?Error: Set a strong SECRET_KEY in .env}
+      - FRONTEND_CORS_ORIGINS=${FRONTEND_CORS_ORIGINS:-http://localhost:8081,http://localhost:8000}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
       - ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-claude-sonnet-4-5-20250929}
+      - SARVAM_API_KEY=${SARVAM_API_KEY:-}
+      - SARVAM_STT_MODEL=${SARVAM_STT_MODEL:-saaras:v4}
+      - ENABLE_TEST_ENDPOINTS=${ENABLE_TEST_ENDPOINTS:-False}
     volumes:
       - tursathi_uploads:/app/backend/uploads
     ports:
-      - "8000:8000"
+      - "${PORT:-8000}:8000"
+    deploy:
+      resources:
+        limits:
+          cpus: "3.5"
+          memory: 3000M
+        reservations:
+          memory: 800M
     networks:
       - tursathi_net
 

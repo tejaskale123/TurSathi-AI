@@ -1,4 +1,4 @@
-﻿import React, {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -25,7 +25,7 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType>({
-  language: 'en',
+  language: 'mr',
   setLanguage: () => {},
   t: (k) => k,
   tDisease: (n) => n || '',
@@ -93,7 +93,7 @@ async function writeStoredLanguage(lang: Language): Promise<void> {
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('mr');
   const [hasSavedLanguage, setHasSavedLanguage] = useState<boolean>(false);
   const [isReady, setIsReady] = useState<boolean>(false);
 

@@ -9,6 +9,7 @@ import {
   Alert,
   Animated,
   Image,
+  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -33,7 +34,8 @@ type GlyphName =
   | 'sun'
   | 'leaf'
   | 'focus'
-  | 'check';
+  | 'check'
+  | 'globe';
 
 type PhotoSource = 'camera' | 'gallery';
 
@@ -44,51 +46,18 @@ const SPEECH_LOCALES: Record<Language, string> = {
   hi: 'hi-IN',
 };
 
-// Localized strings for the premium scan camera UX
-const SCAN_STRINGS: Record<
-  Language,
-  {
-    title: string;
-    subtitle: string;
-    actionText: string;
-    tapToOpen: string;
-    voiceGuide: string;
-    needHelp: string;
-    playVoiceHelp: string;
-    closeCamera: string;
-  }
-> = {
-  en: {
-    title: 'Capture Tur Leaf Photo',
-    subtitle: 'Take a clear photo of a Tur leaf for disease analysis.',
-    actionText: 'Capture Tur Leaf Photo',
-    tapToOpen: 'TAP TO OPEN CAMERA',
-    voiceGuide: 'Place one clear Tur leaf inside the frame and take a steady photo.',
-    needHelp: 'Need help?',
-    playVoiceHelp: 'Play Voice Help',
-    closeCamera: 'Close Camera',
-  },
-  mr: {
-    title: 'तूर पानाचा फोटो काढा',
-    subtitle: 'रोग निदानासाठी तूर पाण्याचा स्पष्ट फोटो घ्या.',
-    actionText: 'तूर पानाचा फोटो काढा',
-    tapToOpen: 'कॅमेरा उघडण्यासाठी टॅप करा',
-    voiceGuide: 'फ्रेममध्ये तुरीचे एक स्पष्ट पान ठेवा आणि स्थिर फोटो घ्या.',
-    needHelp: 'मदत हवी आहे?',
-    playVoiceHelp: 'आवाज मार्गदर्शन ऐका',
-    closeCamera: 'कॅमेरा बंद करा',
-  },
-  hi: {
-    title: 'तूर पत्ती का फोटो लें',
-    subtitle: 'रोग विश्लेषण के लिए तूर पत्ती का स्पष्ट फोटो लें।',
-    actionText: 'तूर पत्ती का फोटो लें',
-    tapToOpen: 'कैमरा खोलने के लिए टैप करें',
-    voiceGuide: 'फ्रेम में तूर का एक साफ पत्ता रखें और स्थिर फोटो लें।',
-    needHelp: 'मदद चाहिए?',
-    playVoiceHelp: 'आवाज मार्गदर्शन सुनें',
-    closeCamera: 'कैमरा बंद करें',
-  },
-};
+// Centralized translations are defined in src/i18n/translations.ts
+
+const LANGUAGE_CHOICES: {
+  code: Language;
+  nativeLabel: string;
+  subLabel: string;
+  badge: string;
+}[] = [
+  { code: 'mr', nativeLabel: 'मराठी', subLabel: 'Marathi', badge: 'म' },
+  { code: 'en', nativeLabel: 'English', subLabel: 'English', badge: 'EN' },
+  { code: 'hi', nativeLabel: 'हिन्दी', subLabel: 'Hindi', badge: 'हि' },
+];
 
 // Prominent geometric vector camera glyph for the hero action card
 function PremiumCameraHeroGlyph({ color = '#1F5137' }: { color?: string }) {
@@ -108,6 +77,17 @@ function PremiumCameraHeroGlyph({ color = '#1F5137' }: { color?: string }) {
 }
 
 function Glyph({ name, color = '#1F5137' }: { name: GlyphName; color?: string }) {
+  if (name === 'globe') {
+    return (
+      <View style={styles.globeGlyph}>
+        <View style={[styles.globeCircle, { borderColor: color }]}>
+          <View style={[styles.globeEquator, { backgroundColor: color }]} />
+          <View style={[styles.globeMeridian, { borderColor: color }]} />
+        </View>
+      </View>
+    );
+  }
+
   if (name === 'back') {
     return (
       <View style={styles.backGlyph}>
@@ -258,9 +238,21 @@ function CameraGuide({
 
 export default function ScanScreen() {
   const router = useRouter();
-  const { t, language } = useLanguage();
-  const scanText = SCAN_STRINGS[language] || SCAN_STRINGS.en;
+  const { t, language, setLanguage } = useLanguage();
+  const scanText = {
+    title: t('scan.title'),
+    subtitle: t('scan.subtitle'),
+    actionText: t('scan.actionText'),
+    tapToOpen: t('scan.tapToOpen'),
+    voiceGuide: t('scan.voiceGuide'),
+    needHelp: t('scan.needHelp'),
+    playVoiceHelp: t('scan.playVoiceHelp'),
+    closeCamera: t('scan.closeCamera'),
+  };
   const cameraRef = useRef<CameraView>(null);
+
+  // Language selection modal state
+  const [isLanguageModalVisible, setIsLanguageModalVisible] = useState(false);
 
   // Animations
   const cameraFade = useRef(new Animated.Value(0)).current;
@@ -288,6 +280,7 @@ export default function ScanScreen() {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const uploadGuard = useRef(false); // Prevents duplicate uploads from double-tap
+  const logoutGuard = useRef(false); // Prevents duplicate logout calls from double-tap
 
   // Voice Help speech playback state (expo-speech)
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -423,12 +416,35 @@ export default function ScanScreen() {
   };
 
   const handleLogout = async () => {
+    if (logoutGuard.current) {
+      return;
+    }
+    logoutGuard.current = true;
     try {
       await clearAuthToken();
     } catch (err) {
       console.warn('[SCAN] Error during logout:', err);
     }
     router.replace('/login');
+  };
+
+  const promptLogout = () => {
+    Alert.alert(
+      t('language.logoutConfirmTitle'),
+      t('language.logoutConfirmMessage'),
+      [
+        {
+          text: t('language.cancel'),
+          style: 'cancel',
+        },
+        {
+          text: t('language.logout'),
+          style: 'destructive',
+          onPress: () => void handleLogout(),
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   const requestCameraAccess = async () => {
@@ -484,11 +500,11 @@ export default function ScanScreen() {
           setIsPhotoReady(false);
           setIsCameraReady(false);
         } else {
-          Alert.alert('Photo could not be prepared', 'Please capture the photo again.');
+          Alert.alert(t('scan.photoPrepErrorTitle'), t('scan.photoPrepErrorMsg'));
         }
       }
     } catch {
-      setCameraMessage('The photo could not be captured. Please hold the phone steady and try again.');
+      setCameraMessage(t('scan.photoCaptureError'));
     } finally {
       setIsCapturing(false);
     }
@@ -500,7 +516,7 @@ export default function ScanScreen() {
     try {
       const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (!permission.granted) {
-        setGalleryMessage('Photo access is needed to choose a leaf image.');
+        setGalleryMessage(t('scan.galleryPermissionNeeded'));
         return;
       }
 
@@ -519,11 +535,11 @@ export default function ScanScreen() {
           setIsPhotoReady(false);
           setIsCameraReady(false);
         } else {
-          Alert.alert('Photo could not be prepared', 'Please select the photo again.');
+          Alert.alert(t('scan.photoPrepErrorTitle'), t('scan.photoPrepErrorMsg'));
         }
       }
     } catch {
-      setGalleryMessage('The gallery could not be opened. Please try again.');
+      setGalleryMessage(t('scan.galleryOpenError'));
     }
   };
 
@@ -542,7 +558,7 @@ export default function ScanScreen() {
 
   const continueWithPhoto = async () => {
     if (!imageUri) {
-      Alert.alert('Photo unavailable', 'Please capture or select a photo again.');
+      Alert.alert(t('scan.photoUnavailableTitle'), t('scan.photoUnavailableMsg'));
       return;
     }
 
@@ -555,7 +571,7 @@ export default function ScanScreen() {
       try {
         const fileInfo = await FileSystem.getInfoAsync(imageUri);
         if (!fileInfo.exists) {
-          Alert.alert('Photo could not be prepared', 'Please capture the photo again.');
+          Alert.alert(t('scan.photoPrepErrorTitle'), t('scan.photoPrepErrorMsg'));
           return;
         }
       } catch (err) {
@@ -572,7 +588,7 @@ export default function ScanScreen() {
       // Retrieve stored JWT token
       const token = await getAuthToken();
       if (!token) {
-        setUploadError('Session expired. Please log in again.');
+        setUploadError(t('scan.sessionExpired'));
         setIsUploading(false);
         uploadGuard.current = false;
         return;
@@ -650,12 +666,12 @@ export default function ScanScreen() {
           setUploadError(errMsg);
         } else {
           setUploadError(
-            err.message + (canRetry ? ' Tap "Use This Photo" to retry.' : '')
+            err.message + (canRetry ? ` ${t('scan.retryPhotoTip')}` : '')
           );
         }
         console.error('[SCAN] Upload error (HTTP', err.httpStatus, '):', err.message);
       } else {
-        setUploadError('Upload failed. Please check your connection and try again.');
+        setUploadError(t('scan.uploadFailed'));
         console.error('[SCAN] Unexpected upload error:', err);
       }
 
@@ -727,8 +743,8 @@ export default function ScanScreen() {
           {/* 1. TOP HEADER */}
           <View style={styles.header}>
             <Pressable
-              accessibilityHint="Navigates back or closes camera"
-              accessibilityLabel="Go back"
+              accessibilityHint={t('scan.backHint')}
+              accessibilityLabel={t('common.back')}
               accessibilityRole="button"
               hitSlop={8}
               onPress={handleBackPress}
@@ -737,21 +753,30 @@ export default function ScanScreen() {
               <Glyph name="back" color="#1F5137" />
             </Pressable>
 
+            {/* Top-right Controls: Language Selection & Standalone Logout */}
+            <View style={styles.headerRight}>
+              <Pressable
+                accessibilityHint={t('scan.languageHint')}
+                accessibilityLabel={t('language.selectLanguage')}
+                accessibilityRole="button"
+                hitSlop={8}
+                onPress={() => setIsLanguageModalVisible(true)}
+                style={({ pressed }) => [styles.headerButton, pressed && styles.iconPressed]}
+              >
+                <Glyph name="globe" color="#1F5137" />
+              </Pressable>
 
-
-            {/* Logout button */}
-            <Pressable
-              accessibilityHint="Logs out of your account"
-              accessibilityLabel="Logout"
-              accessibilityRole="button"
-              hitSlop={8}
-              onPress={handleLogout}
-              style={({ pressed }) => [styles.logoutButton, pressed && styles.iconPressed]}
-            >
-              <Text style={styles.logoutText}>
-                {language === 'mr' ? 'लॉगआउट' : language === 'hi' ? 'लॉगआउट' : 'Logout'}
-              </Text>
-            </Pressable>
+              <Pressable
+                accessibilityHint={t('language.logoutConfirmMessage')}
+                accessibilityLabel={t('language.logout')}
+                accessibilityRole="button"
+                hitSlop={8}
+                onPress={promptLogout}
+                style={({ pressed }) => [styles.logoutButton, pressed && styles.iconPressed]}
+              >
+                <Text style={styles.logoutText}>{t('language.logout')}</Text>
+              </Pressable>
+            </View>
           </View>
 
           {/* 2. INSTRUCTION TITLE (Shown in Initial & Full Camera modes) */}
@@ -767,10 +792,10 @@ export default function ScanScreen() {
             /* PHOTO PREVIEW MODE */
             <View>
               <View style={styles.cameraCard}>
-                <View accessibilityLabel="Tur leaf photo preview" style={styles.cameraFrame}>
+                <View accessibilityLabel={t('scan.cameraPreviewLabel')} style={styles.cameraFrame}>
                   <Animated.View style={[styles.mediaLayer, { opacity: cameraFade }]}>
                     <Image
-                      accessibilityLabel="Selected Tur leaf photo"
+                      accessibilityLabel={t('scan.previewImageLabel')}
                       resizeMode="cover"
                       source={{ uri: imageUri }}
                       style={styles.photo}
@@ -786,7 +811,7 @@ export default function ScanScreen() {
               <View style={styles.previewContainer}>
                 <View style={styles.previewActions}>
                   <Pressable
-                    accessibilityHint="Clears current photo and reopens camera preview"
+                    accessibilityHint={t('scan.retakeHint')}
                     accessibilityLabel={photoSource === 'gallery' ? t('scan.chooseAnother') : t('scan.retake')}
                     accessibilityRole="button"
                     disabled={isUploading}
@@ -800,8 +825,8 @@ export default function ScanScreen() {
                   </Pressable>
 
                   <Pressable
-                    accessibilityHint="Uploads photo and proceeds to leaf analysis"
-                    accessibilityLabel={isUploading ? 'Uploading...' : t('scan.useThisPhoto')}
+                    accessibilityHint={t('scan.usePhotoHint')}
+                    accessibilityLabel={isUploading ? t('scan.uploading') : t('scan.useThisPhoto')}
                     accessibilityRole="button"
                     disabled={isUploading}
                     onPress={() => void continueWithPhoto()}
@@ -828,10 +853,10 @@ export default function ScanScreen() {
                   </View>
                   <View style={styles.photoReadyCopy}>
                     <Text style={styles.photoReadyTitle}>
-                      {isUploading ? 'Uploading image...' : t('scan.photoReady')}
+                      {isUploading ? t('scan.uploading') : t('scan.photoReady')}
                     </Text>
                     <Text style={styles.photoReadySubtitle}>
-                      {isUploading ? 'Please wait while we save your photo.' : t('scan.reviewBeforeAnalysis')}
+                      {isUploading ? t('scan.uploadingWait') : t('scan.reviewBeforeAnalysis')}
                     </Text>
                   </View>
                 </View>
@@ -841,7 +866,7 @@ export default function ScanScreen() {
             /* FULL CAMERA INTERFACE */
             <View>
               <View style={styles.cameraCard}>
-                <View accessibilityLabel="Tur leaf camera preview" style={styles.cameraFrame}>
+                <View accessibilityLabel={t('scan.cameraPreviewLabel')} style={styles.cameraFrame}>
                   {cameraAvailable ? (
                     <Animated.View style={[styles.mediaLayer, { opacity: cameraFade }]}>
                       <CameraView
@@ -865,7 +890,7 @@ export default function ScanScreen() {
                         {t('scan.cameraPermissionText')}
                       </Text>
                       <Pressable
-                        accessibilityHint="Requests camera permission"
+                        accessibilityHint={t('scan.allowCameraHint')}
                         accessibilityLabel={t('scan.allowCamera')}
                         accessibilityRole="button"
                         onPress={() => void requestCameraAccess()}
@@ -907,7 +932,7 @@ export default function ScanScreen() {
               <View style={styles.captureContainer}>
                 {cameraAvailable && (
                   <Pressable
-                    accessibilityHint="Takes a picture of the Tur leaf in the camera preview"
+                    accessibilityHint={t('scan.captureHint')}
                     accessibilityLabel={t('scan.captureLeaf')}
                     accessibilityRole="button"
                     accessibilityState={{ disabled: !canCapture }}
@@ -931,7 +956,7 @@ export default function ScanScreen() {
                 )}
 
                 <Pressable
-                  accessibilityHint="Selects a Tur leaf photo from device gallery"
+                  accessibilityHint={t('scan.galleryHint')}
                   accessibilityLabel={t('scan.chooseFromGallery')}
                   accessibilityRole="button"
                   onPress={() => void chooseFromGallery()}
@@ -942,7 +967,7 @@ export default function ScanScreen() {
                 </Pressable>
 
                 <Pressable
-                  accessibilityHint="Closes camera preview and returns to scan page"
+                  accessibilityHint={t('scan.closeCameraHint')}
                   accessibilityLabel={scanText.closeCamera}
                   accessibilityRole="button"
                   onPress={handleCloseCamera}
@@ -963,7 +988,7 @@ export default function ScanScreen() {
             <View>
               {/* Prominent Camera Action Card */}
               <Pressable
-                accessibilityHint="Opens the camera to capture a leaf photo"
+                accessibilityHint={t('scan.openCameraHint')}
                 accessibilityLabel={scanText.actionText}
                 accessibilityRole="button"
                 onPress={() => void handleOpenCamera()}
@@ -980,7 +1005,7 @@ export default function ScanScreen() {
 
               {/* Gallery Option */}
               <Pressable
-                accessibilityHint="Selects a Tur leaf photo from device gallery"
+                accessibilityHint={t('scan.galleryHint')}
                 accessibilityLabel={t('scan.chooseFromGallery')}
                 accessibilityRole="button"
                 onPress={() => void chooseFromGallery()}
@@ -1009,7 +1034,7 @@ export default function ScanScreen() {
                 </View>
 
                 <Pressable
-                  accessibilityHint="Plays the spoken voice guidance"
+                  accessibilityHint={t('scan.playVoiceHint')}
                   accessibilityLabel={playButtonLabel}
                   accessibilityRole="button"
                   onPress={() => void handlePlayVoiceGuide()}
@@ -1083,6 +1108,100 @@ export default function ScanScreen() {
 
         </View>
       </ScrollView>
+
+      {/* Language Selection Popup Modal */}
+      <Modal
+        animationType="fade"
+        transparent
+        visible={isLanguageModalVisible}
+        onRequestClose={() => setIsLanguageModalVisible(false)}
+        statusBarTranslucent
+      >
+        <View style={styles.modalOverlay}>
+          <Pressable
+            style={StyleSheet.absoluteFill}
+            onPress={() => setIsLanguageModalVisible(false)}
+            accessibilityLabel={t('language.close')}
+          />
+          <View style={styles.modalContent}>
+            {/* Modal Header */}
+            <View style={styles.modalHeader}>
+              <View style={styles.modalTitleRow}>
+                <View style={styles.modalHeaderIconBadge}>
+                  <Glyph name="globe" color="#1F5137" />
+                </View>
+                <Text style={styles.modalTitle}>{t('language.selectLanguage')}</Text>
+              </View>
+              <Pressable
+                hitSlop={10}
+                onPress={() => setIsLanguageModalVisible(false)}
+                style={({ pressed }) => [styles.modalCloseButton, pressed && styles.iconPressed]}
+                accessibilityLabel={t('language.close')}
+                accessibilityRole="button"
+              >
+                <Text style={styles.modalCloseText}>✕</Text>
+              </Pressable>
+            </View>
+
+            {/* Language Cards */}
+            <View style={styles.languageList}>
+              {LANGUAGE_CHOICES.map((item) => {
+                const isSelected = language === item.code;
+                return (
+                  <Pressable
+                    key={item.code}
+                    onPress={() => {
+                      setLanguage(item.code);
+                      setIsLanguageModalVisible(false);
+                    }}
+                    style={({ pressed }) => [
+                      styles.languageCard,
+                      isSelected ? styles.languageCardSelected : styles.languageCardUnselected,
+                      pressed && styles.languageCardPressed,
+                    ]}
+                    accessibilityRole="radio"
+                    accessibilityState={{ selected: isSelected }}
+                    accessibilityLabel={`${item.nativeLabel} (${item.subLabel})`}
+                  >
+                    <View style={[styles.langBadge, isSelected && styles.langBadgeSelected]}>
+                      <Text style={[styles.langBadgeText, isSelected && styles.langBadgeTextSelected]}>
+                        {item.badge}
+                      </Text>
+                    </View>
+                    <View style={styles.langTextContainer}>
+                      <Text style={[styles.langNativeLabel, isSelected && styles.langNativeLabelSelected]}>
+                        {item.nativeLabel}
+                      </Text>
+                      <Text style={styles.langSubLabel}>{item.subLabel}</Text>
+                    </View>
+                    <View style={[styles.langRadio, isSelected && styles.langRadioSelected]}>
+                      {isSelected ? <Glyph name="check" color="#FFFFFF" /> : null}
+                    </View>
+                  </Pressable>
+                );
+              })}
+            </View>
+
+            {/* Divider */}
+            <View style={styles.modalDivider} />
+
+            {/* Close Button Footer */}
+            <View style={styles.modalFooterActions}>
+              <Pressable
+                onPress={() => setIsLanguageModalVisible(false)}
+                style={({ pressed }) => [
+                  styles.modalCloseFooterButton,
+                  pressed && styles.buttonPressed,
+                ]}
+                accessibilityRole="button"
+                accessibilityLabel={t('language.close')}
+              >
+                <Text style={styles.modalCloseFooterText}>{t('language.close')}</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -1108,6 +1227,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   headerButton: {
     width: 44,
@@ -2258,5 +2382,219 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     textAlign: 'center',
     fontWeight: '500',
+  },
+
+  /* Globe Glyph */
+  globeGlyph: {
+    width: 22,
+    height: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  globeCircle: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1.8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  globeEquator: {
+    position: 'absolute',
+    width: 20,
+    height: 1.5,
+  },
+  globeMeridian: {
+    position: 'absolute',
+    width: 10,
+    height: 20,
+    borderRadius: 5,
+    borderWidth: 1.5,
+  },
+
+  /* Language Selection Popup Modal */
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(12, 33, 23, 0.48)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
+  modalContent: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 22,
+    borderWidth: 1,
+    borderColor: '#E6E4DC',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
+    shadowColor: '#102B1F',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.14,
+    shadowRadius: 20,
+    elevation: 8,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 18,
+  },
+  modalTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    flex: 1,
+    marginRight: 8,
+  },
+  modalHeaderIconBadge: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#EFF5F0',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#D7E5DB',
+  },
+  modalTitle: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#1F5137',
+    letterSpacing: -0.2,
+    flexShrink: 1,
+  },
+  modalCloseButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: '#F5F4EC',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#E3E2D9',
+  },
+  modalCloseText: {
+    fontSize: 13,
+    color: '#5B6B61',
+    fontWeight: '600',
+    lineHeight: 16,
+    textAlign: 'center',
+  },
+  languageList: {
+    gap: 11,
+  },
+  languageCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    minHeight: 58,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 16,
+    borderWidth: 1.5,
+  },
+  languageCardSelected: {
+    backgroundColor: '#F2F8F4',
+    borderColor: '#1F5137',
+    shadowColor: '#1F5137',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 1,
+  },
+  languageCardUnselected: {
+    backgroundColor: '#FFFFFF',
+    borderColor: '#E7E5DD',
+  },
+  languageCardPressed: {
+    opacity: 0.88,
+    transform: [{ scale: 0.99 }],
+  },
+  langBadge: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: '#F4F3EB',
+    borderWidth: 1,
+    borderColor: '#DFDCD3',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  langBadgeSelected: {
+    backgroundColor: '#1F5137',
+    borderColor: '#1F5137',
+  },
+  langBadgeText: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#1F5137',
+  },
+  langBadgeTextSelected: {
+    color: '#FFFFFF',
+  },
+  langTextContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginRight: 8,
+  },
+  langNativeLabel: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#24382C',
+    letterSpacing: -0.1,
+  },
+  langNativeLabelSelected: {
+    color: '#1F5137',
+  },
+  langSubLabel: {
+    fontSize: 12,
+    color: '#6F7D74',
+    marginTop: 1,
+    fontWeight: '500',
+  },
+  langRadio: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 1.6,
+    borderColor: '#CBC7BA',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  langRadioSelected: {
+    backgroundColor: '#1F5137',
+    borderColor: '#1F5137',
+  },
+  modalDivider: {
+    height: 1,
+    backgroundColor: '#ECEAE2',
+    marginTop: 16,
+    marginBottom: 14,
+  },
+  modalFooterActions: {
+    width: '100%',
+  },
+  modalCloseFooterButton: {
+    width: '100%',
+    minHeight: 46,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+    backgroundColor: '#F5F4EC',
+    borderWidth: 1,
+    borderColor: '#E2DFD4',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalCloseFooterText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#34483C',
   },
 });

@@ -5,10 +5,14 @@
 
 FROM python:3.11-slim
 
-# Set environment variables for Python runtime
+# Set environment variables for Python runtime and PyTorch CPU thread bounds (4-core VPS)
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app/backend
+    PYTHONPATH=/app/backend \
+    OMP_NUM_THREADS=2 \
+    MKL_NUM_THREADS=2 \
+    OPENBLAS_NUM_THREADS=2 \
+    NUMEXPR_NUM_THREADS=2
 
 # Install OS libraries for OpenCV headless, image decoders, and curl for healthcheck
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -37,12 +41,16 @@ COPY models/best_pigeonpea_disease_final_efficientnet_b0.pth /app/models/
 COPY models/tur_image_validator_efficientnet_b0_v3.pth /app/models/
 COPY models/ood_feature_profile.json /app/models/
 
-# 5. Create persistent upload directories
-RUN mkdir -p /app/backend/uploads/scans /app/backend/uploads/voice_reports
+# 5. Create persistent upload directories and secure non-root system user
+RUN useradd -u 10001 -m -s /bin/bash appuser && \
+    mkdir -p /app/backend/uploads/scans /app/backend/uploads/voice_reports && \
+    chown -R appuser:appuser /app
 
 # 6. Set up container entrypoint
 COPY backend/entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
+
+USER appuser
 
 WORKDIR /app/backend
 

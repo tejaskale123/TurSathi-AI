@@ -9,12 +9,24 @@ from app.core.config import settings
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("tursathi.api")
 
+# Bound PyTorch CPU threads for 4-core VPS to prevent CPU starvation and excessive memory
+try:
+    import torch
+    torch.set_num_threads(settings.TORCH_NUM_THREADS)
+    torch.set_num_interop_threads(1)
+    logger.info("[STARTUP] Bounded PyTorch CPU threads to %d (interop=1) for 4-core VPS optimization", settings.TORCH_NUM_THREADS)
+except Exception as e:
+    logger.debug("[STARTUP] PyTorch thread bounding skipped: %s", e)
+
+# In production, disable public interactive API docs unless DEBUG is explicitly enabled
+docs_enabled = settings.ENVIRONMENT != "production" or settings.DEBUG
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version="1.0.0",
-    openapi_url=f"{settings.API_V1_STR}/openapi.json",
-    docs_url=f"{settings.API_V1_STR}/docs",
-    redoc_url=f"{settings.API_V1_STR}/redoc",
+    openapi_url=f"{settings.API_V1_STR}/openapi.json" if docs_enabled else None,
+    docs_url=f"{settings.API_V1_STR}/docs" if docs_enabled else None,
+    redoc_url=f"{settings.API_V1_STR}/redoc" if docs_enabled else None,
 )
 
 @app.middleware("http")
@@ -46,11 +58,14 @@ dev_origin_regex = (
     else None
 )
 
+cors_origins = [origin.strip() for origin in settings.FRONTEND_CORS_ORIGINS.split(",") if origin.strip()]
+allow_creds = "*" not in cors_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origin.strip() for origin in settings.FRONTEND_CORS_ORIGINS.split(",") if origin.strip()],
+    allow_origins=cors_origins,
     allow_origin_regex=dev_origin_regex,
-    allow_credentials=True,
+    allow_credentials=allow_creds,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -79,5 +94,8 @@ def health_check():
 
 @app.get("/test-voice", include_in_schema=False)
 def test_voice_shortcut():
+    if settings.ENVIRONMENT == "production" and not settings.ENABLE_TEST_ENDPOINTS:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Not Found")
     from fastapi.responses import RedirectResponse
     return RedirectResponse(url=f"{settings.API_V1_STR}/test/ui")

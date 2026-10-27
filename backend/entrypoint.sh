@@ -15,6 +15,7 @@ alembic upgrade head || {
     echo "Notice: Alembic migrations completed or already at head."
 }
 
-# Start Uvicorn ASGI server
-echo "[2/2] Starting Uvicorn API server on 0.0.0.0:8000..."
-exec uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2 --proxy-headers --forwarded-allow-ips='*'
+# Start Uvicorn ASGI server (optimal 2 workers on 4-core VPS to bound memory and CPU thread contention)
+WORKERS="${WEB_CONCURRENCY:-2}"
+echo "[2/2] Starting Uvicorn API server on 0.0.0.0:8000 (workers=${WORKERS})..."
+exec uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers "${WORKERS}" --proxy-headers --forwarded-allow-ips='*'
