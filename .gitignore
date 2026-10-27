@@ -140,6 +140,10 @@ tursathi_db_backup*
 *.cr2
 *.nef
 
+# Required mobile app assets (icons/splash referenced by mobile/app.json) must survive the blanket image block above
+!/mobile/assets/**
+!/mobile/assets/**/
+
 # Heavy Training & Raw Dataset Directories & Archives
 /datasets/
 /datasets/**
