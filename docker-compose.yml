@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Error: Set POSTGRES_PASSWORD in .env}
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Error: Set POSTGRES_PASSWORD in .env}"
       POSTGRES_DB: ${POSTGRES_DB:-tursathi_db}
     volumes:
       - tursathi_pgdata:/var/lib/postgresql/data
@@ -53,11 +53,11 @@ services:
       - POSTGRES_SERVER=db
       - POSTGRES_PORT=5432
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Error: Set POSTGRES_PASSWORD in .env}
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Error: Set POSTGRES_PASSWORD in .env}"
       - POSTGRES_DB=${POSTGRES_DB:-tursathi_db}
       - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-tursathi_db}
       - SQLALCHEMY_DATABASE_URI=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-tursathi_db}
-      - SECRET_KEY=${SECRET_KEY:?Error: Set a strong SECRET_KEY in .env}
+      - "SECRET_KEY=${SECRET_KEY:?Error: Set a strong SECRET_KEY in .env}"
       - API_KEY=${API_KEY:-}
       - FRONTEND_CORS_ORIGINS=${FRONTEND_CORS_ORIGINS:-http://localhost:8081,http://localhost:8000}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
