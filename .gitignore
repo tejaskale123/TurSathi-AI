@@ -176,11 +176,6 @@ reports/duplicate_review/
 tmp/
 temp/
 
-# Explicit Whitelist: Essential UI Icons, Splash & Branding Assets for Mobile/Web
-!mobile/assets/**
-!mobile/assets/images/**
-!frontend/src/assets/**
-!frontend/public/**
 
 # ------------------------------------------------------------------------------
 # 5. Node / Mobile / Frontend (React Native, Expo, Web)
