@@ -1,35 +1,10 @@
-# ============================================================
-# TurSathi AI — Root .gitignore
-# ============================================================
+# ==============================================================================
+# TurSathi AI — Comprehensive Production .gitignore
+# ==============================================================================
 
-# ----- Python / Backend -----
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-.eggs/
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.cache/
-.pytest_cache/
-*.cover
-.hypothesis/
-htmlcov/
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# ----- Environment / Secrets -----
+# ------------------------------------------------------------------------------
+# 1. Environment & Secrets (Raw VPS Defense & Credential Leakage Prevention)
+# ------------------------------------------------------------------------------
 .env
 .env.*
 *.env
@@ -39,69 +14,293 @@ dmypy.json
 !*.env.docker.example
 !.env.example
 !.env.docker.example
+
+# Private / Public Keys, Certificates, and Tokens
 *.pem
 *.key
 *.p12
 *.p8
+*.crt
+*.csr
+*.der
 *.jks
+*.keystore
 *.mobileprovision
+*.pub
+id_rsa*
+id_ed25519*
 secrets.json
+credentials.json
+client_secret*.json
+service-account*.json
 
-# ----- Database -----
+# ------------------------------------------------------------------------------
+# 2. Python Runtime, Bytecode & Package Artifacts
+# ------------------------------------------------------------------------------
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+*.dll
+*.dylib
+.Python
+build/
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.spec
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+.env.virtual/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.pip-cache/
+
+# Testing, Coverage & Linters
+.tox/
+.nox/
+.cache/
+.pytest_cache/
+**/.pytest_cache/
+pytestdebug.log
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+cover/
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+.pyre/
+.pytype/
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+.jupyter/
+
+# ------------------------------------------------------------------------------
+# 3. Database & Local Storage
+# ------------------------------------------------------------------------------
 *.sqlite
+*.sqlite3
 *.db
+*.db-journal
+*.db-wal
+*.db-shm
 *.dump
+*.sql
+*.sql.gz
 backups/
-backend/backups/
+**/backups/
+tursathi_pgdata/
+tursathi_db_backup*
 
-# ----- Uploads -----
+# ------------------------------------------------------------------------------
+# 4. Images, Datasets & Uploads (Privacy, Storage & GitHub Size Defense)
+# ------------------------------------------------------------------------------
+# Global Image Formats
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.bmp
+*.tiff
+*.tif
+*.heic
+*.heif
+*.avif
+*.svg
+*.raw
+*.cr2
+*.nef
+
+# Heavy Training & Raw Dataset Directories
+/datasets/
+/datasets/**
+/PPLD_extracted/
+/PPLD_extracted/**
+/PPLD_processed/
+/PPLD_processed/**
+/tur_dataset_source/
+/tur_dataset_source/**
+/A novel pigeonpea leaf dataset*/
+/A novel pigeonpea leaf dataset*/**
+
+# User Uploads, Smoke Tests & Test Gate Images
 backend/uploads/*
 !backend/uploads/.gitkeep
+/uploads/
+uploads_smoke/
+backend/uploads_smoke/
+backend/uploads_comprehensive/
+backend/test_gate_images/
+backend/scratch_bias_experiment/transformed_images/
+reports/contact_sheets/
+reports/duplicate_review/
+tmp/
+temp/
 
-# ----- Node / Mobile / Frontend -----
+# Explicit Whitelist: Essential UI Icons, Splash & Branding Assets for Mobile/Web
+!mobile/assets/**
+!mobile/assets/images/**
+!frontend/src/assets/**
+!frontend/public/**
+
+# ------------------------------------------------------------------------------
+# 5. Node / Mobile / Frontend (React Native, Expo, Web)
+# ------------------------------------------------------------------------------
 node_modules/
-npm-debug.*
-yarn-debug.*
-yarn-error.*
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 .pnpm-debug.log*
+.npm/
+.yarn/
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
 
-# ----- Expo -----
+# Expo & Metro Bundler
 .expo/
-dist/
+**/.expo/
+.expo-shared/
 web-build/
 expo-env.d.ts
 .metro-health-check*
 *.tsbuildinfo
 
-# ----- Native (Expo managed) -----
+# Native Mobile Build Directories (Expo Prebuild / Native CLI)
 /mobile/ios/
 /mobile/android/
+android/.gradle/
+android/build/
+android/app/build/
+ios/Pods/
+ios/build/
+*.xcworkspace/
+*.xcuserstate
 *.orig.*
 
-# ----- OS -----
-.DS_Store
-Thumbs.db
-desktop.ini
+# Frontend Web Build Artifacts
+frontend/dist/
+frontend/build/
 
-# ----- IDE -----
+# ------------------------------------------------------------------------------
+# 6. Operating System Artifacts
+# ------------------------------------------------------------------------------
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ------------------------------------------------------------------------------
+# 7. IDE, Editor & Tooling Configs
+# ------------------------------------------------------------------------------
 .vscode/
+**/.vscode/
 .idea/
+**/.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.sublime-project
+*.sublime-workspace
+.cursor/
+**/.cursor/
+.gemini/
+**/.gemini/
 
-# ----- Logs -----
-*.log
-logs/
+# ------------------------------------------------------------------------------
+# 8. Temporary Dumps, Backups & Extraction Artifacts
+# ------------------------------------------------------------------------------
+*.bak
+*.backup
+*.bak_*
+*.old
+*.orig
+*.patch
+*.rej
+project_extraction.txt
+**/project_extraction.txt
+project_dump.txt
+**/project_dump.txt
+*_extraction.txt
 
-# ----- Archives & Data Dumps -----
+# ------------------------------------------------------------------------------
+# 9. Archives & Compressed Datasets
+# ------------------------------------------------------------------------------
 *.zip
+*.tar
 *.tar.gz
 *.tgz
-project_extraction.txt
+*.rar
+*.7z
+*.gz
+*.bz2
+*.xz
 
-# ----- Experimental Weights (Keep production weights tracked) -----
+# ------------------------------------------------------------------------------
+# 10. ML Training Checkpoints, Experiments & WandB Logs
+# ------------------------------------------------------------------------------
+# Production models (best_pigeonpea_disease_final_efficientnet_b0.pth, etc.) remain tracked
 models/experimental_*.pth
+models/*.checkpoint.pth
+*.pt.tmp
+*.pth.tmp
+wandb/
+ml/**/wandb/
+ml/**/checkpoints/
 
+# ------------------------------------------------------------------------------
+# 11. Application & Service Logs
+# ------------------------------------------------------------------------------
+*.log
+logs/
+**/logs/
