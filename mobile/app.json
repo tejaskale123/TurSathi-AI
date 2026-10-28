@@ -12,7 +12,6 @@
     },
     "android": {
       "package": "com.tursathi.ai",
-      "usesCleartextTraffic": true,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -33,6 +32,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      "./plugins/withCleartextTraffic.js",
       "expo-router",
       [
         "expo-splash-screen",

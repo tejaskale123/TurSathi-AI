@@ -37,7 +37,7 @@ export const getBaseUrl = (): string => {
       }
     }
   }
-  return 'http://10.211.50.75:8000';
+  return 'http://88.222.212.15:7066';
 };
 
 export const API_BASE_URL = getBaseUrl();
