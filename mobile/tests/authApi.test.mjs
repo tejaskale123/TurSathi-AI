@@ -59,19 +59,52 @@ describe('Auth API and Error Handling Suite', () => {
     assert.equal(payload.password, 'SecretPassword123!');
   });
 
-  test('registration payload simulation strips non-digits and handles optional email', () => {
+  test('registration payload simulation requires non-empty email and normalizes mobile', () => {
     const mobile = '+91 98765-43210';
     const normalizedMobile = mobile.replace(/[\s()-]/g, '').replace(/^\+91/, '');
-    const email = '   ';
+    const email = '  farmer@example.com  ';
     const payload = {
       full_name: 'Kisan Patil',
       mobile_number: normalizedMobile,
-      email: email.trim() || undefined,
+      email: email.trim(),
       password: 'Password123!',
       confirm_password: 'Password123!'
     };
     assert.equal(payload.mobile_number, '9876543210');
-    assert.equal(payload.email, undefined);
+    assert.equal(payload.email, 'farmer@example.com');
+    assert.ok(payload.email.length > 0, 'Email must be required for registration');
+  });
+
+  test('forgot password payload simulation trims email and validates format', () => {
+    const rawEmail = '   kisan.patil@agri.in   ';
+    const trimmed = rawEmail.trim().toLowerCase();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    assert.ok(emailRegex.test(trimmed), 'Email should match valid email pattern');
+    assert.equal(trimmed, 'kisan.patil@agri.in');
+  });
+
+  test('OTP verification payload simulation strips non-digits and validates 6 digits', () => {
+    const rawOtp = ' 123 456 ';
+    const cleaned = rawOtp.replace(/\D/g, '');
+    assert.equal(cleaned.length, 6);
+    assert.equal(cleaned, '123456');
+    assert.ok(/^\d{6}$/.test(cleaned));
+
+    const invalidOtp = '12345';
+    assert.equal(/^\d{6}$/.test(invalidOtp), false);
+  });
+
+  test('password reset payload simulation validates token and password matching', () => {
+    const resetToken = 'sample_jwt_reset_authorization_token';
+    const newPassword = 'SecureNewPassword123!';
+    const confirmPassword = 'SecureNewPassword123!';
+
+    assert.ok(resetToken.trim().length > 0);
+    assert.ok(newPassword.length >= 8, 'Password must be at least 8 characters');
+    assert.equal(newPassword, confirmPassword, 'Passwords must match');
+
+    const mismatchedConfirm = 'DifferentPassword123!';
+    assert.notEqual(newPassword, mismatchedConfirm);
   });
 
   test('token storage lifecycle simulation verifies save, get, and clear isolation', async () => {

@@ -40,6 +40,7 @@ const copy = {
     unavailable: 'Login is not connected yet. Your details have not been submitted.',
     forgotInfo: 'Password recovery will be available once account services are connected.',
     googleInfo: 'Google sign-in is not set up yet. No account was created.',
+    resetSuccess: 'Password reset successfully. Please sign in with your new password.',
   },
   mr: {
     subtitle: 'तूर पान रोग ओळख आणि योग्य फवारणी मार्गदर्शन',
@@ -60,6 +61,7 @@ const copy = {
     unavailable: 'लॉगिन सेवा अद्याप जोडलेली नाही. तुमची माहिती पाठवलेली नाही.',
     forgotInfo: 'खाते सेवा जोडल्यावर पासवर्ड पुनर्प्राप्ती उपलब्ध होईल.',
     googleInfo: 'Google लॉगिन अद्याप सेट केलेले नाही. खाते तयार झालेले नाही.',
+    resetSuccess: 'पासवर्ड यशस्वीरीत्या रीसेट झाला. कृपया नवीन पासवर्डसह लॉगिन करा.',
   },
   hi: {
     subtitle: 'तूर पत्ती रोग पहचान और सही छिड़काव मार्गदर्शन',
@@ -80,6 +82,7 @@ const copy = {
     unavailable: 'लॉगिन सेवा अभी उपलब्ध नहीं है। आपकी जानकारी जमा नहीं की गई।',
     forgotInfo: 'खाता सेवाएं जुड़ने के बाद पासवर्ड रिकवरी उपलब्ध होगी।',
     googleInfo: 'Google लॉगिन अभी सेट नहीं है। कोई खाता नहीं बनाया गया।',
+    resetSuccess: 'पासवर्ड सफलतापूर्वक रीसेट हो गया। कृपया नए पासवर्ड से लॉगिन करें।',
   },
 } satisfies Record<Language, Record<string, string>>;
 
@@ -99,8 +102,13 @@ export default function LoginScreen() {
   useEffect(() => {
     if (params.exchange_code) {
       handleGoogleExchange(params.exchange_code as string);
+    } else if (params.reset_success) {
+      setMessage(text.resetSuccess || 'Password reset successfully. Please sign in with your new password.');
+      if (params.email && typeof params.email === 'string') {
+        setIdentity(params.email);
+      }
     }
-  }, [params.exchange_code]);
+  }, [params.exchange_code, params.reset_success, params.email]);
 
   const handleGoogleExchange = async (code: string) => {
     setIsLoading(true);
@@ -259,7 +267,13 @@ export default function LoginScreen() {
                 </Pressable>
                 <Pressable
                   accessibilityRole="button"
-                  onPress={() => setMessage(text.forgotInfo)}
+                  onPress={() => {
+                    const trimmed = identity.trim();
+                    router.push({
+                      pathname: '/forgot-password',
+                      params: trimmed.includes('@') ? { email: trimmed } : {},
+                    } as any);
+                  }}
                   hitSlop={8}
                 >
                   <Text style={styles.textLink}>{text.forgot}</Text>

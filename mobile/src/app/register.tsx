@@ -32,7 +32,7 @@ const copy = {
     intro: 'A healthier Tur crop starts with the right guidance.',
     name: 'Full Name',
     mobile: 'Mobile Number',
-    email: 'Email Address (optional)',
+    email: 'Email Address',
     password: 'Password',
     confirmPassword: 'Confirm Password',
     terms: 'I agree to the Terms of Service and Privacy Policy.',
@@ -45,7 +45,8 @@ const copy = {
     requiredName: 'Enter your full name.',
     requiredMobile: 'Enter your mobile number.',
     invalidMobile: 'Enter a valid 10-digit mobile number.',
-    invalidEmail: 'Enter a valid email address or leave it blank.',
+    requiredEmail: 'Enter your email address.',
+    invalidEmail: 'Enter a valid email address.',
     requiredPassword: 'Enter a password with at least 8 characters.',
     mismatch: 'The passwords do not match.',
     requiredTerms: 'Please accept the Terms of Service and Privacy Policy.',
@@ -57,7 +58,7 @@ const copy = {
     intro: 'योग्य मार्गदर्शनाने तूर पीक अधिक निरोगी राहील.',
     name: 'पूर्ण नाव',
     mobile: 'मोबाइल नंबर',
-    email: 'ईमेल पत्ता (ऐच्छिक)',
+    email: 'ईमेल पत्ता',
     password: 'पासवर्ड',
     confirmPassword: 'पासवर्डची पुष्टी करा',
     terms: 'मी सेवा अटी आणि गोपनीयता धोरणाशी सहमत आहे.',
@@ -70,7 +71,8 @@ const copy = {
     requiredName: 'तुमचे पूर्ण नाव भरा.',
     requiredMobile: 'मोबाइल नंबर भरा.',
     invalidMobile: 'वैध १० अंकी मोबाइल नंबर भरा.',
-    invalidEmail: 'वैध ईमेल पत्ता भरा किंवा रिक्त ठेवा.',
+    requiredEmail: 'तुमचा ईमेल पत्ता भरा.',
+    invalidEmail: 'वैध ईमेल पत्ता भरा.',
     requiredPassword: 'किमान ८ अक्षरांचा पासवर्ड भरा.',
     mismatch: 'दोन्ही पासवर्ड जुळत नाहीत.',
     requiredTerms: 'कृपया सेवा अटी आणि गोपनीयता धोरण मान्य करा.',
@@ -82,7 +84,7 @@ const copy = {
     intro: 'सही मार्गदर्शन से तूर की फसल स्वस्थ रखें।',
     name: 'पूरा नाम',
     mobile: 'मोबाइल नंबर',
-    email: 'ईमेल पता (वैकल्पिक)',
+    email: 'ईमेल पता',
     password: 'पासवर्ड',
     confirmPassword: 'पासवर्ड की पुष्टि करें',
     terms: 'मैं सेवा की शर्तों और गोपनीयता नीति से सहमत हूं।',
@@ -95,7 +97,8 @@ const copy = {
     requiredName: 'अपना पूरा नाम दर्ज करें।',
     requiredMobile: 'अपना मोबाइल नंबर दर्ज करें।',
     invalidMobile: '10 अंकों का सही मोबाइल नंबर दर्ज करें।',
-    invalidEmail: 'सही ईमेल पता दर्ज करें या इसे खाली छोड़ें।',
+    requiredEmail: 'अपना ईमेल पता दर्ज करें।',
+    invalidEmail: 'सही ईमेल पता दर्ज करें।',
     requiredPassword: 'कम से कम 8 अक्षरों का पासवर्ड दर्ज करें।',
     mismatch: 'दोनों पासवर्ड मेल नहीं खाते।',
     requiredTerms: 'कृपया सेवा की शर्तें और गोपनीयता नीति स्वीकार करें।',
@@ -138,7 +141,9 @@ export default function RegisterScreen() {
     } else if (!/^[6-9]\d{9}$/.test(normalizedMobile)) {
       nextErrors.mobile = text.invalidMobile;
     }
-    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    if (!email.trim()) {
+      nextErrors.email = text.requiredEmail;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       nextErrors.email = text.invalidEmail;
     }
     if (password.length < 8) nextErrors.password = text.requiredPassword;
@@ -158,7 +163,7 @@ export default function RegisterScreen() {
       const regResult = await registerUser({
         full_name: name.trim(),
         mobile_number: normalizedMobile,
-        email: email.trim() || undefined,
+        email: email.trim(),
         password: password,
         confirm_password: confirmPassword,
       });

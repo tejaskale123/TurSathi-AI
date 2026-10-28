@@ -13,6 +13,7 @@ export default function RootLayout() {
           <Stack.Screen name="language-selection" />
           <Stack.Screen name="login" />
           <Stack.Screen name="register" />
+          <Stack.Screen name="forgot-password" />
           <Stack.Screen name="scan" />
           <Stack.Screen name="problem-description" />
           <Stack.Screen name="voice-record" />

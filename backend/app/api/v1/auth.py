@@ -11,8 +11,25 @@ from app.core.config import settings
 from app.core.security import create_access_token, decode_access_token
 from app.database.models.user import User
 from app.database.session import get_db
-from app.schemas.auth import Token, UserLogin, UserRegister, UserResponse
-from app.services.auth_service import authenticate_user, register_user, authenticate_google_user
+from app.schemas.auth import (
+    Token,
+    UserLogin,
+    UserRegister,
+    UserResponse,
+    ForgotPasswordRequest,
+    VerifyOTPRequest,
+    ResetPasswordRequest,
+    GenericAuthResponse,
+    VerifyOTPResponse,
+)
+from app.services.auth_service import (
+    authenticate_user,
+    register_user,
+    authenticate_google_user,
+    request_password_reset,
+    verify_password_reset_otp,
+    reset_password_with_token,
+)
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -45,6 +62,13 @@ def get_current_user(
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired access token.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    if payload.get("purpose") == "password_reset":
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token purpose. Password reset tokens cannot be used as access tokens.",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
@@ -117,6 +141,62 @@ def get_me(
     Returns the currently authenticated farmer's user profile.
     """
     return UserResponse.model_validate(current_user)
+
+
+@router.post("/forgot-password", response_model=GenericAuthResponse, status_code=status.HTTP_200_OK)
+def forgot_password(
+    request_in: ForgotPasswordRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Initiates password recovery for a registered email or mobile number.
+    Sends a 6-digit verification code to the registered email address.
+    Always returns a generic success message to prevent user enumeration.
+    """
+    request_password_reset(db=db, identifier=request_in.identifier)
+    return GenericAuthResponse(
+        message="If an account with this email address exists, a 6-digit verification code has been sent."
+    )
+
+
+@router.post("/verify-otp", response_model=VerifyOTPResponse, status_code=status.HTTP_200_OK)
+def verify_otp(
+    verify_in: VerifyOTPRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Verifies the 6-digit recovery code and issues a short-lived reset authorization token.
+    Enforces maximum attempts and 5-minute expiry.
+    """
+    reset_token = verify_password_reset_otp(
+        db=db,
+        identifier=verify_in.identifier,
+        otp=verify_in.otp
+    )
+    return VerifyOTPResponse(
+        reset_token=reset_token,
+        token_type="bearer",
+        message="Verification code verified successfully."
+    )
+
+
+@router.post("/reset-password", response_model=GenericAuthResponse, status_code=status.HTTP_200_OK)
+def reset_password(
+    reset_in: ResetPasswordRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Sets a new password using the validated reset authorization token.
+    Invalidates the reset token and any remaining OTP requests.
+    """
+    reset_password_with_token(
+        db=db,
+        reset_token=reset_in.reset_token,
+        new_password=reset_in.new_password
+    )
+    return GenericAuthResponse(
+        message="Your password has been successfully reset. You may now log in with your new password."
+    )
 
 
 @router.get("/google/login", status_code=status.HTTP_302_FOUND)

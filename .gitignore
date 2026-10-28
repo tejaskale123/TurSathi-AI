@@ -343,6 +343,7 @@ project_dump.txt
 # Model Directories & Training Checkpoints
 models/
 **/models/
+!backend/app/database/models/
 old_models/
 **/old_models/
 wandb/

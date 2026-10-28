@@ -75,7 +75,7 @@ export interface AuthTokenResponse {
 export interface RegisterPayload {
   full_name: string;
   mobile_number: string;
-  email?: string;
+  email: string;
   password: string;
   confirm_password: string;
 }
@@ -217,4 +217,134 @@ export async function exchangeGoogleCode(code: string): Promise<AuthTokenRespons
   }
 
   return data as AuthTokenResponse;
+}
+
+export interface ForgotPasswordPayload {
+  identifier: string;
+}
+
+export interface VerifyOtpPayload {
+  identifier: string;
+  otp: string;
+}
+
+export interface ResetPasswordPayload {
+  reset_token: string;
+  new_password: string;
+  confirm_password: string;
+}
+
+export interface GenericMessageResponse {
+  message: string;
+}
+
+export interface VerifyOtpResponse {
+  reset_token: string;
+  token_type: string;
+  message: string;
+}
+
+export async function requestPasswordReset(identifier: string): Promise<GenericMessageResponse> {
+  const baseUrl = getBaseUrl();
+  console.log(`[MOBILE AUTH] Requesting Password Reset at: ${baseUrl}/api/v1/auth/forgot-password`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/api/v1/auth/forgot-password`, {
+      method: 'POST',
+      headers: getHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ identifier }),
+      signal: controller.signal,
+    });
+  } catch (err: any) {
+    if (err?.name === 'AbortError') {
+      throw new Error('Connection timed out. Please check your connection and try again.');
+    }
+    throw new Error('Unable to connect to server. Please check your connection and try again.');
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const errorMsg = extractErrorDetail(data, 'Unable to process password reset request.');
+    throw new Error(errorMsg);
+  }
+  return data as GenericMessageResponse;
+}
+
+export async function verifyPasswordResetOtp(identifier: string, otp: string): Promise<VerifyOtpResponse> {
+  const baseUrl = getBaseUrl();
+  console.log(`[MOBILE AUTH] Verifying Reset OTP at: ${baseUrl}/api/v1/auth/verify-otp`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/api/v1/auth/verify-otp`, {
+      method: 'POST',
+      headers: getHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({ identifier, otp }),
+      signal: controller.signal,
+    });
+  } catch (err: any) {
+    if (err?.name === 'AbortError') {
+      throw new Error('Connection timed out. Please check your connection and try again.');
+    }
+    throw new Error('Unable to connect to server. Please check your connection and try again.');
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const errorMsg = extractErrorDetail(data, 'Invalid verification code.');
+    throw new Error(errorMsg);
+  }
+
+  if (!data?.reset_token) {
+    throw new Error('Invalid verification response from server.');
+  }
+
+  return data as VerifyOtpResponse;
+}
+
+export async function submitPasswordReset(payload: ResetPasswordPayload): Promise<GenericMessageResponse> {
+  const baseUrl = getBaseUrl();
+  console.log(`[MOBILE AUTH] Submitting New Password at: ${baseUrl}/api/v1/auth/reset-password`);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(`${baseUrl}/api/v1/auth/reset-password`, {
+      method: 'POST',
+      headers: getHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+  } catch (err: any) {
+    if (err?.name === 'AbortError') {
+      throw new Error('Connection timed out. Please check your connection and try again.');
+    }
+    throw new Error('Unable to connect to server. Please check your connection and try again.');
+  } finally {
+    clearTimeout(timeoutId);
+  }
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const errorMsg = extractErrorDetail(data, 'Failed to reset password. Please try again.');
+    throw new Error(errorMsg);
+  }
+
+  return data as GenericMessageResponse;
 }

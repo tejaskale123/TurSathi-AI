@@ -7,7 +7,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 class UserRegister(BaseModel):
     full_name: str = Field(..., description="User's full name")
     mobile_number: str = Field(..., description="10-digit Indian mobile number")
-    email: Optional[str] = Field(None, description="Optional email address")
+    email: str = Field(..., description="Email address required for password recovery")
     password: str = Field(..., min_length=8, description="Password (at least 8 characters)")
     confirm_password: str = Field(..., description="Must match password")
 
@@ -33,14 +33,14 @@ class UserRegister(BaseModel):
 
     @field_validator("email")
     @classmethod
-    def validate_email(cls, v: Optional[str]) -> Optional[str]:
-        if v is None:
-            return None
+    def validate_email(cls, v: str) -> str:
+        if not v:
+            raise ValueError("Email address is required")
         trimmed = v.strip().lower()
         if not trimmed:
-            return None
+            raise ValueError("Email address cannot be empty")
         if not re.match(r"^[^\s@]+@[^\s@]+\.[^\s@]+$", trimmed):
-            raise ValueError("Enter a valid email address or leave it blank")
+            raise ValueError("Enter a valid email address")
         return trimmed
 
     @model_validator(mode="after")
@@ -85,3 +85,66 @@ class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
     user: UserResponse
+
+
+class ForgotPasswordRequest(BaseModel):
+    identifier: str = Field(..., description="Registered email address")
+
+    @field_validator("identifier")
+    @classmethod
+    def validate_identifier(cls, v: str) -> str:
+        trimmed = v.strip().lower()
+        if not trimmed:
+            raise ValueError("Email address is required")
+        return trimmed
+
+
+class VerifyOTPRequest(BaseModel):
+    identifier: str = Field(..., description="Registered email address")
+    otp: str = Field(..., description="6-digit verification code")
+
+    @field_validator("identifier")
+    @classmethod
+    def validate_identifier(cls, v: str) -> str:
+        trimmed = v.strip().lower()
+        if not trimmed:
+            raise ValueError("Email address is required")
+        return trimmed
+
+    @field_validator("otp")
+    @classmethod
+    def validate_otp(cls, v: str) -> str:
+        cleaned = re.sub(r"\s+", "", v)
+        if not re.match(r"^\d{6}$", cleaned):
+            raise ValueError("Verification code must be exactly 6 digits")
+        return cleaned
+
+
+class ResetPasswordRequest(BaseModel):
+    reset_token: str = Field(..., description="Single-use reset authorization token")
+    new_password: str = Field(..., min_length=8, description="New password (at least 8 characters)")
+    confirm_password: str = Field(..., description="Must match new password")
+
+    @field_validator("reset_token")
+    @classmethod
+    def validate_token(cls, v: str) -> str:
+        trimmed = v.strip()
+        if not trimmed:
+            raise ValueError("Reset authorization token is required")
+        return trimmed
+
+    @model_validator(mode="after")
+    def check_passwords_match(self) -> "ResetPasswordRequest":
+        if self.new_password != self.confirm_password:
+            raise ValueError("Password and Confirm Password do not match")
+        return self
+
+
+class GenericAuthResponse(BaseModel):
+    message: str
+
+
+class VerifyOTPResponse(BaseModel):
+    reset_token: str
+    token_type: str = "bearer"
+    message: str = "Code verified successfully."
