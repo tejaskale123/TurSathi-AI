@@ -78,7 +78,16 @@ function classifyHttpError(status: number, rawDetail?: any): ScanUploadError {
     case 400:
       return new ScanUploadError(400, msg || 'Bad request. Please try again.', false, reason, messageMr);
     case 401:
-      return new ScanUploadError(401, 'Session expired. Please log in again.', false, reason, messageMr);
+      return new ScanUploadError(
+        401,
+        (typeof rawDetail === 'string' && rawDetail.trim()) ||
+        rawDetail?.message ||
+        rawDetail?.detail ||
+        'Session expired. Please log in again.',
+        false,
+        reason,
+        messageMr,
+      );
     case 403:
       return new ScanUploadError(403, 'Access denied.', false, reason, messageMr);
     case 404:
@@ -134,9 +143,9 @@ export async function uploadScanImage(
         httpMethod: 'POST',
         uploadType: FileSystem.FileSystemUploadType.MULTIPART,
         fieldName: 'image',
-        headers: {
+        headers: getHeaders({
           Authorization: `Bearer ${token}`,
-        },
+        }),
         parameters: {
           crop: crop,
         },
@@ -294,9 +303,9 @@ export async function uploadVoiceReport(
         httpMethod: 'POST',
         uploadType: FileSystem.FileSystemUploadType.MULTIPART,
         fieldName: 'audio',
-        headers: {
+        headers: getHeaders({
           Authorization: `Bearer ${token}`,
-        },
+        }),
         parameters,
       });
 
