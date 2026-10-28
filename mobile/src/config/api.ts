@@ -113,9 +113,9 @@ export async function registerUser(payload: RegisterPayload): Promise<AuthTokenR
   try {
     response = await fetch(`${baseUrl}/api/v1/auth/register`, {
       method: 'POST',
-      headers: {
+      headers: getHeaders({
         'Content-Type': 'application/json',
-      },
+      }),
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
@@ -152,9 +152,9 @@ export async function loginUser(payload: LoginPayload): Promise<AuthTokenRespons
   try {
     response = await fetch(`${baseUrl}/api/v1/auth/login`, {
       method: 'POST',
-      headers: {
+      headers: getHeaders({
         'Content-Type': 'application/json',
-      },
+      }),
       body: JSON.stringify(payload),
       signal: controller.signal,
     });
@@ -194,9 +194,9 @@ export async function exchangeGoogleCode(code: string): Promise<AuthTokenRespons
   try {
     response = await fetch(`${baseUrl}/api/v1/auth/google/exchange`, {
       method: 'POST',
-      headers: {
+      headers: getHeaders({
         'Content-Type': 'application/json',
-      },
+      }),
       body: JSON.stringify({ exchange_code: code }),
       signal: controller.signal,
     });

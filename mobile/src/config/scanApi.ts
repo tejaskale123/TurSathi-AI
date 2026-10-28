@@ -16,7 +16,7 @@
 
 import * as FileSystem from 'expo-file-system/legacy';
 import { Platform } from 'react-native';
-import { getBaseUrl } from './api';
+import { getBaseUrl, getHeaders } from './api';
 
 const UPLOAD_TIMEOUT_MS = 30000; // 30 seconds for image upload
 const VOICE_UPLOAD_TIMEOUT_MS = 60000; // 60 seconds for audio upload
@@ -214,9 +214,9 @@ export async function uploadScanImage(
   try {
     response = await fetch(url, {
       method: 'POST',
-      headers: {
+      headers: getHeaders({
         Authorization: `Bearer ${token}`,
-      },
+      }),
       body: formData,
       signal: controller.signal,
     });
@@ -378,9 +378,9 @@ export async function uploadVoiceReport(
   try {
     response = await fetch(url, {
       method: 'POST',
-      headers: {
+      headers: getHeaders({
         Authorization: `Bearer ${token}`,
-      },
+      }),
       body: formData,
       signal: controller.signal,
     });
@@ -443,9 +443,9 @@ export async function predictTurLeaf(
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
+      headers: getHeaders({
         Authorization: `Bearer ${token}`,
-      },
+      }),
     });
 
     let data: any = {};
@@ -503,9 +503,9 @@ export async function validateCameraFrame(
         httpMethod: 'POST',
         uploadType: FileSystem.FileSystemUploadType.MULTIPART,
         fieldName: 'image',
-        headers: {
+        headers: getHeaders({
           Authorization: `Bearer ${token}`,
-        },
+        }),
       });
 
       if (result.status >= 200 && result.status < 300) {
@@ -535,9 +535,9 @@ export async function validateCameraFrame(
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: {
+        headers: getHeaders({
           Authorization: `Bearer ${token}`,
-        },
+        }),
         body: formData,
       });
 

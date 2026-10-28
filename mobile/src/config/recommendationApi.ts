@@ -1,4 +1,4 @@
-import { getBaseUrl } from './api';
+import { getBaseUrl, getHeaders } from './api';
 
 export interface SprayGuidanceResponse {
   crop: string;
@@ -87,7 +87,7 @@ export async function fetchTurSprayGuidance(
   try {
     const response = await fetch(url, {
       method: 'GET',
-      headers,
+      headers: getHeaders(headers),
       signal: controller.signal,
     });
 
@@ -154,7 +154,7 @@ export async function fetchAIGuidance(
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers,
+      headers: getHeaders(headers),
       body: JSON.stringify({}),
       signal: controller.signal,
     });
