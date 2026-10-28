@@ -27,11 +27,7 @@ let VOICE_GUIDANCE_ASSET: number | null = null;
 try {
   VOICE_GUIDANCE_ASSET = require('../../assets/audio/tur_leaf_scan_guide.mp3');
 } catch {
-  try {
-    VOICE_GUIDANCE_ASSET = require('../../assets/audio/tur_leaf_scan_guide.wav');
-  } catch {
-    VOICE_GUIDANCE_ASSET = null;
-  }
+  VOICE_GUIDANCE_ASSET = null;
 }
 
 // ============================================================================
