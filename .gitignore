@@ -155,6 +155,8 @@ tursathi_db_backup*
 /tur_dataset_source/**
 /A novel pigeonpea leaf dataset*/
 /A novel pigeonpea leaf dataset*/**
+incoming_hard_negatives/
+**/incoming_hard_negatives/
 /archive/
 /archive/**
 *.zip
@@ -164,21 +166,45 @@ tursathi_db_backup*
 *.rar
 *.dump
 tursathi_clean_project.zip
+Tur_Disease_Dataset.zip
 
+# Audio Formats, Voice Recordings & Generated Audio
+*.m4a
+*.mp3
+*.wav
+*.webm
+*.ogg
+*.aac
+*.3gp
+*.flac
+*.opus
+*.amr
 
-# User Uploads, Smoke Tests & Test Gate Images
+# Required audio assets (mobile guidance assets & test fixtures must survive)
+!/mobile/assets/**
+!/mobile/assets/**/
+!scripts/sample_marathi_speech.wav
+
+# User Uploads, Smoke Tests, Scans & Runtime Staging
 backend/uploads/*
 !backend/uploads/.gitkeep
 /uploads/
+**/uploads/
 uploads_smoke/
+**/uploads_smoke/
 backend/uploads_smoke/
 backend/uploads_comprehensive/
 backend/test_gate_images/
-backend/scratch_bias_experiment/transformed_images/
+backend/scratch_bias_experiment/
 reports/contact_sheets/
 reports/duplicate_review/
+scans/
+**/scans/
+voice_reports/
+**/voice_reports/
 tmp/
 temp/
+test_clone/
 
 
 # ------------------------------------------------------------------------------
@@ -296,13 +322,29 @@ project_dump.txt
 *.xz
 
 # ------------------------------------------------------------------------------
-# 10. ML Training Checkpoints, Experiments & WandB Logs
+# 10. Machine Learning Models, Checkpoints & Training Artifacts
 # ------------------------------------------------------------------------------
-# Production models (best_pigeonpea_disease_final_efficientnet_b0.pth, etc.) remain tracked
-models/experimental_*.pth
-models/*.checkpoint.pth
+# AI / ML Model Weights and Formats
+*.pth
+*.pt
+*.onnx
+*.h5
+*.keras
+*.safetensors
+*.ckpt
+*.bin
+*.joblib
+*.pkl
+*.pb
+*.tflite
 *.pt.tmp
 *.pth.tmp
+
+# Model Directories & Training Checkpoints
+models/
+**/models/
+old_models/
+**/old_models/
 wandb/
 ml/**/wandb/
 ml/**/checkpoints/
