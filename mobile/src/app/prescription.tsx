@@ -65,6 +65,7 @@ const LOCALIZED_STRINGS: Record<
     healthyDesc: string;
     invalidImageTitle: string;
     invalidImageDesc: string;
+    recordedObservationTitle: string;
   }
 > = {
   en: {
@@ -99,6 +100,7 @@ const LOCALIZED_STRINGS: Record<
       'Your Tur leaf appears healthy. Continue regular field monitoring and balanced irrigation without applying unnecessary chemical sprays.',
     invalidImageTitle: 'Invalid Image',
     invalidImageDesc: 'Please capture a clear photo of a Tur leaf.',
+    recordedObservationTitle: 'Your Recorded Observation',
   },
   mr: {
     brand: 'TurSathi AI',
@@ -132,6 +134,7 @@ const LOCALIZED_STRINGS: Record<
       'तुमचे तूर पान निरोगी दिसत आहे. नियमित शेती निरीक्षण आणि योग्य पाणी व्यवस्थापन सुरू ठेवा; अनावश्यक फवारणी टाळा.',
     invalidImageTitle: 'अवैध फोटो',
     invalidImageDesc: 'कृपया तूर पानाचा स्पष्ट फोटो घ्या.',
+    recordedObservationTitle: 'तुम्ही नोंदवलेली समस्या',
   },
   hi: {
     brand: 'TurSathi AI',
@@ -165,6 +168,7 @@ const LOCALIZED_STRINGS: Record<
       'आपकी तूर पत्ती स्वस्थ दिखाई दे रही है। नियमित खेत की निगरानी और उचित सिंचाई जारी रखें; अनावश्यक कीटनाशक से बचें।',
     invalidImageTitle: 'अमान्य फोटो',
     invalidImageDesc: 'कृपया तूर पत्ती की स्पष्ट फोटो लें।',
+    recordedObservationTitle: 'आपकी दर्ज की गई समस्या',
   },
 };
 
@@ -270,6 +274,7 @@ export default function PrescriptionScreen() {
   const params = useLocalSearchParams<{
     imageUri?: string | string[];
     voiceUri?: string | string[];
+    transcription?: string | string[];
     scanId?: string | string[];
     disease_name?: string;
     confidence?: string;
@@ -277,6 +282,23 @@ export default function PrescriptionScreen() {
     status?: string;
     crop?: string;
   }>();
+
+  // Extract and normalize transcription safely
+  const rawTranscription = Array.isArray(params.transcription)
+    ? params.transcription[0]
+    : params.transcription;
+
+  let normalizedTranscription = '';
+  if (rawTranscription && typeof rawTranscription === 'string') {
+    try {
+      normalizedTranscription = rawTranscription.includes('%')
+        ? decodeURIComponent(rawTranscription)
+        : rawTranscription;
+    } catch {
+      normalizedTranscription = rawTranscription;
+    }
+    normalizedTranscription = normalizedTranscription.trim();
+  }
 
   // Extract crop and capitalize
   const rawCrop = params.crop ? (Array.isArray(params.crop) ? params.crop[0] : params.crop) : 'Tur';
@@ -598,6 +620,18 @@ export default function PrescriptionScreen() {
               </View>
             )}
           </View>
+
+          {/* SECTION 2B — RECORDED OBSERVATION */}
+          {Boolean(normalizedTranscription) && (
+            <View style={styles.card}>
+              <View style={styles.cardHeaderRow}>
+                <Text style={styles.cardCategoryLabel}>{labels.recordedObservationTitle}</Text>
+              </View>
+              <Text style={styles.explanationText}>
+                {normalizedTranscription}
+              </Text>
+            </View>
+          )}
 
           {/* SECTION 3 — WHAT DOES THIS MEAN? */}
           <View style={styles.card}>

@@ -853,6 +853,7 @@ export default function ProblemDescriptionScreen() {
     console.log('  voiceUri:', recordedUri);
     console.log('  scanId:', scanId);
 
+    let voiceTranscription: string | null = null;
     let prediction: any = null;
 
     // Upload voice recording to backend
@@ -862,13 +863,16 @@ export default function ProblemDescriptionScreen() {
         if (token) {
           const langCode = language === 'mr' ? 'mr' : language === 'hi' ? 'hi' : 'en';
           const tUploadStart = Date.now();
-          await uploadVoiceReport(
+          const voiceRes = await uploadVoiceReport(
             scanId,
             recordedUri,
             token,
             langCode,
             recordedDuration > 0 ? recordedDuration : undefined,
           );
+          if (voiceRes && typeof voiceRes.transcription === 'string' && voiceRes.transcription.trim()) {
+            voiceTranscription = voiceRes.transcription.trim();
+          }
           const tUploadEnd = Date.now();
           console.log(`[PERF][VOICE_SUBMIT] Audio upload completed in ${tUploadEnd - tUploadStart}ms for scan_id: ${scanId}`);
 
@@ -923,6 +927,7 @@ export default function ProblemDescriptionScreen() {
       params: {
         imageUri: encodeURIComponent(finalImageUri),
         voiceUri: encodeURIComponent(recordedUri),
+        ...(voiceTranscription ? { transcription: voiceTranscription } : {}),
         ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
         diseaseName: prediction?.disease_name ?? passedDiseaseName,
         disease_name: prediction?.disease_name ?? passedDiseaseName,

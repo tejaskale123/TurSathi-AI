@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Header, status, Body
+from fastapi import APIRouter, Depends, HTTPException, Header, status, Body, Request
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import httpx
@@ -29,6 +29,7 @@ from app.services.auth_service import (
     request_password_reset,
     verify_password_reset_otp,
     reset_password_with_token,
+    record_login_attempt,
 )
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -114,16 +115,22 @@ def register(
 @router.post("/login", response_model=Token, status_code=status.HTTP_200_OK)
 def login(
     login_in: UserLogin,
+    request: Request = None,
     db: Session = Depends(get_db)
 ):
     """
     Authenticates a farmer using mobile number OR email and password.
     Returns signed JWT access token and user profile.
     """
+    client_ip = request.client.host if (request and request.client) else None
+    user_agent = request.headers.get("user-agent") if (request and hasattr(request, "headers")) else None
+
     user = authenticate_user(
         db=db,
         identifier=login_in.identifier,
-        password=login_in.password
+        password=login_in.password,
+        ip_address=client_ip,
+        user_agent=user_agent,
     )
     access_token = create_access_token(subject=user.id)
     return Token(
@@ -222,7 +229,7 @@ def google_login():
 
 
 @router.get("/google/callback")
-async def google_callback(code: str, db: Session = Depends(get_db)):
+async def google_callback(code: str, request: Request = None, db: Session = Depends(get_db)):
     """
     Handles the callback from Google. Exchanges the code for an access token,
     retrieves user info, and creates a short-lived exchange code.
@@ -267,7 +274,9 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Incomplete user information from Google.")
         
     # Authenticate or create user
-    user = authenticate_google_user(db, google_id=google_id, email=email, name=name)
+    client_ip = request.client.host if (request and request.client) else None
+    user_agent = request.headers.get("user-agent") if (request and hasattr(request, "headers")) else None
+    user = authenticate_google_user(db, google_id=google_id, email=email, name=name, ip_address=client_ip, user_agent=user_agent)
     
     # Create a short-lived exchange code (valid for 5 minutes)
     exchange_code = create_access_token(subject=f"exchange_{user.id}", expires_delta=timedelta(minutes=5))
@@ -286,22 +295,53 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
 @router.post("/google/exchange", response_model=Token, status_code=status.HTTP_200_OK)
 def google_exchange(
     exchange_code: str = Body(..., embed=True),
+    request: Request = None,
     db: Session = Depends(get_db)
 ):
     """
     Exchanges the short-lived exchange code for a permanent access token.
     """
+    client_ip = request.client.host if (request and request.client) else None
+    user_agent = request.headers.get("user-agent") if (request and hasattr(request, "headers")) else None
+
     payload = decode_access_token(exchange_code)
     if not payload or not payload.get("sub", "").startswith("exchange_"):
+        record_login_attempt(
+            db=db,
+            user_id=None,
+            login_method="google_oauth",
+            status="failed",
+            failure_reason="invalid_exchange_code",
+            ip_address=client_ip,
+            user_agent=user_agent,
+        )
         raise HTTPException(status_code=401, detail="Invalid or expired exchange code.")
         
     try:
         user_id = int(payload["sub"].split("_")[1])
     except (ValueError, IndexError):
+        record_login_attempt(
+            db=db,
+            user_id=None,
+            login_method="google_oauth",
+            status="failed",
+            failure_reason="invalid_token_subject",
+            ip_address=client_ip,
+            user_agent=user_agent,
+        )
         raise HTTPException(status_code=401, detail="Invalid token subject.")
         
     user = db.query(User).filter(User.id == user_id).first()
     if not user or not user.is_active:
+        record_login_attempt(
+            db=db,
+            user_id=user.id if user else user_id,
+            login_method="google_oauth",
+            status="failed",
+            failure_reason="account_inactive",
+            ip_address=client_ip,
+            user_agent=user_agent,
+        )
         raise HTTPException(status_code=401, detail="User not found or inactive.")
         
     # Generate the real access token

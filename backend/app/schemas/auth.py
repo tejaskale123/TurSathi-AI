@@ -39,8 +39,9 @@ class UserRegister(BaseModel):
         trimmed = v.strip().lower()
         if not trimmed:
             raise ValueError("Email address cannot be empty")
-        if not re.match(r"^[^\s@]+@[^\s@]+\.[^\s@]+$", trimmed):
-            raise ValueError("Enter a valid email address")
+        email_regex = r"^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$"
+        if not re.match(email_regex, trimmed):
+            raise ValueError("Please enter a valid email address.")
         return trimmed
 
     @model_validator(mode="after")

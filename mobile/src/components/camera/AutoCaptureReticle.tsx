@@ -27,6 +27,7 @@ import {
 
 interface StateGuidance {
   badge: string;
+  badgeColor?: string;
   instruction: string;
 }
 

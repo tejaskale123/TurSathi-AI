@@ -588,6 +588,8 @@ export default function VoiceRecordScreen() {
     console.log('  voiceUri:', recordedUri);
     console.log('  scanId:', scanId);
 
+    let voiceTranscription: string | null = null;
+
     // Upload voice recording to backend (best-effort: failure doesn't block prescription)
     if (scanId !== null && !isNaN(scanId)) {
       try {
@@ -595,13 +597,16 @@ export default function VoiceRecordScreen() {
         if (token) {
           const langCode = language === 'mr' ? 'mr' : language === 'hi' ? 'hi' : 'en';
           const tUploadStart = Date.now();
-          await uploadVoiceReport(
+          const voiceRes = await uploadVoiceReport(
             scanId,
             recordedUri,
             token,
             langCode,
             recordedDuration > 0 ? recordedDuration : undefined,
           );
+          if (voiceRes && typeof voiceRes.transcription === 'string' && voiceRes.transcription.trim()) {
+            voiceTranscription = voiceRes.transcription.trim();
+          }
           const tUploadEnd = Date.now();
           console.log(`[PERF][VOICE_RECORD] Voice uploaded in ${tUploadEnd - tUploadStart}ms for scan_id: ${scanId}`);
         }
@@ -623,6 +628,7 @@ export default function VoiceRecordScreen() {
       params: {
         imageUri: encodeURIComponent(finalImageUri),
         voiceUri: encodeURIComponent(recordedUri),
+        ...(voiceTranscription ? { transcription: voiceTranscription } : {}),
         ...(scanId !== null && !isNaN(scanId) ? { scanId: String(scanId) } : {}),
       },
     });

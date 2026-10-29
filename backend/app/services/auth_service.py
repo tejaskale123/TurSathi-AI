@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 from app.core.config import settings
 from app.core.security import get_password_hash, verify_password
 from app.database.models.password_reset_otp import PasswordResetOTP
+from app.database.models.login_history import LoginHistory
 from app.database.models.user import User
 from app.schemas.auth import UserRegister
 from app.services.email_service import send_otp_email
@@ -54,7 +55,7 @@ def register_user(db: Session, user_in: UserRegister) -> User:
         if existing_email:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Email address is already registered. Please login or use a different email."
+                detail="This email is already registered. Please log in or use another email address."
             )
 
     # 3. Hash password securely
@@ -75,9 +76,91 @@ def register_user(db: Session, user_in: UserRegister) -> User:
     return db_user
 
 
-def authenticate_user(db: Session, identifier: str, password: str) -> User:
+def _sanitize_ip(ip: Optional[str]) -> Optional[str]:
+    """
+    Validates and sanitizes client IP address. Supports IPv4/IPv6 up to 45 chars.
+    Returns None if missing, malformed, or containing invalid characters.
+    """
+    if not ip or not isinstance(ip, str):
+        return None
+    cleaned = ip.strip()
+    if not cleaned:
+        return None
+    # Standard characters for IPv4, IPv6, and scoped zone IDs
+    if all(c in "0123456789abcdefABCDEF:.[%]" for c in cleaned):
+        return cleaned[:45]
+    return None
+
+
+def _sanitize_user_agent(ua: Optional[str]) -> Optional[str]:
+    """
+    Sanitizes user-agent string, stripping non-printable/control chars and truncating to 255 chars.
+    Returns None if missing or empty.
+    """
+    if not ua or not isinstance(ua, str):
+        return None
+    cleaned = ua.strip()
+    if not cleaned:
+        return None
+    printable = "".join(c for c in cleaned if 31 < ord(c) < 127)
+    if not printable:
+        return None
+    return printable[:255]
+
+
+def record_login_attempt(
+    db: Session,
+    user_id: Optional[int],
+    login_method: str,
+    status: str,
+    failure_reason: Optional[str] = None,
+    ip_address: Optional[str] = None,
+    user_agent: Optional[str] = None,
+) -> Optional[LoginHistory]:
+    """
+    Safely and durably records a login event (success or failure) to login_history.
+
+    Security & Privacy Rules:
+    - Never throws exceptions to the caller; failures are caught and logged.
+    - If inserting fails, does not break caller authentication or corrupt session state.
+    - user_id is nullable (null for unidentifiable accounts).
+    - NEVER records passwords, hashes, tokens, OTPs, or raw submitted identifiers.
+    - failure_reason must only be safe generic strings (e.g. 'invalid_credentials', 'account_inactive').
+    """
+    try:
+        sanitized_ip = _sanitize_ip(ip_address)
+        sanitized_ua = _sanitize_user_agent(user_agent)
+        record = LoginHistory(
+            user_id=user_id,
+            login_at=datetime.now(timezone.utc),
+            login_method=login_method,
+            status=status,
+            failure_reason=failure_reason,
+            ip_address=sanitized_ip,
+            user_agent=sanitized_ua,
+        )
+        db.add(record)
+        db.commit()
+        return record
+    except Exception as exc:
+        try:
+            db.rollback()
+        except Exception:
+            pass
+        logger.error("[AUTH_HISTORY] Failed to persist login history record: %s", exc)
+        return None
+
+
+def authenticate_user(
+    db: Session,
+    identifier: str,
+    password: str,
+    ip_address: Optional[str] = None,
+    user_agent: Optional[str] = None,
+) -> User:
     """
     Authenticates a user by email OR mobile number and verifies password.
+    Records successful and failed login attempts securely.
     Returns user instance or raises HTTP 401/400.
     """
     cleaned_identifier = identifier.strip()
@@ -95,6 +178,15 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
     ).first()
 
     if not db_user:
+        record_login_attempt(
+            db=db,
+            user_id=None,
+            login_method="local_password",
+            status="failed",
+            failure_reason="invalid_credentials",
+            ip_address=ip_address,
+            user_agent=user_agent,
+        )
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid mobile number/email or password.",
@@ -102,6 +194,15 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
         )
 
     if not verify_password(password, db_user.password_hash):
+        record_login_attempt(
+            db=db,
+            user_id=db_user.id,
+            login_method="local_password",
+            status="failed",
+            failure_reason="invalid_credentials",
+            ip_address=ip_address,
+            user_agent=user_agent,
+        )
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid mobile number/email or password.",
@@ -109,17 +210,45 @@ def authenticate_user(db: Session, identifier: str, password: str) -> User:
         )
 
     if not db_user.is_active:
+        record_login_attempt(
+            db=db,
+            user_id=db_user.id,
+            login_method="local_password",
+            status="failed",
+            failure_reason="account_inactive",
+            ip_address=ip_address,
+            user_agent=user_agent,
+        )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="User account is inactive. Please contact support."
         )
 
+    # Successful local authentication
+    record_login_attempt(
+        db=db,
+        user_id=db_user.id,
+        login_method="local_password",
+        status="success",
+        failure_reason=None,
+        ip_address=ip_address,
+        user_agent=user_agent,
+    )
+
     return db_user
 
 
-def authenticate_google_user(db: Session, google_id: str, email: str, name: str) -> User:
+def authenticate_google_user(
+    db: Session,
+    google_id: str,
+    email: str,
+    name: str,
+    ip_address: Optional[str] = None,
+    user_agent: Optional[str] = None,
+) -> User:
     """
     Finds or creates a TurSathi user from Google OAuth profile data.
+    Records successful and failed Google authentication attempts securely.
     """
     normalized_email = normalize_email(email)
     
@@ -127,7 +256,25 @@ def authenticate_google_user(db: Session, google_id: str, email: str, name: str)
     user = db.query(User).filter(User.google_id == google_id).first()
     if user:
         if not user.is_active:
+            record_login_attempt(
+                db=db,
+                user_id=user.id,
+                login_method="google_oauth",
+                status="failed",
+                failure_reason="account_inactive",
+                ip_address=ip_address,
+                user_agent=user_agent,
+            )
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User account is inactive. Please contact support.")
+        record_login_attempt(
+            db=db,
+            user_id=user.id,
+            login_method="google_oauth",
+            status="success",
+            failure_reason=None,
+            ip_address=ip_address,
+            user_agent=user_agent,
+        )
         return user
         
     # 2. Check if a local user exists with the SAME verified email
@@ -139,7 +286,25 @@ def authenticate_google_user(db: Session, google_id: str, email: str, name: str)
             db.commit()
             db.refresh(existing_email_user)
             if not existing_email_user.is_active:
+                record_login_attempt(
+                    db=db,
+                    user_id=existing_email_user.id,
+                    login_method="google_oauth",
+                    status="failed",
+                    failure_reason="account_inactive",
+                    ip_address=ip_address,
+                    user_agent=user_agent,
+                )
                 raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="User account is inactive. Please contact support.")
+            record_login_attempt(
+                db=db,
+                user_id=existing_email_user.id,
+                login_method="google_oauth",
+                status="success",
+                failure_reason=None,
+                ip_address=ip_address,
+                user_agent=user_agent,
+            )
             return existing_email_user
             
     # 3. Create a NEW Google-only user
@@ -153,6 +318,15 @@ def authenticate_google_user(db: Session, google_id: str, email: str, name: str)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
+    record_login_attempt(
+        db=db,
+        user_id=new_user.id,
+        login_method="google_oauth",
+        status="success",
+        failure_reason=None,
+        ip_address=ip_address,
+        user_agent=user_agent,
+    )
     return new_user
 
 

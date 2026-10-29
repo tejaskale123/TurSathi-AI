@@ -46,7 +46,7 @@ const copy = {
     requiredMobile: 'Enter your mobile number.',
     invalidMobile: 'Enter a valid 10-digit mobile number.',
     requiredEmail: 'Enter your email address.',
-    invalidEmail: 'Enter a valid email address.',
+    invalidEmail: 'Please enter a valid email address.',
     requiredPassword: 'Enter a password with at least 8 characters.',
     mismatch: 'The passwords do not match.',
     requiredTerms: 'Please accept the Terms of Service and Privacy Policy.',
@@ -134,6 +134,8 @@ export default function RegisterScreen() {
   const handleCreateAccount = async () => {
     const nextErrors: Partial<Record<FieldName, string>> = {};
     const normalizedMobile = mobile.replace(/[\s()-]/g, '').replace(/^\+91/, '');
+    const normalizedEmail = email.trim().toLowerCase();
+    const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 
     if (!name.trim()) nextErrors.name = text.requiredName;
     if (!mobile.trim()) {
@@ -141,9 +143,9 @@ export default function RegisterScreen() {
     } else if (!/^[6-9]\d{9}$/.test(normalizedMobile)) {
       nextErrors.mobile = text.invalidMobile;
     }
-    if (!email.trim()) {
+    if (!normalizedEmail) {
       nextErrors.email = text.requiredEmail;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    } else if (!EMAIL_REGEX.test(normalizedEmail)) {
       nextErrors.email = text.invalidEmail;
     }
     if (password.length < 8) nextErrors.password = text.requiredPassword;
@@ -163,7 +165,7 @@ export default function RegisterScreen() {
       const regResult = await registerUser({
         full_name: name.trim(),
         mobile_number: normalizedMobile,
-        email: email.trim(),
+        email: normalizedEmail,
         password: password,
         confirm_password: confirmPassword,
       });
@@ -175,7 +177,14 @@ export default function RegisterScreen() {
       router.replace('/scan');
     } catch (err: any) {
       setIsLoading(false);
-      setMessage(err.message || 'Registration failed. Please try again.');
+      const errMsg = err?.message || 'Registration failed. Please try again.';
+      if (errMsg.toLowerCase().includes('mobile') && errMsg.toLowerCase().includes('already registered')) {
+        setErrors((prev) => ({ ...prev, mobile: errMsg }));
+      } else if (errMsg.toLowerCase().includes('already registered') || errMsg.toLowerCase().includes('email')) {
+        setErrors((prev) => ({ ...prev, email: errMsg }));
+      } else {
+        setMessage(errMsg);
+      }
     }
   };
 

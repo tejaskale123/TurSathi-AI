@@ -36,6 +36,7 @@ export interface ClaudeGuidanceResponse {
   spray_guidance: SprayGuidanceDetails | null;
   warnings: string[];
   language: string;
+  important_alert?: string | null;
 }
 
 function extractErrorDetail(data: any, fallback: string): string {

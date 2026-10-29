@@ -180,6 +180,7 @@ const UI_TEXT: Record<
     errorTitle: string;
     unverifiedTitle: string;
     tryAgain: string;
+    recordedObservationTitle: string;
   }
 > = {
   en: {
@@ -208,6 +209,7 @@ const UI_TEXT: Record<
     errorTitle: 'Verified spray guidance is currently unavailable.',
     unverifiedTitle: 'Verified spray guidance is not available for this condition yet.',
     tryAgain: 'Try Again',
+    recordedObservationTitle: 'Your Recorded Observation',
   },
   mr: {
     brand: 'TurSathi AI',
@@ -235,6 +237,7 @@ const UI_TEXT: Record<
     errorTitle: 'पडताळलेले फवारणी मार्गदर्शन सध्या उपलब्ध नाही.',
     unverifiedTitle: 'या स्थितीसाठी पडताळलेले फवारणी मार्गदर्शन अद्याप उपलब्ध नाही.',
     tryAgain: 'पुन्हा प्रयत्न करा',
+    recordedObservationTitle: 'तुम्ही नोंदवलेली समस्या',
   },
   hi: {
     brand: 'TurSathi AI',
@@ -262,6 +265,7 @@ const UI_TEXT: Record<
     errorTitle: 'सत्यापित छिड़काव मार्गदर्शन वर्तमान में उपलब्ध नहीं है।',
     unverifiedTitle: 'इस स्थिति के लिए सत्यापित छिड़काव मार्गदर्शन अभी उपलब्ध नहीं है।',
     tryAgain: 'पुनः प्रयास करें',
+    recordedObservationTitle: 'आपकी दर्ज की गई समस्या',
   },
 };
 
@@ -355,9 +359,27 @@ export default function SprayGuidanceScreen() {
     status?: string;
     imageUri?: string;
     voiceUri?: string;
+    transcription?: string | string[];
     scanId?: string;
     crop?: string;
   }>();
+
+  // Extract and normalize transcription safely
+  const rawTranscription = Array.isArray(params.transcription)
+    ? params.transcription[0]
+    : params.transcription;
+
+  let normalizedTranscription = '';
+  if (rawTranscription && typeof rawTranscription === 'string') {
+    try {
+      normalizedTranscription = rawTranscription.includes('%')
+        ? decodeURIComponent(rawTranscription)
+        : rawTranscription;
+    } catch {
+      normalizedTranscription = rawTranscription;
+    }
+    normalizedTranscription = normalizedTranscription.trim();
+  }
 
   const rawDiseaseName = (params.diseaseName?.trim() || params.disease_name?.trim() || '').trim();
   const parsedConfidence = Number(params.confidence);
@@ -577,6 +599,7 @@ export default function SprayGuidanceScreen() {
       params: {
         ...(params.imageUri ? { imageUri: params.imageUri } : {}),
         ...(params.voiceUri ? { voiceUri: params.voiceUri } : {}),
+        ...(normalizedTranscription ? { transcription: normalizedTranscription } : {}),
         ...(diseaseParam ? { disease_name: diseaseParam } : {}),
         ...(params.confidence ? { confidence: String(params.confidence) } : {}),
         ...(params.severity ? { severity: params.severity } : {}),
@@ -672,7 +695,7 @@ export default function SprayGuidanceScreen() {
 
             <Pressable
               accessibilityRole="button"
-              onPress={loadGuidance}
+              onPress={() => loadGuidance()}
               style={({ pressed }) => [styles.primaryCta, pressed && styles.buttonPressed]}
             >
               <Text style={styles.primaryCtaText}>{ui.tryAgain}</Text>
@@ -920,6 +943,18 @@ export default function SprayGuidanceScreen() {
               </Text>
             </View>
           </View>
+
+          {/* RECORDED OBSERVATION */}
+          {Boolean(normalizedTranscription) && (
+            <View style={styles.card}>
+              <View style={styles.conditionRow}>
+                <Text style={styles.cardCategoryLabel}>{ui.recordedObservationTitle}</Text>
+              </View>
+              <Text style={[styles.cardBodyText, { marginTop: 8 }]}>
+                {normalizedTranscription}
+              </Text>
+            </View>
+          )}
 
           {/* SECTION B: LEAF CONDITION */}
           <View style={styles.card}>

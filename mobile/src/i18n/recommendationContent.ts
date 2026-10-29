@@ -1,3 +1,5 @@
+import type { ClaudeGuidanceResponse } from '../config/recommendationApi';
+
 export type Language = 'en' | 'mr' | 'hi';
 
 export interface LocalizedRecommendation {

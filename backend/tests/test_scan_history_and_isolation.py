@@ -85,10 +85,11 @@ def isolated_env(monkeypatch):
 
 def register_user(client: TestClient, full_name: str, mobile: str, email: str = None) -> str:
     """Helper to register a user and return their JWT access token."""
+    user_email = email or f"{mobile}@example.com"
     resp = client.post("/api/v1/auth/register", json={
         "full_name": full_name,
         "mobile_number": mobile,
-        "email": email,
+        "email": user_email,
         "password": "Password123!",
         "confirm_password": "Password123!"
     })

@@ -34,6 +34,7 @@ export interface VoiceReportCreateResponse {
   scan_id: number;
   language: string | null;
   status: string;
+  transcription?: string | null;
 }
 
 export interface PredictionResponse {
