@@ -1,8 +1,8 @@
-import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
 // Default API URL configuration
-// Dynamically resolves current laptop LAN IP for physical mobile devices via Expo Go
+// Prioritizes EXPO_PUBLIC_API_URL, preserves Web platform behavior,
+// and falls back directly to the hosted VPS backend on port 7066 for native mobile platforms.
 export const getBaseUrl = (): string => {
   if (process.env.EXPO_PUBLIC_API_URL) {
     return process.env.EXPO_PUBLIC_API_URL;
@@ -12,30 +12,6 @@ export const getBaseUrl = (): string => {
       return `http://${window.location.hostname}:8000`;
     }
     return 'http://localhost:8000';
-  }
-  // Dynamically derive laptop LAN IP from Expo Go metadata properties
-  const candidateHostUris = [
-    Constants.expoConfig?.hostUri,
-    Constants.manifest2?.extra?.expoGo?.debuggerHost,
-    (Constants as any).manifest2?.extra?.expoGo?.developer?.tool,
-    (Constants as any).manifest?.debuggerHost,
-    (Constants as any).linkingUri,
-    (Constants as any).experienceUrl,
-  ];
-
-  for (const rawHostUri of candidateHostUris) {
-    if (rawHostUri && typeof rawHostUri === 'string') {
-      const cleanUri = rawHostUri.replace(/^(exp|http|https):\/\//, '');
-      const lanIp = cleanUri.split(':')[0];
-      if (
-        lanIp &&
-        lanIp !== 'localhost' &&
-        lanIp !== '127.0.0.1' &&
-        lanIp !== '0.0.0.0'
-      ) {
-        return `http://${lanIp}:8000`;
-      }
-    }
   }
   return 'http://88.222.212.15:7066';
 };
